@@ -691,13 +691,27 @@ auto	mod:Dystoria's Song Pack	ダダダダダル	Dadadadadaru	雨良 Amala	ダ�
 auto	mod:X Song Pack	罪の名前	Name of the Sin	ryo (supercell)	罪の名前	罪的名字	netease-alias
 auto	mod:Nitori's Song Pack	しかばねの踊り	Dance of the Corpses	きくお	しかばねの踊り	尸骸之舞	netease-alias
 auto	mod:Onneb's Song Pack	おかあさん	Okaasan	マチゲリータP	おかあさん	妈妈	netease-alias
-pending	mod:Project Hoshikuzu - Song Pack	アイディスマイル	IDSMILE	とあ			missing
+auto	mod:Doatz Song Pack	あいしていたのに	Even Though I Had Loved You	MARETU	pjsk-alias	曾經深愛著的	t-wy-pjsk-alias
+auto	mod:Dystoria's Song Pack	あなたの空が泣くのなら	If your sky were to cry	Yuzy	pjsk-alias	若你的天空在哭泣	t-wy-pjsk-alias
+auto	mod:Doatz Song Pack	おぎゃりないざー	OGYARINIZER	Ponchi♪	pjsk-alias	還嬰者	t-wy-pjsk-alias
+auto	mod:Project Hoshikuzu - Song Pack	アイスドロップ	Ice Drop	Aqu3ra	pjsk-alias	冰滴	t-wy-pjsk-alias
+auto	mod:Project Hoshikuzu - Song Pack	アイディスマイル	IDSMILE	とあ	pjsk-alias	愛的微笑	t-wy-pjsk-alias
+auto	mod:Dystoria's Song Pack	アンテナ39	Antenna 39	Hiiragi Magnetite	pjsk-alias	天線39	t-wy-pjsk-alias
+auto	mod:zombzach's song pack	エゴイスト	Egoist	大沼パセリ	pjsk-alias	利己主義者	t-wy-pjsk-alias
+auto	mod:Project Hoshikuzu - Song Pack	ガランド	Garando	ピコン	pjsk-alias	傻瓜	t-wy-pjsk-alias
+auto	mod:zombzach's song pack	キラー	Killer	夏代孝明	pjsk-alias	殺手	t-wy-pjsk-alias
+auto	mod:zombzach's song pack	サイバーパンクデッドボーイ	Cyberpunk Dead Boy	マイキP	pjsk-alias	賽博龐克死男孩	t-wy-pjsk-alias
+auto	mod:Project Hoshikuzu - Song Pack	ショウタイム・ルーラー	Showtime Ruler	カラスヤサボウ	pjsk-alias	開演時刻的支配者	t-wy-pjsk-alias
+auto	mod:Project Hoshikuzu - Song Pack	ノマド	Nomad	バルーン	pjsk-alias	流浪者	t-wy-pjsk-alias
+auto	mod:Dystoria's Song Pack	ハローセカイ	Hello Sekai	DECO*27	pjsk-alias	哈囉世界	t-wy-pjsk-alias
+auto	mod:Dystoria's Song Pack	ファイアダンス	Fire Dance	DECO	pjsk-alias	火之舞	t-wy-pjsk-alias
+auto	mod:PolterVocaloidSongPack1.1.1	マトリョシカ	MATRYOSHKA	ハチ	pjsk-alias	俄羅斯套娃	t-wy-pjsk-alias
+auto	mod:Dystoria's Song Pack	ラストラス	Lustrous	*Luna	pjsk-alias	星漢燦爛	t-wy-pjsk-alias
+auto	mod:Cabra's Song Pack	ラブカ？	Love Ka?	柊キライ	pjsk-alias	皺鰓鯊？	t-wy-pjsk-alias
+auto	mod:Dystoria's Song Pack	ワールドワイドワンダー	Worldwide Wander	西沢さんP	pjsk-alias	世界環遊	t-wy-pjsk-alias
+auto	mod:Dystoria's Song Pack	嬢王	Jouou	八王子P	pjsk-alias	女王	t-wy-pjsk-alias
 pending	mod:Project Hoshikuzu - Song Pack	夜に駆ける	Racing Into the Night	Ayase			missing
-pending	mod:Project Hoshikuzu - Song Pack	アイスドロップ	Ice Drop	Aqu3ra			missing
-pending	mod:Project Hoshikuzu - Song Pack	ショウタイム・ルーラー	Showtime Ruler	カラスヤサボウ			missing
-pending	mod:Project Hoshikuzu - Song Pack	ガランド	Garando	ピコン			missing
 pending	mod:Project Hoshikuzu - Song Pack	月光	Moonlight	キタニタツヤ, はるまきごはん			missing
-pending	mod:Project Hoshikuzu - Song Pack	ノマド	Nomad	バルーン			missing
 pending	mod:Cabra's Song Pack	ビー マイ ゲスト	Be My Guest	アザリ			missing
 pending	mod:Cabra's Song Pack	ララララフレシア	RRRRafflesia	鬱P			missing
 pending	mod:Cabra's Song Pack	マネキン	Mannequin	DECO*27			missing
@@ -736,7 +750,6 @@ pending	mod:PolterVocaloidSongPack1.1.1	恐怖ガーデン	Fear Garden	ちゃぁ
 pending	mod:PolterVocaloidSongPack1.1.1	あぁあぁあぁああぁあぁああぁ	AaAaAaAAaAaAAa	梨本うい			missing
 pending	mod:PolterVocaloidSongPack1.1.1	肺超微細珪火山症	Pneumonoultramicroscopicsilicovolcanoconiosis	だす			missing
 pending	mod:PolterVocaloidSongPack1.1.1	いますぐ輪廻	Retry Now	なきそ			missing
-pending	mod:PolterVocaloidSongPack1.1.1	マトリョシカ	MATRYOSHKA	ハチ			missing
 pending	mod:PolterVocaloidSongPack1.1.1	失敗時代	FLOP ERA	えぴあえおん			missing
 pending	mod:PolterVocaloidSongPack1.1.1	静的	Static	ふれいばあfおうりい			missing
 pending	mod:PolterVocaloidSongPack1.1.1	静的 - 再起動	Static - REBOOTED	ふれいばあfおうりい			missing
@@ -751,11 +764,9 @@ pending	mod:Cabra's Song Pack	メデ	Mayday	ユリイ・カノン			missing
 pending	mod:Cabra's Song Pack	ビビビビ	Be Be Be Be!	フロクロ			missing
 pending	mod:Cabra's Song Pack	キミのことが好きでゴメンナサイ	Kimi no Koto ga Suki de Gomennasai	うたたP			missing
 pending	mod:Cabra's Song Pack	アガペーハッピー	Agape Happy	柊キライ			missing
-pending	mod:Cabra's Song Pack	ラブカ？	Love Ka?	柊キライ			missing
 pending	mod:Cabra's Song Pack	おおかみなんかこわくないッ!	Wolves Aren't Scary!	OSTER Project			missing
 pending	mod:zombzach's song pack	ルーマー	Rumor	ポリスピカデリー			missing
 pending	mod:zombzach's song pack	Aじゃないか	Isn't it "A"	ピノキオピ			missing
-pending	mod:zombzach's song pack	サイバーパンクデッドボーイ	Cyberpunk Dead Boy	マイキP			missing
 pending	mod:zombzach's song pack	バグってない?	It's not buggy	すりい			missing
 pending	mod:zombzach's song pack	ころしちゃった!	Messed up!	夏山よつぎ			missing
 pending	mod:zombzach's song pack	病み垢ステロイド	Yamiaka Steroid	かいりきベア			missing
@@ -806,7 +817,6 @@ pending	mod:Doatz Song Pack	アイ	Ai	DECO*27			missing
 pending	mod:Doatz Song Pack	スターナイトスノウ	Star Night Snow	Orangestar			missing
 pending	mod:Doatz Song Pack	雪がとける前に	Before the Snow Melts	doriko			missing
 pending	mod:Doatz Song Pack	酒呑童子	Shutendouji	豆カカオ			missing
-pending	mod:Doatz Song Pack	あいしていたのに	Even Though I Had Loved You	MARETU			missing
 pending	mod:Doatz Song Pack	きみとそらをとぶ	Fly in the Sky With You	傘村トータ			missing
 pending	mod:Doatz Song Pack	少女ケシゴム	Girl Eraser	MARETU			missing
 pending	mod:Doatz Song Pack	ニャン黙の了解	Nyan-Spoken Understanding	鬱P			missing
@@ -818,7 +828,6 @@ pending	mod:Doatz Song Pack	シェイディ・レイディ	Shady Lady	前線			m
 pending	mod:Doatz Song Pack	アマツキツネ - 10th anniversary -	Amatsu Kitsune - 10th anniversary -	まらしぃ			missing
 pending	mod:Doatz Song Pack	光よ	O Light	kikuo			missing
 pending	mod:Doatz Song Pack	俺ゴーストタイプ	I'm a Ghost Type	手動			missing
-pending	mod:Doatz Song Pack	おぎゃりないざー	OGYARINIZER	Ponchi♪			missing
 pending	mod:Doatz Song Pack	ひゅ〜どろどろ	Woo~oosh, Oozing	蜂屋ななし			missing
 pending	mod:Doatz Song Pack	みつけた	FOUND YOU	罪草			missing
 pending	mod:Doatz Song Pack	むげんのチケット	Eon Ticket	marasy			missing
@@ -832,11 +841,9 @@ pending	mod:Doatz Song Pack	メロメロイド	Attractloid	かいりきベア			
 pending	mod:Doatz Song Pack	ゴー！ビッパ団	GO! Team BIPPA	Wonderful☆Opportunity			missing
 pending	mod:Doatz Song Pack	新人類	New Human Race	まらしぃ, じん			missing
 pending	mod:Doatz Song Pack	ダメンズ ロープウェイ	Damens Ropeway	ねじ式			missing
-pending	mod:zombzach's song pack	エゴイスト	Egoist	大沼パセリ			missing
 pending	mod:zombzach's song pack	モエチャッカファイア	MoeChakkaFire	issey			missing
 pending	mod:zombzach's song pack	烈火	Rekka	niki			missing
 pending	mod:zombzach's song pack	嘘ミーム	Fake meme	ピノキオピー			missing
-pending	mod:zombzach's song pack	キラー	Killer	夏代孝明			missing
 pending	mod:zombzach's song pack	アンチユー	ANTI YOU	Chinozo			missing
 pending	mod:zombzach's song pack	フィッシュアンドTips	Fish and Tips	Dopam!ne			missing
 pending	mod:zombzach's song pack	バブリン	Bubblin	5u5h1			missing
@@ -972,7 +979,6 @@ pending	mod:Nitori's Song Pack	チェリーハント feat. ルス	Cherry Hunt fe
 pending	mod:Nitori's Song Pack	む	Mu	大漠波新			missing
 pending	mod:Nitori's Song Pack	ムニエル	Meunière	daniwell			missing
 pending	mod:Dystoria's Song Pack	祝福のLibrary	Shukufuku no Library	Valkyrie			missing
-pending	mod:Dystoria's Song Pack	あなたの空が泣くのなら	If your sky were to cry	Yuzy			missing
 pending	mod:Dystoria's Song Pack	虚像のCarousel	Carousel of Imaginary Images	Mori Calliope × Reol			missing
 pending	mod:Dystoria's Song Pack	目撃！テト31世	Teto the 31st	HALLOCELL			missing
 pending	mod:Dystoria's Song Pack	匙ノ咒	Spoofull of SPELL	r-906			missing
@@ -982,7 +988,6 @@ pending	mod:Dystoria's Song Pack	カレーニナ	Karenina	柊キライ			missing
 pending	mod:Dystoria's Song Pack	マインドブランド	Mind Brand	Maretu			missing
 pending	mod:Dystoria's Song Pack	駅前	Ekimae -A station-	東京事変			missing
 pending	mod:Dystoria's Song Pack	愛属性	Love Attribute	PinnochioP			missing
-pending	mod:Dystoria's Song Pack	ファイアダンス	Fire Dance	DECO			missing
 pending	mod:Dystoria's Song Pack	蜂蜜日記	Honey Diary	Kashii Moimi			missing
 pending	mod:Dystoria's Song Pack	スカーレット・ドリームズ	Scarlet Dreams	Nem			missing
 pending	mod:Dystoria's Song Pack	かんせい	Perfect	大漠波新			missing
@@ -991,7 +996,6 @@ pending	mod:Dystoria's Song Pack	熱異常	Heat abnormal	Iyowa			missing
 pending	mod:Dystoria's Song Pack	幸せになれる隠しコマンドがあるらしい	There's supposed to be a cheat code for happiness	うたたP			missing
 pending	mod:Dystoria's Song Pack	いますぐ輪廻	Retry Now	NAKISO			missing
 pending	mod:Dystoria's Song Pack	推活天使ビビアンちゃん	oshikatsu angel miss vivian	Mustard			missing
-pending	mod:Dystoria's Song Pack	嬢王	Jouou	八王子P			missing
 pending	mod:Dystoria's Song Pack	クローンクローン	Clone Clone	Atena			missing
 pending	mod:Dystoria's Song Pack	愛は得体が知れない	Love is Mysterious	otetsu			missing
 pending	mod:Dystoria's Song Pack	お化けガオ	Obake Gao	はろける			missing
@@ -999,12 +1003,9 @@ pending	mod:Dystoria's Song Pack	エンヴィーベイビー	Envy Baby	Kanaria		
 pending	mod:Dystoria's Song Pack	綴目	The corner of my eye	栗山夕璃			missing
 pending	mod:Dystoria's Song Pack	ハートアタック	Heart Attack	Omoi			missing
 pending	mod:Dystoria's Song Pack	ジレンマ	Dilemma	DECO*27			missing
-pending	mod:Dystoria's Song Pack	ハローセカイ	Hello Sekai	DECO*27			missing
-pending	mod:Dystoria's Song Pack	アンテナ39	Antenna 39	Hiiragi Magnetite			missing
 pending	mod:Dystoria's Song Pack	僕なんかいなくても	With or Without me	PinocchioP			missing
 pending	mod:Dystoria's Song Pack	サッドガール・セックス	SAD GIRL SEX	DECO*27			missing
 pending	mod:Dystoria's Song Pack	ぐちゃったな	Guchatta na	タケノコ少年			missing
-pending	mod:Dystoria's Song Pack	ワールドワイドワンダー	Worldwide Wander	西沢さんP			missing
 pending	mod:Dystoria's Song Pack	ユニ	Yuni	柊マグネタイト			missing
 pending	mod:Dystoria's Song Pack	すーぱーぬこわーるど	Super Nuko world	まふまふ			missing
 pending	mod:Dystoria's Song Pack	妄想税	Delusion Tax	DECO27			missing
@@ -1065,7 +1066,6 @@ pending	mod:Dystoria's Song Pack	レディメイド	Readymade	Ado			missing
 pending	mod:Dystoria's Song Pack	勇気のReason (Ado Ver.)	Yuuki no Reason (Ado Ver.)	Ado			missing
 pending	mod:Dystoria's Song Pack	トネリコレジスタンス	The Resistance	UmikazeTaiyou			missing
 pending	mod:Dystoria's Song Pack	ビバリウム	Vivarium	Ado			missing
-pending	mod:Dystoria's Song Pack	ラストラス	Lustrous	*Luna			missing
 pending	mod:Dystoria's Song Pack	レーテー	Lethe	Aira			missing
 pending	mod:Dystoria's Song Pack	つれづれどうじ	Wandering Youth	UmikazeTaiyou			missing
 pending	mod:Dystoria's Song Pack	フィナーレをあなたに。	Finale for You	Aira			missing
