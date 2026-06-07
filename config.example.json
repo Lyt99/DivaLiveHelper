@@ -1,0 +1,22 @@
+{
+    "room_id": 12345678,
+    "hotkey": "ctrl+shift+n",
+    "data_dir": "Data",
+    "mods_dir": "D:\\SteamLibrary\\steamapps\\common\\Hatsune Miku Project DIVA Mega Mix Plus\\mods",
+    "auto_play_next": false,
+    "auto_play_interval": 300,
+    "max_queue_size": 50,
+    "allow_duplicates": false,
+    "obs_overlay_enabled": true,
+    "obs_overlay_host": "127.0.0.1",
+    "obs_overlay_port": 8765,
+    "obs_overlay_title": "点歌队列",
+    "song_command_prefix": "点歌",
+    "sessdata": "",
+    "fetch_chinese_names": false,
+    "http_proxy": "",
+    "llm_enabled": false,
+    "llm_api_key": "",
+    "llm_base_url": "https://api.deepseek.com",
+    "llm_model": "deepseek-chat"
+}
