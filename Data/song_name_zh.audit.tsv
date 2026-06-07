@@ -799,269 +799,263 @@ auto	mod:Dystoria's Song Pack	ダダダダダル	Dadadadadaru	雨良 Amala	name_
 auto	mod:Dystoria's Song Pack	御掃除しましょ	Let's clean up	虻瀬犬	name_en	Let's clean up	name_en-fallback
 auto	mod:Dystoria's Song Pack	#髪を切る	Cut my bangs	ゐろは苹果	name_en	Cut my bangs	name_en-fallback
 auto	mod:Dystoria's Song Pack	ムーンライト・フィナーレ	Moonlight Finale	ヤマギシコージ	name_en	Moonlight Finale	name_en-fallback
-pending	mod:Restore Cut Songs	Ievan Polkka	Ievan Polkka	フィンランド民謡			missing
+auto	mod:Restore Cut Songs	Ievan Polkka	Ievan Polkka	フィンランド民謡	self	Ievan Polkka	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	KING	KING	Kanaria	self	KING	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Glory Steady Go!	Glory Steady Go!	キノシタ	self	Glory Steady Go!	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Flyer!	Flyer!	Chinozo	self	Flyer!	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	HERO	HERO	Ayase	self	HERO	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	STAGE OF SEKAI	STAGE OF SEKAI	はりーP	self	STAGE OF SEKAI	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Peaky Peaky	Peaky Peaky	みきとP	self	Peaky Peaky	self-display-fallback
+auto	mod:Cabra's Song Pack	THUNDERBOLT	THUNDERBOLT	jon-YAKITORY	self	THUNDERBOLT	self-display-fallback
+auto	mod:Cabra's Song Pack	Just a Mount	Just a Mount	高生紳士	self	Just a Mount	self-display-fallback
+auto	mod:Cabra's Song Pack	Why do I	Why do I	Set it off	self	Why do I	self-display-fallback
+auto	mod:X Song Pack	Hand in Hand -X Edition-	Hand in Hand -X Edition-	kz	self	Hand in Hand -X Edition-	self-display-fallback
+auto	mod:X Song Pack	Strangers	Strangers	Heavenz	self	Strangers	self-display-fallback
+auto	mod:X Song Pack	LOL -lots of laugh- -X Edition-	LOL -lots of laugh- -X Edition-	KeN	self	LOL -lots of laugh- -X Edition-	self-display-fallback
+auto	mod:X Song Pack	Calc.	Calc.	ジミーサムP	self	Calc.	self-display-fallback
+auto	mod:X Song Pack	Amazing Dolce	Amazing Dolce	ひとしずくP	self	Amazing Dolce	self-display-fallback
+auto	mod:X Song Pack	Satisfaction	Satisfaction	kz	self	Satisfaction	self-display-fallback
+auto	mod:X Song Pack	Sharing The World	Sharing The World	BIGHEAD	self	Sharing The World	self-display-fallback
+auto	mod:lavverso Song Pack	Digital Girl	Digital Girl	KIRA	self	Digital Girl	self-display-fallback
+auto	mod:lavverso Song Pack	LUVORATORRRRRY!	LUVORATORRRRRY!	ギガP/れをる	self	LUVORATORRRRRY!	self-display-fallback
+auto	mod:lavverso Song Pack	MIRA	MIRA	Kanaria	self	MIRA	self-display-fallback
+auto	mod:lavverso Song Pack	BlackFlagBreaker!!	BlackFlagBreaker!!	sasakure.UK	self	BlackFlagBreaker!!	self-display-fallback
+auto	mod:lavverso Song Pack	Makeup	Makeup	香椎モイミ	self	Makeup	self-display-fallback
+auto	mod:lavverso Song Pack	4BLOOD	4BLOOD	KIRA	self	4BLOOD	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Blessing	Blessing	halyosy, 紅い流星, ゴサマル	self	Blessing	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Alive	Alive	市瀬るぽ	self	Alive	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	needLe	needLe	DECO*27	self	needLe	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Ready Steady	Ready Steady	ギガP	self	Ready Steady	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Gimme×Gimme	Gimme×Gimme	ギガP, 八王子P	self	Gimme×Gimme	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	ECHO	ECHO		self	ECHO	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Forward	Forward	R Sound Design	self	Forward	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Brand New Day	Brand New Day	いるかアイス	self	Brand New Day	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	Color of Drops	Color of Drops	40mP	self	Color of Drops	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	drop pop candy	drop pop candy	ギガP	self	drop pop candy	self-display-fallback
+auto	mod:Project Hoshikuzu - Song Pack	RAD DOGS	RAD DOGS	八王子P	self	RAD DOGS	self-display-fallback
+auto	mod:EdenMasochistPack	Tempestissimo	Tempestissimo	t+pazolite	self	Tempestissimo	self-display-fallback
+auto	mod:EdenMasochistPack	ENDYMION	ENDYMION	ARM/RabbiTon Strings	self	ENDYMION	self-display-fallback
+auto	mod:EdenMasochistPack	Misfortune	Misfortune	χ-kai-	self	Misfortune	self-display-fallback
+auto	mod:EdenMasochistPack	boku-boku II	boku-boku II	AVTechNO	self	boku-boku II	self-display-fallback
+auto	mod:EdenMasochistPack	FREEDOM DiVE↓	FREEDOM DiVE↓	XI	self	FREEDOM DiVE↓	self-display-fallback
+auto	mod:EdenMasochistPack	ANTI THE∞HOLiC	ANTI THE∞HOLiC	cosMo＠暴走P	self	ANTI THE∞HOLiC	self-display-fallback
+auto	mod:EdenMasochistPack	Anti the EuphoriaHOLiC	Anti the EuphoriaHOLiC	cosMo＠暴走P	self	Anti the EuphoriaHOLiC	self-display-fallback
+auto	mod:EdenMasochistPack	Alice in N.Y.	Alice in N.Y.	ひとしずくP/やま△	self	Alice in N.Y.	self-display-fallback
+auto	mod:Cabra's Song Pack	＋♂	＋♂	Giga	self	＋♂	self-display-fallback
+auto	mod:Cabra's Song Pack	POMPADOUR	POMPADOUR	OSTER Project	self	POMPADOUR	self-display-fallback
+auto	mod:Cabra's Song Pack	Beyond the Way	Beyond the Way	Giga	self	Beyond the Way	self-display-fallback
+auto	mod:zombzach's song pack	SUSHI-GO-ROUND	SUSHI-GO-ROUND	鬱P	self	SUSHI-GO-ROUND	self-display-fallback
+auto	mod:zombzach's song pack	Loveit?	Loveit?	biz&ZERA	self	Loveit?	self-display-fallback
+auto	mod:zombzach's song pack	Happy Coaster	Happy Coaster	emon(Tes.)	self	Happy Coaster	self-display-fallback
+auto	mod:zombzach's song pack	ULTRA C	ULTRA C	Giga & TeddyLoid	self	ULTRA C	self-display-fallback
+auto	mod:WACCA Mini Songpack	Let you DIVE!	Let you DIVE!	Hardcore TANO*C	self	Let you DIVE!	self-display-fallback
+auto	mod:WACCA Mini Songpack	with U	with U	t+pazolite & Massive New Krew	self	with U	self-display-fallback
+auto	mod:WACCA Mini Songpack	Ouvertüre	Ouvertüre	USAO & DJ Genki	self	Ouvertüre	self-display-fallback
+auto	mod:Doatz Song Pack	Sinner	Sinner	オカメP	self	Sinner	self-display-fallback
+auto	mod:Doatz Song Pack	Always Be ^o^	Always Be ^o^	StaticP	self	Always Be ^o^	self-display-fallback
+auto	mod:Doatz Song Pack	G.H.O.S.T.	G.H.O.S.T.	EMIRI	self	G.H.O.S.T.	self-display-fallback
+auto	mod:Doatz Song Pack	KITSUNE Patissiere	KITSUNE Patissiere	まらしぃ	self	KITSUNE Patissiere	self-display-fallback
+auto	mod:Doatz Song Pack	Whisper Whisper Whisper	Whisper Whisper Whisper	Azari	self	Whisper Whisper Whisper	self-display-fallback
+auto	mod:Doatz Song Pack	2.14	2.14	オカメP	self	2.14	self-display-fallback
+auto	mod:Doatz Song Pack	THE DYING MESSAGE	THE DYING MESSAGE	鬱P	self	THE DYING MESSAGE	self-display-fallback
+auto	mod:Doatz Song Pack	SnowMix♪	SnowMix♪	まらしぃ	self	SnowMix♪	self-display-fallback
+auto	mod:Doatz Song Pack	Fondant Step	Fondant Step	ヘブンズP	self	Fondant Step	self-display-fallback
+auto	mod:Doatz Song Pack	Snow Fairy Story	Snow Fairy Story	40mP	self	Snow Fairy Story	self-display-fallback
+auto	mod:Doatz Song Pack	Snow Song Show	Snow Song Show	ささくれUK	self	Snow Song Show	self-display-fallback
+auto	mod:Doatz Song Pack	Die For You	Die For You	オカメP	self	Die For You	self-display-fallback
+auto	mod:Doatz Song Pack	Reon - Remind Version	Reon - Remind Version	ゆよゆっぺ	self	Reon - Remind Version	self-display-fallback
+auto	mod:Doatz Song Pack	JUVENILE	JUVENILE	じん	self	JUVENILE	self-display-fallback
+auto	mod:Doatz Song Pack	Round and Land	Round and Land	前線	self	Round and Land	self-display-fallback
+auto	mod:Doatz Song Pack	CH4NGE	CH4NGE	Giga	self	CH4NGE	self-display-fallback
+auto	mod:Doatz Song Pack	CRACKS	CRACKS	EMIRI	self	CRACKS	self-display-fallback
+auto	mod:Doatz Song Pack	INTERGALACTIA	INTERGALACTIA	KIRA	self	INTERGALACTIA	self-display-fallback
+auto	mod:Doatz Song Pack	GANGNAM STYLE	GANGNAM STYLE	PSY	self	GANGNAM STYLE	self-display-fallback
+auto	mod:Doatz Song Pack	Into Starlight	Into Starlight	KURIS, YUICHI NAKASE	self	Into Starlight	self-display-fallback
+auto	mod:Doatz Song Pack	Encounter	Encounter	Orangestar	self	Encounter	self-display-fallback
+auto	mod:Doatz Song Pack	PARTY ROCK ETERNITY	PARTY ROCK ETERNITY	Hachioji-P	self	PARTY ROCK ETERNITY	self-display-fallback
+auto	mod:Doatz Song Pack	Glorious Day	Glorious Day	いぶ	self	Glorious Day	self-display-fallback
+auto	mod:Doatz Song Pack	Snowdome	Snowdome	wotaku	self	Snowdome	self-display-fallback
+auto	mod:Nitori's Song Pack	DYE/Re:flection+	DYE/Re:flection+	AVTechNO!	self	DYE/Re:flection+	self-display-fallback
+auto	mod:Onneb's Song Pack	Don't say "lazy"	Don't say "lazy"	前澤寛之	self	Don't say "lazy"	self-display-fallback
+auto	mod:Onneb's Song Pack	Listen!!	Listen!!	前澤寛之	self	Listen!!	self-display-fallback
+auto	mod:Onneb's Song Pack	NO, Thank You!	NO, Thank You!	前澤寛之	self	NO, Thank You!	self-display-fallback
+auto	mod:zombzach's song pack	WAYWARD ROMANCE	WAYWARD ROMANCE	FLAVOR FOLEY	self	WAYWARD ROMANCE	self-display-fallback
+auto	mod:zombzach's song pack	Butcher Vanity	Butcher Vanity	Jamie Paige	self	Butcher Vanity	self-display-fallback
+auto	mod:zombzach's song pack	Millennia	Millennia	EMIRI	self	Millennia	self-display-fallback
+auto	mod:Nitori's Song Pack	INTERNET OVERDOSE	INTERNET OVERDOSE	Aiobahn	self	INTERNET OVERDOSE	self-display-fallback
+auto	mod:Nitori's Song Pack	Miku's Little Dark Age	Miku's Little Dark Age	Astrophysics	self	Miku's Little Dark Age	self-display-fallback
+auto	mod:Nitori's Song Pack	The Model	The Model	Astrophysics	self	The Model	self-display-fallback
+auto	mod:Nitori's Song Pack	Sea is	Sea is	きくお	self	Sea is	self-display-fallback
+auto	mod:Nitori's Song Pack	INTERNET YAMERO	INTERNET YAMERO	Aiobahn	self	INTERNET YAMERO	self-display-fallback
+auto	mod:Nitori's Song Pack	Calalini	Calalini	CrusherP	self	Calalini	self-display-fallback
+auto	mod:Nitori's Song Pack	Blinding Lights	Blinding Lights	The Weeknd	self	Blinding Lights	self-display-fallback
+auto	mod:Nitori's Song Pack	Somebody That I Used to Know	Somebody That I Used to Know	Gotye	self	Somebody That I Used to Know	self-display-fallback
+auto	mod:Nitori's Song Pack	B Who I Want 2 B	B Who I Want 2 B	SOPHIE × Mitchie M	self	B Who I Want 2 B	self-display-fallback
+auto	mod:Nitori's Song Pack	Miku's Oblivion (Astrophysics Take)	Miku's Oblivion (Astrophysics Take)	Astrophysics	self	Miku's Oblivion (Astrophysics Take)	self-display-fallback
+auto	mod:Nitori's Song Pack	Friday Night	Friday Night	SEGA SOUND TEAM	self	Friday Night	self-display-fallback
+auto	mod:Nitori's Song Pack	Plastic Beach	Plastic Beach	Gorillaz	self	Plastic Beach	self-display-fallback
+auto	mod:Nitori's Song Pack	Moteur Action (SOPHIE & A. G. Cook remix)	Moteur Action (SOPHIE & A. G. Cook remix)	Yelle, SOPHIE, A. G. Cook	self	Moteur Action (SOPHIE & A. G. Cook remix)	self-display-fallback
+auto	mod:Nitori's Song Pack	Never Gonna Give You Up	Never Gonna Give You Up	Rick Astley	self	Never Gonna Give You Up	self-display-fallback
+auto	mod:Nitori's Song Pack	Take On Me (Astrophysics Take)	Take On Me (Astrophysics Take)	Astrophysics	self	Take On Me (Astrophysics Take)	self-display-fallback
+auto	mod:Nitori's Song Pack	All the Things She Said	All the Things She Said	t.A.T.u	self	All the Things She Said	self-display-fallback
+auto	mod:Nitori's Song Pack	Axel F	Axel F	Crazy Frog	self	Axel F	self-display-fallback
+auto	mod:Nitori's Song Pack	Tren Al Sur	Tren Al Sur	Los Prisioneros	self	Tren Al Sur	self-display-fallback
+auto	mod:Nitori's Song Pack	The Glorious Octagon of Destiny	The Glorious Octagon of Destiny	NOMA	self	The Glorious Octagon of Destiny	self-display-fallback
+auto	mod:Nitori's Song Pack	Hardkore of the North	Hardkore of the North	Diclonius kiD	self	Hardkore of the North	self-display-fallback
+auto	mod:Nitori's Song Pack	THE POWER OF TERRY	THE POWER OF TERRY	Old Spice Collaboration Team	self	THE POWER OF TERRY	self-display-fallback
+auto	mod:Nitori's Song Pack	Black Swan	Black Swan	BTS	self	Black Swan	self-display-fallback
+auto	mod:Nitori's Song Pack	SCREAM	SCREAM	梅とら	self	SCREAM	self-display-fallback
+auto	mod:Nitori's Song Pack	Nebula	Nebula	Tripshots, Yusuke	self	Nebula	self-display-fallback
+auto	mod:Nitori's Song Pack	Galaxy Collapse	Galaxy Collapse	黒皇帝	self	Galaxy Collapse	self-display-fallback
+auto	mod:Nitori's Song Pack	Beat It	Beat It	Michael Jackson	self	Beat It	self-display-fallback
+auto	mod:Nitori's Song Pack	Thriller	Thriller	Michael Jackson	self	Thriller	self-display-fallback
+auto	mod:Nitori's Song Pack	Bad Apple!! feat.nomico	Bad Apple!! feat.nomico	マサヨシ ミノシマ	self	Bad Apple!! feat.nomico	self-display-fallback
+auto	mod:Nitori's Song Pack	Ms. Miku After Dark	Ms. Miku After Dark	Mr.Kitty / Astrophysics	self	Ms. Miku After Dark	self-display-fallback
+auto	mod:Nitori's Song Pack	aiSeNMa	aiSeNMa	CircusP	self	aiSeNMa	self-display-fallback
+auto	mod:Nitori's Song Pack	8 Awesome Angles of YouTube	8 Awesome Angles of YouTube	NOMA	self	8 Awesome Angles of YouTube	self-display-fallback
+auto	mod:Nitori's Song Pack	Miku's Bizarre Love Triangle	Miku's Bizarre Love Triangle	New Order / Astrophysics	self	Miku's Bizarre Love Triangle	self-display-fallback
+auto	mod:Nitori's Song Pack	Miku's On Melancholy Hill	Miku's On Melancholy Hill	Gorillaz / Astrophysics	self	Miku's On Melancholy Hill	self-display-fallback
+auto	mod:Nitori's Song Pack	Adios	Adios	Eun Ji Won	self	Adios	self-display-fallback
+auto	mod:Nitori's Song Pack	BANG BANG BANG	BANG BANG BANG	BigBang	self	BANG BANG BANG	self-display-fallback
+auto	mod:Nitori's Song Pack	FANTASTIC BABY	FANTASTIC BABY	BigBang	self	FANTASTIC BABY	self-display-fallback
+auto	mod:Nitori's Song Pack	Tell me (FRNK Remix)	Tell me (FRNK Remix)	NewJeans	self	Tell me (FRNK Remix)	self-display-fallback
+auto	mod:Nitori's Song Pack	WILDFIRE!!	WILDFIRE!!	CIRCRUSH	self	WILDFIRE!!	self-display-fallback
+auto	mod:Nitori's Song Pack	iNSaNiTY	iNSaNiTY	CircusP	self	iNSaNiTY	self-display-fallback
+auto	mod:Nitori's Song Pack	WARNING×WARNING×WARNING	WARNING×WARNING×WARNING	ACTRock	self	WARNING×WARNING×WARNING	self-display-fallback
+auto	mod:Nitori's Song Pack	Mirrrrrors	Mirrrrrors	エーコ	self	Mirrrrrors	self-display-fallback
+auto	mod:Nitori's Song Pack	Backslash	Backslash	かめりあ	self	Backslash	self-display-fallback
+auto	mod:Nitori's Song Pack	BAILE DA MIKU II - CADEIA PARALELA	BAILE DA MIKU II - CADEIA PARALELA	Astrophysics & DJ DENGUE	self	BAILE DA MIKU II - CADEIA PARALELA	self-display-fallback
+auto	mod:Nitori's Song Pack	Miku's Nightcall	Miku's Nightcall	Kavinsky / Astrophysics	self	Miku's Nightcall	self-display-fallback
+auto	mod:Nitori's Song Pack	hardbass night	hardbass night	Ferry	self	hardbass night	self-display-fallback
+auto	mod:Nitori's Song Pack	GEDO	GEDO	daraku	self	GEDO	self-display-fallback
+auto	mod:Nitori's Song Pack	Virtual Insanity	Virtual Insanity	Jamiroquai	self	Virtual Insanity	self-display-fallback
+auto	mod:Nitori's Song Pack	Karma	Karma	ampstyle	self	Karma	self-display-fallback
+auto	mod:Nitori's Song Pack	ANGELIST	ANGELIST	OZ	self	ANGELIST	self-display-fallback
+auto	mod:Nitori's Song Pack	mochimochi	mochimochi	TAK	self	mochimochi	self-display-fallback
+auto	mod:Nitori's Song Pack	Paranoid Android	Paranoid Android	Radiohead	self	Paranoid Android	self-display-fallback
+auto	mod:Nitori's Song Pack	CRUSH	CRUSH	ZEROBASEONE	self	CRUSH	self-display-fallback
+auto	mod:Nitori's Song Pack	Miku is Head Over Heels	Miku is Head Over Heels	Astrophysics	self	Miku is Head Over Heels	self-display-fallback
+auto	mod:Nitori's Song Pack	Heart Beats	Heart Beats	emon(Tes.)	self	Heart Beats	self-display-fallback
+auto	mod:Nitori's Song Pack	Bury the Light Eurobeat Remix	Bury the Light Eurobeat Remix	Casey Edwards / Turbo	self	Bury the Light Eurobeat Remix	self-display-fallback
+auto	mod:Nitori's Song Pack	MAWARU INFINITY -Project DIVA edition-	MAWARU INFINITY -Project DIVA edition-	TaroNuke & Kimsynth	self	MAWARU INFINITY -Project DIVA edition-	self-display-fallback
+auto	mod:Onneb's Song Pack	FOMENT	FOMENT	Sumia	self	FOMENT	self-display-fallback
+auto	mod:Onneb's Song Pack	Vørstia	Vørstia	Shiena	self	Vørstia	self-display-fallback
+auto	mod:Onneb's Song Pack	only my railgun	only my railgun	fripSide	self	only my railgun	self-display-fallback
+auto	mod:Onneb's Song Pack	my crush	my crush	香椎モイミ	self	my crush	self-display-fallback
+auto	mod:Onneb's Song Pack	Dream goes on	Dream goes on	Tiny Minim	self	Dream goes on	self-display-fallback
+auto	mod:Onneb's Song Pack	Wilt	Wilt	VerseQuence	self	Wilt	self-display-fallback
+auto	mod:Onneb's Song Pack	POKÉDANCE	POKÉDANCE	本多友紀 feat. ななひら	self	POKÉDANCE	self-display-fallback
+auto	mod:Onneb's Song Pack	M@GICAL☆CURE! LOVE ♥ SHOT!	M@GICAL☆CURE! LOVE ♥ SHOT!	SAWTOWNE	self	M@GICAL☆CURE! LOVE ♥ SHOT!	self-display-fallback
+auto	mod:alocin Song Pack	Snow Mile	Snow Mile	Aqu3ra	self	Snow Mile	self-display-fallback
+auto	mod:alocin Song Pack	FUN!!	FUN!!	DECO*27 / いよわ	self	FUN!!	self-display-fallback
+auto	mod:alocin Song Pack	SToRY	SToRY	DECO*27 / kemu	self	SToRY	self-display-fallback
+auto	mod:Kaito-Aiyumi SongPack3	Blue Star	Blue Star	八王子P	self	Blue Star	self-display-fallback
+auto	mod:Kaito-Aiyumi SongPack3	Overwriter	Overwriter	tilt-6	self	Overwriter	self-display-fallback
+auto	mod:Kaito-Aiyumi SongPack3	Singularity (Magical Mirai 2021)	Singularity (Magical Mirai 2021)	keisei	self	Singularity (Magical Mirai 2021)	self-display-fallback
+auto	mod:Miracle Girls Festival Chart Pack	Jumping!!	Jumping!!	Meis Clauson	self	Jumping!!	self-display-fallback
+auto	mod:Miracle Girls Festival Chart Pack	Your Voice	Your Voice	中塚 武	self	Your Voice	self-display-fallback
+auto	mod:Miracle Girls Festival Chart Pack	Daydream café	Daydream café	大久保 薫	self	Daydream café	self-display-fallback
+auto	mod:Miracle Girls Festival Chart Pack	Stand Up!!!!	Stand Up!!!!	井上 純一	self	Stand Up!!!!	self-display-fallback
+auto	mod:Miracle Girls Festival Chart Pack	7 Girls War	7 Girls War	神前 暁 \/ 田中 秀和（MONACA	self	7 Girls War	self-display-fallback
+auto	mod:Miracle Girls Festival Chart Pack	Innocent Blue	Innocent Blue	fu_mou	self	Innocent Blue	self-display-fallback
+auto	mod:Miracle Girls Festival Chart Pack	Vivid Shining Sky	Vivid Shining Sky	神前 暁（MONACA）	self	Vivid Shining Sky	self-display-fallback
+auto	mod:zombzach's song pack	FLOP ERA	FLOP ERA	エピーオン	self	FLOP ERA	self-display-fallback
+auto	mod:zombzach's song pack	V	V	ゴゴ	self	V	self-display-fallback
+auto	mod:zombzach's song pack	FOCUS	FOCUS	KIRA	self	FOCUS	self-display-fallback
+auto	mod:Yoru Song Pack	Lindenbaum	Lindenbaum	zensen	self	Lindenbaum	self-display-fallback
+auto	mod:Yoru Song Pack	Grievous Lady	Grievous Lady	Team Grimoire & Laur	self	Grievous Lady	self-display-fallback
+auto	mod:Yoru Song Pack	Ré：Ré	Ré：Ré	Morimori Atsushi vs. uma	self	Ré：Ré	self-display-fallback
+auto	mod:lavverso Song Pack	Intergalactic Bound	Intergalactic Bound	CircusP	self	Intergalactic Bound	self-display-fallback
+auto	mod:lavverso Song Pack	We are POP☆CANDY!	We are POP☆CANDY!	runo	self	We are POP☆CANDY!	self-display-fallback
+auto	mod:Rinissa's Song Pack	FAKE HEART	FAKE HEART	KIRA + Johnny R	self	FAKE HEART	self-display-fallback
+auto	mod:Rinissa's Song Pack	LIFE	LIFE	monii, Johnny R	self	LIFE	self-display-fallback
+auto	mod:Rinissa's Song Pack	TOXY!	TOXY!	煮ル果実	self	TOXY!	self-display-fallback
+auto	mod:Rinissa's Song Pack	Colorful Array	Colorful Array	Andrew Holmes, Cosmoz Music	self	Colorful Array	self-display-fallback
+auto	mod:Rinissa's Song Pack	MTMTM	MTMTM	TAK	self	MTMTM	self-display-fallback
+auto	mod:lavverso Song Pack	Bad ∞ End ∞ Night	Bad ∞ End ∞ Night	ひとしずくP/やま△	self	Bad ∞ End ∞ Night	self-display-fallback
+auto	mod:NiStory Song Pack	Confessions of a Rotten Girl	Confessions of a Rotten Girl	SAWTOWNE	self	Confessions of a Rotten Girl	self-display-fallback
+auto	mod:NiStory Song Pack	.espect	.espect	Noname	self	.espect	self-display-fallback
+auto	mod:NiStory Song Pack	LEMON MELON COOKIE	LEMON MELON COOKIE	Tak	self	LEMON MELON COOKIE	self-display-fallback
+auto	mod:Nitori's Song Pack	Machine Love	Machine Love	Jamie Paige	self	Machine Love	self-display-fallback
+auto	mod:Nitori's Song Pack	SHOCK	SHOCK	BEAST	self	SHOCK	self-display-fallback
+auto	mod:Nitori's Song Pack	Miku's Instant Crush	Miku's Instant Crush	Daft Punk, Astrophysics	self	Miku's Instant Crush	self-display-fallback
+auto	mod:Nitori's Song Pack	You're Telling Me A SHRIMP Fried This Rice?!	You're Telling Me A SHRIMP Fried This Rice?!	Jamie Paige	self	You're Telling Me A SHRIMP Fried This Rice?!	self-display-fallback
+auto	mod:Nitori's Song Pack	Duele el Amor	Duele el Amor	ryusouta / Aleks Syntek	self	Duele el Amor	self-display-fallback
+auto	mod:Nitori's Song Pack	Piece of Art	Piece of Art	KIRA	self	Piece of Art	self-display-fallback
+auto	mod:Nitori's Song Pack	WILDFIRE!! (Extended Version)	WILDFIRE!! (Extended Version)	FATAL FORCE & CRUSHER-P	self	WILDFIRE!! (Extended Version)	self-display-fallback
+auto	mod:Nitori's Song Pack	Save Your Tears For Miku	Save Your Tears For Miku	Astrophysics	self	Save Your Tears For Miku	self-display-fallback
+auto	mod:Nitori's Song Pack	Big Brother (Crusher Remix)	Big Brother (Crusher Remix)	Crusher-P	self	Big Brother (Crusher Remix)	self-display-fallback
+auto	mod:Nitori's Song Pack	Smooth Criminal	Smooth Criminal	Michael Jackson	self	Smooth Criminal	self-display-fallback
+auto	mod:Nitori's Song Pack	Russian Girl feat. Kasane Teto	Russian Girl feat. Kasane Teto	Jenia Lubich	self	Russian Girl feat. Kasane Teto	self-display-fallback
+auto	mod:Nitori's Song Pack	filament (TV size)	filament (TV size)	妖精帝國	self	filament (TV size)	self-display-fallback
+auto	mod:Nitori's Song Pack	The End (feat. BABYMETAL)	The End (feat. BABYMETAL)	Lil Uzi Vert x BABYMETAL	self	The End (feat. BABYMETAL)	self-display-fallback
+auto	mod:Nitori's Song Pack	Miku wants to Enjoy The Silence	Miku wants to Enjoy The Silence	Astrophysics	self	Miku wants to Enjoy The Silence	self-display-fallback
+auto	mod:Nitori's Song Pack	Billie Jean	Billie Jean	Michael Jackson	self	Billie Jean	self-display-fallback
+auto	mod:Nitori's Song Pack	01_ballade	01_ballade	平沢栄司	self	01_ballade	self-display-fallback
+auto	mod:Nitori's Song Pack	Life Will Change	Life Will Change	ぬゆり	self	Life Will Change	self-display-fallback
+auto	mod:Nitori's Song Pack	Cuz My Order	Cuz My Order	書店太郎	self	Cuz My Order	self-display-fallback
+auto	mod:Nitori's Song Pack	Decade	Decade	Dixie Flatline	self	Decade	self-display-fallback
+auto	mod:Nitori's Song Pack	MINIMUM RAGE	MINIMUM RAGE	MonochroMenace	self	MINIMUM RAGE	self-display-fallback
+auto	mod:Nitori's Song Pack	Honestly	Honestly	THORNS	self	Honestly	self-display-fallback
+auto	mod:Dystoria's Song Pack	Radio Electric Anniversary Edition	Radio Electric Anniversary Edition	angelbrained	self	Radio Electric Anniversary Edition	self-display-fallback
+auto	mod:Dystoria's Song Pack	0.0000034	0.0000034	Musanuriyu	self	0.0000034	self-display-fallback
+auto	mod:Dystoria's Song Pack	Magic	Magic	Ado	self	Magic	self-display-fallback
+auto	mod:Dystoria's Song Pack	Bad Apple!! feat.SEKAI	Bad Apple!! feat.SEKAI	ZUN (Team Shanghai Alice)	self	Bad Apple!! feat.SEKAI	self-display-fallback
+auto	mod:Dystoria's Song Pack	This song is AI generated	This song is AI generated	googifloop	self	This song is AI generated	self-display-fallback
+auto	mod:Dystoria's Song Pack	Alright	Alright	Gaiden, Mezha	self	Alright	self-display-fallback
+auto	mod:Dystoria's Song Pack	TWINKLE	TWINKLE	Mellowcle	self	TWINKLE	self-display-fallback
+auto	mod:Dystoria's Song Pack	Cool Me Down	Cool Me Down	Mwk	self	Cool Me Down	self-display-fallback
+auto	mod:Dystoria's Song Pack	Minimum Rage	Minimum Rage	MonochroMenace	self	Minimum Rage	self-display-fallback
+auto	mod:Dystoria's Song Pack	PPPP	PPPP	TAK	self	PPPP	self-display-fallback
+auto	mod:Dystoria's Song Pack	MOTTO!!!	MOTTO!!!	Junky	self	MOTTO!!!	self-display-fallback
+auto	mod:Dystoria's Song Pack	Myosotis	Myosotis	M2U	self	Myosotis	self-display-fallback
+auto	mod:Dystoria's Song Pack	Marigold	Marigold	M2U	self	Marigold	self-display-fallback
+auto	mod:Dystoria's Song Pack	D/N/A	D/N/A	Azari	self	D/N/A	self-display-fallback
+auto	mod:Dystoria's Song Pack	IRIS OUT	IRIS OUT	米津 玄師	self	IRIS OUT	self-display-fallback
+auto	mod:Dystoria's Song Pack	B.B.K.K.B.K.K.	B.B.K.K.B.K.K.	Nora2r	self	B.B.K.K.B.K.K.	self-display-fallback
+auto	mod:Dystoria's Song Pack	Love For You	Love For You	暁Records	self	Love For You	self-display-fallback
+auto	mod:Dystoria's Song Pack	MAO-u	MAO-u	Baby Castella	self	MAO-u	self-display-fallback
+auto	mod:Dystoria's Song Pack	unlive	unlive	書店太郎	self	unlive	self-display-fallback
+auto	mod:Dystoria's Song Pack	Someday'z Coming	Someday'z Coming	書店太郎	self	Someday'z Coming	self-display-fallback
+auto	mod:Dystoria's Song Pack	Lonesome	Lonesome	Okame-P	self	Lonesome	self-display-fallback
+auto	mod:Dystoria's Song Pack	DIVA X	DIVA X	Miyamori Bungaku	self	DIVA X	self-display-fallback
+auto	mod:Dystoria's Song Pack	Static	Static	FLAVOR FOLEY	self	Static	self-display-fallback
+auto	mod:Dystoria's Song Pack	V.S	V.S	大漠波新	self	V.S	self-display-fallback
+auto	mod:Dystoria's Song Pack	Ten Thousand Stars	Ten Thousand Stars	CircusP	self	Ten Thousand Stars	self-display-fallback
+auto	mod:Dystoria's Song Pack	I got no time	I got no time	The Living Tombstone	self	I got no time	self-display-fallback
+auto	mod:Dystoria's Song Pack	Paranoia	Paranoia	MezameP	self	Paranoia	self-display-fallback
+auto	mod:Dystoria's Song Pack	WILDCARD	WILDCARD	ゆうすけきら	self	WILDCARD	self-display-fallback
+auto	mod:Dystoria's Song Pack	NEMO NEMO	NEMO NEMO	ちぇ よな	self	NEMO NEMO	self-display-fallback
+auto	mod:Dystoria's Song Pack	gift nor art	gift nor art	鼻そうめんP	self	gift nor art	self-display-fallback
+auto	mod:Dystoria's Song Pack	New me	New me	YOASOBI	self	New me	self-display-fallback
+auto	mod:IA-VT Colorful Song Pack	TSUBASA New Days	TSUBASA New Days	A-bee	self	TSUBASA New Days	self-display-fallback
+auto	mod:Retro Charts	[PD1] Far Away	[PD1] Far Away	kz	self	[PD1] Far Away	self-display-fallback
+auto	mod:Retro Charts	[PD1] Star Story	[PD1] Star Story	kz	self	[PD1] Star Story	self-display-fallback
+auto	mod:Retro Charts	[PD1] Last Night, Good Night	[PD1] Last Night, Good Night	kz	self	[PD1] Last Night, Good Night	self-display-fallback
+auto	mod:Retro Charts	[PD1/PD2] Packaged	[PD1/PD2] Packaged	kz	self	[PD1/PD2] Packaged	self-display-fallback
+auto	mod:Retro Charts	[PD1/PD2] moon	[PD1/PD2] moon	iroha(sasaki)	self	[PD1/PD2] moon	self-display-fallback
+auto	mod:Retro Charts	[PD1/PD2] The secret garden	[PD1/PD2] The secret garden	神前 暁	self	[PD1/PD2] The secret garden	self-display-fallback
+auto	mod:Retro Charts	[PD1/PD2] Dear cocoa girls	[PD1/PD2] Dear cocoa girls	神前 暁	self	[PD1/PD2] Dear cocoa girls	self-display-fallback
+auto	mod:Retro Charts	[PD1] Ievan Polkka	[PD1] Ievan Polkka	フィンランド民謡	self	[PD1] Ievan Polkka	self-display-fallback
+auto	mod:Retro Charts	[PDe] Yellow	[PDe] Yellow	kz	self	[PDe] Yellow	self-display-fallback
+auto	mod:Retro Charts	[PD2] Dear	[PD2] Dear	19-iku-	self	[PD2] Dear	self-display-fallback
+auto	mod:Retro Charts	[PD2] from Y to Y	[PD2] from Y to Y	ジミーサムP	self	[PD2] from Y to Y	self-display-fallback
+auto	mod:Retro Charts	[PD2] VOiCE -DIVA　MIX-	[PD2] VOiCE -DIVA　MIX-	ラヴリーP	self	[PD2] VOiCE -DIVA　MIX-	self-display-fallback
+auto	mod:Retro Charts	[PD2] Promise	[PD2] Promise	samfree	self	[PD2] Promise	self-display-fallback
+auto	mod:Retro Charts	[PD2] Innocence	[PD2] Innocence	KazuP	self	[PD2] Innocence	self-display-fallback
+auto	mod:Retro Charts	[PDe] Just Be Friends	[PDe] Just Be Friends	Dixie Flatline	self	[PDe] Just Be Friends	self-display-fallback
+auto	mod:Retro Charts	[PDe] SPiCa -39's Giving Day Edition-	[PDe] SPiCa -39's Giving Day Edition-	とく	self	[PDe] SPiCa -39's Giving Day Edition-	self-display-fallback
+auto	mod:Retro Charts	[PDe] Palette	[PDe] Palette	ゆよゆっぺ/meola	self	[PDe] Palette	self-display-fallback
+auto	mod:Retro Charts	[PDe] Starduster	[PDe] Starduster	ジミーサムP	self	[PDe] Starduster	self-display-fallback
+auto	mod:Retro Charts	[PDe] StargazeR	[PDe] StargazeR	骨盤P	self	[PDe] StargazeR	self-display-fallback
+auto	mod:Retro Charts	[PDe] melody...	[PDe] melody...	mikuru396	self	[PDe] melody...	self-display-fallback
+auto	mod:Dystoria's Song Pack	Ex-Otogibanashi	Ex-Otogibanashi	ryo (supercell)	self	Ex-Otogibanashi	self-display-fallback
+auto	mod:Dystoria's Song Pack	AiAiA	AiAiA	Ado/Kikuo	self	AiAiA	self-display-fallback
+auto	mod:Dystoria's Song Pack	The Big Black	The Big Black	The Quick Brown Fox	self	The Big Black	self-display-fallback
+auto	mod:Dystoria's Song Pack	PaperMoon	PaperMoon	Tommy heavenly6	self	PaperMoon	self-display-fallback
+auto	mod:Dystoria's Song Pack	Labyrinthine Labyrinth	Labyrinthine Labyrinth	HoloX	self	Labyrinthine Labyrinth	self-display-fallback
+auto	mod:Dystoria's Song Pack	Gorgon	Gorgon	Utsu-P	self	Gorgon	self-display-fallback
 pending	mod:Project Hoshikuzu - Song Pack	「１」	1	164			missing
-pending	mod:Project Hoshikuzu - Song Pack	KING	KING	Kanaria			missing
-pending	mod:Project Hoshikuzu - Song Pack	Glory Steady Go!	Glory Steady Go!	キノシタ			missing
-pending	mod:Project Hoshikuzu - Song Pack	Flyer!	Flyer!	Chinozo			missing
-pending	mod:Project Hoshikuzu - Song Pack	HERO	HERO	Ayase			missing
-pending	mod:Project Hoshikuzu - Song Pack	STAGE OF SEKAI	STAGE OF SEKAI	はりーP			missing
-pending	mod:Project Hoshikuzu - Song Pack	Peaky Peaky	Peaky Peaky	みきとP			missing
-pending	mod:Cabra's Song Pack	THUNDERBOLT	THUNDERBOLT	jon-YAKITORY			missing
-pending	mod:Cabra's Song Pack	Just a Mount	Just a Mount	高生紳士			missing
-pending	mod:Cabra's Song Pack	Why do I	Why do I	Set it off			missing
-pending	mod:X Song Pack	Hand in Hand -X Edition-	Hand in Hand -X Edition-	kz			missing
-pending	mod:X Song Pack	Strangers	Strangers	Heavenz			missing
-pending	mod:X Song Pack	LOL -lots of laugh- -X Edition-	LOL -lots of laugh- -X Edition-	KeN			missing
-pending	mod:X Song Pack	Calc.	Calc.	ジミーサムP			missing
-pending	mod:X Song Pack	Amazing Dolce	Amazing Dolce	ひとしずくP			missing
-pending	mod:X Song Pack	Satisfaction	Satisfaction	kz			missing
-pending	mod:X Song Pack	Sharing The World	Sharing The World	BIGHEAD			missing
-pending	mod:lavverso Song Pack	Digital Girl	Digital Girl	KIRA			missing
-pending	mod:lavverso Song Pack	LUVORATORRRRRY!	LUVORATORRRRRY!	ギガP/れをる			missing
-pending	mod:lavverso Song Pack	MIRA	MIRA	Kanaria			missing
-pending	mod:lavverso Song Pack	BlackFlagBreaker!!	BlackFlagBreaker!!	sasakure.UK			missing
-pending	mod:lavverso Song Pack	Makeup	Makeup	香椎モイミ			missing
-pending	mod:lavverso Song Pack	4BLOOD	4BLOOD	KIRA			missing
-pending	mod:Project Hoshikuzu - Song Pack	Blessing	Blessing	halyosy, 紅い流星, ゴサマル			missing
-pending	mod:Project Hoshikuzu - Song Pack	Alive	Alive	市瀬るぽ			missing
-pending	mod:Project Hoshikuzu - Song Pack	needLe	needLe	DECO*27			missing
-pending	mod:Project Hoshikuzu - Song Pack	Ready Steady	Ready Steady	ギガP			missing
-pending	mod:Project Hoshikuzu - Song Pack	Gimme×Gimme	Gimme×Gimme	ギガP, 八王子P			missing
-pending	mod:Project Hoshikuzu - Song Pack	ECHO	ECHO				missing
-pending	mod:Project Hoshikuzu - Song Pack	Forward	Forward	R Sound Design			missing
-pending	mod:Project Hoshikuzu - Song Pack	Brand New Day	Brand New Day	いるかアイス			missing
-pending	mod:Project Hoshikuzu - Song Pack	Color of Drops	Color of Drops	40mP			missing
-pending	mod:Project Hoshikuzu - Song Pack	drop pop candy	drop pop candy	ギガP			missing
-pending	mod:Project Hoshikuzu - Song Pack	RAD DOGS	RAD DOGS	八王子P			missing
-pending	mod:EdenMasochistPack	Tempestissimo	Tempestissimo	t+pazolite			missing
-pending	mod:EdenMasochistPack	ENDYMION	ENDYMION	ARM/RabbiTon Strings			missing
-pending	mod:EdenMasochistPack	Misfortune	Misfortune	χ-kai-			missing
-pending	mod:EdenMasochistPack	boku-boku II	boku-boku II	AVTechNO			missing
-pending	mod:EdenMasochistPack	FREEDOM DiVE↓	FREEDOM DiVE↓	XI			missing
-pending	mod:EdenMasochistPack	ANTI THE∞HOLiC	ANTI THE∞HOLiC	cosMo＠暴走P			missing
-pending	mod:EdenMasochistPack	Anti the EuphoriaHOLiC	Anti the EuphoriaHOLiC	cosMo＠暴走P			missing
-pending	mod:EdenMasochistPack	Alice in N.Y.	Alice in N.Y.	ひとしずくP/やま△			missing
-pending	mod:Cabra's Song Pack	＋♂	＋♂	Giga			missing
-pending	mod:Cabra's Song Pack	POMPADOUR	POMPADOUR	OSTER Project			missing
-pending	mod:Cabra's Song Pack	Beyond the Way	Beyond the Way	Giga			missing
-pending	mod:zombzach's song pack	SUSHI-GO-ROUND	SUSHI-GO-ROUND	鬱P			missing
-pending	mod:zombzach's song pack	Loveit?	Loveit?	biz&ZERA			missing
-pending	mod:zombzach's song pack	Happy Coaster	Happy Coaster	emon(Tes.)			missing
-pending	mod:zombzach's song pack	ULTRA C	ULTRA C	Giga & TeddyLoid			missing
-pending	mod:WACCA Mini Songpack	Let you DIVE!	Let you DIVE!	Hardcore TANO*C			missing
-pending	mod:WACCA Mini Songpack	with U	with U	t+pazolite & Massive New Krew			missing
-pending	mod:WACCA Mini Songpack	Ouvertüre	Ouvertüre	USAO & DJ Genki			missing
 pending	mod:Doatz Song Pack	いいや	118	DECO*27			missing
-pending	mod:Doatz Song Pack	Sinner	Sinner	オカメP			missing
-pending	mod:Doatz Song Pack	Always Be ^o^	Always Be ^o^	StaticP			missing
-pending	mod:Doatz Song Pack	G.H.O.S.T.	G.H.O.S.T.	EMIRI			missing
-pending	mod:Doatz Song Pack	KITSUNE Patissiere	KITSUNE Patissiere	まらしぃ			missing
-pending	mod:Doatz Song Pack	Whisper Whisper Whisper	Whisper Whisper Whisper	Azari			missing
-pending	mod:Doatz Song Pack	2.14	2.14	オカメP			missing
-pending	mod:Doatz Song Pack	THE DYING MESSAGE	THE DYING MESSAGE	鬱P			missing
-pending	mod:Doatz Song Pack	SnowMix♪	SnowMix♪	まらしぃ			missing
-pending	mod:Doatz Song Pack	Fondant Step	Fondant Step	ヘブンズP			missing
-pending	mod:Doatz Song Pack	Snow Fairy Story	Snow Fairy Story	40mP			missing
-pending	mod:Doatz Song Pack	Snow Song Show	Snow Song Show	ささくれUK			missing
-pending	mod:Doatz Song Pack	Die For You	Die For You	オカメP			missing
-pending	mod:Doatz Song Pack	Reon - Remind Version	Reon - Remind Version	ゆよゆっぺ			missing
-pending	mod:Doatz Song Pack	JUVENILE	JUVENILE	じん			missing
-pending	mod:Doatz Song Pack	Round and Land	Round and Land	前線			missing
-pending	mod:Doatz Song Pack	CH4NGE	CH4NGE	Giga			missing
-pending	mod:Doatz Song Pack	CRACKS	CRACKS	EMIRI			missing
-pending	mod:Doatz Song Pack	INTERGALACTIA	INTERGALACTIA	KIRA			missing
-pending	mod:Doatz Song Pack	GANGNAM STYLE	GANGNAM STYLE	PSY			missing
-pending	mod:Doatz Song Pack	Into Starlight	Into Starlight	KURIS, YUICHI NAKASE			missing
-pending	mod:Doatz Song Pack	Encounter	Encounter	Orangestar			missing
-pending	mod:Doatz Song Pack	PARTY ROCK ETERNITY	PARTY ROCK ETERNITY	Hachioji-P			missing
-pending	mod:Doatz Song Pack	Glorious Day	Glorious Day	いぶ			missing
-pending	mod:Doatz Song Pack	Snowdome	Snowdome	wotaku			missing
-pending	mod:Nitori's Song Pack	DYE/Re:flection+	DYE/Re:flection+	AVTechNO!			missing
-pending	mod:Onneb's Song Pack	Don't say "lazy"	Don't say "lazy"	前澤寛之			missing
-pending	mod:Onneb's Song Pack	Listen!!	Listen!!	前澤寛之			missing
-pending	mod:Onneb's Song Pack	NO, Thank You!	NO, Thank You!	前澤寛之			missing
-pending	mod:zombzach's song pack	WAYWARD ROMANCE	WAYWARD ROMANCE	FLAVOR FOLEY			missing
-pending	mod:zombzach's song pack	Butcher Vanity	Butcher Vanity	Jamie Paige			missing
-pending	mod:zombzach's song pack	Millennia	Millennia	EMIRI			missing
-pending	mod:Nitori's Song Pack	INTERNET OVERDOSE	INTERNET OVERDOSE	Aiobahn			missing
-pending	mod:Nitori's Song Pack	Miku's Little Dark Age	Miku's Little Dark Age	Astrophysics			missing
-pending	mod:Nitori's Song Pack	The Model	The Model	Astrophysics			missing
-pending	mod:Nitori's Song Pack	Sea is	Sea is	きくお			missing
 pending	mod:Nitori's Song Pack	Девочка с каре	Девочка с каре	МУККА			missing
-pending	mod:Nitori's Song Pack	INTERNET YAMERO	INTERNET YAMERO	Aiobahn			missing
-pending	mod:Nitori's Song Pack	Calalini	Calalini	CrusherP			missing
-pending	mod:Nitori's Song Pack	Blinding Lights	Blinding Lights	The Weeknd			missing
-pending	mod:Nitori's Song Pack	Somebody That I Used to Know	Somebody That I Used to Know	Gotye			missing
-pending	mod:Nitori's Song Pack	B Who I Want 2 B	B Who I Want 2 B	SOPHIE × Mitchie M			missing
-pending	mod:Nitori's Song Pack	Miku's Oblivion (Astrophysics Take)	Miku's Oblivion (Astrophysics Take)	Astrophysics			missing
-pending	mod:Nitori's Song Pack	Friday Night	Friday Night	SEGA SOUND TEAM			missing
-pending	mod:Nitori's Song Pack	Plastic Beach	Plastic Beach	Gorillaz			missing
-pending	mod:Nitori's Song Pack	Moteur Action (SOPHIE & A. G. Cook remix)	Moteur Action (SOPHIE & A. G. Cook remix)	Yelle, SOPHIE, A. G. Cook			missing
-pending	mod:Nitori's Song Pack	Never Gonna Give You Up	Never Gonna Give You Up	Rick Astley			missing
-pending	mod:Nitori's Song Pack	Take On Me (Astrophysics Take)	Take On Me (Astrophysics Take)	Astrophysics			missing
-pending	mod:Nitori's Song Pack	All the Things She Said	All the Things She Said	t.A.T.u			missing
-pending	mod:Nitori's Song Pack	Axel F	Axel F	Crazy Frog			missing
-pending	mod:Nitori's Song Pack	Tren Al Sur	Tren Al Sur	Los Prisioneros			missing
-pending	mod:Nitori's Song Pack	The Glorious Octagon of Destiny	The Glorious Octagon of Destiny	NOMA			missing
-pending	mod:Nitori's Song Pack	Hardkore of the North	Hardkore of the North	Diclonius kiD			missing
 pending	mod:Nitori's Song Pack	Я сошла с ума	Я сошла с ума	t.A.T.u			missing
-pending	mod:Nitori's Song Pack	THE POWER OF TERRY	THE POWER OF TERRY	Old Spice Collaboration Team			missing
-pending	mod:Nitori's Song Pack	Black Swan	Black Swan	BTS			missing
-pending	mod:Nitori's Song Pack	SCREAM	SCREAM	梅とら			missing
-pending	mod:Nitori's Song Pack	Nebula	Nebula	Tripshots, Yusuke			missing
-pending	mod:Nitori's Song Pack	Galaxy Collapse	Galaxy Collapse	黒皇帝			missing
-pending	mod:Nitori's Song Pack	Beat It	Beat It	Michael Jackson			missing
-pending	mod:Nitori's Song Pack	Thriller	Thriller	Michael Jackson			missing
-pending	mod:Nitori's Song Pack	Bad Apple!! feat.nomico	Bad Apple!! feat.nomico	マサヨシ ミノシマ			missing
-pending	mod:Nitori's Song Pack	Ms. Miku After Dark	Ms. Miku After Dark	Mr.Kitty / Astrophysics			missing
-pending	mod:Nitori's Song Pack	aiSeNMa	aiSeNMa	CircusP			missing
-pending	mod:Nitori's Song Pack	8 Awesome Angles of YouTube	8 Awesome Angles of YouTube	NOMA			missing
-pending	mod:Nitori's Song Pack	Miku's Bizarre Love Triangle	Miku's Bizarre Love Triangle	New Order / Astrophysics			missing
-pending	mod:Nitori's Song Pack	Miku's On Melancholy Hill	Miku's On Melancholy Hill	Gorillaz / Astrophysics			missing
-pending	mod:Nitori's Song Pack	Adios	Adios	Eun Ji Won			missing
-pending	mod:Nitori's Song Pack	BANG BANG BANG	BANG BANG BANG	BigBang			missing
-pending	mod:Nitori's Song Pack	FANTASTIC BABY	FANTASTIC BABY	BigBang			missing
-pending	mod:Nitori's Song Pack	Tell me (FRNK Remix)	Tell me (FRNK Remix)	NewJeans			missing
-pending	mod:Nitori's Song Pack	WILDFIRE!!	WILDFIRE!!	CIRCRUSH			missing
-pending	mod:Nitori's Song Pack	iNSaNiTY	iNSaNiTY	CircusP			missing
-pending	mod:Nitori's Song Pack	WARNING×WARNING×WARNING	WARNING×WARNING×WARNING	ACTRock			missing
-pending	mod:Nitori's Song Pack	Mirrrrrors	Mirrrrrors	エーコ			missing
-pending	mod:Nitori's Song Pack	Backslash	Backslash	かめりあ			missing
-pending	mod:Nitori's Song Pack	BAILE DA MIKU II - CADEIA PARALELA	BAILE DA MIKU II - CADEIA PARALELA	Astrophysics & DJ DENGUE			missing
-pending	mod:Nitori's Song Pack	Miku's Nightcall	Miku's Nightcall	Kavinsky / Astrophysics			missing
-pending	mod:Nitori's Song Pack	hardbass night	hardbass night	Ferry			missing
-pending	mod:Nitori's Song Pack	GEDO	GEDO	daraku			missing
-pending	mod:Nitori's Song Pack	Virtual Insanity	Virtual Insanity	Jamiroquai			missing
-pending	mod:Nitori's Song Pack	Karma	Karma	ampstyle			missing
-pending	mod:Nitori's Song Pack	ANGELIST	ANGELIST	OZ			missing
-pending	mod:Nitori's Song Pack	mochimochi	mochimochi	TAK			missing
-pending	mod:Nitori's Song Pack	Paranoid Android	Paranoid Android	Radiohead			missing
-pending	mod:Nitori's Song Pack	CRUSH	CRUSH	ZEROBASEONE			missing
-pending	mod:Nitori's Song Pack	Miku is Head Over Heels	Miku is Head Over Heels	Astrophysics			missing
-pending	mod:Nitori's Song Pack	Heart Beats	Heart Beats	emon(Tes.)			missing
-pending	mod:Nitori's Song Pack	Bury the Light Eurobeat Remix	Bury the Light Eurobeat Remix	Casey Edwards / Turbo			missing
-pending	mod:Nitori's Song Pack	MAWARU INFINITY -Project DIVA edition-	MAWARU INFINITY -Project DIVA edition-	TaroNuke & Kimsynth			missing
-pending	mod:Onneb's Song Pack	FOMENT	FOMENT	Sumia			missing
-pending	mod:Onneb's Song Pack	Vørstia	Vørstia	Shiena			missing
-pending	mod:Onneb's Song Pack	only my railgun	only my railgun	fripSide			missing
-pending	mod:Onneb's Song Pack	my crush	my crush	香椎モイミ			missing
-pending	mod:Onneb's Song Pack	Dream goes on	Dream goes on	Tiny Minim			missing
-pending	mod:Onneb's Song Pack	Wilt	Wilt	VerseQuence			missing
-pending	mod:Onneb's Song Pack	POKÉDANCE	POKÉDANCE	本多友紀 feat. ななひら			missing
-pending	mod:Onneb's Song Pack	M@GICAL☆CURE! LOVE ♥ SHOT!	M@GICAL☆CURE! LOVE ♥ SHOT!	SAWTOWNE			missing
-pending	mod:alocin Song Pack	Flyer!	Flyer!	Chinozo			missing
-pending	mod:alocin Song Pack	Snow Mile	Snow Mile	Aqu3ra			missing
-pending	mod:alocin Song Pack	STAGE OF SEKAI	STAGE OF SEKAI	はりーP			missing
-pending	mod:alocin Song Pack	FUN!!	FUN!!	DECO*27 / いよわ			missing
-pending	mod:alocin Song Pack	SToRY	SToRY	DECO*27 / kemu			missing
-pending	mod:Kaito-Aiyumi SongPack3	Blue Star	Blue Star	八王子P			missing
-pending	mod:Kaito-Aiyumi SongPack3	Overwriter	Overwriter	tilt-6			missing
-pending	mod:Kaito-Aiyumi SongPack3	Singularity (Magical Mirai 2021)	Singularity (Magical Mirai 2021)	keisei			missing
-pending	mod:Miracle Girls Festival Chart Pack	Jumping!!	Jumping!!	Meis Clauson			missing
-pending	mod:Miracle Girls Festival Chart Pack	Your Voice	Your Voice	中塚 武			missing
-pending	mod:Miracle Girls Festival Chart Pack	Daydream café	Daydream café	大久保 薫			missing
-pending	mod:Miracle Girls Festival Chart Pack	Stand Up!!!!	Stand Up!!!!	井上 純一			missing
-pending	mod:Miracle Girls Festival Chart Pack	7 Girls War	7 Girls War	神前 暁 \/ 田中 秀和（MONACA			missing
-pending	mod:Miracle Girls Festival Chart Pack	Innocent Blue	Innocent Blue	fu_mou			missing
-pending	mod:Miracle Girls Festival Chart Pack	Vivid Shining Sky	Vivid Shining Sky	神前 暁（MONACA）			missing
-pending	mod:zombzach's song pack	FLOP ERA	FLOP ERA	エピーオン			missing
-pending	mod:zombzach's song pack	V	V	ゴゴ			missing
-pending	mod:zombzach's song pack	FOCUS	FOCUS	KIRA			missing
-pending	mod:Yoru Song Pack	Lindenbaum	Lindenbaum	zensen			missing
-pending	mod:Yoru Song Pack	Grievous Lady	Grievous Lady	Team Grimoire & Laur			missing
-pending	mod:Yoru Song Pack	Ré：Ré	Ré：Ré	Morimori Atsushi vs. uma			missing
-pending	mod:lavverso Song Pack	M@GICAL☆CURE! LOVE ♥ SHOT!	M@GICAL☆CURE! LOVE ♥ SHOT!	SAWTOWNE			missing
-pending	mod:lavverso Song Pack	Intergalactic Bound	Intergalactic Bound	CircusP			missing
-pending	mod:lavverso Song Pack	We are POP☆CANDY!	We are POP☆CANDY!	runo			missing
-pending	mod:Rinissa's Song Pack	FAKE HEART	FAKE HEART	KIRA + Johnny R			missing
-pending	mod:Rinissa's Song Pack	LIFE	LIFE	monii, Johnny R			missing
-pending	mod:Rinissa's Song Pack	TOXY!	TOXY!	煮ル果実			missing
-pending	mod:Rinissa's Song Pack	Colorful Array	Colorful Array	Andrew Holmes, Cosmoz Music			missing
-pending	mod:Rinissa's Song Pack	MTMTM	MTMTM	TAK			missing
-pending	mod:lavverso Song Pack	Bad ∞ End ∞ Night	Bad ∞ End ∞ Night	ひとしずくP/やま△			missing
-pending	mod:NiStory Song Pack	Confessions of a Rotten Girl	Confessions of a Rotten Girl	SAWTOWNE			missing
-pending	mod:NiStory Song Pack	.espect	.espect	Noname			missing
-pending	mod:NiStory Song Pack	LEMON MELON COOKIE	LEMON MELON COOKIE	Tak			missing
-pending	mod:Nitori's Song Pack	Machine Love	Machine Love	Jamie Paige			missing
-pending	mod:Nitori's Song Pack	SHOCK	SHOCK	BEAST			missing
-pending	mod:Nitori's Song Pack	Miku's Instant Crush	Miku's Instant Crush	Daft Punk, Astrophysics			missing
-pending	mod:Nitori's Song Pack	You're Telling Me A SHRIMP Fried This Rice?!	You're Telling Me A SHRIMP Fried This Rice?!	Jamie Paige			missing
-pending	mod:Nitori's Song Pack	Duele el Amor	Duele el Amor	ryusouta / Aleks Syntek			missing
-pending	mod:Nitori's Song Pack	Piece of Art	Piece of Art	KIRA			missing
-pending	mod:Nitori's Song Pack	WILDFIRE!! (Extended Version)	WILDFIRE!! (Extended Version)	FATAL FORCE & CRUSHER-P			missing
-pending	mod:Nitori's Song Pack	Save Your Tears For Miku	Save Your Tears For Miku	Astrophysics			missing
-pending	mod:Nitori's Song Pack	Big Brother (Crusher Remix)	Big Brother (Crusher Remix)	Crusher-P			missing
-pending	mod:Nitori's Song Pack	Smooth Criminal	Smooth Criminal	Michael Jackson			missing
-pending	mod:Nitori's Song Pack	Russian Girl feat. Kasane Teto	Russian Girl feat. Kasane Teto	Jenia Lubich			missing
-pending	mod:Nitori's Song Pack	filament (TV size)	filament (TV size)	妖精帝國			missing
-pending	mod:Nitori's Song Pack	The End (feat. BABYMETAL)	The End (feat. BABYMETAL)	Lil Uzi Vert x BABYMETAL			missing
-pending	mod:Nitori's Song Pack	Miku wants to Enjoy The Silence	Miku wants to Enjoy The Silence	Astrophysics			missing
-pending	mod:Nitori's Song Pack	Billie Jean	Billie Jean	Michael Jackson			missing
-pending	mod:Nitori's Song Pack	01_ballade	01_ballade	平沢栄司			missing
-pending	mod:Nitori's Song Pack	Life Will Change	Life Will Change	ぬゆり			missing
-pending	mod:Nitori's Song Pack	Cuz My Order	Cuz My Order	書店太郎			missing
-pending	mod:Nitori's Song Pack	Decade	Decade	Dixie Flatline			missing
-pending	mod:Nitori's Song Pack	MINIMUM RAGE	MINIMUM RAGE	MonochroMenace			missing
-pending	mod:Nitori's Song Pack	Honestly	Honestly	THORNS			missing
-pending	mod:Dystoria's Song Pack	Radio Electric Anniversary Edition	Radio Electric Anniversary Edition	angelbrained			missing
-pending	mod:Dystoria's Song Pack	0.0000034	0.0000034	Musanuriyu			missing
-pending	mod:Dystoria's Song Pack	Magic	Magic	Ado			missing
-pending	mod:Dystoria's Song Pack	Bad Apple!! feat.SEKAI	Bad Apple!! feat.SEKAI	ZUN (Team Shanghai Alice)			missing
-pending	mod:Dystoria's Song Pack	This song is AI generated	This song is AI generated	googifloop			missing
-pending	mod:Dystoria's Song Pack	Honestly	Honestly	THØRNS			missing
-pending	mod:Dystoria's Song Pack	Alright	Alright	Gaiden, Mezha			missing
-pending	mod:Dystoria's Song Pack	TWINKLE	TWINKLE	Mellowcle			missing
-pending	mod:Dystoria's Song Pack	Cool Me Down	Cool Me Down	Mwk			missing
-pending	mod:Dystoria's Song Pack	Minimum Rage	Minimum Rage	MonochroMenace			missing
-pending	mod:Dystoria's Song Pack	PPPP	PPPP	TAK			missing
-pending	mod:Dystoria's Song Pack	MOTTO!!!	MOTTO!!!	Junky			missing
-pending	mod:Dystoria's Song Pack	Myosotis	Myosotis	M2U			missing
-pending	mod:Dystoria's Song Pack	Marigold	Marigold	M2U			missing
-pending	mod:Dystoria's Song Pack	D/N/A	D/N/A	Azari			missing
-pending	mod:Dystoria's Song Pack	IRIS OUT	IRIS OUT	米津 玄師			missing
-pending	mod:Dystoria's Song Pack	B.B.K.K.B.K.K.	B.B.K.K.B.K.K.	Nora2r			missing
-pending	mod:Dystoria's Song Pack	Love For You	Love For You	暁Records			missing
-pending	mod:Dystoria's Song Pack	MAO-u	MAO-u	Baby Castella			missing
-pending	mod:Dystoria's Song Pack	unlive	unlive	書店太郎			missing
-pending	mod:Dystoria's Song Pack	Someday'z Coming	Someday'z Coming	書店太郎			missing
-pending	mod:Dystoria's Song Pack	Lonesome	Lonesome	Okame-P			missing
-pending	mod:Dystoria's Song Pack	DIVA X	DIVA X	Miyamori Bungaku			missing
-pending	mod:Dystoria's Song Pack	Lindenbaum	Lindenbaum	wotaku			missing
-pending	mod:Dystoria's Song Pack	Static	Static	FLAVOR FOLEY			missing
-pending	mod:Dystoria's Song Pack	V.S	V.S	大漠波新			missing
-pending	mod:Dystoria's Song Pack	Ten Thousand Stars	Ten Thousand Stars	CircusP			missing
-pending	mod:Dystoria's Song Pack	I got no time	I got no time	The Living Tombstone			missing
-pending	mod:Dystoria's Song Pack	Loveit?	Loveit?	bizxZERA			missing
-pending	mod:Dystoria's Song Pack	Paranoia	Paranoia	MezameP			missing
-pending	mod:Dystoria's Song Pack	WILDCARD	WILDCARD	ゆうすけきら			missing
-pending	mod:Dystoria's Song Pack	NEMO NEMO	NEMO NEMO	ちぇ よな			missing
-pending	mod:Dystoria's Song Pack	gift nor art	gift nor art	鼻そうめんP			missing
-pending	mod:Dystoria's Song Pack	New me	New me	YOASOBI			missing
-pending	mod:IA-VT Colorful Song Pack	TSUBASA New Days	TSUBASA New Days	A-bee			missing
-pending	mod:Retro Charts	[PD1] Far Away	[PD1] Far Away	kz			missing
-pending	mod:Retro Charts	[PD1] Star Story	[PD1] Star Story	kz			missing
-pending	mod:Retro Charts	[PD1] Last Night, Good Night	[PD1] Last Night, Good Night	kz			missing
-pending	mod:Retro Charts	[PD1/PD2] Packaged	[PD1/PD2] Packaged	kz			missing
-pending	mod:Retro Charts	[PD1/PD2] moon	[PD1/PD2] moon	iroha(sasaki)			missing
-pending	mod:Retro Charts	[PD1/PD2] The secret garden	[PD1/PD2] The secret garden	神前 暁			missing
-pending	mod:Retro Charts	[PD1/PD2] Dear cocoa girls	[PD1/PD2] Dear cocoa girls	神前 暁			missing
-pending	mod:Retro Charts	[PD1] Ievan Polkka	[PD1] Ievan Polkka	フィンランド民謡			missing
-pending	mod:Retro Charts	[PDe] Yellow	[PDe] Yellow	kz			missing
-pending	mod:Retro Charts	[PD2] Dear	[PD2] Dear	19-iku-			missing
-pending	mod:Retro Charts	[PD2] from Y to Y	[PD2] from Y to Y	ジミーサムP			missing
-pending	mod:Retro Charts	[PD2] VOiCE -DIVA　MIX-	[PD2] VOiCE -DIVA　MIX-	ラヴリーP			missing
-pending	mod:Retro Charts	[PD2] Promise	[PD2] Promise	samfree			missing
-pending	mod:Retro Charts	[PD2] Innocence	[PD2] Innocence	KazuP			missing
-pending	mod:Retro Charts	[PDe] Just Be Friends	[PDe] Just Be Friends	Dixie Flatline			missing
-pending	mod:Retro Charts	[PDe] SPiCa -39's Giving Day Edition-	[PDe] SPiCa -39's Giving Day Edition-	とく			missing
-pending	mod:Retro Charts	[PDe] Palette	[PDe] Palette	ゆよゆっぺ/meola			missing
-pending	mod:Retro Charts	[PDe] Starduster	[PDe] Starduster	ジミーサムP			missing
-pending	mod:Retro Charts	[PDe] StargazeR	[PDe] StargazeR	骨盤P			missing
-pending	mod:Retro Charts	[PDe] melody...	[PDe] melody...	mikuru396			missing
-pending	mod:Dystoria's Song Pack	Ex-Otogibanashi	Ex-Otogibanashi	ryo (supercell)			missing
-pending	mod:Dystoria's Song Pack	AiAiA	AiAiA	Ado/Kikuo			missing
-pending	mod:Dystoria's Song Pack	The Big Black	The Big Black	The Quick Brown Fox			missing
-pending	mod:Dystoria's Song Pack	PaperMoon	PaperMoon	Tommy heavenly6			missing
-pending	mod:Dystoria's Song Pack	Labyrinthine Labyrinth	Labyrinthine Labyrinth	HoloX			missing
-pending	mod:Dystoria's Song Pack	Gorgon	Gorgon	Utsu-P			missing
