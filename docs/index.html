@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIVA 中文曲名数据库</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">DIVA LIVE HELPER / 中文曲名审计台</p>
+        <h1>中文曲名数据库</h1>
+        <p class="subtitle">浏览、筛选、下载并参与维护 Project DIVA 曲名中文化数据。</p>
+      </div>
+      <nav class="actions" aria-label="站点操作">
+        <a class="button ghost" href="data/song_name_zh.json" download>下载中文名库</a>
+        <a class="button ghost" href="data/song_db.json" download>下载歌曲库</a>
+        <a class="button ghost" href="data/song_name_zh.audit.tsv" download>下载审计 TSV</a>
+        <button class="button" id="exportCsv" type="button">导出当前 CSV</button>
+      </nav>
+    </header>
+
+    <section class="stats" id="stats" aria-label="数据库统计"></section>
+
+    <section class="panel controls" aria-label="筛选器">
+      <label>
+        <span>搜索</span>
+        <input id="query" type="search" placeholder="原名 / 中文名 / 英文名 / 作者 / 别名" autocomplete="off" />
+      </label>
+      <label>
+        <span>MOD / 来源</span>
+        <select id="sourceFilter"></select>
+      </label>
+      <label>
+        <span>作者</span>
+        <input id="authorFilter" list="authorOptions" placeholder="输入作者名" autocomplete="off" />
+        <datalist id="authorOptions"></datalist>
+      </label>
+      <label>
+        <span>状态</span>
+        <select id="statusFilter"></select>
+      </label>
+      <label>
+        <span>证据</span>
+        <select id="evidenceFilter"></select>
+      </label>
+      <label>
+        <span>排序</span>
+        <select id="sortKey">
+          <option value="pv_id">PV ID</option>
+          <option value="name">原名</option>
+          <option value="name_zh">中文名</option>
+          <option value="author">作者</option>
+          <option value="source">来源</option>
+        </select>
+      </label>
+      <button id="resetFilters" class="button quiet" type="button">重置筛选</button>
+    </section>
+
+    <main class="panel table-panel">
+      <div class="table-head">
+        <div>
+          <strong id="resultCount">加载中...</strong>
+          <span id="generatedAt"></span>
+        </div>
+        <span class="toast" id="toast" aria-live="polite"></span>
+        <div class="legend">
+          <span><i class="dot translated"></i>已有中文名</span>
+          <span><i class="dot missing"></i>待补充</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>PV</th>
+              <th>曲名</th>
+              <th>中文名</th>
+              <th>英文名</th>
+              <th>作者</th>
+              <th>来源</th>
+              <th>证据</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="songRows"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="detailDialog">
+    <article class="detail-card">
+      <button class="close" id="closeDetail" type="button" aria-label="关闭">×</button>
+      <div id="detailContent"></div>
+    </article>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
