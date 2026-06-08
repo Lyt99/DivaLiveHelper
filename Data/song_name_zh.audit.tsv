@@ -862,8 +862,6 @@ auto	mod:IA-VT Colorful Song Pack	延命治療	Enmei Chiryou	Neru	self-display	�
 auto	mod:IA-VT Colorful Song Pack	鹿驚	Kakashi	Mochizuki Urara	self-display	鹿驚	self-display-cjk-title
 auto	mod:lavverso Song Pack	MELODY LINE	Melody Line	SmileR	self-display	MELODY LINE	self-display-latin-title
 auto	mod:Retro Charts	[PD2] Change me	[PD2] Change Me	shu-t	self-display	[PD2] Change me	self-display-latin-title
-auto	mod:Cabra's Song Pack	ビー マイ ゲスト	Be My Guest	アザリ	self-display	ビー マイ ゲスト	self-display-kana-title
-auto	mod:X Song Pack	カオス・メドレー ～ギガリミックス～	Quirky Medley - Giga-Remix	ぎがP/れをる, みきとP	self-display	カオス・メドレー ～ギガリミックス～	self-display-kana-title
 auto	mod:lavverso Song Pack	ストロ→	Straw→	千石ナタデコ子	self-display	ストロ→	self-display-kana-title
 auto	mod:Nitori's Song Pack	HANN	HANN (Alone)	(G)I-dle	qq-music:한 (HANN) (一) (HANN(Alone))	一	qq-music-parenthetical-title
 auto	mod:alocin Song Pack	JUMPIN' OVER！	JUMPIN' OVER!	r-906	netease-transNames:JUMPIN' OVER !	跳过！	netease-transname
@@ -872,6 +870,8 @@ auto	mod:X Song Pack	キュート・メドレー ～アイドル サウンズ～
 auto	mod:X Song Pack	はじまりのメドレー 〜プライマリーカラーズ〜	Beginning Medley - Primary Colors	OSTER project	qq-music:はじまりのメドレー ~プライマリーカラーズ~ (初始组曲 ~Primary Colors~)	初始组曲 ~Primary Colors~	qq-music-parenthetical-title
 auto	mod:X Song Pack	クール・メドレー ～サイバーロックジャム～	Cool Medley - Cyber Rock Jam	wowaka, ライブP, ゆうゆ, ゆよゆっぺ, n,k	qq-music:クール・メドレー ~サイバーロックジャム~ (酷炫组曲 ~Cyber Rocker Jam~)	酷炫组曲 ~Cyber Rocker Jam~	qq-music-parenthetical-title
 auto	mod:lavverso Song Pack	フロートプレイ	Float Play	稲葉曇	netease-transNames:フロートプレイ	漂浮游戏	netease-transname
+auto	mod:Cabra's Song Pack	ビー マイ ゲスト	Be My Guest	アザリ	moegirl:Be_My_Guest	别客气	moegirl-title-evidence
+auto	mod:X Song Pack	カオス・メドレー ～ギガリミックス～	Quirky Medley - Giga-Remix	ぎがP/れをる, みきとP	mikuclub:920545	混沌组曲 ~Giga Remix~	community-title-evidence
 pending	mod:X Song Pack	愛Dee	Ai Dee	Mitchie M			missing
 pending	mod:X Song Pack	ビューティ・メドレー 〜Glossy Mixture〜	Elegant Medley - Glossy Mixture	ELECTROCUTICA ,八王子P, Tripshots			missing
 pending	mod:X Song Pack	終極のメドレー ～超絶技巧暴走組曲～	Ending Medley - Ultimate Exquisite Rampage	wowaka, PolyphonicBranch, Storyteller			missing
