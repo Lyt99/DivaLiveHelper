@@ -23,6 +23,7 @@ dependencies = [
 diva-live-helper = "diva_live_helper.main:main"
 update_db        = "diva_live_helper.tools.update_db:main"
 diva-translate   = "diva_live_helper.tools.translate:main"
+build-zh-site    = "diva_live_helper.tools.build_zh_site:main"
 
 [dependency-groups]
 dev = [
