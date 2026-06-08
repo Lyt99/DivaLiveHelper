@@ -8,3 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Local runtime config may contain cookies or LLM API keys
+config.json
