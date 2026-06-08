@@ -135,7 +135,7 @@ def main():
     # 导入旧版别名文件到每首歌的 aliases 字段
     db.import_aliases(data_path / "AnotherSongName.json")
 
-    # 合并旧版中文名缓存到独立中文名数据库（按 pvid 存储）
+    # 合并旧版中文名缓存到独立中文名数据库（按原曲名存储）
     name_cache = _load_name_cache(data_dir)
     if name_cache:
         updated = zh_db.update_from_name_cache(db, name_cache)

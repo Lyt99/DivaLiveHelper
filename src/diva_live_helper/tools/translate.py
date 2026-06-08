@@ -61,8 +61,10 @@ def _print_zh_db(zh_db_path: Path):
         print("中文名数据库为空。")
         return
     print(f"共 {len(zh_db.names)} 条中文名：")
-    for pv_id, zh in sorted(zh_db.names.items()):
-        print(f"  pv_{pv_id:04d}  ->  {zh}")
+    for name, zh in sorted(zh_db.names.items()):
+        entry = zh_db.entries.get(name)
+        evidence = f" [{entry.evidence}]" if entry and entry.evidence else ""
+        print(f"  {name}  ->  {zh}{evidence}")
 
 
 async def _run_query(
@@ -78,7 +80,7 @@ async def _run_query(
     """
     异步翻译歌曲名，返回 {原名: 中文名 or None}。
 
-    如果 write_to_zh_db=True，会将结果按 pv_id 写入 song_name_zh.json。
+    如果 write_to_zh_db=True，会将结果按原曲名写入 song_name_zh.json。
     """
     from diva_live_helper.translator import SongTranslator
 
@@ -108,7 +110,7 @@ async def _run_query(
 
     await translator.close()
 
-    # 将翻译结果写入 song_name_zh.json（按 pv_id 存储）
+    # 将翻译结果写入 song_name_zh.json（按原曲名存储）
     if write_to_zh_db:
         _write_to_zh_db(results, data_dir)
 
@@ -149,7 +151,19 @@ def _write_to_zh_db(results: dict[str, str | None], data_dir: str):
             continue
         original_name = name_to_original_name.get(name)
         if original_name:
-            zh_db.names[original_name] = zh
+            matched_entry = next(
+                (entry for entry in song_db.songs.values() if entry.name == original_name),
+                None,
+            )
+            zh_db.set_name(
+                original_name,
+                zh,
+                source=matched_entry.source if matched_entry else "",
+                name_en=matched_entry.name_en if matched_entry else "",
+                author=",".join(matched_entry.authors) if matched_entry else "",
+                candidate="diva-translate",
+                evidence="llm-generated",
+            )
             updated += 1
 
     if updated:
@@ -220,7 +234,16 @@ async def _run_translate_all(
     updated = 0
     for name, zh in batch_results.items():
         if zh:
-            zh_db.names[name] = zh
+            matched_entry = next((entry for entry in song_db.songs.values() if entry.name == name), None)
+            zh_db.set_name(
+                name,
+                zh,
+                source=matched_entry.source if matched_entry else "",
+                name_en=matched_entry.name_en if matched_entry else "",
+                author=",".join(matched_entry.authors) if matched_entry else "",
+                candidate="diva-translate",
+                evidence="llm-generated",
+            )
             updated += 1
 
     if updated:

@@ -36,6 +36,7 @@ import json
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import cast
 
 
 # 难度名规范化映射（用户输入 → DB key）
@@ -121,6 +122,48 @@ class SongEntry:
     def display_name(self) -> str:
         """优先中文名，其次日文名，最后英文名"""
         return self.name_zh or self.name or self.name_en or f"Unknown({self.pv_id})"
+
+
+@dataclass
+class ChineseNameEntry:
+    """单条中文曲名与来源信息。"""
+
+    name_zh: str
+    status: str = "auto"
+    source: str = ""
+    name_en: str = ""
+    author: str = ""
+    candidate: str = ""
+    evidence: str = ""
+
+    def to_dict(self) -> dict[str, str]:
+        return {
+            "name_zh": self.name_zh,
+            "status": self.status,
+            "source": self.source,
+            "name_en": self.name_en,
+            "author": self.author,
+            "candidate": self.candidate,
+            "evidence": self.evidence,
+        }
+
+    @classmethod
+    def from_dict(cls, value: object) -> "ChineseNameEntry | None":
+        if not isinstance(value, dict):
+            return None
+        entry = cast(dict[str, object], value)
+        name_zh = entry.get("name_zh")
+        if not isinstance(name_zh, str) or not name_zh:
+            return None
+        return cls(
+            name_zh=name_zh,
+            status=str(entry.get("status") or "auto"),
+            source=str(entry.get("source") or ""),
+            name_en=str(entry.get("name_en") or ""),
+            author=str(entry.get("author") or ""),
+            candidate=str(entry.get("candidate") or ""),
+            evidence=str(entry.get("evidence") or ""),
+        )
 
 
 def parse_level(level_str: str) -> float:
@@ -386,23 +429,34 @@ class ChineseNameDatabase:
     """
     独立中文名数据库（Data/song_name_zh.json）。
 
-    格式：
+    version 3 格式：
     {
-      "version": 2,
-      "names": {
-        "恋は戦争": "恋爱战争"
+      "version": 3,
+      "entries": {
+        "恋は戦争": {
+          "name_zh": "恋爱战争",
+          "status": "auto",
+          "source": "jiut",
+          "name_en": "",
+          "author": "",
+          "candidate": "pv_001",
+          "evidence": "jiut-song-name-table"
+        }
       }
     }
 
     key 为原曲名（日文/原文名，来自 song_db.json 的 name 字段），
     不使用 pvid，避免 pvid 在不同 mod 间重复导致对应关系错误。
+
+    entries 是磁盘主表；names 是 load() 后生成的内存查询索引。
     """
 
-    VERSION = 2
+    VERSION: int = 3
 
     def __init__(self, db_path: str | Path):
-        self.db_path = Path(db_path)
+        self.db_path: Path = Path(db_path)
         self.names: dict[str, str] = {}  # 原曲名 -> 中文名
+        self.entries: dict[str, ChineseNameEntry] = {}  # 原曲名 -> 中文名与来源
 
     def load(self) -> bool:
         if not self.db_path.exists():
@@ -411,19 +465,24 @@ class ChineseNameDatabase:
             with open(self.db_path, "r", encoding="utf-8") as f:
                 raw = json.load(f)
 
-            raw_names: object
-            if isinstance(raw, dict) and "names" in raw:
-                raw_names = raw.get("names", {})
-            else:
-                raw_names = raw
-
-            if not isinstance(raw_names, dict):
+            if not isinstance(raw, dict) or raw.get("version") != self.VERSION:
                 return False
 
             self.names = {}
-            for key, value in raw_names.items():
-                if isinstance(key, str) and key and isinstance(value, str) and value:
-                    self.names[key] = value
+            self.entries = {}
+
+            raw_entries = raw.get("entries")
+            if not isinstance(raw_entries, dict):
+                return False
+
+            for key, value in raw_entries.items():
+                if not isinstance(key, str) or not key:
+                    continue
+                entry = ChineseNameEntry.from_dict(value)
+                if entry is None:
+                    continue
+                self.entries[key] = entry
+                self.names[key] = entry.name_zh
             return True
         except Exception as e:
             safe_print(f"加载中文名数据库失败: {e}")
@@ -431,19 +490,58 @@ class ChineseNameDatabase:
 
     def save(self):
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        sorted_entries = {
+            name: entry.to_dict()
+            for name, entry in sorted(self.entries.items())
+            if entry.name_zh
+        }
         raw = {
             "version": self.VERSION,
-            "names": {name: zh for name, zh in sorted(self.names.items())},
+            "entries": sorted_entries,
         }
         with open(self.db_path, "w", encoding="utf-8") as f:
             json.dump(raw, f, ensure_ascii=False, indent=2)
+
+    def set_name(
+        self,
+        name: str,
+        name_zh: str,
+        *,
+        status: str = "auto",
+        source: str = "",
+        name_en: str = "",
+        author: str = "",
+        candidate: str = "",
+        evidence: str = "",
+    ):
+        """写入中文名及来源信息。"""
+        if not name or not name_zh:
+            return
+        entry = ChineseNameEntry(
+            name_zh=name_zh,
+            status=status,
+            source=source,
+            name_en=name_en,
+            author=author,
+            candidate=candidate,
+            evidence=evidence,
+        )
+        self.names[name] = name_zh
+        self.entries[name] = entry
 
     def update_from_song_db(self, song_db: SongDatabase) -> int:
         """从 song_db.json 的 name_zh 字段合并到中文名库（按原曲名存储）。"""
         updated = 0
         for entry in song_db.songs.values():
             if entry.name_zh and entry.name and entry.name not in self.names:
-                self.names[entry.name] = entry.name_zh
+                self.set_name(
+                    entry.name,
+                    entry.name_zh,
+                    source=entry.source,
+                    name_en=entry.name_en,
+                    author=",".join(entry.authors),
+                    evidence="song-db-name_zh",
+                )
                 updated += 1
         return updated
 
@@ -455,7 +553,14 @@ class ChineseNameDatabase:
                 continue
             chinese_name = name_cache.get(entry.name) or name_cache.get(entry.name_en)
             if chinese_name:
-                self.names[entry.name] = chinese_name
+                self.set_name(
+                    entry.name,
+                    chinese_name,
+                    source=entry.source,
+                    name_en=entry.name_en,
+                    author=",".join(entry.authors),
+                    evidence="song-name-cache",
+                )
                 updated += 1
         return updated
 

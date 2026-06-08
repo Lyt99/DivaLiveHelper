@@ -260,19 +260,15 @@ class SongSearcher:
         zh_db_file = self.data_dir / "song_name_zh.json"
         if zh_db_file.exists():
             try:
-                with open(zh_db_file, "r", encoding="utf-8") as f:
-                    raw = json.load(f)
-                raw_names = raw.get("names", raw) if isinstance(raw, dict) else {}
-                if isinstance(raw_names, dict):
-                    # 格式：原曲名 -> 中文名；构建反向索引用于填入 id_to_name_zh
-                    name_to_id: dict[str, int] = {
-                        name: pv_id for pv_id, name in self.id_to_name.items()
-                    }
-                    for song_name, zh_name in raw_names.items():
-                        if isinstance(song_name, str) and isinstance(zh_name, str) and zh_name:
-                            pv_id = name_to_id.get(song_name)
-                            if pv_id is not None:
-                                self.id_to_name_zh[pv_id] = zh_name
+                from diva_live_helper.song_db import ChineseNameDatabase
+
+                zh_db = ChineseNameDatabase(zh_db_file)
+                if zh_db.load():
+                    name_to_id: dict[str, int] = {name: pv_id for pv_id, name in self.id_to_name.items()}
+                    for song_name, zh_name in zh_db.names.items():
+                        pv_id = name_to_id.get(song_name)
+                        if pv_id is not None:
+                            self.id_to_name_zh[pv_id] = zh_name
                 print(f"已加载 {len(self.id_to_name_zh)} 条中文名缓存")
                 return
             except Exception as e:
