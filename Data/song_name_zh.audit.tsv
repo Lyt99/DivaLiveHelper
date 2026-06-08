@@ -812,10 +812,31 @@ auto	mod:IA-VT Colorful Song Pack	君のとなりに	Kimi no Tonari Ni	rerulili	
 auto	mod:IA-VT Colorful Song Pack	東京リアルワールド	Tokyo Real World	out of service	qq-music-title	东京现实世界	qq-music-parenthetical-title
 auto	mod:IA-VT Colorful Song Pack	仇返しシンドローム	Adagaeshi Syndrome	MafuMafu	qq-music-title	复仇综合症	qq-music-parenthetical-title
 auto	mod:zombzach's song pack	ルーキー	Rookie	DECO*27	qq-music:ルーキー (新手) (Hiroshi Fujiwara Remix)	新手	qq-music-parenthetical-title
+auto	mod:X Song Pack	紅一葉	A Single Red Leaf	黒うさ	netease-transNames	红一叶	netease-transname
+auto	mod:lavverso Song Pack	アップルドットコム	Apple dot com	ピノキオピー	netease-transNames	苹果网站	netease-transname
+auto	mod:lavverso Song Pack	うらめしヤッホー	URAMESHI YAHOO	和田たけあき	netease-transNames	怨恨	netease-transname
+auto	mod:PolterVocaloidSongPack1.1.1	あぁあぁあぁああぁあぁああぁ	AaAaAaAAaAaAAa	梨本うい	netease-transNames	啊啊啊啊啊啊啊啊啊	netease-transname
+auto	mod:Cabra's Song Pack	鉄の処女と夢見がちなお姫さま	The Iron Maiden and the Dreamy Princess	暗黒童話P(じょるじん)	netease-transNames	铁处女与爱做梦的公主大人	netease-transname
+auto	mod:Cabra's Song Pack	キミのことが好きでゴメンナサイ	Kimi no Koto ga Suki de Gomennasai	うたたP	netease-transNames	对不起，我喜欢你	netease-transname
+auto	mod:Doatz Song Pack	アンチビート	Anti Beat	DECO*27	netease-transNames	反击	netease-transname
+auto	mod:Doatz Song Pack	俺ゴーストタイプ	I'm a Ghost Type	手動	netease-transNames	我幽灵类型	netease-transname
+auto	mod:zombzach's song pack	モエチャッカファイア	MoeChakkaFire	issey	netease-transNames	萌萌点火Fire	netease-transname
+auto	mod:zombzach's song pack	アンチユー	ANTI YOU	Chinozo	netease-transNames	反对你	netease-transname
+auto	mod:Nitori's Song Pack	Девочка с каре	Девочка с каре	МУККА	netease-transNames	短发女孩	netease-transname
+auto	mod:Nitori's Song Pack	インベーダーインベーダー	Invader Invader	きゃりーぱみゅぱみゅ	netease-transNames	入侵者入侵者	netease-transname
+auto	mod:Nitori's Song Pack	は？お前ほんとマジお前分かってねえわマジで一旦とりあえず聞けってマジ	kawaiiorei	D.J.ァネイロ	netease-transNames	哈？你真的你是真不懂啊总之先听人说话啊我说真的	netease-transname
+auto	mod:Onneb's Song Pack	ぐるぐるめろメロディ♪	Groove Groove melo-melody♪	キノシタ	netease-transNames	转啊转的旋律♪	netease-transname
+auto	mod:noah's mini song pack 1	超限界バスター	Super Limit Buster	¿?shimon	netease-transNames	超极限破坏者	netease-transname
+auto	mod:zombzach's song pack	フィクサー	Fixer	ぬゆり	netease-transNames	神射手	netease-transname
+auto	mod:Rinissa's Song Pack	エリート	Elite	ちのぞー	netease-transNames	优等生	netease-transname
+auto	mod:Nitori's Song Pack	残酷な天使のテーゼ (TV size)	A Cruel Angel's Thesis (TV size)	高橋 洋子	netease-transNames	残酷天使的行动纲领	netease-transname
+auto	mod:Dystoria's Song Pack	祝福のLibrary	Shukufuku no Library	Valkyrie	netease-transNames	祝福的藏书馆	netease-transname
+auto	mod:IA-VT Colorful Song Pack	ワールド・コーリング	World Calling	Jin	netease-transNames	世界·呼唤	netease-transname
+auto	mod:Doatz Song Pack	カラクサタウン	Accumula Town	増田順一	netease-transNames	唐草镇	netease-transname
+auto	mod:Dystoria's Song Pack	#髪を切る	Cut my bangs	ゐろは苹果	netease-transNames	#剪发	netease-transname
 pending	mod:Project Hoshikuzu - Song Pack	月光	Moonlight	キタニタツヤ, はるまきごはん			missing
 pending	mod:Cabra's Song Pack	ビー マイ ゲスト	Be My Guest	アザリ			missing
 pending	mod:X Song Pack	愛Dee	Ai Dee	Mitchie M			missing
-pending	mod:X Song Pack	紅一葉	A Single Red Leaf	黒うさ			missing
 pending	mod:X Song Pack	キュート・メドレー ～アイドル サウンズ～	Cute Medley - Idol Sounds	Mitchie M			missing
 pending	mod:X Song Pack	はじまりのメドレー 〜プライマリーカラーズ〜	Beginning Medley - Primary Colors	OSTER project			missing
 pending	mod:X Song Pack	クール・メドレー ～サイバーロックジャム～	Cool Medley - Cyber Rock Jam	wowaka, ライブP, ゆうゆ, ゆよゆっぺ, n,k			missing
@@ -824,9 +845,7 @@ pending	mod:X Song Pack	カオス・メドレー ～ギガリミックス～	Qui
 pending	mod:X Song Pack	終極のメドレー ～超絶技巧暴走組曲～	Ending Medley - Ultimate Exquisite Rampage	wowaka, PolyphonicBranch, Storyteller			missing
 pending	mod:lavverso Song Pack	重音territory ～ずっとテトのターン	Kasane territory ～ Zutto Teto no Taan	ZUN			missing
 pending	mod:lavverso Song Pack	振り子の幽霊	Furiko no Yuurei	mizian 81 end			missing
-pending	mod:lavverso Song Pack	アップルドットコム	Apple dot com	ピノキオピー			missing
 pending	mod:lavverso Song Pack	ストロ→	Straw→	千石ナタデコ子			missing
-pending	mod:lavverso Song Pack	うらめしヤッホー	URAMESHI YAHOO	和田たけあき			missing
 pending	mod:lavverso Song Pack	匿名M	Anonymous M	ピノキオピー			missing
 pending	mod:lavverso Song Pack	MELODY LINE	Melody Line	SmileR			missing
 pending	mod:lavverso Song Pack	フロートプレイ	Float Play	稲葉曇			missing
@@ -836,7 +855,6 @@ pending	mod:EdenMasochistPack	終焉≠カタルシス	Demise ≠ Catharsis	ろ�
 pending	mod:EdenMasochistPack	帝国少女	Imperial Girl	R Sound Design			missing
 pending	mod:Birdbrain	バードブレイン	BIRDBRAIN	Jamie Paige/OK Glass/Ash Taylor			missing
 pending	mod:PolterVocaloidSongPack1.1.1	恐怖ガーデン	Fear Garden	ちゃぁ			missing
-pending	mod:PolterVocaloidSongPack1.1.1	あぁあぁあぁああぁあぁああぁ	AaAaAaAAaAaAAa	梨本うい			missing
 pending	mod:PolterVocaloidSongPack1.1.1	肺超微細珪火山症	Pneumonoultramicroscopicsilicovolcanoconiosis	だす			missing
 pending	mod:PolterVocaloidSongPack1.1.1	失敗時代	FLOP ERA	えぴあえおん			missing
 pending	mod:PolterVocaloidSongPack1.1.1	静的	Static	ふれいばあfおうりい			missing
@@ -844,14 +862,11 @@ pending	mod:PolterVocaloidSongPack1.1.1	静的 - 再起動	Static - REBOOTED	ふ
 pending	mod:PolterVocaloidSongPack1.1.1	代弁された	Spoken For	ふれいばあfおうりい			missing
 pending	mod:PolterVocaloidSongPack1.1.1	ヴァルゴ	Virgo	なんとかP			missing
 pending	mod:Cabra's Song Pack	街	City	jon-YAKITORY			missing
-pending	mod:Cabra's Song Pack	鉄の処女と夢見がちなお姫さま	The Iron Maiden and the Dreamy Princess	暗黒童話P(じょるじん)			missing
 pending	mod:Cabra's Song Pack	ビビビビ	Be Be Be Be!	フロクロ			missing
-pending	mod:Cabra's Song Pack	キミのことが好きでゴメンナサイ	Kimi no Koto ga Suki de Gomennasai	うたたP			missing
 pending	mod:zombzach's song pack	バグってない?	It's not buggy	すりい			missing
 pending	mod:zombzach's song pack	ころしちゃった!	Messed up!	夏山よつぎ			missing
 pending	mod:zombzach's song pack	あいたい星人	Aitai-lians	DECO*27			missing
 pending	mod:Doatz Song Pack	おじゃま虫II	Stickybug II	DECO*27			missing
-pending	mod:Doatz Song Pack	アンチビート	Anti Beat	DECO*27			missing
 pending	mod:Doatz Song Pack	giga戯画witch	Giga Cartoon Witch	黒澤まどか			missing
 pending	mod:Doatz Song Pack	おはよう元年	Good Morning, First Year	ラマーズP			missing
 pending	mod:Doatz Song Pack	ATARI FRONT PROGRAM Feat. 可不	ATARI FRONT PROGRAM Feat. KAFU	鬱P			missing
@@ -886,7 +901,6 @@ pending	mod:Doatz Song Pack	天照ラセ - 10th Anniversary ver. -	Amaterase - 1
 pending	mod:Doatz Song Pack	ハッピーチートデー	Happy Cheat Day	れるりり			missing
 pending	mod:Doatz Song Pack	シェイディ・レイディ	Shady Lady	前線			missing
 pending	mod:Doatz Song Pack	アマツキツネ - 10th anniversary -	Amatsu Kitsune - 10th anniversary -	まらしぃ			missing
-pending	mod:Doatz Song Pack	俺ゴーストタイプ	I'm a Ghost Type	手動			missing
 pending	mod:Doatz Song Pack	ひゅ〜どろどろ	Woo~oosh, Oozing	蜂屋ななし			missing
 pending	mod:Doatz Song Pack	ネコ通信	Cat Communication	isonosuke			missing
 pending	mod:Doatz Song Pack	ノーブル・ローズ	NOBLE ROSE	ねじ式			missing
@@ -895,21 +909,17 @@ pending	mod:Doatz Song Pack	たびのまえ、たびのあと	Journey's Prequels
 pending	mod:Doatz Song Pack	エスパーエスパー	Psychic Psychic	ナユタン星人			missing
 pending	mod:Doatz Song Pack	ゴー！ビッパ団	GO! Team BIPPA	Wonderful☆Opportunity			missing
 pending	mod:Doatz Song Pack	ダメンズ ロープウェイ	Damens Ropeway	ねじ式			missing
-pending	mod:zombzach's song pack	モエチャッカファイア	MoeChakkaFire	issey			missing
 pending	mod:zombzach's song pack	烈火	Rekka	niki			missing
-pending	mod:zombzach's song pack	アンチユー	ANTI YOU	Chinozo			missing
 pending	mod:zombzach's song pack	フィッシュアンドTips	Fish and Tips	Dopam!ne			missing
 pending	mod:zombzach's song pack	バブリン	Bubblin	5u5h1			missing
 pending	mod:Nitori's Song Pack	恋のディスコ・クイーン	Koi no DISCO QUEEN	SEGA SOUND TEAM			missing
 pending	mod:Nitori's Song Pack	JUDGEMENT -審判- (Full Spec Edition)	Judgement -Shinpan- (Full Spec Edition)	Hyd Lunch			missing
 pending	mod:Nitori's Song Pack	HANN	HANN (Alone)	(G)I-dle			missing
 pending	mod:Nitori's Song Pack	るるちゃんの自殺配信	Ruru's Suicide Show On A Livestream	神聖かまってちゃん			missing
-pending	mod:Nitori's Song Pack	Девочка с каре	Девочка с каре	МУККА			missing
 pending	mod:Nitori's Song Pack	24時間シンデレラ (Full Spec Edition)	24-hour Cinderella (Full Spec Edition)	ZENTA			missing
 pending	mod:Nitori's Song Pack	ピプパペット	Pip Puppet	r-906			missing
 pending	mod:Nitori's Song Pack	ナイト・オブ・ナイツ (Cranky Remix)	Night of Knights (Cranky Remix)	ビートまりお × Cranky			missing
 pending	mod:Nitori's Song Pack	イワシが土から生えてくるんだ	A Sardine Grows from the Soil	???????			missing
-pending	mod:Nitori's Song Pack	インベーダーインベーダー	Invader Invader	きゃりーぱみゅぱみゅ			missing
 pending	mod:Nitori's Song Pack	雷神の左腕	Raijin no Hidariude	サウンドホライズン			missing
 pending	mod:Nitori's Song Pack	夏祭り- 鬱P Ver	Natsu Matsuri - UtsuP Ver	鬱P			missing
 pending	mod:Nitori's Song Pack	LaLaL危	LaLaLove	梅とら			missing
@@ -924,7 +934,6 @@ pending	mod:Nitori's Song Pack	落日	Rakujitsu -Dusk-	東京事変			missing
 pending	mod:Nitori's Song Pack	くるくるぱぁ	Kuru Kuru Pa	ラマーズP			missing
 pending	mod:Nitori's Song Pack	ササメク (remodel for alpa)	Sasameku (remodel for alpa)	椎名もた			missing
 pending	mod:Nitori's Song Pack	インターネッツ・ディスコ	Internets Disco	buzzG			missing
-pending	mod:Nitori's Song Pack	は？お前ほんとマジお前分かってねえわマジで一旦とりあえず聞けってマジ	kawaiiorei	D.J.ァネイロ			missing
 pending	mod:Nitori's Song Pack	13階段のすべりだい	13 Stairs	ばぶちゃん			missing
 pending	mod:Onneb's Song Pack	ハイスピードユニヴァース	High-Speed Universe	テンタクル忍者			missing
 pending	mod:Onneb's Song Pack	悪戯センセーション	Itazura Sensation	森羅万象			missing
@@ -933,7 +942,6 @@ pending	mod:Onneb's Song Pack	レッドラインシンドローム	Redline Syndr
 pending	mod:Onneb's Song Pack	煉情ミスティフィリア	Renjou Mystiphilia	Sakamiya feat.一花			missing
 pending	mod:Onneb's Song Pack	エゴイスト (セカイVer.)	EGOIST (Sekai Ver.)	大沼パセリ			missing
 pending	mod:Onneb's Song Pack	ボーカロイドボサノバメドレー	Vocaloid Bossa Nova Medley				missing
-pending	mod:Onneb's Song Pack	ぐるぐるめろメロディ♪	Groove Groove melo-melody♪	キノシタ			missing
 pending	mod:Onneb's Song Pack	ヤムヤム!ピザ！	Yum-Yum! Pizza!	ねこだいすきP			missing
 pending	mod:Onneb's Song Pack	フューエル (セカイVer.)	Fuel (Sekai Ver.)	鬱P			missing
 pending	mod:Onneb's Song Pack	Voices (セカイVer.)	Voices (Sekai Ver.)	ゆよゆっぺ			missing
@@ -949,7 +957,6 @@ pending	mod:alocin Song Pack	ミライどんなだろう	What Kind of Future	Mit
 pending	mod:alocin Song Pack	地団駄ビート	Jidanda Beat	まらしぃ			missing
 pending	mod:Kaito-Aiyumi SongPack3	ニュース39	News39	Mitchie M			missing
 pending	mod:Kaito-Aiyumi SongPack3	どうぶつ占い - Mirai2013	Animal Divination - Mirai 2013	Scop			missing
-pending	mod:noah's mini song pack 1	超限界バスター	Super Limit Buster	¿?shimon			missing
 pending	mod:noah's mini song pack 1	すーぱーこんぷれっくす	Super Complex	¿?shimon			missing
 pending	mod:Miracle Girls Festival Chart Pack	ぽっぴんジャンプ♪	Poppin Jump♪	木村 有希			missing
 pending	mod:Miracle Girls Festival Chart Pack	いぇす！ゆゆゆ☆ゆるゆり♪♪	Yes! YuYuYu☆YuruYuri♪♪	杉浦\ラフィン\誠一郎			missing
@@ -957,7 +964,6 @@ pending	mod:Miracle Girls Festival Chart Pack	も・ぎ・た・て♥フルー�
 pending	mod:Miracle Girls Festival Chart Pack	コトバ・サガシタイ	Kotoba・Sagashitai	千葉\naotyu-\直樹			missing
 pending	mod:Miracle Girls Festival Chart Pack	タチアガレ！	Tachiagare!	神前 暁（MONACA）			missing
 pending	mod:zombzach's song pack	ディジーディジー	Dizzy Dizzy	栗山夕璃			missing
-pending	mod:zombzach's song pack	フィクサー	Fixer	ぬゆり			missing
 pending	mod:Megpoid the Music# Song Pack	キリトリセン -Megpoid# Edit-	Cutoff Line -Megpoid# Edit-	40mp			missing
 pending	mod:Megpoid the Music# Song Pack	十面相 -Megpoid# Edit-	Ten Faced -Megpoid# Edit-	YM			missing
 pending	mod:Megpoid the Music# Song Pack	レクイヱム -Megpoid# Edit-	Requiem -Megpoid# Edit-	ぺぺろんP			missing
@@ -976,7 +982,6 @@ pending	mod:Rinissa's Song Pack	アンダーヒロイン	Under Heroine	ツユ			
 pending	mod:Rinissa's Song Pack	カリンーヨサ	Ang Carinosa	Steampianist			missing
 pending	mod:Rinissa's Song Pack	404：虚像	404: False Image	蟹木しとお			missing
 pending	mod:Rinissa's Song Pack	シンデレラ (ギガりみっくす)	Cinderella (Giga First Night Remix)	DECO*27			missing
-pending	mod:Rinissa's Song Pack	エリート	Elite	ちのぞー			missing
 pending	mod:Rinissa's Song Pack	フォクス	FOCUS	KIRA			missing
 pending	mod:Rinissa's Song Pack	らんぐあじおふだろすと	Language of the Lost	R.I.P / RIProducer			missing
 pending	mod:Rinissa's Song Pack	萬屋レストラン	Yorozuya Restaurant	暖炉P			missing
@@ -989,13 +994,11 @@ pending	mod:Nitori's Song Pack	パラノイヤ	Paranoia	カラスヤサボウ			
 pending	mod:Nitori's Song Pack	私がモテないのはどう考えてもお前らが悪い! (TV size)	Watashi ga Motenai no wa Dou Kangaete mo Omaera ga Warui (TV size)	キバオブアキバ, 鈴木 このみ			missing
 pending	mod:Nitori's Song Pack	ミク	Miku	Anamanaguchi			missing
 pending	mod:Nitori's Song Pack	テリヤキ	Teriyaki	柊マグネタイト			missing
-pending	mod:Nitori's Song Pack	残酷な天使のテーゼ (TV size)	A Cruel Angel's Thesis (TV size)	高橋 洋子			missing
 pending	mod:Nitori's Song Pack	土屋的イワシがくる生活	In the soil, daily life with a sardine	saklz			missing
 pending	mod:Nitori's Song Pack	Gruppa krovi feat. 初音ミク	Gruppa krovi feat. Hatsune Miku	Кино / Andrew Ovcharenko			missing
 pending	mod:Nitori's Song Pack	チェリーハント feat. ルス	Cherry Hunt feat. Luz	奏音69			missing
 pending	mod:Nitori's Song Pack	む	Mu	大漠波新			missing
 pending	mod:Nitori's Song Pack	ムニエル	Meunière	daniwell			missing
-pending	mod:Dystoria's Song Pack	祝福のLibrary	Shukufuku no Library	Valkyrie			missing
 pending	mod:Dystoria's Song Pack	虚像のCarousel	Carousel of Imaginary Images	Mori Calliope × Reol			missing
 pending	mod:Dystoria's Song Pack	ディジーディジー	Dizzy Dizzy	蜂屋ななし			missing
 pending	mod:Dystoria's Song Pack	ビースト・ダンス	Beast Dance	KurageP			missing
@@ -1016,13 +1019,11 @@ pending	mod:Dystoria's Song Pack	ユニ	Yuni	柊マグネタイト			missing
 pending	mod:Dystoria's Song Pack	すーぱーぬこわーるど	Super Nuko world	まふまふ			missing
 pending	mod:Dystoria's Song Pack	妄想税	Delusion Tax	DECO27			missing
 pending	mod:Dystoria's Song Pack	本命	Fave Fix	DECO*27			missing
-pending	mod:Dystoria's Song Pack	モエチャッカファイア	MoeChakkaFire	issey			missing
 pending	mod:IA-VT Colorful Song Pack	キラースマイル	Killer Smile	yksb			missing
 pending	mod:IA-VT Colorful Song Pack	インナーアーツ	Inner Arts	Jin			missing
 pending	mod:IA-VT Colorful Song Pack	神のみぞ知る	God Only Knows	Darvish-P			missing
 pending	mod:IA-VT Colorful Song Pack	サーキットディスコ	Circuit DISCO	Komatsu Kazuya			missing
 pending	mod:IA-VT Colorful Song Pack	ラヴ・サジタリアス	Love Sagitarius	Jin			missing
-pending	mod:IA-VT Colorful Song Pack	ワールド・コーリング	World Calling	Jin			missing
 pending	mod:IA-VT Colorful Song Pack	パバースラブロック	Perverse Love Rock	Nakazawa Tomoyuki			missing
 pending	mod:IA-VT Colorful Song Pack	憧憬	Doukei	BACK-ON			missing
 pending	mod:IA-VT Colorful Song Pack	現実的論理主義者	Genjitsuteki Ronri Shugisha	goboumen			missing
@@ -1056,7 +1057,6 @@ pending	mod:Retro Charts	[PDe] 忘却心中	[PDe] Lover's Suicide Oblivion	OPA		
 pending	mod:Retro Charts	[PDe] タイムリミット	[PDe] Time Limit	North-T			missing
 pending	mod:Retro Charts	[PDe] いろは唄	[PDe] Iroha Uta	銀サク			missing
 pending	mod:Retro Charts	[PDe] 右肩の蝶 -39's Giving Day Edition-	[PDe] Butterfly on Your Right Shoulder -39's Giving Day Edition-	のりぴー			missing
-pending	mod:Doatz Song Pack	カラクサタウン	Accumula Town	増田順一			missing
 pending	mod:Doatz Song Pack	名を冠する者たち	You Will Know Our Names	工藤ともり, 平松建治, 山中ちこ			missing
 pending	mod:Doatz Song Pack	戦闘！伝説のポケモン	Battle! Legendary - BW/B2W2	増田順一			missing
 pending	mod:Dystoria's Song Pack	勇気のReason (Ado Ver.)	Yuuki no Reason (Ado Ver.)	Ado			missing
@@ -1066,5 +1066,4 @@ pending	mod:Dystoria's Song Pack	つれづれどうじ	Wandering Youth	UmikazeTa
 pending	mod:Dystoria's Song Pack	フィナーレをあなたに。	Finale for You	Aira			missing
 pending	mod:Dystoria's Song Pack	ほぼ水の泡	Cheers Beer	Sheena Ringo			missing
 pending	mod:Dystoria's Song Pack	御掃除しましょ	Let's clean up	虻瀬犬			missing
-pending	mod:Dystoria's Song Pack	#髪を切る	Cut my bangs	ゐろは苹果			missing
 pending	mod:Dystoria's Song Pack	ムーンライト・フィナーレ	Moonlight Finale	ヤマギシコージ			missing
