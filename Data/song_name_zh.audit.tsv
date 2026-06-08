@@ -860,20 +860,24 @@ auto	mod:IA-VT Colorful Song Pack	単色世界	Tanshoku Sekai	Wataame	self-displ
 auto	mod:IA-VT Colorful Song Pack	銀河鉄道365	Ginga Tetsudou 365	Ichiokuen-P	self-display	銀河鉄道365	self-display-cjk-title
 auto	mod:IA-VT Colorful Song Pack	延命治療	Enmei Chiryou	Neru	self-display	延命治療	self-display-cjk-title
 auto	mod:IA-VT Colorful Song Pack	鹿驚	Kakashi	Mochizuki Urara	self-display	鹿驚	self-display-cjk-title
-pending	mod:Cabra's Song Pack	ビー マイ ゲスト	Be My Guest	アザリ			missing
+auto	mod:lavverso Song Pack	MELODY LINE	Melody Line	SmileR	self-display	MELODY LINE	self-display-latin-title
+auto	mod:Nitori's Song Pack	HANN	HANN (Alone)	(G)I-dle	self-display	HANN	self-display-latin-title
+auto	mod:alocin Song Pack	JUMPIN' OVER！	JUMPIN' OVER!	r-906	self-display	JUMPIN' OVER！	self-display-latin-title
+auto	mod:Retro Charts	[PD2] magnet	[PD2] Magnet	minato	self-display	[PD2] magnet	self-display-latin-title
+auto	mod:Retro Charts	[PD2] Change me	[PD2] Change Me	shu-t	self-display	[PD2] Change me	self-display-latin-title
+auto	mod:Cabra's Song Pack	ビー マイ ゲスト	Be My Guest	アザリ	self-display	ビー マイ ゲスト	self-display-kana-title
+auto	mod:X Song Pack	キュート・メドレー ～アイドル サウンズ～	Cute Medley - Idol Sounds	Mitchie M	self-display	キュート・メドレー ～アイドル サウンズ～	self-display-kana-title
+auto	mod:X Song Pack	はじまりのメドレー 〜プライマリーカラーズ〜	Beginning Medley - Primary Colors	OSTER project	self-display	はじまりのメドレー 〜プライマリーカラーズ〜	self-display-kana-title
+auto	mod:X Song Pack	クール・メドレー ～サイバーロックジャム～	Cool Medley - Cyber Rock Jam	wowaka, ライブP, ゆうゆ, ゆよゆっぺ, n,k	self-display	クール・メドレー ～サイバーロックジャム～	self-display-kana-title
+auto	mod:X Song Pack	カオス・メドレー ～ギガリミックス～	Quirky Medley - Giga-Remix	ぎがP/れをる, みきとP	self-display	カオス・メドレー ～ギガリミックス～	self-display-kana-title
+auto	mod:lavverso Song Pack	ストロ→	Straw→	千石ナタデコ子	self-display	ストロ→	self-display-kana-title
+auto	mod:lavverso Song Pack	フロートプレイ	Float Play	稲葉曇	self-display	フロートプレイ	self-display-kana-title
 pending	mod:X Song Pack	愛Dee	Ai Dee	Mitchie M			missing
-pending	mod:X Song Pack	キュート・メドレー ～アイドル サウンズ～	Cute Medley - Idol Sounds	Mitchie M			missing
-pending	mod:X Song Pack	はじまりのメドレー 〜プライマリーカラーズ〜	Beginning Medley - Primary Colors	OSTER project			missing
-pending	mod:X Song Pack	クール・メドレー ～サイバーロックジャム～	Cool Medley - Cyber Rock Jam	wowaka, ライブP, ゆうゆ, ゆよゆっぺ, n,k			missing
 pending	mod:X Song Pack	ビューティ・メドレー 〜Glossy Mixture〜	Elegant Medley - Glossy Mixture	ELECTROCUTICA ,八王子P, Tripshots			missing
-pending	mod:X Song Pack	カオス・メドレー ～ギガリミックス～	Quirky Medley - Giga-Remix	ぎがP/れをる, みきとP			missing
 pending	mod:X Song Pack	終極のメドレー ～超絶技巧暴走組曲～	Ending Medley - Ultimate Exquisite Rampage	wowaka, PolyphonicBranch, Storyteller			missing
 pending	mod:lavverso Song Pack	重音territory ～ずっとテトのターン	Kasane territory ～ Zutto Teto no Taan	ZUN			missing
 pending	mod:lavverso Song Pack	振り子の幽霊	Furiko no Yuurei	mizian 81 end			missing
-pending	mod:lavverso Song Pack	ストロ→	Straw→	千石ナタデコ子			missing
 pending	mod:lavverso Song Pack	匿名M	Anonymous M	ピノキオピー			missing
-pending	mod:lavverso Song Pack	MELODY LINE	Melody Line	SmileR			missing
-pending	mod:lavverso Song Pack	フロートプレイ	Float Play	稲葉曇			missing
 pending	mod:EdenMasochistPack	すーぱーぬこになれんかった	I Couldn't Become a Super Cat After All	まふまふ			missing
 pending	mod:EdenMasochistPack	マギサ	Magisa	wotaku			missing
 pending	mod:EdenMasochistPack	終焉≠カタルシス	Demise ≠ Catharsis	ろひP			missing
@@ -930,7 +934,6 @@ pending	mod:zombzach's song pack	フィッシュアンドTips	Fish and Tips	Dopa
 pending	mod:zombzach's song pack	バブリン	Bubblin	5u5h1			missing
 pending	mod:Nitori's Song Pack	恋のディスコ・クイーン	Koi no DISCO QUEEN	SEGA SOUND TEAM			missing
 pending	mod:Nitori's Song Pack	JUDGEMENT -審判- (Full Spec Edition)	Judgement -Shinpan- (Full Spec Edition)	Hyd Lunch			missing
-pending	mod:Nitori's Song Pack	HANN	HANN (Alone)	(G)I-dle			missing
 pending	mod:Nitori's Song Pack	るるちゃんの自殺配信	Ruru's Suicide Show On A Livestream	神聖かまってちゃん			missing
 pending	mod:Nitori's Song Pack	24時間シンデレラ (Full Spec Edition)	24-hour Cinderella (Full Spec Edition)	ZENTA			missing
 pending	mod:Nitori's Song Pack	ピプパペット	Pip Puppet	r-906			missing
@@ -964,7 +967,6 @@ pending	mod:Onneb's Song Pack	シニタイちゃん	Shinitai-chan	すいっち		
 pending	mod:alocin Song Pack	バッドシャーク	Bad Shark	niki			missing
 pending	mod:alocin Song Pack	エスパーエスパー	Esper Esper	ナユタン星人			missing
 pending	mod:alocin Song Pack	イフ	IF	ユリイ・カノン			missing
-pending	mod:alocin Song Pack	JUMPIN' OVER！	JUMPIN' OVER!	r-906			missing
 pending	mod:alocin Song Pack	ピカピカ	Pikapika	n.k			missing
 pending	mod:alocin Song Pack	ミライどんなだろう	What Kind of Future	Mitchie M			missing
 pending	mod:alocin Song Pack	地団駄ビート	Jidanda Beat	まらしぃ			missing
@@ -1046,10 +1048,8 @@ pending	mod:Retro Charts	[PD1/PD2] みくみく菌にご注意♪	[PD1/PD2] Bewa
 pending	mod:Retro Charts	[PD1/PD2] 天鵞絨アラベスク	[PD1/PD2] Velvet Arabesque	畑 亜貴			missing
 pending	mod:Retro Charts	[PD1/PD2] ラブリスト更新中？	[PD1/PD2] Updating My Love List?	畑 亜貴			missing
 pending	mod:Retro Charts	[PD1/PDe] 金の聖夜霜雪に朽ちて	[PD1/PDe] Requiem for the Phantasma	デッドボールP			missing
-pending	mod:Retro Charts	[PD2] magnet	[PD2] Magnet	minato			missing
 pending	mod:Retro Charts	[PD2] 巨大少女	[PD2] Gigantic Girl	40mP			missing
 pending	mod:Retro Charts	[PDe] 炉心融解	[PDe] Roshin Yukai	iroha(sasaki)			missing
-pending	mod:Retro Charts	[PD2] Change me	[PD2] Change Me	shu-t			missing
 pending	mod:Retro Charts	[PD2] クローバー・クラブ	[PD2] Clover♣Club	ゆうゆ			missing
 pending	mod:Retro Charts	[PD2] ほんとは分かってる	[PD2] I Really Do Understand	フナコシP			missing
 pending	mod:Retro Charts	[PDe] 孤独の果て -extend edition-	[PDe] Solitude's End -extend edition-	光収容			missing
