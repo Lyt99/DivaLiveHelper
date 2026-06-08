@@ -154,6 +154,22 @@ pv_4951.song_name=誰だお前
 pv_4951.song_name_en=Dare da Omae
 ```
 
+## 公开中文曲名数据库
+
+项目可以生成一个静态网页，用于公开浏览、筛选、下载和贡献中文曲名数据库：
+
+```bash
+uv run build-zh-site
+```
+
+生成结果位于 `docs/`，可直接作为 GitHub Pages 站点发布。页面支持按曲名、中文名、英文名、作者、MOD 来源、状态和证据类型筛选，并提供以下下载：
+
+- `song_name_zh.json` — version 3 中文曲名数据库，包含译名和来源/证据信息
+- `song_db.json` — 结构化歌曲数据库
+- `song_name_zh.audit.tsv` — 表格形式审计数据
+
+贡献译名时请优先提供可验证来源，例如 B站标题、网易云/QQ 音乐平台标题、萌娘百科或其他社区页面。不要提交无来源的硬翻译。
+
 ## 项目结构
 
 ```
@@ -167,8 +183,10 @@ diva-live-helper/
 │       ├── song_search.py       # 歌曲搜索
 │       ├── song_select.py       # 游戏内存修改
 │       ├── queue.py             # 点歌队列
-│       └── hotkey.py            # 快捷键监听
+│       ├── hotkey.py            # 快捷键监听
+│       └── tools/               # 数据库与站点生成工具
 ├── Data/                        # 数据文件
+├── docs/                        # 生成的中文曲名数据库静态站点
 ├── config.example.json          # 配置示例
 ├── pyproject.toml               # 项目配置
 └── README.md

@@ -1,0 +1,53 @@
+name: 建议新增或修改中文曲名
+description: 提交有来源证据的中文曲名补充或纠错
+title: "中文名建议: "
+labels: ["data", "song-name"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢补充中文曲名！请提供可验证来源。没有社区/平台证据的硬翻译不会直接合并。
+  - type: input
+    id: original_name
+    attributes:
+      label: 原曲名
+      description: song_db.json 中的原始曲名
+      placeholder: 例：初音ミクの消失
+    validations:
+      required: true
+  - type: input
+    id: name_zh
+    attributes:
+      label: 建议中文名
+      placeholder: 例：初音未来的消失
+    validations:
+      required: true
+  - type: input
+    id: evidence_url
+    attributes:
+      label: 证据链接
+      description: B站、网易云、QQ 音乐、萌娘百科、社区页面等
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence_type
+    attributes:
+      label: 证据类型
+      options:
+        - B站标题证据
+        - 网易云/QQ 音乐平台标题
+        - 萌娘百科/百科页面
+        - 社区常用译名
+        - 官方中文名
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 说明
+      description: 补充来源截图、搜索关键词、为什么不是硬翻译等信息
+      placeholder: 这个译名出现在……
+    validations:
+      required: false
