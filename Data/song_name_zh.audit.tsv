@@ -309,7 +309,7 @@ auto	mod:Doatz Song Pack	PARTY ROCK ETERNITY	PARTY ROCK ETERNITY	Hachioji-P	self
 auto	mod:Doatz Song Pack	Glorious Day	Glorious Day	いぶ	self	Glorious Day	self-display-fallback
 auto	mod:Doatz Song Pack	Snowdome	Snowdome	wotaku	self	Snowdome	self-display-fallback
 auto	mod:Nitori's Song Pack	DYE/Re:flection+	DYE/Re:flection+	AVTechNO!	self	DYE/Re:flection+	self-display-fallback
-auto	mod:Onneb's Song Pack	Don't say "lazy"	Don't say "lazy"	前澤寛之	self	Don't say "lazy"	self-display-fallback
+auto	mod:Onneb's Song Pack	"Don't say ""lazy"""	"Don't say ""lazy"""	前澤寛之	self	"Don't say ""lazy"""	self-display-fallback
 auto	mod:Onneb's Song Pack	Listen!!	Listen!!	前澤寛之	self	Listen!!	self-display-fallback
 auto	mod:Onneb's Song Pack	NO, Thank You!	NO, Thank You!	前澤寛之	self	NO, Thank You!	self-display-fallback
 auto	mod:zombzach's song pack	WAYWARD ROMANCE	WAYWARD ROMANCE	FLAVOR FOLEY	self	WAYWARD ROMANCE	self-display-fallback
@@ -734,7 +734,7 @@ auto	mod:EdenMasochistPack	皆殺しのマジック	The Magic of Massacre	鬱P	B
 auto	mod:Onneb's Song Pack	アンデッドアリス	Undead Alice	DECO*27	BV17m421g7hn	致不死的爱丽丝	bilibili-title-evidence
 auto	mod:Onneb's Song Pack	人間らしい	Humanly	ユリイ・カノン	BV1Z441187ii	人间本性	bilibili-title-evidence
 auto	mod:alocin Song Pack	閻魔さまのいうとおり	Whatever Yama Says Goes	ピノキオピー	BV1hW41197px	像阎魔大王说的那样	bilibili-title-evidence
-auto	mod:zombzach's song pack	Aじゃないか	Isn't it "A"	ピノキオピ	BV1aJ4m147Mi	不是A吗	bilibili-title-evidence
+auto	mod:zombzach's song pack	Aじゃないか	"Isn't it ""A"""	ピノキオピ	BV1aJ4m147Mi	不是A吗	bilibili-title-evidence
 auto	mod:Doatz Song Pack	あんたにあっかんべ	I'll Stick My Tongue Out At You	一二三	BV1Ws4y1J7Li	对你做鬼脸	bilibili-title-evidence
 auto	mod:Doatz Song Pack	イナくなっちゃえ大作戦	DOMESTIC Revenger	みつあくま	BV1Po4y1F78q	给我消失吧大作战	bilibili-title-evidence
 auto	mod:Doatz Song Pack	アネモネ	Anemone	Mitsu Akuma	BV1NR4y1R7Hm	银莲花	bilibili-title-evidence
@@ -785,7 +785,7 @@ auto	mod:Kaito-Aiyumi SongPack3	ハジマリノサヨナラ	Beginning's Goodbye	
 auto	mod:Kaito-Aiyumi SongPack3	今好きになる。	Right Now, I'm In Love With You.	HoneyWorks	qq-music-title	我于此刻恋上你	qq-music-parenthetical-title
 auto	mod:Kaito-Aiyumi SongPack3	エレクトリック・マジック	Electric Magic	八王子P	qq-music-title	电子魔法	qq-music-parenthetical-title
 auto	mod:noah's mini song pack 1	パンこげこげになっちゃった	My Bread was Burnt to a Crisp	picdo	qq-music-title	面包烤焦了	qq-music-parenthetical-title
-auto	mod:Miracle Girls Festival Chart Pack	太陽曰く燃えよカオス	The Sun Says "Burn, Chaos"	田中 秀和(MONACA)	qq-music-title	太阳说燃烧吧混沌	qq-music-parenthetical-title
+auto	mod:Miracle Girls Festival Chart Pack	太陽曰く燃えよカオス	"The Sun Says ""Burn, Chaos"""	田中 秀和(MONACA)	qq-music-title	太阳说燃烧吧混沌	qq-music-parenthetical-title
 auto	mod:Miracle Girls Festival Chart Pack	恋は渾沌の隷也	Love is the Servant of Chaos	田中 秀和(MONACA)	qq-music-title	恋爱乃混沌之奴隶也	qq-music-parenthetical-title
 auto	mod:Miracle Girls Festival Chart Pack	とまどい→レシピ	Confusion→Recipe	Junky	qq-music-title	疑惑→配方	qq-music-parenthetical-title
 auto	mod:Miracle Girls Festival Chart Pack	まっしろわーるど	Masshiro World	Junky	qq-music-title	纯白世界	qq-music-parenthetical-title
@@ -861,17 +861,17 @@ auto	mod:IA-VT Colorful Song Pack	銀河鉄道365	Ginga Tetsudou 365	Ichiokuen-P
 auto	mod:IA-VT Colorful Song Pack	延命治療	Enmei Chiryou	Neru	self-display	延命治療	self-display-cjk-title
 auto	mod:IA-VT Colorful Song Pack	鹿驚	Kakashi	Mochizuki Urara	self-display	鹿驚	self-display-cjk-title
 auto	mod:lavverso Song Pack	MELODY LINE	Melody Line	SmileR	self-display	MELODY LINE	self-display-latin-title
-auto	mod:Nitori's Song Pack	HANN	HANN (Alone)	(G)I-dle	self-display	HANN	self-display-latin-title
-auto	mod:alocin Song Pack	JUMPIN' OVER！	JUMPIN' OVER!	r-906	self-display	JUMPIN' OVER！	self-display-latin-title
-auto	mod:Retro Charts	[PD2] magnet	[PD2] Magnet	minato	self-display	[PD2] magnet	self-display-latin-title
 auto	mod:Retro Charts	[PD2] Change me	[PD2] Change Me	shu-t	self-display	[PD2] Change me	self-display-latin-title
 auto	mod:Cabra's Song Pack	ビー マイ ゲスト	Be My Guest	アザリ	self-display	ビー マイ ゲスト	self-display-kana-title
-auto	mod:X Song Pack	キュート・メドレー ～アイドル サウンズ～	Cute Medley - Idol Sounds	Mitchie M	self-display	キュート・メドレー ～アイドル サウンズ～	self-display-kana-title
-auto	mod:X Song Pack	はじまりのメドレー 〜プライマリーカラーズ〜	Beginning Medley - Primary Colors	OSTER project	self-display	はじまりのメドレー 〜プライマリーカラーズ〜	self-display-kana-title
-auto	mod:X Song Pack	クール・メドレー ～サイバーロックジャム～	Cool Medley - Cyber Rock Jam	wowaka, ライブP, ゆうゆ, ゆよゆっぺ, n,k	self-display	クール・メドレー ～サイバーロックジャム～	self-display-kana-title
 auto	mod:X Song Pack	カオス・メドレー ～ギガリミックス～	Quirky Medley - Giga-Remix	ぎがP/れをる, みきとP	self-display	カオス・メドレー ～ギガリミックス～	self-display-kana-title
 auto	mod:lavverso Song Pack	ストロ→	Straw→	千石ナタデコ子	self-display	ストロ→	self-display-kana-title
-auto	mod:lavverso Song Pack	フロートプレイ	Float Play	稲葉曇	self-display	フロートプレイ	self-display-kana-title
+auto	mod:Nitori's Song Pack	HANN	HANN (Alone)	(G)I-dle	qq-music:한 (HANN) (一) (HANN(Alone))	一	qq-music-parenthetical-title
+auto	mod:alocin Song Pack	JUMPIN' OVER！	JUMPIN' OVER!	r-906	netease-transNames:JUMPIN' OVER !	跳过！	netease-transname
+auto	mod:Retro Charts	[PD2] magnet	[PD2] Magnet	minato	qq-music:magnet (磁铁)	磁铁	qq-music-parenthetical-title
+auto	mod:X Song Pack	キュート・メドレー ～アイドル サウンズ～	Cute Medley - Idol Sounds	Mitchie M	bilibili:BV1Z64y1V7RD	俏皮组曲 ~Idol Sounds~	bilibili-title-evidence
+auto	mod:X Song Pack	はじまりのメドレー 〜プライマリーカラーズ〜	Beginning Medley - Primary Colors	OSTER project	qq-music:はじまりのメドレー ~プライマリーカラーズ~ (初始组曲 ~Primary Colors~)	初始组曲 ~Primary Colors~	qq-music-parenthetical-title
+auto	mod:X Song Pack	クール・メドレー ～サイバーロックジャム～	Cool Medley - Cyber Rock Jam	wowaka, ライブP, ゆうゆ, ゆよゆっぺ, n,k	qq-music:クール・メドレー ~サイバーロックジャム~ (酷炫组曲 ~Cyber Rocker Jam~)	酷炫组曲 ~Cyber Rocker Jam~	qq-music-parenthetical-title
+auto	mod:lavverso Song Pack	フロートプレイ	Float Play	稲葉曇	netease-transNames:フロートプレイ	漂浮游戏	netease-transname
 pending	mod:X Song Pack	愛Dee	Ai Dee	Mitchie M			missing
 pending	mod:X Song Pack	ビューティ・メドレー 〜Glossy Mixture〜	Elegant Medley - Glossy Mixture	ELECTROCUTICA ,八王子P, Tripshots			missing
 pending	mod:X Song Pack	終極のメドレー ～超絶技巧暴走組曲～	Ending Medley - Ultimate Exquisite Rampage	wowaka, PolyphonicBranch, Storyteller			missing
