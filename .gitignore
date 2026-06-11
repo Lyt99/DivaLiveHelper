@@ -11,3 +11,8 @@ wheels/
 
 # Local runtime config may contain cookies or LLM API keys
 config.json
+
+# Tauri / frontend generated files
+app/node_modules/
+app/dist/
+app/src-tauri/target/
