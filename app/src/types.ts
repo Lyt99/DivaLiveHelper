@@ -1,0 +1,87 @@
+export interface AppConfig {
+  room_id: number;
+  hotkey: string;
+  data_dir: string;
+  mods_dir: string;
+  auto_play_next: boolean;
+  auto_play_interval: number;
+  max_queue_size: number;
+  allow_duplicates: boolean;
+  obs_overlay_enabled: boolean;
+  obs_overlay_host: string;
+  obs_overlay_port: number;
+  obs_overlay_title: string;
+  song_command_prefix: string;
+  sessdata: string;
+  fetch_chinese_names: boolean;
+  http_proxy: string;
+  default_search_difficulty: string;
+  difficulty_tolerance: number;
+  llm_enabled: boolean;
+  llm_api_key: string;
+  llm_base_url: string;
+  llm_model: string;
+  config_file: string;
+}
+
+export interface SongRequest {
+  song_id: number;
+  song_name: string;
+  requester: string;
+  timestamp: number;
+  difficulty: number | null;
+}
+
+export interface SongInfo {
+  pv_id: number;
+  name: string;
+  name_en: string | null;
+  name_zh: string | null;
+  authors: string[];
+  difficulty: Record<string, number>;
+  source: string | null;
+  aliases: string[];
+}
+
+export interface SearchResult {
+  pv_id: number;
+  display_name: string;
+}
+
+export interface DanmakuEvent {
+  user_name: string;
+  content: string;
+  is_song_request: boolean;
+  timestamp: number;
+}
+
+export interface DanmakuStatus {
+  connected: boolean;
+  room_id: number;
+}
+
+export interface HotkeyStatus {
+  registered: boolean;
+  hotkey: string;
+  message: string;
+}
+
+export interface OBSOverlayStatus {
+  running: boolean;
+  url: string;
+  message: string;
+}
+
+export interface RebuildReport {
+  data_dir: string;
+  mods_dir: string | null;
+  total: number;
+  base_imported: number;
+  mods_imported: number;
+  mods_scanned: number;
+  aliases_imported: number;
+  chinese_names_merged: number;
+  removed_mdata: number;
+  removed_unnamed: number;
+  sources: Record<string, number>;
+}
