@@ -1,10 +1,10 @@
 use std::sync::Arc;
 
 use serde::Serialize;
+use tauri::async_runtime::{self, JoinHandle};
 use tauri::{AppHandle, Emitter};
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader};
 use tokio::net::{TcpListener, TcpStream};
-use tokio::task::JoinHandle;
 
 use crate::queue::SongQueue;
 
@@ -67,7 +67,7 @@ impl OBSOverlayServer {
         let queue = self.queue.clone();
         let app = app.clone();
         let url = self.url();
-        self.task = Some(tokio::spawn(async move {
+        self.task = Some(async_runtime::spawn(async move {
             match TcpListener::bind((host.as_str(), port)).await {
                 Ok(listener) => {
                     let _ = app.emit("log-event", format!("OBS 覆盖层已启动: {url}"));
@@ -76,7 +76,7 @@ impl OBSOverlayServer {
                             Ok((stream, _)) => {
                                 let queue = queue.clone();
                                 let title = title.clone();
-                                tokio::spawn(async move {
+                                async_runtime::spawn(async move {
                                     let _ = handle_client(stream, queue, title).await;
                                 });
                             }
