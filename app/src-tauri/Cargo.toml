@@ -1,0 +1,42 @@
+[package]
+name = "diva-live-helper"
+version = "0.1.0"
+description = "B站直播点歌助手 Tauri 版"
+authors = ["diva-live-helper contributors"]
+edition = "2021"
+
+[lib]
+name = "diva_live_helper_app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+anyhow = "1"
+base64 = "0.22"
+brotli = "7"
+bytes = "1"
+chrono = { version = "0.4", features = ["serde"] }
+flate2 = "1"
+futures-util = "0.3"
+md5 = "0.7"
+reqwest = { version = "0.12", features = ["json", "native-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-shell = "2"
+tokio = { version = "1", features = ["full"] }
+tokio-tungstenite = { version = "0.27", features = ["native-tls"] }
+urlencoding = "2"
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_Threading",
+    "Win32_System_Memory",
+] }
