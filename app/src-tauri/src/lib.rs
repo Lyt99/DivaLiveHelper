@@ -152,6 +152,8 @@ pub fn run() {
             commands::rebuild_database,
             commands::search_songs,
             commands::search_songs_by_author,
+            commands::debug_song_request,
+            commands::debug_enqueue_song,
             commands::get_queue,
             commands::get_queue_history,
             commands::remove_from_queue,

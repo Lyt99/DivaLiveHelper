@@ -48,6 +48,17 @@ export interface SearchResult {
   display_name: string;
 }
 
+export interface DebugSongRequestResult {
+  is_song_request: boolean;
+  query: string;
+  matched: boolean;
+  song_id: number | null;
+  song_name: string | null;
+  added: boolean;
+  requester: string | null;
+  message: string;
+}
+
 export interface DanmakuEvent {
   user_name: string;
   content: string;

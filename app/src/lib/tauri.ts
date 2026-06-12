@@ -1,5 +1,5 @@
 import { invoke } from '@tauri-apps/api/core';
-import type { AppConfig, DanmakuStatus, HotkeyStatus, OBSOverlayStatus, RebuildReport, SearchResult, SongInfo, SongRequest } from '../types';
+import type { AppConfig, DanmakuStatus, DebugSongRequestResult, HotkeyStatus, OBSOverlayStatus, RebuildReport, SearchResult, SongInfo, SongRequest } from '../types';
 
 export const api = {
   getConfig: () => invoke<AppConfig>('get_config'),
@@ -13,6 +13,8 @@ export const api = {
       difficulty: difficulty ?? null,
       difficultyKey: difficultyKey ?? null,
     }),
+  debugSongRequest: (text: string) => invoke<DebugSongRequestResult>('debug_song_request', { text }),
+  debugEnqueueSong: (text: string) => invoke<DebugSongRequestResult>('debug_enqueue_song', { text }),
   getQueue: () => invoke<SongRequest[]>('get_queue'),
   getHistory: () => invoke<SongRequest[]>('get_queue_history'),
   removeFromQueue: (songId: number) => invoke<boolean>('remove_from_queue', { songId }),

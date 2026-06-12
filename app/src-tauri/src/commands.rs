@@ -1,9 +1,11 @@
 use std::path::{Path, PathBuf};
+use std::time::{SystemTime, UNIX_EPOCH};
 
-use tauri::{AppHandle, State};
+use serde::Serialize;
+use tauri::{AppHandle, Manager, State};
 
 use crate::config::Config;
-use crate::danmaku::DanmakuStatus;
+use crate::danmaku::{self, DanmakuEvent, DanmakuStatus, SongProcessOutcome};
 use crate::db_tool::{self, RebuildReport};
 use crate::hotkey::HotkeyStatus;
 use crate::obs_overlay::OBSOverlayStatus;
@@ -11,6 +13,33 @@ use crate::queue::SongRequest;
 use crate::song_db::{SongDatabase, SongInfo};
 use crate::song_search::{SearchResult, SongSearcher};
 use crate::{play_next_song, AppState};
+
+#[derive(Debug, Clone, Serialize)]
+pub struct DebugSongRequestResult {
+    pub is_song_request: bool,
+    pub query: String,
+    pub matched: bool,
+    pub song_id: Option<u32>,
+    pub song_name: Option<String>,
+    pub added: bool,
+    pub requester: Option<String>,
+    pub message: String,
+}
+
+impl From<SongProcessOutcome> for DebugSongRequestResult {
+    fn from(outcome: SongProcessOutcome) -> Self {
+        Self {
+            is_song_request: outcome.is_song_request,
+            query: outcome.query,
+            matched: outcome.matched,
+            song_id: outcome.song_id,
+            song_name: outcome.song_name,
+            added: outcome.added,
+            requester: Some(outcome.requester),
+            message: outcome.message,
+        }
+    }
+}
 
 #[tauri::command]
 pub fn get_config(state: State<'_, AppState>) -> Result<Config, String> {
@@ -156,6 +185,114 @@ pub fn search_songs_by_author(
             &config.default_search_difficulty,
             config.difficulty_tolerance,
         ))
+}
+
+#[tauri::command]
+pub fn debug_song_request(
+    text: String,
+    state: State<'_, AppState>,
+) -> Result<DebugSongRequestResult, String> {
+    resolve_debug_song_request(&text, &state)
+}
+
+#[tauri::command]
+pub async fn debug_enqueue_song(
+    text: String,
+    app: AppHandle,
+) -> Result<DebugSongRequestResult, String> {
+    let state = app.state::<AppState>();
+    let config = state
+        .config
+        .read()
+        .map_err(|_| "读取配置锁失败".to_string())?
+        .clone();
+    let trimmed = text.trim_start();
+    let is_song_request = trimmed.starts_with(&config.song_command_prefix);
+    let event = DanmakuEvent {
+        user_name: "调试".to_string(),
+        content: text,
+        is_song_request,
+        timestamp: current_timestamp(),
+    };
+    Ok(danmaku::process_song_request(&app, &event).await.into())
+}
+
+fn resolve_debug_song_request(
+    text: &str,
+    state: &AppState,
+) -> Result<DebugSongRequestResult, String> {
+    let config = state
+        .config
+        .read()
+        .map_err(|_| "读取配置锁失败".to_string())?
+        .clone();
+    let trimmed = text.trim_start();
+    if !trimmed.starts_with(&config.song_command_prefix) {
+        return Ok(DebugSongRequestResult {
+            is_song_request: false,
+            query: String::new(),
+            matched: false,
+            song_id: None,
+            song_name: None,
+            added: false,
+            requester: None,
+            message: format!(
+                "未识别为点歌指令：当前前缀是 {}",
+                config.song_command_prefix
+            ),
+        });
+    }
+
+    let query = trimmed
+        .trim_start_matches(&config.song_command_prefix)
+        .trim()
+        .to_string();
+    if query.is_empty() {
+        return Ok(DebugSongRequestResult {
+            is_song_request: true,
+            query,
+            matched: false,
+            song_id: None,
+            song_name: None,
+            added: false,
+            requester: None,
+            message: "已识别点歌前缀，但缺少歌曲名".to_string(),
+        });
+    }
+
+    let results = state
+        .searcher
+        .read()
+        .map_err(|_| "读取搜索索引锁失败".to_string())?
+        .search(
+            &query,
+            None,
+            &config.default_search_difficulty,
+            config.difficulty_tolerance,
+        );
+    let Some(result) = results.first() else {
+        return Ok(DebugSongRequestResult {
+            is_song_request: true,
+            query: query.clone(),
+            matched: false,
+            song_id: None,
+            song_name: None,
+            added: false,
+            requester: None,
+            message: format!("点歌指令有效，但没有找到匹配歌曲：{query}"),
+        });
+    };
+
+    Ok(DebugSongRequestResult {
+        is_song_request: true,
+        query,
+        matched: true,
+        song_id: Some(result.pv_id),
+        song_name: Some(result.display_name.clone()),
+        added: false,
+        requester: None,
+        message: format!("可点歌：{} (#{})", result.display_name, result.pv_id),
+    })
 }
 
 #[tauri::command]
@@ -351,4 +488,11 @@ fn resolve_data_dir(configured: &str, fallback: &Path) -> PathBuf {
     } else {
         fallback.join(configured)
     }
+}
+
+fn current_timestamp() -> f64 {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|duration| duration.as_secs_f64())
+        .unwrap_or_default()
 }
