@@ -60,7 +60,7 @@ Copy from `config.example.json`. The only required fields for startup are `room_
 Key non-obvious fields:
 - `mods_dir` — absolute path to game's `mods/` folder; each mod must have `rom/mod_pv_db.txt`
 - `http_proxy` — used by the LLM client (httpx proxy)
-- `llm_enabled` — enables semantic danmaku parsing; falls back to prefix match when disabled or when `llm_api_key` is missing
+- `llm_enabled` — enables semantic danmaku parsing; falls back to prefix match only when disabled. `llm_api_key` is optional so local OpenAI-compatible models can run without a key.
 - `llm_base_url` — OpenAI-compatible; default is DeepSeek. See config.py comments for Qwen/GLM/OpenAI URLs
 - `default_search_difficulty` — difficulty tier used for star-rating filter (`"extreme"` by default); options: `"easy"` / `"normal"` / `"hard"` / `"extreme"` / `"exextreme"`
 - `difficulty_tolerance` — ±tolerance for star-rating filter (default `0.5`)

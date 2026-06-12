@@ -59,7 +59,7 @@ class LLMIntentAnalyzer:
                 pass
 
         self.client = AsyncOpenAI(
-            api_key=api_key,
+            api_key=api_key.strip() or "local-model",
             base_url=base_url,
             http_client=http_client,
         )

@@ -58,7 +58,7 @@ struct ResponseMessage {
 }
 
 pub async fn analyze(config: &Config, message: &str) -> Result<SongIntent, String> {
-    if !config.llm_enabled || config.llm_api_key.trim().is_empty() {
+    if !config.llm_enabled {
         return Ok(SongIntent::default());
     }
 
@@ -93,10 +93,12 @@ pub async fn analyze(config: &Config, message: &str) -> Result<SongIntent, Strin
         max_tokens: 150,
     };
 
-    let response = client
-        .post(endpoint)
-        .bearer_auth(config.llm_api_key.trim())
-        .json(&request)
+    let mut request_builder = client.post(endpoint).json(&request);
+    if !config.llm_api_key.trim().is_empty() {
+        request_builder = request_builder.bearer_auth(config.llm_api_key.trim());
+    }
+
+    let response = request_builder
         .send()
         .await
         .map_err(|error| format!("LLM 请求失败: {error}"))?;

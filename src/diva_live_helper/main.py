@@ -110,16 +110,14 @@ class DivaLiveHelper:
             return
 
         if self.config.llm_enabled:
-            if not self.config.llm_api_key:
-                print("警告: 已启用LLM但未配置 llm_api_key，将回退到前缀匹配")
-            else:
-                self.llm_analyzer = LLMIntentAnalyzer(
-                    api_key=self.config.llm_api_key,
-                    base_url=self.config.llm_base_url,
-                    model=self.config.llm_model,
-                    proxy=self.config.http_proxy,
-                )
-                print(f"LLM意图分析已启用 (model: {self.config.llm_model})")
+            self.llm_analyzer = LLMIntentAnalyzer(
+                api_key=self.config.llm_api_key,
+                base_url=self.config.llm_base_url,
+                model=self.config.llm_model,
+                proxy=self.config.http_proxy,
+            )
+            key_note = "未配置 API Key，本地模型模式" if not self.config.llm_api_key else "已配置 API Key"
+            print(f"LLM意图分析已启用 (model: {self.config.llm_model}, {key_note})")
 
         print("加载歌曲数据库...")
         self.song_searcher.load_database()
