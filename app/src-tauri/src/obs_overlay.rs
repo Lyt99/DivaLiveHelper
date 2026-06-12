@@ -150,11 +150,8 @@ async fn handle_client(
             false,
         )
     } else if path == "/api/queue" {
-        let mut value = serde_json::to_value(queue.snapshot())
+        let value = serde_json::to_value(queue.snapshot())
             .map_err(|error| format!("序列化队列失败: {error}"))?;
-        if let Some(object) = value.as_object_mut() {
-            object.insert("updated_at".to_string(), serde_json::json!(now_timestamp()));
-        }
         let body =
             serde_json::to_vec(&value).map_err(|error| format!("序列化队列失败: {error}"))?;
         (200, "application/json; charset=utf-8", body, true)
@@ -196,9 +193,56 @@ async fn handle_client(
 
 fn render_overlay(title: &str) -> String {
     let title = escape_html(title);
-    format!(
-        r#"<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{title}</title><style>:root{{--bg:rgba(5,10,18,.72);--panel:rgba(10,20,34,.78);--cyan:#32f6ff;--pink:#ff4fd8;--gold:#ffe27a;--text:#f7fbff;--muted:rgba(247,251,255,.68);--line:rgba(50,246,255,.22);font-family:"Microsoft YaHei UI","Microsoft YaHei","Segoe UI",sans-serif}}*{{box-sizing:border-box}}body{{margin:0;min-height:100vh;color:var(--text);background:transparent;overflow:hidden}}.overlay{{width:min(680px,calc(100vw - 32px));margin:16px;padding:18px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 12% 0%,rgba(255,79,216,.24),transparent 32%),radial-gradient(circle at 88% 12%,rgba(50,246,255,.26),transparent 34%),linear-gradient(135deg,var(--bg),var(--panel));box-shadow:0 24px 80px rgba(0,0,0,.42),inset 0 0 34px rgba(50,246,255,.08);backdrop-filter:blur(14px)}}header{{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;margin-bottom:14px}}.eyebrow{{color:var(--cyan);font-size:12px;letter-spacing:.28em;text-transform:uppercase;text-shadow:0 0 14px rgba(50,246,255,.8)}}h1{{margin:2px 0 0;font-size:34px;line-height:1;letter-spacing:.04em;text-shadow:3px 3px 0 rgba(255,79,216,.72),0 0 24px rgba(50,246,255,.42)}}.counter{{min-width:92px;padding:10px 12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,226,122,.28);text-align:center;color:var(--gold)}}.counter strong{{display:block;font-size:26px;line-height:1}}.counter span{{font-size:11px;color:var(--muted)}}.list{{display:grid;gap:10px;max-height:calc(100vh - 150px);overflow:hidden}}.song{{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;background:linear-gradient(90deg,rgba(255,255,255,.11),rgba(255,255,255,.045));border:1px solid rgba(255,255,255,.08);animation:slide-in 360ms ease both}}.song:first-child{{background:linear-gradient(90deg,rgba(50,246,255,.24),rgba(255,79,216,.12));border-color:rgba(50,246,255,.34)}}.pos{{width:38px;height:38px;display:grid;place-items:center;border-radius:14px;color:#061019;background:linear-gradient(135deg,var(--cyan),var(--gold));font-weight:900;box-shadow:0 0 18px rgba(50,246,255,.35)}}.name{{font-size:20px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}.meta{{margin-top:3px;color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}.difficulty{{padding:7px 10px;border-radius:999px;color:var(--pink);background:rgba(255,79,216,.12);border:1px solid rgba(255,79,216,.22);font-weight:800;white-space:nowrap}}.empty{{padding:34px 18px;border-radius:18px;border:1px dashed rgba(50,246,255,.28);color:var(--muted);text-align:center;background:rgba(0,0,0,.18)}}@keyframes slide-in{{from{{opacity:0;transform:translateX(-16px) scale(.98)}}to{{opacity:1;transform:translateX(0) scale(1)}}}}</style></head><body><main class="overlay"><header><div><div class="eyebrow">Project DIVA Live Helper</div><h1>{title}</h1></div><div class="counter"><strong id="count">0</strong><span>首等待</span></div></header><section class="list" id="list"><div class="empty"><strong>等待点歌中</strong><span>弹幕点歌会显示在这里</span></div></section></main><script>async function load(){{try{{const r=await fetch('/api/queue',{{cache:'no-store'}});const d=await r.json();document.getElementById('count').textContent=d.size||0;const list=document.getElementById('list');if(!d.songs||!d.songs.length){{list.innerHTML='<div class="empty"><strong>等待点歌中</strong><span>弹幕点歌会显示在这里</span></div>';return}}list.innerHTML=d.songs.map((s,i)=>`<article class="song" style="animation-delay:${{i*40}}ms"><div class="pos">${{s.position}}</div><div><div class="name">${{s.song_name}}</div><div class="meta">点歌人：${{s.requester}} · ID ${{s.song_id}}</div></div><div class="difficulty">${{s.difficulty?`${{s.difficulty}}★`:'READY'}}</div></article>`).join('')}}catch(e){{}}}}load();setInterval(load,2000)</script></body></html>"#
-    )
+    r#"<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>__TITLE__</title>
+  <style>
+    :root{--bg:rgba(5,10,18,.72);--panel:rgba(10,20,34,.78);--cyan:#32f6ff;--pink:#ff4fd8;--gold:#ffe27a;--text:#f7fbff;--muted:rgba(247,251,255,.68);--line:rgba(50,246,255,.22);font-family:"Microsoft YaHei UI","Microsoft YaHei","Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);background:transparent;overflow:hidden}
+    .overlay{width:min(680px,calc(100vw - 32px));margin:16px;padding:18px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 12% 0%,rgba(255,79,216,.24),transparent 32%),radial-gradient(circle at 88% 12%,rgba(50,246,255,.26),transparent 34%),linear-gradient(135deg,var(--bg),var(--panel));box-shadow:0 24px 80px rgba(0,0,0,.42),inset 0 0 34px rgba(50,246,255,.08);backdrop-filter:blur(14px)}
+    header{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;margin-bottom:14px}.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:.28em;text-transform:uppercase;text-shadow:0 0 14px rgba(50,246,255,.8)}
+    h1{margin:2px 0 0;font-size:34px;line-height:1;letter-spacing:.04em;text-shadow:3px 3px 0 rgba(255,79,216,.72),0 0 24px rgba(50,246,255,.42)}.counter{min-width:92px;padding:10px 12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,226,122,.28);text-align:center;color:var(--gold)}
+    .counter strong{display:block;font-size:26px;line-height:1}.counter span{font-size:11px;color:var(--muted)}.list{display:grid;gap:10px;max-height:calc(100vh - 150px);overflow:hidden}
+    .song{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;background:linear-gradient(90deg,rgba(255,255,255,.11),rgba(255,255,255,.045));border:1px solid rgba(255,255,255,.08);animation:slide-in 360ms ease both}
+    .song:first-child{background:linear-gradient(90deg,rgba(50,246,255,.24),rgba(255,79,216,.12));border-color:rgba(50,246,255,.34)}.pos{width:38px;height:38px;display:grid;place-items:center;border-radius:14px;color:#061019;background:linear-gradient(135deg,var(--cyan),var(--gold));font-weight:900;box-shadow:0 0 18px rgba(50,246,255,.35)}
+    .name{font-size:20px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{margin-top:3px;color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.difficulty{padding:7px 10px;border-radius:999px;color:var(--pink);background:rgba(255,79,216,.12);border:1px solid rgba(255,79,216,.22);font-weight:800;white-space:nowrap}
+    .empty{padding:34px 18px;border-radius:18px;border:1px dashed rgba(50,246,255,.28);color:var(--muted);text-align:center;background:rgba(0,0,0,.18)}@keyframes slide-in{from{opacity:0;transform:translateX(-16px) scale(.98)}to{opacity:1;transform:translateX(0) scale(1)}}
+  </style>
+</head>
+<body>
+  <main class="overlay">
+    <header><div><div class="eyebrow">Project DIVA Live Helper</div><h1>__TITLE__</h1></div><div class="counter"><strong id="count">0</strong><span>首等待</span></div></header>
+    <section class="list" id="list"><div class="empty"><strong>等待点歌</strong><span>弹幕点歌会显示在这里</span></div></section>
+  </main>
+  <script>
+    let lastSignature = '';
+    const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    async function load(){
+      try{
+        const response = await fetch('/api/queue', { cache: 'no-store' });
+        const data = await response.json();
+        document.getElementById('count').textContent = data.size || 0;
+        const songs = data.songs || [];
+        const signature = JSON.stringify(songs.map((song) => [song.position, song.song_id, song.song_name, song.requester, song.difficulty]));
+        if (signature === lastSignature) return;
+        lastSignature = signature;
+        const list = document.getElementById('list');
+        if (!songs.length) {
+          list.innerHTML = '<div class="empty"><strong>等待点歌</strong><span>弹幕点歌会显示在这里</span></div>';
+          return;
+        }
+        list.innerHTML = songs.map((song, index) => `<article class="song" style="animation-delay:${index * 40}ms"><div class="pos">${escapeHtml(song.position)}</div><div><div class="name">${escapeHtml(song.song_name)}</div><div class="meta">点歌人：${escapeHtml(song.requester)} · ID ${escapeHtml(song.song_id)}</div></div><div class="difficulty">${song.difficulty ? `${escapeHtml(song.difficulty)}★` : 'READY'}</div></article>`).join('');
+      } catch (_error) {}
+    }
+    load();
+    setInterval(load, 2000);
+  </script>
+</body>
+</html>"#
+        .replace("__TITLE__", &title)
 }
 
 fn escape_html(value: &str) -> String {
@@ -208,11 +252,4 @@ fn escape_html(value: &str) -> String {
         .replace('>', "&gt;")
         .replace('"', "&quot;")
         .replace('\'', "&#39;")
-}
-
-fn now_timestamp() -> f64 {
-    std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
-        .map(|duration| duration.as_secs_f64())
-        .unwrap_or_default()
 }

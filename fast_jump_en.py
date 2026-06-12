@@ -166,6 +166,7 @@ class SongSelect:
         self.pm = pymem.Pymem('DivaMegaMix.exe')
         self.LastSelectPVIDMem = self.pm.base_address + int("0x12B6350" , 16)
         self.LastSelectSortMem = self.pm.base_address + int("0x12B6354" , 16)
+        self.LastSelectDifficultyMem = self.pm.base_address + int("0x12B634C", 16)
         self.LastSelectDiffMem = self.pm.base_address + int("0x12B635C" , 16)
         self.EdenOffsetMem     = int("0x105F460" , 16)
         self.ChangeSongSelect  = self.pm.base_address + int("0xCC61098" , 16)
