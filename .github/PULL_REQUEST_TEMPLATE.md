@@ -2,7 +2,7 @@
 
 - [ ] 新增/修正中文曲名
 - [ ] 更新 `Data/song_name_zh.json`
-- [ ] 重新运行 `uv run build-zh-site`
+- [ ] 同步更新 `docs/data/` 中公开站点使用的数据副本（如适用）
 
 ## 证据要求
 
@@ -15,5 +15,6 @@
 ## 验证
 
 ```bash
-uv run build-zh-site
+npm run build
+cargo check --manifest-path src-tauri/Cargo.toml
 ```

@@ -1,217 +1,138 @@
 # diva-live-helper
 
-B站直播点歌助手 - 自动读取直播间弹幕，解析点歌命令，在游戏中选择歌曲。
+B站直播点歌助手桌面版。应用使用 Rust + Tauri + React 构建，连接 B 站直播间弹幕，解析点歌请求，在 *Hatsune Miku Project DIVA Mega Mix Plus* 中写入游戏内存切歌，并提供 OBS 点歌队列覆盖层。
 
 ## 功能
 
-1. **实时弹幕监听** - 连接B站直播间，实时接收弹幕消息
-2. **点歌命令解析** - 识别 `点歌 <歌名>` 格式的弹幕
-3. **歌曲搜索** - 在游戏数据库中搜索匹配的歌曲
-4. **点歌队列** - 将找到的歌曲加入队列
-5. **快捷键切歌** - 按下自定义快捷键，从队列取歌并切换游戏歌曲
-6. **OBS 点歌队列组件** - 启动本地网页，OBS 浏览器源可实时显示当前点歌列表
+- 实时连接 B 站直播间弹幕，支持 SESSDATA 和 WBI 签名取弹幕 token。
+- 识别 `点歌 <歌名>` 弹幕，也可启用 OpenAI 兼容 LLM 解析自然语言点歌。
+- 基于 `Data/song_db.json`、中文名、别名、作者和难度星级进行搜索。
+- 在桌面 UI 中管理队列、配置、歌曲库、日志和离线点歌调试。
+- 通过快捷键切到下一首，写入 `DivaMegaMix.exe` 内存。
+- 启动本地 OBS 浏览器源页面，实时展示点歌队列。
 
-## 安装
+## 前置要求
 
-### 前置要求
+- Windows
+- Node.js 20+
+- Rust stable toolchain
+- Hatsune Miku Project DIVA Mega Mix Plus
+- 管理员权限（全局快捷键监听通常需要）
 
-- Python 3.14+
-- [uv](https://github.com/astral-sh/uv) 包管理器
-- Hatsune Miku Project DIVA Mega Mix Plus 游戏
+## 安装与运行
 
-### 安装步骤
-
-1. 克隆项目
 ```bash
-git clone <repository-url>
-cd diva-live-helper
+npm install
+npm run tauri dev
 ```
 
-2. 安装依赖
+构建发布包：
+
 ```bash
-uv sync
+npm run tauri build
 ```
 
-3. 配置
+仅验证前端：
+
 ```bash
-cp config.example.json config.json
-# 编辑 config.json，填入直播间ID等配置
+npm run build
 ```
 
-## 配置说明
+仅验证 Rust 后端：
 
-编辑 `config.json` 文件：
-
-```json
-{
-    "room_id": 12345678,          // B站直播间ID
-    "hotkey": "ctrl+shift+n",     // 切歌快捷键
-    "data_dir": "Data",           // 数据文件目录
-    "mods_dir": "D:\\SteamLibrary\\steamapps\\common\\Hatsune Miku Project DIVA Mega Mix Plus\\mods",  // MOD文件夹路径
-    "auto_play_next": false,      // 是否自动播放下一首
-    "auto_play_interval": 300,    // 自动播放间隔（秒）
-    "max_queue_size": 50,         // 最大队列长度
-    "allow_duplicates": false,    // 是否允许重复点歌
-    "obs_overlay_enabled": true,  // 是否启用 OBS 点歌队列组件
-    "obs_overlay_host": "127.0.0.1", // OBS 组件监听地址
-    "obs_overlay_port": 8765,      // OBS 组件监听端口
-    "obs_overlay_title": "点歌队列", // OBS 组件标题
-    "song_command_prefix": "点歌", // 点歌命令前缀
-    "sessdata": ""                // B站SESSDATA（可选）
-}
-```
-
-### 获取直播间ID
-
-直播间ID在直播间URL中：`https://live.bilibili.com/12345678`，其中 `12345678` 就是直播间ID。
-
-### 获取SESSDATA（可选）
-
-1. 登录B站
-2. 打开浏览器开发者工具（F12）
-3. 在Application -> Cookies中找到 `SESSDATA`
-4. 复制值填入配置文件
-
-## 使用方法
-
-1. 启动游戏 Hatsune Miku Project DIVA Mega Mix Plus
-2. 运行程序
 ```bash
-uv run python -m diva_live_helper.main
+cargo check --manifest-path src-tauri/Cargo.toml
 ```
 
-3. 在直播间发送弹幕点歌
-```
+## 配置
+
+复制 `config.example.json` 为 `config.json`，或在桌面应用的“设置”页面保存配置。`config.json` 包含敏感信息，默认不会提交到 Git。
+
+关键字段：
+
+- `room_id`：B 站直播间 ID。
+- `hotkey`：切歌快捷键，例如 `ctrl+shift+n`。
+- `data_dir`：歌曲数据目录，默认 `Data`。
+- `mods_dir`：游戏 `mods/` 目录，每个 MOD 需要包含 `rom/mod_pv_db.txt`。
+- `sessdata`：B 站 Cookie 中的 SESSDATA，可提高弹幕连接可靠性。
+- `llm_enabled`：启用自然语言点歌解析；前缀点歌始终本地解析。
+- `llm_api_key`：OpenAI 兼容接口 API Key；本地模型可留空。
+- `llm_base_url` / `llm_model`：OpenAI 兼容服务地址与模型名。
+- `obs_overlay_enabled` / `obs_overlay_host` / `obs_overlay_port`：OBS 覆盖层设置。
+
+## 使用
+
+1. 启动游戏 `DivaMegaMix.exe`。
+2. 运行 `npm run tauri dev` 或启动已构建的桌面程序。
+3. 在“设置”页填写直播间、MOD 路径、快捷键、LLM 等配置并保存。
+4. 在“点歌”页连接直播间和游戏进程。
+5. 观众发送弹幕：
+
+```text
 点歌 Love is War
 点歌 初音未来的消失
-点歌 みくみくにしてあげる♪
+点歌 みくみくにしてあげる♪ ex
 ```
 
-4. 按下快捷键（默认 `Ctrl+Shift+N`）切换到队列中的下一首歌
+6. 按快捷键或点击“切下一首”执行切歌。
 
-## OBS 点歌队列组件
+## OBS 点歌队列覆盖层
 
-程序默认会启动一个本地网页组件，用于 OBS 的“浏览器”来源：
+启用后访问：
 
 ```text
 http://127.0.0.1:8765/
 ```
 
-使用方法：
+队列 JSON 接口：
 
-1. 启动 `diva-live-helper` 后，确认控制台打印 `OBS点歌队列组件已启动`。
-2. 在 OBS 中添加“浏览器”来源。
-3. URL 填入控制台显示的地址，默认是 `http://127.0.0.1:8765/`。
-4. 推荐宽度 `680`、高度按直播布局调整；网页背景透明，可直接叠在游戏画面上。
-
-如果端口被占用，可以在 `config.json` 修改：
-
-```json
-{
-    "obs_overlay_enabled": true,
-    "obs_overlay_host": "127.0.0.1",
-    "obs_overlay_port": 8766,
-    "obs_overlay_title": "点歌队列"
-}
+```text
+http://127.0.0.1:8765/api/queue
 ```
 
-出于安全考虑，组件只允许监听 `127.0.0.1` 或 `localhost`。不要把它暴露到局域网或公网；如果需要自定义展示，建议读取本机的 JSON 接口后自行转发。
-
-队列数据接口为 `http://127.0.0.1:8765/api/queue`，方便需要自定义样式时复用。
+覆盖层只允许监听 `127.0.0.1` 或 `localhost`，不要暴露到局域网或公网。
 
 ## 数据文件
 
-项目依赖以下数据文件（位于 `Data/` 目录）：
+`Data/` 是运行时数据目录，保留在仓库根目录：
 
-- `pv_db.txt` - 游戏歌曲数据库
-- `mdata_pv_db.txt` - DLC歌曲数据库
-- `AnotherSongName.json` - 歌曲别名数据库
-- `HanziKanjiDict.txt` - 汉字到假名转换表
+- `song_db.json`：结构化歌曲数据库，通常由工具扫描基础 `pv_db.txt` 与 MOD 数据生成。
+- `song_name_zh.json`：中文曲名数据库，version 3 `entries` 格式。
+- `AnotherSongName.json`：旧别名映射。
+- `HanziKanjiDict.txt`：汉字/汉字转写搜索辅助表。
+- `pv_db.txt`：基础游戏歌曲数据库。
 
-## MOD支持
-
-程序启动时会自动扫描MOD文件夹，加载所有MOD中的歌曲数据库。每个MOD文件夹需要包含 `rom/mod_pv_db.txt` 文件，其中定义了歌曲的 `song_name` 和 `song_name_en`。
-
-### MOD文件夹结构示例
-
-```
-mods/
-├── My Song Pack/
-│   └── rom/
-│       └── mod_pv_db.txt
-├── Another Pack/
-│   └── rom/
-│       └── mod_pv_db.txt
-└── ...
-```
-
-### mod_pv_db.txt 格式示例
-
-```
-pv_4950.song_name=バッドシャーク
-pv_4950.song_name_en=Bad Shark
-pv_4951.song_name=誰だお前
-pv_4951.song_name_en=Dare da Omae
-```
-
-## 公开中文曲名数据库
-
-项目可以生成一个静态网页，用于公开浏览、筛选、下载和贡献中文曲名数据库：
-
-```bash
-uv run build-zh-site
-```
-
-生成结果位于 `docs/`，可直接作为 GitHub Pages 站点发布。页面支持按曲名、中文名、英文名、作者、MOD 来源、状态和证据类型筛选，并提供以下下载：
-
-- `song_name_zh.json` — version 3 中文曲名数据库，包含译名和来源/证据信息
-- `song_db.json` — 结构化歌曲数据库
-- `song_name_zh.audit.tsv` — 表格形式审计数据
-
-贡献译名时请优先提供可验证来源，例如 B站标题、网易云/QQ 音乐平台标题、萌娘百科或其他社区页面。不要提交无来源的硬翻译。
+`docs/` 是已生成的公开中文曲名数据库静态站点，可用于 GitHub Pages 发布。
 
 ## 项目结构
 
-```
+```text
 diva-live-helper/
-├── src/
-│   └── diva_live_helper/
-│       ├── __init__.py
-│       ├── main.py              # 主入口
-│       ├── config.py            # 配置管理
-│       ├── danmaku.py           # B站弹幕处理
-│       ├── song_search.py       # 歌曲搜索
-│       ├── song_select.py       # 游戏内存修改
-│       ├── queue.py             # 点歌队列
-│       ├── hotkey.py            # 快捷键监听
-│       └── tools/               # 数据库与站点生成工具
-├── Data/                        # 数据文件
-├── docs/                        # 生成的中文曲名数据库静态站点
+├── src/                         # React / TypeScript 前端
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── components/
+│   ├── lib/
+│   └── pages/
+├── src-tauri/                   # Rust / Tauri 后端
+│   ├── Cargo.toml
+│   ├── tauri.conf.json
+│   ├── capabilities/
+│   ├── icons/
+│   └── src/
+├── Data/                        # 歌曲数据库与搜索辅助数据
+├── docs/                        # 中文曲名数据库静态站点
 ├── config.example.json          # 配置示例
-├── pyproject.toml               # 项目配置
+├── package.json                 # 前端与 Tauri CLI 脚本
 └── README.md
-```
-
-## 开发
-
-### 添加依赖
-
-```bash
-uv add <package-name>
-```
-
-### 运行测试
-
-```bash
-uv run pytest
 ```
 
 ## 注意事项
 
-1. 游戏必须正在运行才能切换歌曲
-2. 首次运行需要加载歌曲数据库，可能需要几秒钟
-3. 快捷键监听需要管理员权限（Windows）
-4. 如果遇到网络问题，请配置国内镜像源
+- 仅支持 Windows；内存写入目标进程为 `DivaMegaMix.exe`。
+- 游戏必须运行后才能连接游戏进程并切歌。
+- 全局快捷键通常需要管理员权限。
+- `config.json` 可能包含 SESSDATA 和 LLM API Key，不要提交。
 
 ## 许可证
 
