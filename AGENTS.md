@@ -83,7 +83,10 @@ Files required at startup:
 - `song_name_zh.json` — independent Chinese name DB; version 3 stores one `entries` object keyed by original song name
 - `AnotherSongName.json` — legacy alias map `{ alias: canonical_name }`; imported into search aliases
 - `HanziKanjiDict.txt` — hanzi→kanji conversion for cross-script search
-- `pv_db.txt` — base game song DB used when rebuilding the local DB
+
+Files used when rebuilding the local DB:
+- `base_song_db.json` — embedded base game song DB; keyed by `pv_id` string; includes original name, English name, Chinese name, authors, difficulty, aliases, and `source: "base"`
+- `pv_db.txt` — legacy base game song DB fallback used only when `base_song_db.json` is missing
 
 Generated public site:
 - `docs/` — static GitHub Pages-compatible Chinese-name database browser containing frontend assets and `docs/data/` copies of public data.
