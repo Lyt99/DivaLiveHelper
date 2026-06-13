@@ -39,7 +39,7 @@ Keys are the original `song_db.json` `name` field, **not pv_id**, because pv_id 
 3. Do not invent a Chinese title when evidence is weak. Use `status: "needs_review"` if uncertain.
 4. Keep original-language names as keys exactly as they appear in `song_db.json`.
 5. Do not write Chinese names into `song_db.json`; it is a generated structural DB and should remain shareable.
-6. VocaDB is unreliable for Chinese names in this project. Do not rely on `translator.py` / `diva-translate` for bulk population.
+6. VocaDB is unreliable for Chinese names in this project. Do not rely on it for bulk population.
 7. Include aliases/search variants in `AnotherSongName.json` or song aliases, not as replacement Chinese names.
 
 ## Evidence Standard
@@ -60,9 +60,9 @@ For each new or changed entry, record enough evidence for future review:
 4. Write entries under `entries` keyed by original name.
 5. Preserve existing audit fields unless intentionally correcting them.
 6. Run database/site generation as appropriate:
-   - Python workflow: `uv run update_db`, then optionally `uv run build-zh-site`
-   - Tauri workflow: use GUI “重建歌曲库” for local `song_db.json` rebuild; use Python `build-zh-site` for public site output.
-7. Verify JSON parses and spot-check search behavior if code changed.
+   - Use the desktop GUI “重建歌曲库” action for local `song_db.json` rebuilds.
+   - If public site data changes, keep `docs/data/` copies in sync with `Data/`.
+7. Verify JSON parses; run `npm run build` and `cargo check --manifest-path src-tauri/Cargo.toml` if code or bundled data paths changed.
 
 ## Output Style
 

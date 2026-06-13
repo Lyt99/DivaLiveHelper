@@ -1,18 +1,11 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
+# Frontend / Tauri generated files
+node_modules/
 dist/
-wheels/
-*.egg-info
+src-tauri/target/
 
-# Virtual environments
-.venv
+# Local tool/runtime artifacts
+.sisyphus/
+Data/*.7z
 
 # Local runtime config may contain cookies or LLM API keys
 config.json
-
-# Tauri / frontend generated files
-app/node_modules/
-app/dist/
-app/src-tauri/target/
