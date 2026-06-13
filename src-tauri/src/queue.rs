@@ -84,7 +84,7 @@ impl SongQueue {
 
     /// 将已经成功切歌的请求写入历史。
     ///
-    /// 注意：和旧 Python 版不同，`next()` 只负责出队，不会立即写入历史。
+    /// 注意：`next()` 只负责出队，不会立即写入历史。
     /// 这样如果游戏内存写入失败，调用方可以用 `requeue_front()` 把歌曲放回队首，
     /// 避免“切歌失败但歌曲消失并进入历史”的问题。
     pub fn complete(&self, request: SongRequest) {

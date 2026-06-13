@@ -29,6 +29,6 @@
     "active": true,
     "targets": "all",
     "icon": ["icons/icon.ico"],
-    "resources": ["../../Data"]
+    "resources": ["../Data"]
   }
 }
