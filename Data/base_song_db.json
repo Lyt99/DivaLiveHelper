@@ -37,6 +37,40 @@
       },
       "source": "base"
     },
+    "3": {
+      "pv_id": 3,
+      "name": "その一秒スローモーション",
+      "name_en": "That One Second in Slow Motion",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ryo"
+      ],
+      "difficulty": {
+        "easy": 4.0,
+        "normal": 5.0,
+        "hard": 6.5,
+        "extreme": 7.0,
+        "exextreme": 7.5
+      },
+      "source": "dlc"
+    },
+    "4": {
+      "pv_id": 4,
+      "name": "ひねくれ者",
+      "name_en": "Jaded",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ryo"
+      ],
+      "difficulty": {
+        "easy": 1.0,
+        "hard": 4.0,
+        "extreme": 7.5
+      },
+      "source": "dlc"
+    },
     "5": {
       "pv_id": 5,
       "name": "メルト",
@@ -53,7 +87,24 @@
         "extreme": 7.0,
         "exextreme": 8.0
       },
-      "source": "base"
+      "source": "dlc"
+    },
+    "6": {
+      "pv_id": 6,
+      "name": "Far Away",
+      "name_en": "Far Away",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "kz"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "hard": 4.5,
+        "extreme": 6.0,
+        "exextreme": 6.0
+      },
+      "source": "dlc"
     },
     "7": {
       "pv_id": 7,
@@ -123,6 +174,24 @@
       },
       "source": "base"
     },
+    "11": {
+      "pv_id": 11,
+      "name": "雨のちSweet*Drops",
+      "name_en": "Rain With A Chance of Sweet*Drops",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "OSTER project"
+      ],
+      "difficulty": {
+        "easy": 3.0,
+        "normal": 5.0,
+        "hard": 6.0,
+        "extreme": 7.0,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
+    },
     "12": {
       "pv_id": 12,
       "name": "マージナル",
@@ -174,6 +243,23 @@
       },
       "source": "base"
     },
+    "15": {
+      "pv_id": 15,
+      "name": "Dreaming Leaf -ユメミルコトノハ-",
+      "name_en": "Dreaming Leaf",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "OSTER project"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 6.5,
+        "extreme": 8.0,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
+    },
     "16": {
       "pv_id": 16,
       "name": "恋スルＶＯＣ＠ＬＯＩＤ",
@@ -190,6 +276,73 @@
         "exextreme": 8.5
       },
       "source": "base"
+    },
+    "17": {
+      "pv_id": 17,
+      "name": "荒野と森と魔法の歌",
+      "name_en": "A Song of Wastelands, Forests, and Magic",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "トラボルタ"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 6.5,
+        "exextreme": 7.5
+      },
+      "source": "dlc"
+    },
+    "18": {
+      "pv_id": 18,
+      "name": "いのちの歌",
+      "name_en": "Song of Life",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "トラボルタ"
+      ],
+      "difficulty": {
+        "easy": 1.5,
+        "hard": 5.0,
+        "extreme": 6.0
+      },
+      "source": "dlc"
+    },
+    "20": {
+      "pv_id": 20,
+      "name": "moon",
+      "name_en": "moon",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "iroha(sasaki)"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 4.0,
+        "hard": 5.5,
+        "extreme": 7.0,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "21": {
+      "pv_id": 21,
+      "name": "みくみく菌にご注意♪",
+      "name_en": "Beware of the Miku Miku Germs♪",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "はやや"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 6.5,
+        "extreme": 8.0
+      },
+      "source": "dlc"
     },
     "22": {
       "pv_id": 22,
@@ -208,6 +361,59 @@
       },
       "source": "base"
     },
+    "23": {
+      "pv_id": 23,
+      "name": "Dear cocoa girls",
+      "name_en": "Dear cocoa girls",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "神前 暁"
+      ],
+      "difficulty": {
+        "easy": 3.5,
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 6.5,
+        "exextreme": 7.5
+      },
+      "source": "dlc"
+    },
+    "24": {
+      "pv_id": 24,
+      "name": "天鵞絨アラベスク",
+      "name_en": "Velvet Arabesque",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "畑 亜貴"
+      ],
+      "difficulty": {
+        "easy": 1.5,
+        "normal": 3.0,
+        "hard": 4.5,
+        "extreme": 6.5,
+        "exextreme": 6.5
+      },
+      "source": "dlc"
+    },
+    "25": {
+      "pv_id": 25,
+      "name": "ラブリスト更新中？",
+      "name_en": "Updating My Love List?",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "畑 亜貴"
+      ],
+      "difficulty": {
+        "easy": 3.0,
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 7.0
+      },
+      "source": "dlc"
+    },
     "28": {
       "pv_id": 28,
       "name": "みくみくにしてあげる♪【してやんよ】",
@@ -225,6 +431,23 @@
         "exextreme": 8.0
       },
       "source": "base"
+    },
+    "29": {
+      "pv_id": 29,
+      "name": "金の聖夜霜雪に朽ちて",
+      "name_en": "Requiem for the Phantasma",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "デッドボールP"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 7.5,
+        "extreme": 8.5,
+        "exextreme": 9.5
+      },
+      "source": "dlc"
     },
     "30": {
       "pv_id": 30,
@@ -744,6 +967,42 @@
       },
       "source": "base"
     },
+    "63": {
+      "pv_id": 63,
+      "name": "ほんとは分かってる",
+      "name_en": "I Really Do Understand",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "フナコシP"
+      ],
+      "difficulty": {
+        "easy": 3.5,
+        "normal": 4.0,
+        "hard": 5.5,
+        "extreme": 7.0,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "64": {
+      "pv_id": 64,
+      "name": "Innocence",
+      "name_en": "Innocence",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "KazuP"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 6.0,
+        "exextreme": 7.5
+      },
+      "source": "dlc"
+    },
     "65": {
       "pv_id": 65,
       "name": "ハジメテノオト",
@@ -779,6 +1038,22 @@
         "exextreme": 8.0
       },
       "source": "base"
+    },
+    "67": {
+      "pv_id": 67,
+      "name": "金の聖夜霜雪に朽ちて（extend版)",
+      "name_en": "Requiem for the Phantasma",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "デッドボールP"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 7.5,
+        "extreme": 8.5
+      },
+      "source": "dlc"
     },
     "68": {
       "pv_id": 68,
@@ -865,6 +1140,23 @@
         "extreme": 8.0
       },
       "source": "base"
+    },
+    "84": {
+      "pv_id": 84,
+      "name": "那由他の彼方まで",
+      "name_en": "To the End of Infinity",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "釣り師P"
+      ],
+      "difficulty": {
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 7.0,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
     },
     "85": {
       "pv_id": 85,
@@ -1091,6 +1383,23 @@
       },
       "source": "base"
     },
+    "101": {
+      "pv_id": 101,
+      "name": "Magical Sound Shower",
+      "name_en": "Magical Sound Shower",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "HIRO"
+      ],
+      "difficulty": {
+        "normal": 6.5,
+        "hard": 8.0,
+        "extreme": 8.5,
+        "exextreme": 9.0
+      },
+      "source": "dlc"
+    },
     "102": {
       "pv_id": 102,
       "name": "多重未来のカルテット -Quartet Theme-",
@@ -1174,6 +1483,142 @@
       },
       "source": "base"
     },
+    "203": {
+      "pv_id": 203,
+      "name": "孤独の果て",
+      "name_en": "Solitude's End",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "光収容"
+      ],
+      "difficulty": {
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "204": {
+      "pv_id": 204,
+      "name": "タイムリミット",
+      "name_en": "Time Limit",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "North-T"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 8.0,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "205": {
+      "pv_id": 205,
+      "name": "Holy Star -2010 DIVA mix-",
+      "name_en": "Holy Star -2010 DIVA mix-",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Kouhei (K's Sound Project)"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 7.0
+      },
+      "source": "dlc"
+    },
+    "206": {
+      "pv_id": 206,
+      "name": "melody...",
+      "name_en": "melody...",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "mikuru396"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 3.5,
+        "hard": 5.5,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "208": {
+      "pv_id": 208,
+      "name": "迷的サイバネティックス",
+      "name_en": "Meiteki Cybernetics",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "otetsu"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 5.0,
+        "hard": 6.0,
+        "extreme": 8.0,
+        "exextreme": 9.0
+      },
+      "source": "dlc"
+    },
+    "209": {
+      "pv_id": 209,
+      "name": "ピンクムーン",
+      "name_en": "Pink Moon",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "もじょP"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 6.5,
+        "extreme": 7.5,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "210": {
+      "pv_id": 210,
+      "name": "透明水彩",
+      "name_en": "Transparent Watercolors",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ヤスオ"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 6.5,
+        "extreme": 8.5,
+        "exextreme": 9.0
+      },
+      "source": "dlc"
+    },
+    "211": {
+      "pv_id": 211,
+      "name": "いろは唄",
+      "name_en": "Iroha Uta",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "銀サク"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 7.0,
+        "extreme": 9.0,
+        "exextreme": 9.5
+      },
+      "source": "dlc"
+    },
     "212": {
       "pv_id": 212,
       "name": "カラフル×セクシィ",
@@ -1209,6 +1654,22 @@
       },
       "source": "base"
     },
+    "214": {
+      "pv_id": 214,
+      "name": "右肩の蝶 -39's Giving Day Edition-",
+      "name_en": "Butterfly on Your Right Shoulder -39's Giving Day Edition-",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "のりぴー"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 6.5,
+        "extreme": 8.5
+      },
+      "source": "dlc"
+    },
     "215": {
       "pv_id": 215,
       "name": "Leia",
@@ -1225,6 +1686,23 @@
         "exextreme": 9.5
       },
       "source": "base"
+    },
+    "216": {
+      "pv_id": 216,
+      "name": "千本桜",
+      "name_en": "Senbonzakura",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "黒うさＰ (WhiteFlame)"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 4.0,
+        "hard": 6.5,
+        "extreme": 8.0
+      },
+      "source": "dlc"
     },
     "218": {
       "pv_id": 218,
@@ -1313,6 +1791,22 @@
         "exextreme": 9.5
       },
       "source": "base"
+    },
+    "223": {
+      "pv_id": 223,
+      "name": "アウト オブ エデン",
+      "name_en": "Out of Eden",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Kouhei (K's Sound Project)"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 6.0,
+        "extreme": 8.0
+      },
+      "source": "dlc"
     },
     "224": {
       "pv_id": 224,
@@ -1434,6 +1928,22 @@
       },
       "source": "base"
     },
+    "233": {
+      "pv_id": 233,
+      "name": "ふたりで。",
+      "name_en": "The Two of Us - Futaride",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ねこぼーろ"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 7.5
+      },
+      "source": "dlc"
+    },
     "234": {
       "pv_id": 234,
       "name": "深海シティアンダーグラウンド",
@@ -1451,6 +1961,39 @@
         "exextreme": 8.5
       },
       "source": "base"
+    },
+    "235": {
+      "pv_id": 235,
+      "name": "ルシッドドリーミング",
+      "name_en": "Lucid Dreaming",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "くぇ（ナイーヴP）"
+      ],
+      "difficulty": {
+        "easy": 3.5,
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "236": {
+      "pv_id": 236,
+      "name": "Absolunote",
+      "name_en": "Absolunote",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Lemm"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 8.5
+      },
+      "source": "dlc"
     },
     "238": {
       "pv_id": 238,
@@ -2111,6 +2654,536 @@
       },
       "source": "base"
     },
+    "401": {
+      "pv_id": 401,
+      "name": "片想いサンバ",
+      "name_en": "One-Sided Love Samba",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "オワタP"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 7.0,
+        "extreme": 7.5,
+        "exextreme": 9.5
+      },
+      "source": "dlc"
+    },
+    "402": {
+      "pv_id": 402,
+      "name": "サヨナラ・グッバイ",
+      "name_en": "Sayonara, Goodbye",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "のぼる↑"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 7.0,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "403": {
+      "pv_id": 403,
+      "name": "崩壊歌姫 -disruptive diva-",
+      "name_en": "Disruptive Diva",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "マチゲリータ"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 7.0,
+        "extreme": 8.0,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "404": {
+      "pv_id": 404,
+      "name": "ZIGG-ZAGG",
+      "name_en": "ZIGG-ZAGG",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Junky"
+      ],
+      "difficulty": {
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 8.0,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "405": {
+      "pv_id": 405,
+      "name": "ナイトメア☆パーティーナイト",
+      "name_en": "Nightmare ☆ Party Night",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "くちばし"
+      ],
+      "difficulty": {
+        "easy": 3.0,
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 6.5,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "407": {
+      "pv_id": 407,
+      "name": "恋ノート////",
+      "name_en": "Love's note",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ジェバンニP+ハットリP"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 6.5,
+        "extreme": 7.5,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "408": {
+      "pv_id": 408,
+      "name": "SYMPHONIC DIVE - DIVA FT edit -",
+      "name_en": "SYMPHONIC DIVE - DIVA FT edit -",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Re:nG"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "409": {
+      "pv_id": 409,
+      "name": "どうしてこうなった",
+      "name_en": "How'd It Get To Be Like This?",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "うどんゲルゲ"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 9.0
+      },
+      "source": "dlc"
+    },
+    "410": {
+      "pv_id": 410,
+      "name": "オオカミガール",
+      "name_en": "Wolf Girl",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "くらP"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 7.5,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "411": {
+      "pv_id": 411,
+      "name": "Starlite★Lydian",
+      "name_en": "Starlite★Lydian",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Masaki"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 6.0,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "412": {
+      "pv_id": 412,
+      "name": "ペリコ・スペースシッパー",
+      "name_en": "Perico Space Shipper",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ワンカップP"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 7.5,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "413": {
+      "pv_id": 413,
+      "name": "マスターオブパペッツ",
+      "name_en": "Master of Puppets",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "デスおはぎ"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 6.5,
+        "extreme": 8.5,
+        "exextreme": 9.5
+      },
+      "source": "dlc"
+    },
+    "414": {
+      "pv_id": 414,
+      "name": "Pane dhiria",
+      "name_en": "Pane dhiria",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "新城P"
+      ],
+      "difficulty": {
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 8.5,
+        "exextreme": 9.0
+      },
+      "source": "dlc"
+    },
+    "415": {
+      "pv_id": 415,
+      "name": "ほしをつくるひと",
+      "name_en": "The Star Maker",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "MazoP"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 8.0,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "416": {
+      "pv_id": 416,
+      "name": "So much loving you★ -DIVA Edit-",
+      "name_en": "So Much Loving You★ -DIVA Edit-",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "古墳P"
+      ],
+      "difficulty": {
+        "easy": 3.0,
+        "normal": 4.5,
+        "hard": 5.5,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "417": {
+      "pv_id": 417,
+      "name": "ジュゲムシーケンサー",
+      "name_en": "Jugemu Sequencer",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ぼーかりおどP（noa）"
+      ],
+      "difficulty": {
+        "normal": 4.5,
+        "hard": 6.5,
+        "extreme": 8.5,
+        "exextreme": 10.0
+      },
+      "source": "dlc"
+    },
+    "418": {
+      "pv_id": 418,
+      "name": "さあ、どっち？",
+      "name_en": "Now Choose",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ひなた春花"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 4.0,
+        "hard": 5.0,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "419": {
+      "pv_id": 419,
+      "name": "イヤイヤ星人",
+      "name_en": "Iya Iya Seijin",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "イヤイヤP"
+      ],
+      "difficulty": {
+        "easy": 3.5,
+        "normal": 5.0,
+        "hard": 7.0,
+        "extreme": 9.5
+      },
+      "source": "dlc"
+    },
+    "420": {
+      "pv_id": 420,
+      "name": "Equation+**",
+      "name_en": "Equation+**",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ぽわぽわP"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 6.5,
+        "extreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "421": {
+      "pv_id": 421,
+      "name": "嘘つきベティ",
+      "name_en": "Betty The Liar",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "PolyphonicBranch"
+      ],
+      "difficulty": {
+        "normal": 4.5,
+        "hard": 5.5,
+        "extreme": 8.0,
+        "exextreme": 9.5
+      },
+      "source": "dlc"
+    },
+    "422": {
+      "pv_id": 422,
+      "name": "数多の舞 -Dance of many-",
+      "name_en": "Dance of Many",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "koushirou（卑屈P）"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 7.0,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "423": {
+      "pv_id": 423,
+      "name": "迷子ライフ",
+      "name_en": "maigo life",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "TOKOTOKO（西沢さんP）"
+      ],
+      "difficulty": {
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 7.0,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "424": {
+      "pv_id": 424,
+      "name": "ハイスクール Days - DIVA EDIT",
+      "name_en": "High School Days - DIVA EDIT",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "U-ji（霊長類P）"
+      ],
+      "difficulty": {
+        "easy": 3.0,
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 8.0,
+        "exextreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "425": {
+      "pv_id": 425,
+      "name": "そいやっさぁ!!",
+      "name_en": "Soiyassa!!",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "囚人P"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 7.0,
+        "extreme": 8.5,
+        "exextreme": 9.5
+      },
+      "source": "dlc"
+    },
+    "426": {
+      "pv_id": 426,
+      "name": "break;down",
+      "name_en": "break;down",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "hmtk"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 6.5,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "427": {
+      "pv_id": 427,
+      "name": "花舞月詠譚",
+      "name_en": "Hanamai Tsukuyomi Tan",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Hoskey"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 4.0,
+        "hard": 5.5,
+        "extreme": 7.5,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "428": {
+      "pv_id": 428,
+      "name": "フランシスカ",
+      "name_en": "Francisca",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "ぢゅ＠メラゾーマP"
+      ],
+      "difficulty": {
+        "normal": 5.5,
+        "hard": 7.0,
+        "extreme": 9.0,
+        "exextreme": 9.0
+      },
+      "source": "dlc"
+    },
+    "429": {
+      "pv_id": 429,
+      "name": "悠久-Song of Eternity-DIVAMIX-",
+      "name_en": "Song of Eternity -DIVAMIX-",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "てぃあら"
+      ],
+      "difficulty": {
+        "easy": 1.0,
+        "normal": 3.0,
+        "hard": 4.5,
+        "extreme": 6.5,
+        "exextreme": 7.5
+      },
+      "source": "dlc"
+    },
+    "430": {
+      "pv_id": 430,
+      "name": "slump",
+      "name_en": "slump",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "しばいぬ"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "431": {
+      "pv_id": 431,
+      "name": "Gothic and Loneliness 〜I'm the very DIVA〜",
+      "name_en": "Gothic and Loneliness ～I'm the very DIVA～",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "なるしまたかし"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 7.5,
+        "extreme": 9.0,
+        "exextreme": 10.0
+      },
+      "source": "dlc"
+    },
+    "432": {
+      "pv_id": 432,
+      "name": "唐傘さんが通る",
+      "name_en": "Here Comes Karakasa-san",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "イヤイヤP"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 3.5,
+        "hard": 5.0,
+        "extreme": 7.0
+      },
+      "source": "dlc"
+    },
     "433": {
       "pv_id": 433,
       "name": "巴里映画少女",
@@ -2128,6 +3201,23 @@
       },
       "source": "base"
     },
+    "434": {
+      "pv_id": 434,
+      "name": "おはヨーデル (Oha-Yo-del!!)",
+      "name_en": "Oha-Yo-del!!",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "爆弾ポピー"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 3.0,
+        "hard": 5.5,
+        "extreme": 9.0
+      },
+      "source": "dlc"
+    },
     "435": {
       "pv_id": 435,
       "name": "デンパラダイム",
@@ -2144,6 +3234,140 @@
         "exextreme": 10.0
       },
       "source": "base"
+    },
+    "436": {
+      "pv_id": 436,
+      "name": "月向うまでのトラベル",
+      "name_en": "Travel to The Other Side of The Moon",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "vilP"
+      ],
+      "difficulty": {
+        "easy": 3.0,
+        "normal": 5.5,
+        "hard": 6.5,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "437": {
+      "pv_id": 437,
+      "name": "ブラックノートに溺れさせて",
+      "name_en": "Let Me Lose Myself in The Black Note",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Shun13"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 6.0,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "438": {
+      "pv_id": 438,
+      "name": "ステップフォワード",
+      "name_en": "Step Forward",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Chesa"
+      ],
+      "difficulty": {
+        "normal": 6.0,
+        "hard": 7.5,
+        "extreme": 9.0
+      },
+      "source": "dlc"
+    },
+    "439": {
+      "pv_id": 439,
+      "name": "キミに",
+      "name_en": "Kimi Ni",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "teaeye"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "440": {
+      "pv_id": 440,
+      "name": "ナイト・オブ・ライト",
+      "name_en": "Knight of Light",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "いーえるP @ TinySymphony"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 4.5,
+        "hard": 6.0,
+        "extreme": 7.5
+      },
+      "source": "dlc"
+    },
+    "441": {
+      "pv_id": 441,
+      "name": "Mellow Yellow",
+      "name_en": "Mellow Yellow",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "めりっさP"
+      ],
+      "difficulty": {
+        "normal": 5.0,
+        "hard": 6.5,
+        "extreme": 8.0,
+        "exextreme": 8.5
+      },
+      "source": "dlc"
+    },
+    "442": {
+      "pv_id": 442,
+      "name": "ぎずも",
+      "name_en": "Gizmo",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "uguis08"
+      ],
+      "difficulty": {
+        "easy": 2.0,
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 8.0
+      },
+      "source": "dlc"
+    },
+    "443": {
+      "pv_id": 443,
+      "name": "偶像無線(Game edit)",
+      "name_en": "Idol Radio (Game Edit)",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "Daisuke Ohnuma(大福P)"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 3.5,
+        "hard": 5.0,
+        "extreme": 7.5
+      },
+      "source": "dlc"
     },
     "600": {
       "pv_id": 600,
@@ -2436,6 +3660,23 @@
         "exextreme": 8.5
       },
       "source": "base"
+    },
+    "618": {
+      "pv_id": 618,
+      "name": "鏡音八八花合戦",
+      "name_en": "Kagamine HachiHachi Flower Fight",
+      "name_zh": null,
+      "aliases": [],
+      "authors": [
+        "モジャP"
+      ],
+      "difficulty": {
+        "easy": 2.5,
+        "normal": 4.0,
+        "hard": 6.0,
+        "extreme": 8.5
+      },
+      "source": "dlc"
     },
     "619": {
       "pv_id": 619,

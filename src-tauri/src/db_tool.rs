@@ -59,12 +59,16 @@ pub fn rebuild_database(data_dir: &Path, mods_dir: Option<&Path>) -> Result<Rebu
     let base_imported = if base_db.exists() {
         database.import_base_json(&base_db)?
     } else {
+        let mut imported = 0;
         let pv_db = data_dir.join("pv_db.txt");
         if pv_db.exists() {
-            database.import_from_pvdb(&pv_db, "base")?
-        } else {
-            0
+            imported += database.import_from_pvdb(&pv_db, "base")?;
         }
+        let mdata_pv_db = data_dir.join("mdata_pv_db.txt");
+        if mdata_pv_db.exists() {
+            imported += database.import_from_pvdb(&mdata_pv_db, "dlc")?;
+        }
+        imported
     };
 
     let mut mods_imported = 0;
