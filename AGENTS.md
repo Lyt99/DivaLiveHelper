@@ -85,13 +85,13 @@ Files required at startup:
 - `HanziKanjiDict.txt` — hanzi→kanji conversion for cross-script search
 
 Files used when rebuilding the local DB:
-- `base_song_db.json` — embedded base game song DB; keyed by `pv_id` string; includes original name, English name, Chinese name, authors, difficulty, aliases, and `source: "base"`
-- `pv_db.txt` — legacy base game song DB fallback used only when `base_song_db.json` is missing
+- `base_song_db.json` — embedded official song DB; keyed by `pv_id` string; includes base-game and DLC songs, original name, English name, Chinese name, authors, difficulty, empty aliases, and `source: "base"` or `source: "dlc"`
+- `pv_db.txt` / `mdata_pv_db.txt` — legacy base-game and DLC fallbacks used only when `base_song_db.json` is missing
 
 Generated public site:
 - `docs/` — static GitHub Pages-compatible Chinese-name database browser containing frontend assets and `docs/data/` copies of public data.
 
-DLC songs are **not** read from `mdata_pv_db.txt`. They come from mod packs under `mods_dir`.
+DLC songs are part of `base_song_db.json` and are marked with `source: "dlc"`. MOD songs are not part of the embedded base DB; they come from mod packs under `mods_dir`.
 
 ## Architecture Notes
 
