@@ -31,6 +31,29 @@ pub struct SongDatabase {
     pub songs: HashMap<u32, SongEntry>,
 }
 
+#[derive(Debug, Clone, Default, Deserialize)]
+pub struct BaseSongDatabaseFile {
+    pub version: u32,
+    pub songs: HashMap<String, BaseSongEntry>,
+}
+
+#[derive(Debug, Clone, Default, Deserialize)]
+pub struct BaseSongEntry {
+    pub pv_id: u32,
+    pub name: String,
+    pub name_en: String,
+    #[serde(default)]
+    pub name_zh: Option<String>,
+    #[serde(default)]
+    pub aliases: Vec<String>,
+    #[serde(default)]
+    pub authors: Vec<String>,
+    #[serde(default)]
+    pub difficulty: HashMap<String, f32>,
+    #[serde(default)]
+    pub source: String,
+}
+
 #[derive(Debug, Clone, Serialize)]
 pub struct SongInfo {
     pub pv_id: u32,
@@ -159,6 +182,41 @@ impl SongDatabase {
                     source: source.to_string(),
                     name_zh: None,
                 });
+            imported += 1;
+        }
+        Ok(imported)
+    }
+
+    pub fn import_base_json(&mut self, path: &Path) -> Result<usize, String> {
+        let content =
+            fs::read_to_string(path).map_err(|error| format!("读取内置基础歌曲库失败: {error}"))?;
+        let parsed: BaseSongDatabaseFile = serde_json::from_str(&content)
+            .map_err(|error| format!("解析内置基础歌曲库失败: {error}"))?;
+        if parsed.version == 0 {
+            return Err("内置基础歌曲库版本无效".to_string());
+        }
+
+        let mut imported = 0;
+        for (key, base_entry) in parsed.songs {
+            let pv_id = key.parse::<u32>().unwrap_or(base_entry.pv_id);
+            let source = if base_entry.source.trim().is_empty() {
+                "base".to_string()
+            } else {
+                base_entry.source
+            };
+            self.songs.insert(
+                pv_id,
+                SongEntry {
+                    pv_id,
+                    name: base_entry.name,
+                    name_en: base_entry.name_en,
+                    aliases: base_entry.aliases,
+                    authors: base_entry.authors,
+                    difficulty: base_entry.difficulty,
+                    source,
+                    name_zh: base_entry.name_zh,
+                },
+            );
             imported += 1;
         }
         Ok(imported)

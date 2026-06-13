@@ -55,11 +55,16 @@ pub fn rebuild_database(data_dir: &Path, mods_dir: Option<&Path>) -> Result<Rebu
         SongDatabase::default()
     };
 
-    let pv_db = data_dir.join("pv_db.txt");
-    let base_imported = if pv_db.exists() {
-        database.import_from_pvdb(&pv_db, "base")?
+    let base_db = data_dir.join("base_song_db.json");
+    let base_imported = if base_db.exists() {
+        database.import_base_json(&base_db)?
     } else {
-        0
+        let pv_db = data_dir.join("pv_db.txt");
+        if pv_db.exists() {
+            database.import_from_pvdb(&pv_db, "base")?
+        } else {
+            0
+        }
     };
 
     let mut mods_imported = 0;
@@ -129,19 +134,30 @@ fn merge_chinese_names(data_dir: &Path, database: &SongDatabase) -> Result<usize
         if entry.name.is_empty() || zh.entries.contains_key(&entry.name) {
             continue;
         }
-        let Some(name_zh) = cache.get(&entry.name).or_else(|| cache.get(&entry.name_en)) else {
+        let Some((name_zh, evidence)) = entry
+            .name_zh
+            .as_ref()
+            .filter(|name| !name.trim().is_empty())
+            .map(|name| (name.clone(), "base-song-db".to_string()))
+            .or_else(|| {
+                cache
+                    .get(&entry.name)
+                    .or_else(|| cache.get(&entry.name_en))
+                    .map(|name| (name.clone(), "song-name-cache".to_string()))
+            })
+        else {
             continue;
         };
         zh.entries.insert(
             entry.name.clone(),
             ChineseNameEntry {
-                name_zh: name_zh.clone(),
+                name_zh,
                 status: "auto".to_string(),
                 source: entry.source.clone(),
                 name_en: entry.name_en.clone(),
                 author: entry.authors.join(","),
                 candidate: String::new(),
-                evidence: "song-name-cache".to_string(),
+                evidence,
             },
         );
         merged += 1;
