@@ -7820,7 +7820,7 @@
       "name_en": "The World is Mine",
       "author": "ryo",
       "candidate": "世界第一公主殿下",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "その一秒スローモーション": {
       "name_zh": "那一秒的慢动作",
@@ -7829,7 +7829,7 @@
       "name_en": "That One Second in Slow Motion",
       "author": "ryo",
       "candidate": "那一秒的慢动作",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ひねくれ者": {
       "name_zh": "别扭的人",
@@ -7838,7 +7838,7 @@
       "name_en": "Jaded",
       "author": "ryo",
       "candidate": "别扭的人",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "メルト": {
       "name_zh": "融化",
@@ -7847,7 +7847,7 @@
       "name_en": "Melt",
       "author": "ryo",
       "candidate": "融化",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Far Away": {
       "name_zh": "Far Away",
@@ -7856,7 +7856,7 @@
       "name_en": "Far Away",
       "author": "kz",
       "candidate": "Far Away",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Star Story": {
       "name_zh": "星之故事",
@@ -7865,7 +7865,7 @@
       "name_en": "Star Story",
       "author": "kz",
       "candidate": "星之故事",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Last Night, Good Night": {
       "name_zh": "Last Night, Good Night",
@@ -7874,7 +7874,7 @@
       "name_en": "Last Night, Good Night",
       "author": "kz",
       "candidate": "Last Night, Good Night",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Packaged": {
       "name_zh": "Packaged",
@@ -7883,7 +7883,7 @@
       "name_en": "Packaged",
       "author": "kz",
       "candidate": "Packaged",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "雨のちSweet*Drops": {
       "name_zh": "雨后 Sweet*Drops",
@@ -7892,7 +7892,7 @@
       "name_en": "Rain With A Chance of Sweet*Drops",
       "author": "OSTER project",
       "candidate": "雨后 Sweet*Drops",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "マージナル": {
       "name_zh": "边缘",
@@ -7901,7 +7901,7 @@
       "name_en": "Marginal",
       "author": "OSTER project",
       "candidate": "边缘",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ミラクルペイント": {
       "name_zh": "奇迹画笔",
@@ -7910,7 +7910,7 @@
       "name_en": "Miracle Paint",
       "author": "OSTER project",
       "candidate": "奇迹画笔",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Dreaming Leaf -ユメミルコトノハ-": {
       "name_zh": "Dreaming Leaf -梦见的言语-",
@@ -7919,7 +7919,7 @@
       "name_en": "Dreaming Leaf",
       "author": "OSTER project",
       "candidate": "Dreaming Leaf -梦见的言语-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "荒野と森と魔法の歌": {
       "name_zh": "荒野、森林与魔法之歌",
@@ -7928,7 +7928,7 @@
       "name_en": "A Song of Wastelands, Forests, and Magic",
       "author": "トラボルタ",
       "candidate": "荒野、森林与魔法之歌",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "いのちの歌": {
       "name_zh": "生命之歌",
@@ -7937,7 +7937,7 @@
       "name_en": "Song of Life",
       "author": "トラボルタ",
       "candidate": "生命之歌",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "moon": {
       "name_zh": "moon",
@@ -7946,7 +7946,7 @@
       "name_en": "moon",
       "author": "iroha(sasaki)",
       "candidate": "moon",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "みくみく菌にご注意♪": {
       "name_zh": "小心 Miku Miku 菌♪",
@@ -7955,7 +7955,7 @@
       "name_en": "Beware of the Miku Miku Germs♪",
       "author": "はやや",
       "candidate": "小心 Miku Miku 菌♪",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "The secret garden": {
       "name_zh": "秘密花园",
@@ -7964,7 +7964,7 @@
       "name_en": "The secret garden",
       "author": "神前 暁",
       "candidate": "秘密花园",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Dear cocoa girls": {
       "name_zh": "Dear cocoa girls",
@@ -7973,7 +7973,7 @@
       "name_en": "Dear cocoa girls",
       "author": "神前 暁",
       "candidate": "Dear cocoa girls",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "天鵞絨アラベスク": {
       "name_zh": "天鹅绒阿拉伯风",
@@ -7982,7 +7982,7 @@
       "name_en": "Velvet Arabesque",
       "author": "畑 亜貴",
       "candidate": "天鹅绒阿拉伯风",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ラブリスト更新中？": {
       "name_zh": "恋爱清单更新中？",
@@ -7991,7 +7991,7 @@
       "name_en": "Updating My Love List?",
       "author": "畑 亜貴",
       "candidate": "恋爱清单更新中？",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "みくみくにしてあげる♪【してやんよ】": {
       "name_zh": "把你给 MikuMiku 掉♪【给我变成那样吧】",
@@ -8000,7 +8000,7 @@
       "name_en": "I'll Miku-Miku You♪ (For Reals)",
       "author": "ika_mo",
       "candidate": "把你给 MikuMiku 掉♪【给我变成那样吧】",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "金の聖夜霜雪に朽ちて": {
       "name_zh": "金色圣夜霜雪中朽去",
@@ -8009,7 +8009,7 @@
       "name_en": "Requiem for the Phantasma",
       "author": "デッドボールP",
       "candidate": "金色圣夜霜雪中朽去",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "えれくとりっく・えんじぇぅ": {
       "name_zh": "电子天使",
@@ -8018,7 +8018,7 @@
       "name_en": "Electric Angel",
       "author": "ヤスオ",
       "candidate": "电子天使",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "初めての恋が終わる時": {
       "name_zh": "初恋结束时",
@@ -8027,7 +8027,7 @@
       "name_en": "When First Love Ends",
       "author": "ryo",
       "candidate": "初恋结束时",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "こっち向いて Baby": {
       "name_zh": "看向这边 Baby",
@@ -8036,7 +8036,7 @@
       "name_en": "Look This Way, Baby",
       "author": "ryo",
       "candidate": "看向这边 Baby",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Yellow": {
       "name_zh": "Yellow",
@@ -8045,7 +8045,7 @@
       "name_en": "Yellow",
       "author": "kz",
       "candidate": "Yellow",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "カラフル×メロディ": {
       "name_zh": "Colorful × Melody",
@@ -8054,7 +8054,7 @@
       "name_en": "Colorful × Melody",
       "author": "doriko",
       "candidate": "Colorful × Melody",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "初音ミクの激唱": {
       "name_zh": "初音未来的激唱",
@@ -8063,7 +8063,7 @@
       "name_en": "The Intense Voice of Hatsune Miku",
       "author": "Storyteller",
       "candidate": "初音未来的激唱",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "magnet": {
       "name_zh": "magnet",
@@ -8072,7 +8072,7 @@
       "name_en": "Magnet",
       "author": "minato",
       "candidate": "magnet",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Dear": {
       "name_zh": "Dear",
@@ -8081,7 +8081,7 @@
       "name_en": "Dear",
       "author": "19-iku-",
       "candidate": "Dear",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "from Y to Y": {
       "name_zh": "from Y to Y",
@@ -8090,7 +8090,7 @@
       "name_en": "from Y to Y",
       "author": "ジミーサムP",
       "candidate": "from Y to Y",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "愛言葉": {
       "name_zh": "爱言叶",
@@ -8099,7 +8099,7 @@
       "name_en": "Aikotoba",
       "author": "DECO*27",
       "candidate": "爱言叶",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "VOiCE -DIVA　MIX-": {
       "name_zh": "VOiCE -DIVA MIX-",
@@ -8108,7 +8108,7 @@
       "name_en": "VOiCE -DIVA　MIX-",
       "author": "ラヴリーP",
       "candidate": "VOiCE -DIVA MIX-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "巨大少女": {
       "name_zh": "巨大少女",
@@ -8117,7 +8117,7 @@
       "name_en": "Gigantic Girl",
       "author": "40mP",
       "candidate": "巨大少女",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "炉心融解": {
       "name_zh": "炉心融解",
@@ -8126,7 +8126,7 @@
       "name_en": "Roshin Yukai",
       "author": "iroha(sasaki)",
       "candidate": "炉心融解",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ココロ": {
       "name_zh": "心",
@@ -8135,7 +8135,7 @@
       "name_en": "Kokoro",
       "author": "トラボルタ",
       "candidate": "心",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ダブルラリアット": {
       "name_zh": "双重套索",
@@ -8144,7 +8144,7 @@
       "name_en": "Double Lariat",
       "author": "アゴアニキ",
       "candidate": "双重套索",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Change me": {
       "name_zh": "Change me",
@@ -8153,7 +8153,7 @@
       "name_en": "Change Me",
       "author": "shu-t",
       "candidate": "Change me",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "クローバー・クラブ": {
       "name_zh": "Clover♣Club",
@@ -8162,7 +8162,7 @@
       "name_en": "Clover♣Club",
       "author": "ゆうゆ",
       "candidate": "Clover♣Club",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "Promise": {
       "name_zh": "Promise",
@@ -8171,7 +8171,7 @@
       "name_en": "Promise",
       "author": "samfree",
       "candidate": "Promise",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ほんとは分かってる": {
       "name_zh": "其实我明白",
@@ -8180,7 +8180,7 @@
       "name_en": "I Really Do Understand",
       "author": "フナコシP",
       "candidate": "其实我明白",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Innocence": {
       "name_zh": "Innocence",
@@ -8189,7 +8189,7 @@
       "name_en": "Innocence",
       "author": "KazuP",
       "candidate": "Innocence",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Just Be Friends": {
       "name_zh": "Just Be Friends",
@@ -8198,7 +8198,7 @@
       "name_en": "Just Be Friends",
       "author": "Dixie Flatline",
       "candidate": "Just Be Friends",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "金の聖夜霜雪に朽ちて（extend版)": {
       "name_zh": "金色圣夜霜雪中朽去（extend版）",
@@ -8207,7 +8207,7 @@
       "name_en": "Requiem for the Phantasma",
       "author": "デッドボールP",
       "candidate": "金色圣夜霜雪中朽去（extend版）",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "SPiCa -39's Giving Day Edition-": {
       "name_zh": "SPiCa -39's Giving Day Edition-",
@@ -8216,7 +8216,7 @@
       "name_en": "SPiCa -39's Giving Day Edition-",
       "author": "とく",
       "candidate": "SPiCa -39's Giving Day Edition-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "歌に形はないけれど": {
       "name_zh": "虽然歌声无形",
@@ -8225,7 +8225,7 @@
       "name_en": "Though My Song Has No Form",
       "author": "doriko",
       "candidate": "虽然歌声无形",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "裏表ラバーズ": {
       "name_zh": "里表情人",
@@ -8234,7 +8234,7 @@
       "name_en": "Two-Sided Lovers",
       "author": "wowaka",
       "candidate": "里表情人",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "那由他の彼方まで": {
       "name_zh": "直到那由他的彼方",
@@ -8243,7 +8243,7 @@
       "name_en": "To the End of Infinity",
       "author": "釣り師P",
       "candidate": "直到那由他的彼方",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "孤独の果て -extend edition-": {
       "name_zh": "孤独的尽头 -extend edition-",
@@ -8252,7 +8252,7 @@
       "name_en": "Solitude's End -extend edition-",
       "author": "光収容",
       "candidate": "孤独的尽头 -extend edition-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Palette": {
       "name_zh": "Palette",
@@ -8261,7 +8261,7 @@
       "name_en": "Palette",
       "author": "ゆよゆっぺ/meola",
       "candidate": "Palette",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "千年の独奏歌 (DIVA edit)": {
       "name_zh": "千年独奏歌 (DIVA edit)",
@@ -8270,7 +8270,7 @@
       "name_en": "Thousand Year Solo (DIVA Edit)",
       "author": "yanagi",
       "candidate": "千年独奏歌 (DIVA edit)",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "忘却心中": {
       "name_zh": "忘却心中",
@@ -8279,7 +8279,7 @@
       "name_en": "Lover's Suicide Oblivion",
       "author": "OPA",
       "candidate": "忘却心中",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "結んで開いて羅刹と骸": {
       "name_zh": "结起打开罗刹与骸",
@@ -8288,7 +8288,7 @@
       "name_en": "Close and Open, Demons and The Dead",
       "author": "ハチ",
       "candidate": "结起打开罗刹与骸",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ローリンガール": {
       "name_zh": "Rolling Girl",
@@ -8297,7 +8297,7 @@
       "name_en": "Rolling Girl",
       "author": "wowaka",
       "candidate": "Rolling Girl",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "Starduster": {
       "name_zh": "Starduster",
@@ -8306,7 +8306,7 @@
       "name_en": "Starduster",
       "author": "ジミーサムP",
       "candidate": "Starduster",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "パラジクロロベンゼン": {
       "name_zh": "对二氯苯",
@@ -8315,7 +8315,7 @@
       "name_en": "Paradichlorobenzene",
       "author": "オワタP",
       "candidate": "对二氯苯",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "番凩": {
       "name_zh": "番凩",
@@ -8324,7 +8324,7 @@
       "name_en": "Wintry Winds",
       "author": "hinayukki@仕事してP",
       "candidate": "番凩",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "積乱雲グラフィティ": {
       "name_zh": "积雨云涂鸦",
@@ -8333,7 +8333,7 @@
       "name_en": "Sekiranun Graffiti",
       "author": "ryo",
       "candidate": "积雨云涂鸦",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Magical Sound Shower": {
       "name_zh": "Magical Sound Shower",
@@ -8342,7 +8342,7 @@
       "name_en": "Magical Sound Shower",
       "author": "HIRO",
       "candidate": "Magical Sound Shower",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "AFTER BURNER": {
       "name_zh": "AFTER BURNER",
@@ -8351,7 +8351,7 @@
       "name_en": "AFTER BURNER",
       "author": "HIRO",
       "candidate": "AFTER BURNER",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "LIKE THE WIND": {
       "name_zh": "LIKE THE WIND",
@@ -8360,7 +8360,7 @@
       "name_en": "LIKE THE WIND",
       "author": "HIRO",
       "candidate": "LIKE THE WIND",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "StargazeR": {
       "name_zh": "StargazeR",
@@ -8369,7 +8369,7 @@
       "name_en": "StargazeR",
       "author": "骨盤P",
       "candidate": "StargazeR",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "孤独の果て": {
       "name_zh": "孤独的尽头",
@@ -8378,7 +8378,7 @@
       "name_en": "Solitude's End",
       "author": "光収容",
       "candidate": "孤独的尽头",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "タイムリミット": {
       "name_zh": "时间限制",
@@ -8387,7 +8387,7 @@
       "name_en": "Time Limit",
       "author": "North-T",
       "candidate": "时间限制",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Holy Star -2010 DIVA mix-": {
       "name_zh": "Holy Star -2010 DIVA mix-",
@@ -8396,7 +8396,7 @@
       "name_en": "Holy Star -2010 DIVA mix-",
       "author": "Kouhei (K's Sound Project)",
       "candidate": "Holy Star -2010 DIVA mix-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "melody...": {
       "name_zh": "melody...",
@@ -8405,7 +8405,7 @@
       "name_en": "melody...",
       "author": "mikuru396",
       "candidate": "melody...",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "迷的サイバネティックス": {
       "name_zh": "迷的控制论",
@@ -8414,7 +8414,7 @@
       "name_en": "Meiteki Cybernetics",
       "author": "otetsu",
       "candidate": "迷的控制论",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ピンクムーン": {
       "name_zh": "粉红月亮",
@@ -8423,7 +8423,7 @@
       "name_en": "Pink Moon",
       "author": "もじょP",
       "candidate": "粉红月亮",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "透明水彩": {
       "name_zh": "透明水彩",
@@ -8432,7 +8432,7 @@
       "name_en": "Transparent Watercolors",
       "author": "ヤスオ",
       "candidate": "透明水彩",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "いろは唄": {
       "name_zh": "伊吕波歌",
@@ -8441,7 +8441,7 @@
       "name_en": "Iroha Uta",
       "author": "銀サク",
       "candidate": "伊吕波歌",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ルカルカ★ナイトフィーバー": {
       "name_zh": "Luka Luka★Night Fever",
@@ -8450,7 +8450,7 @@
       "name_en": "Luka Luka ★ Night Fever",
       "author": "samfree",
       "candidate": "Luka Luka★Night Fever",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "右肩の蝶 -39's Giving Day Edition-": {
       "name_zh": "右肩之蝶 -39's Giving Day Edition-",
@@ -8459,7 +8459,7 @@
       "name_en": "Butterfly on Your Right Shoulder -39's Giving Day Edition-",
       "author": "のりぴー",
       "candidate": "右肩之蝶 -39's Giving Day Edition-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Leia": {
       "name_zh": "Leia",
@@ -8468,7 +8468,7 @@
       "name_en": "Leia",
       "author": "ゆよゆっぺ",
       "candidate": "Leia",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "千本桜": {
       "name_zh": "千本樱",
@@ -8477,7 +8477,7 @@
       "name_en": "Senbonzakura",
       "author": "黒うさＰ (WhiteFlame)",
       "candidate": "千本樱",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "深海少女": {
       "name_zh": "深海少女",
@@ -8486,7 +8486,7 @@
       "name_en": "Deep Sea Girl",
       "author": "ゆうゆ",
       "candidate": "深海少女",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "アウト オブ エデン": {
       "name_zh": "Out of Eden",
@@ -8495,7 +8495,7 @@
       "name_en": "Out of Eden",
       "author": "Kouhei (K's Sound Project)",
       "candidate": "Out of Eden",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "Rosary Pale": {
       "name_zh": "苍白玫瑰经",
@@ -8504,7 +8504,7 @@
       "name_en": "Rosary Pale",
       "author": "新城P",
       "candidate": "苍白玫瑰经",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "on the rocks": {
       "name_zh": "on the rocks",
@@ -8513,7 +8513,7 @@
       "name_en": "On The Rocks",
       "author": "OSTER project",
       "candidate": "on the rocks",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "No Logic": {
       "name_zh": "No Logic",
@@ -8522,7 +8522,7 @@
       "name_en": "No Logic",
       "author": "ジミーサムP",
       "candidate": "No Logic",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "39": {
       "name_zh": "39",
@@ -8531,7 +8531,7 @@
       "name_en": "39",
       "author": "sasakure.UK",
       "candidate": "39",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ふたりで。": {
       "name_zh": "两个人。",
@@ -8540,7 +8540,7 @@
       "name_en": "The Two of Us - Futaride",
       "author": "ねこぼーろ",
       "candidate": "两个人。",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ルシッドドリーミング": {
       "name_zh": "清醒梦",
@@ -8549,7 +8549,7 @@
       "name_en": "Lucid Dreaming",
       "author": "くぇ（ナイーヴP）",
       "candidate": "清醒梦",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Absolunote": {
       "name_zh": "Absolunote",
@@ -8558,7 +8558,7 @@
       "name_en": "Absolunote",
       "author": "Lemm",
       "candidate": "Absolunote",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "SING＆SMILE": {
       "name_zh": "SING&SMILE",
@@ -8567,7 +8567,7 @@
       "name_en": "SING&SMILE",
       "author": "Re:nG",
       "candidate": "SING&SMILE",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "1/6 -out of the gravity-": {
       "name_zh": "1/6 -脱离重力-",
@@ -8576,7 +8576,7 @@
       "name_en": "1/6 -out of the gravity-",
       "author": "ぼーかりおどP(noa)",
       "candidate": "1/6 -脱离重力-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "PIANO*GIRL": {
       "name_zh": "PIANO*GIRL",
@@ -8585,7 +8585,7 @@
       "name_en": "PIANO*GIRL",
       "author": "OSTER project",
       "candidate": "PIANO*GIRL",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "LOL -lots of laugh-": {
       "name_zh": "LOL -lots of laugh-",
@@ -8594,7 +8594,7 @@
       "name_en": "LOL -lots of laugh-",
       "author": "KeN",
       "candidate": "LOL -lots of laugh-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "shake it！": {
       "name_zh": "shake it！",
@@ -8603,7 +8603,7 @@
       "name_en": "shake it!",
       "author": "emon(Tes.)",
       "candidate": "shake it！",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "1925": {
       "name_zh": "1925",
@@ -8612,7 +8612,7 @@
       "name_en": "1925",
       "author": "T-POCKET",
       "candidate": "1925",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Catch the Wave": {
       "name_zh": "Catch the Wave",
@@ -8621,7 +8621,7 @@
       "name_en": "Catch the Wave",
       "author": "kz",
       "candidate": "Catch the Wave",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "劣等上等": {
       "name_zh": "劣等上等",
@@ -8630,7 +8630,7 @@
       "name_en": "BRING IT ON",
       "author": "Giga",
       "candidate": "劣等上等",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "片想いサンバ": {
       "name_zh": "单相思桑巴",
@@ -8639,7 +8639,7 @@
       "name_en": "One-Sided Love Samba",
       "author": "オワタP",
       "candidate": "单相思桑巴",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "サヨナラ・グッバイ": {
       "name_zh": "再见·Goodbye",
@@ -8648,7 +8648,7 @@
       "name_en": "Sayonara, Goodbye",
       "author": "のぼる↑",
       "candidate": "再见·Goodbye",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "崩壊歌姫 -disruptive diva-": {
       "name_zh": "崩坏歌姬 -disruptive diva-",
@@ -8657,7 +8657,7 @@
       "name_en": "Disruptive Diva",
       "author": "マチゲリータ",
       "candidate": "崩坏歌姬 -disruptive diva-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ZIGG-ZAGG": {
       "name_zh": "ZIGG-ZAGG",
@@ -8666,7 +8666,7 @@
       "name_en": "ZIGG-ZAGG",
       "author": "Junky",
       "candidate": "ZIGG-ZAGG",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ナイトメア☆パーティーナイト": {
       "name_zh": "Nightmare☆Party Night",
@@ -8675,7 +8675,7 @@
       "name_en": "Nightmare ☆ Party Night",
       "author": "くちばし",
       "candidate": "Nightmare☆Party Night",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "恋ノート////": {
       "name_zh": "恋爱笔记////",
@@ -8684,7 +8684,7 @@
       "name_en": "Love's note",
       "author": "ジェバンニP+ハットリP",
       "candidate": "恋爱笔记////",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "SYMPHONIC DIVE - DIVA FT edit -": {
       "name_zh": "SYMPHONIC DIVE - DIVA FT edit -",
@@ -8693,7 +8693,7 @@
       "name_en": "SYMPHONIC DIVE - DIVA FT edit -",
       "author": "Re:nG",
       "candidate": "SYMPHONIC DIVE - DIVA FT edit -",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "どうしてこうなった": {
       "name_zh": "为什么会变成这样",
@@ -8702,7 +8702,7 @@
       "name_en": "How'd It Get To Be Like This?",
       "author": "うどんゲルゲ",
       "candidate": "为什么会变成这样",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "オオカミガール": {
       "name_zh": "狼女孩",
@@ -8711,7 +8711,7 @@
       "name_en": "Wolf Girl",
       "author": "くらP",
       "candidate": "狼女孩",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Starlite★Lydian": {
       "name_zh": "Starlite★Lydian",
@@ -8720,7 +8720,7 @@
       "name_en": "Starlite★Lydian",
       "author": "Masaki",
       "candidate": "Starlite★Lydian",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ペリコ・スペースシッパー": {
       "name_zh": "Perico Space Shipper",
@@ -8729,7 +8729,7 @@
       "name_en": "Perico Space Shipper",
       "author": "ワンカップP",
       "candidate": "Perico Space Shipper",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "マスターオブパペッツ": {
       "name_zh": "木偶大师",
@@ -8738,7 +8738,7 @@
       "name_en": "Master of Puppets",
       "author": "デスおはぎ",
       "candidate": "木偶大师",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Pane dhiria": {
       "name_zh": "Pane dhiria",
@@ -8747,7 +8747,7 @@
       "name_en": "Pane dhiria",
       "author": "新城P",
       "candidate": "Pane dhiria",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ほしをつくるひと": {
       "name_zh": "造星之人",
@@ -8756,7 +8756,7 @@
       "name_en": "The Star Maker",
       "author": "MazoP",
       "candidate": "造星之人",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "So much loving you★ -DIVA Edit-": {
       "name_zh": "So much loving you★ -DIVA Edit-",
@@ -8765,7 +8765,7 @@
       "name_en": "So Much Loving You★ -DIVA Edit-",
       "author": "古墳P",
       "candidate": "So much loving you★ -DIVA Edit-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ジュゲムシーケンサー": {
       "name_zh": "寿限无音序器",
@@ -8774,7 +8774,7 @@
       "name_en": "Jugemu Sequencer",
       "author": "ぼーかりおどP（noa）",
       "candidate": "寿限无音序器",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "さあ、どっち？": {
       "name_zh": "来吧，选哪边？",
@@ -8783,7 +8783,7 @@
       "name_en": "Now Choose",
       "author": "ひなた春花",
       "candidate": "来吧，选哪边？",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "イヤイヤ星人": {
       "name_zh": "讨厌讨厌星人",
@@ -8792,7 +8792,7 @@
       "name_en": "Iya Iya Seijin",
       "author": "イヤイヤP",
       "candidate": "讨厌讨厌星人",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Equation+**": {
       "name_zh": "Equation+**",
@@ -8801,7 +8801,7 @@
       "name_en": "Equation+**",
       "author": "ぽわぽわP",
       "candidate": "Equation+**",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "嘘つきベティ": {
       "name_zh": "说谎的贝蒂",
@@ -8810,7 +8810,7 @@
       "name_en": "Betty The Liar",
       "author": "PolyphonicBranch",
       "candidate": "说谎的贝蒂",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "数多の舞 -Dance of many-": {
       "name_zh": "数多之舞 -Dance of many-",
@@ -8819,7 +8819,7 @@
       "name_en": "Dance of Many",
       "author": "koushirou（卑屈P）",
       "candidate": "数多之舞 -Dance of many-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "迷子ライフ": {
       "name_zh": "迷路人生",
@@ -8828,7 +8828,7 @@
       "name_en": "maigo life",
       "author": "TOKOTOKO（西沢さんP）",
       "candidate": "迷路人生",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ハイスクール Days - DIVA EDIT": {
       "name_zh": "High School Days - DIVA EDIT",
@@ -8837,7 +8837,7 @@
       "name_en": "High School Days - DIVA EDIT",
       "author": "U-ji（霊長類P）",
       "candidate": "High School Days - DIVA EDIT",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "そいやっさぁ!!": {
       "name_zh": "嘿呀呀!!",
@@ -8846,7 +8846,7 @@
       "name_en": "Soiyassa!!",
       "author": "囚人P",
       "candidate": "嘿呀呀!!",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "break;down": {
       "name_zh": "break;down",
@@ -8855,7 +8855,7 @@
       "name_en": "break;down",
       "author": "hmtk",
       "candidate": "break;down",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "花舞月詠譚": {
       "name_zh": "花舞月咏谭",
@@ -8864,7 +8864,7 @@
       "name_en": "Hanamai Tsukuyomi Tan",
       "author": "Hoskey",
       "candidate": "花舞月咏谭",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "フランシスカ": {
       "name_zh": "Francisca",
@@ -8873,7 +8873,7 @@
       "name_en": "Francisca",
       "author": "ぢゅ＠メラゾーマP",
       "candidate": "Francisca",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "悠久-Song of Eternity-DIVAMIX-": {
       "name_zh": "悠久 -Song of Eternity- DIVAMIX-",
@@ -8882,7 +8882,7 @@
       "name_en": "Song of Eternity -DIVAMIX-",
       "author": "てぃあら",
       "candidate": "悠久 -Song of Eternity- DIVAMIX-",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "slump": {
       "name_zh": "slump",
@@ -8891,7 +8891,7 @@
       "name_en": "slump",
       "author": "しばいぬ",
       "candidate": "slump",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Gothic and Loneliness 〜I'm the very DIVA〜": {
       "name_zh": "Gothic and Loneliness ～I'm the very DIVA～",
@@ -8900,7 +8900,7 @@
       "name_en": "Gothic and Loneliness ～I'm the very DIVA～",
       "author": "なるしまたかし",
       "candidate": "Gothic and Loneliness ～I'm the very DIVA～",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "唐傘さんが通る": {
       "name_zh": "唐伞先生经过",
@@ -8909,7 +8909,7 @@
       "name_en": "Here Comes Karakasa-san",
       "author": "イヤイヤP",
       "candidate": "唐伞先生经过",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "おはヨーデル (Oha-Yo-del!!)": {
       "name_zh": "早安约德尔 (Oha-Yo-del!!)",
@@ -8918,7 +8918,7 @@
       "name_en": "Oha-Yo-del!!",
       "author": "爆弾ポピー",
       "candidate": "早安约德尔 (Oha-Yo-del!!)",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "月向うまでのトラベル": {
       "name_zh": "到月亮彼端的旅行",
@@ -8927,7 +8927,7 @@
       "name_en": "Travel to The Other Side of The Moon",
       "author": "vilP",
       "candidate": "到月亮彼端的旅行",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ブラックノートに溺れさせて": {
       "name_zh": "让我沉溺于黑色音符",
@@ -8936,7 +8936,7 @@
       "name_en": "Let Me Lose Myself in The Black Note",
       "author": "Shun13",
       "candidate": "让我沉溺于黑色音符",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ステップフォワード": {
       "name_zh": "Step Forward",
@@ -8945,7 +8945,7 @@
       "name_en": "Step Forward",
       "author": "Chesa",
       "candidate": "Step Forward",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "キミに": {
       "name_zh": "给你",
@@ -8954,7 +8954,7 @@
       "name_en": "Kimi Ni",
       "author": "teaeye",
       "candidate": "给你",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ナイト・オブ・ライト": {
       "name_zh": "光之骑士",
@@ -8963,7 +8963,7 @@
       "name_en": "Knight of Light",
       "author": "いーえるP @ TinySymphony",
       "candidate": "光之骑士",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Mellow Yellow": {
       "name_zh": "Mellow Yellow",
@@ -8972,7 +8972,7 @@
       "name_en": "Mellow Yellow",
       "author": "めりっさP",
       "candidate": "Mellow Yellow",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ぎずも": {
       "name_zh": "Gizmo",
@@ -8981,7 +8981,7 @@
       "name_en": "Gizmo",
       "author": "uguis08",
       "candidate": "Gizmo",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db English title; needs community review"
     },
     "偶像無線(Game edit)": {
       "name_zh": "偶像无线(Game edit)",
@@ -8990,7 +8990,7 @@
       "name_en": "Idol Radio (Game Edit)",
       "author": "Daisuke Ohnuma(大福P)",
       "candidate": "偶像无线(Game edit)",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Fire◎Flower": {
       "name_zh": "Fire◎Flower",
@@ -8999,7 +8999,7 @@
       "name_en": "Fire◎Flower",
       "author": "halyosy",
       "candidate": "Fire◎Flower",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "DYE": {
       "name_zh": "DYE",
@@ -9008,7 +9008,7 @@
       "name_en": "DYE",
       "author": "AVTechNO!",
       "candidate": "DYE",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "秘密警察": {
       "name_zh": "秘密警察",
@@ -9017,7 +9017,7 @@
       "name_en": "Secret Police",
       "author": "ぶりる",
       "candidate": "秘密警察",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "神曲": {
       "name_zh": "神曲",
@@ -9026,7 +9026,7 @@
       "name_en": "God-Tier Tune",
       "author": "おにゅうP",
       "candidate": "神曲",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ACUTE": {
       "name_zh": "ACUTE",
@@ -9035,7 +9035,7 @@
       "name_en": "ACUTE",
       "author": "黒うさ",
       "candidate": "ACUTE",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "鏡音八八花合戦": {
       "name_zh": "镜音八八花合战",
@@ -9044,7 +9044,7 @@
       "name_en": "Kagamine HachiHachi Flower Fight",
       "author": "モジャP",
       "candidate": "镜音八八花合战",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "Nostalogic": {
       "name_zh": "Nostalogic",
@@ -9053,7 +9053,7 @@
       "name_en": "Nostalogic",
       "author": "yuukiss",
       "candidate": "Nostalogic",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Stay with me": {
       "name_zh": "Stay with me",
@@ -9062,7 +9062,7 @@
       "name_en": "Stay with me",
       "author": "shu-t",
       "candidate": "Stay with me",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Sadistic.Music∞Factory": {
       "name_zh": "Sadistic.Music∞Factory",
@@ -9071,7 +9071,7 @@
       "name_en": "Sadistic.Music∞Factory",
       "author": "cosMo＠暴走P",
       "candidate": "Sadistic.Music∞Factory",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "ODDS&ENDS": {
       "name_zh": "ODDS&ENDS",
@@ -9080,7 +9080,7 @@
       "name_en": "Odds & Ends",
       "author": "ryo",
       "candidate": "ODDS&ENDS",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Weekender Girl": {
       "name_zh": "Weekender Girl",
@@ -9089,7 +9089,7 @@
       "name_en": "Weekender Girl",
       "author": "八王子P",
       "candidate": "Weekender Girl",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "WORLD'S END UMBRELLA": {
       "name_zh": "WORLD'S END UMBRELLA",
@@ -9098,7 +9098,7 @@
       "name_en": "World's End Umbrella",
       "author": "ハチ",
       "candidate": "WORLD'S END UMBRELLA",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "FREELY TOMORROW": {
       "name_zh": "FREELY TOMORROW",
@@ -9107,7 +9107,7 @@
       "name_en": "Freely Tomorrow",
       "author": "Mitchie M",
       "candidate": "FREELY TOMORROW",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Tell Your World": {
       "name_zh": "Tell Your World",
@@ -9116,7 +9116,7 @@
       "name_en": "Tell Your World",
       "author": "kz",
       "candidate": "Tell Your World",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Sweet Devil": {
       "name_zh": "Sweet Devil",
@@ -9125,7 +9125,7 @@
       "name_en": "Sweet Devil",
       "author": "八王子P",
       "candidate": "Sweet Devil",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "erase or zero": {
       "name_zh": "erase or zero",
@@ -9134,7 +9134,7 @@
       "name_en": "Erase or Zero",
       "author": "クリスタルP",
       "candidate": "erase or zero",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Hello, Worker": {
       "name_zh": "Hello, Worker",
@@ -9143,7 +9143,7 @@
       "name_en": "Hello, Worker",
       "author": "KEI",
       "candidate": "Hello, Worker",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Knife": {
       "name_zh": "Knife",
@@ -9152,7 +9152,7 @@
       "name_en": "Knife",
       "author": "れるりり",
       "candidate": "Knife",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "soundless voice": {
       "name_zh": "soundless voice",
@@ -9161,7 +9161,7 @@
       "name_en": "Soundless Voice",
       "author": "ひとしずくP",
       "candidate": "soundless voice",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Blackjack": {
       "name_zh": "Blackjack",
@@ -9170,7 +9170,7 @@
       "name_en": "Blackjack",
       "author": "ゆちゃＰ",
       "candidate": "Blackjack",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "DECORATOR": {
       "name_zh": "DECORATOR",
@@ -9179,7 +9179,7 @@
       "name_en": "Decorator",
       "author": "kz",
       "candidate": "DECORATOR",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Glory 3usi9": {
       "name_zh": "Glory 3usi9",
@@ -9188,7 +9188,7 @@
       "name_en": "Glory 3usi9",
       "author": "ナノウ",
       "candidate": "Glory 3usi9",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Hand in Hand": {
       "name_zh": "Hand in Hand",
@@ -9197,7 +9197,7 @@
       "name_en": "Hand in Hand",
       "author": "kz",
       "candidate": "Hand in Hand",
-      "evidence": "manual translation from embedded base_song_db title; needs community review"
+      "evidence": "fallback to embedded base_song_db original title; needs community review"
     }
   }
 }
