@@ -205,6 +205,15 @@ fn resolve_data_dir(configured: &str, resource_dir: Option<&Path>) -> PathBuf {
     if let Some(resource_dir) = resource_dir {
         candidates.push(resource_dir.join(configured));
         candidates.push(resource_dir.join("Data"));
+        candidates.push(resource_dir.to_path_buf());
+        candidates.push(resource_dir.join("_up_").join("Data"));
+    }
+
+    if let Some(candidate) = candidates
+        .iter()
+        .find(|candidate| candidate.join("song_db.json").exists())
+    {
+        return candidate.clone();
     }
 
     candidates

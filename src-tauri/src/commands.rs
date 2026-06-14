@@ -483,11 +483,24 @@ pub fn get_obs_overlay_status(state: State<'_, AppState>) -> Result<OBSOverlaySt
 
 fn resolve_data_dir(configured: &str, fallback: &Path) -> PathBuf {
     let configured_path = PathBuf::from(configured);
-    if configured_path.is_absolute() || configured_path.exists() {
-        configured_path
-    } else {
-        fallback.join(configured)
+    if configured_path.is_absolute() && configured_path.exists() {
+        return configured_path;
     }
+
+    let candidates = [
+        configured_path.clone(),
+        fallback.to_path_buf(),
+        fallback.join(configured),
+        fallback.join("Data"),
+        fallback.join("_up_").join("Data"),
+    ];
+
+    candidates
+        .iter()
+        .find(|candidate| candidate.join("song_db.json").exists())
+        .cloned()
+        .or_else(|| candidates.into_iter().find(|candidate| candidate.exists()))
+        .unwrap_or(configured_path)
 }
 
 fn current_timestamp() -> f64 {
