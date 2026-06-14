@@ -56,13 +56,34 @@ For each new or changed entry, record enough evidence for future review:
 
 1. Load `Data/song_db.json` and identify original song names needing Chinese names.
 2. Check existing `Data/song_name_zh.json` before adding anything.
-3. For each candidate, decide whether it is official/common/uncertain.
-4. Write entries under `entries` keyed by original name.
-5. Preserve existing audit fields unless intentionally correcting them.
-6. Run database/site generation as appropriate:
+3. When many names are missing, use `scripts/collect_translation_candidates.py` from this skill to gather review candidates before writing bulk translations. It can query local `song_name_zh.json`, optional public platform suggestions, and manual review URLs, then writes a TSV for human review.
+4. For each candidate, decide whether it is official/common/uncertain. Platform suggestions are evidence hints, not proof; keep weak candidates as `needs_review`.
+5. Write entries under `entries` keyed by original name.
+6. Preserve existing audit fields unless intentionally correcting them.
+7. Run database/site generation as appropriate:
    - Use the desktop GUI “重建歌曲库” action for local `song_db.json` rebuilds.
    - If public site data changes, keep `docs/data/` copies in sync with `Data/`.
-7. Verify JSON parses; run `npm run build` and `cargo check --manifest-path src-tauri/Cargo.toml` if code or bundled data paths changed.
+8. Verify JSON parses; run `npm run build` and `cargo check --manifest-path src-tauri/Cargo.toml` if code or bundled data paths changed.
+
+## Bundled Candidate Script
+
+Use the helper when the missing-name set is too large for manual lookup one by one:
+
+```bash
+python .opencode/skills/song-chinese-translation/scripts/collect_translation_candidates.py \
+  --song-db Data/base_song_db.json \
+  --zh-db Data/song_name_zh.json \
+  --output Data/song_name_zh.candidates.tsv \
+  --search-urls
+```
+
+Useful options:
+
+- `--no-web` — avoid network requests and only emit local matches / review URLs.
+- `--limit N` — sample the first N missing songs when testing the workflow.
+- `--search-urls` — include Bilibili and Moegirl search URLs for manual review.
+
+Review the TSV before changing JSON. Do not bulk-mark candidates from public suggestions as `verified` unless you independently confirm they are official or strongly established community names.
 
 ## Output Style
 

@@ -6,7 +6,9 @@
       "name": "恋は戦争",
       "name_en": "Love is War",
       "name_zh": "恋爱战争",
-      "aliases": [],
+      "aliases": [
+        "📣"
+      ],
       "authors": [
         "ryo"
       ],
@@ -23,7 +25,7 @@
       "pv_id": 2,
       "name": "ワールドイズマイン",
       "name_en": "The World is Mine",
-      "name_zh": "世界第一公主殿下",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ryo"
@@ -37,45 +39,11 @@
       },
       "source": "base"
     },
-    "3": {
-      "pv_id": 3,
-      "name": "その一秒スローモーション",
-      "name_en": "That One Second in Slow Motion",
-      "name_zh": "那一秒的慢动作",
-      "aliases": [],
-      "authors": [
-        "ryo"
-      ],
-      "difficulty": {
-        "easy": 4.0,
-        "normal": 5.0,
-        "hard": 6.5,
-        "extreme": 7.0,
-        "exextreme": 7.5
-      },
-      "source": "dlc"
-    },
-    "4": {
-      "pv_id": 4,
-      "name": "ひねくれ者",
-      "name_en": "Jaded",
-      "name_zh": "别扭的人",
-      "aliases": [],
-      "authors": [
-        "ryo"
-      ],
-      "difficulty": {
-        "easy": 1.0,
-        "hard": 4.0,
-        "extreme": 7.5
-      },
-      "source": "dlc"
-    },
     "5": {
       "pv_id": 5,
       "name": "メルト",
       "name_en": "Melt",
-      "name_zh": "融化",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ryo"
@@ -87,24 +55,7 @@
         "extreme": 7.0,
         "exextreme": 8.0
       },
-      "source": "dlc"
-    },
-    "6": {
-      "pv_id": 6,
-      "name": "Far Away",
-      "name_en": "Far Away",
-      "name_zh": "Far Away",
-      "aliases": [],
-      "authors": [
-        "kz"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "hard": 4.5,
-        "extreme": 6.0,
-        "exextreme": 6.0
-      },
-      "source": "dlc"
+      "source": "base"
     },
     "7": {
       "pv_id": 7,
@@ -127,7 +78,7 @@
       "pv_id": 8,
       "name": "Star Story",
       "name_en": "Star Story",
-      "name_zh": "星之故事",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "kz"
@@ -145,7 +96,7 @@
       "pv_id": 9,
       "name": "Last Night, Good Night",
       "name_en": "Last Night, Good Night",
-      "name_zh": "Last Night, Good Night",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "kz"
@@ -161,7 +112,7 @@
       "pv_id": 10,
       "name": "Packaged",
       "name_en": "Packaged",
-      "name_zh": "Packaged",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "kz"
@@ -174,29 +125,11 @@
       },
       "source": "base"
     },
-    "11": {
-      "pv_id": 11,
-      "name": "雨のちSweet*Drops",
-      "name_en": "Rain With A Chance of Sweet*Drops",
-      "name_zh": "雨后 Sweet*Drops",
-      "aliases": [],
-      "authors": [
-        "OSTER project"
-      ],
-      "difficulty": {
-        "easy": 3.0,
-        "normal": 5.0,
-        "hard": 6.0,
-        "extreme": 7.0,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
     "12": {
       "pv_id": 12,
       "name": "マージナル",
       "name_en": "Marginal",
-      "name_zh": "边缘",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "OSTER project"
@@ -230,7 +163,7 @@
       "pv_id": 14,
       "name": "ミラクルペイント",
       "name_en": "Miracle Paint",
-      "name_zh": "奇迹画笔",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "OSTER project"
@@ -243,29 +176,14 @@
       },
       "source": "base"
     },
-    "15": {
-      "pv_id": 15,
-      "name": "Dreaming Leaf -ユメミルコトノハ-",
-      "name_en": "Dreaming Leaf",
-      "name_zh": "Dreaming Leaf -梦见的言语-",
-      "aliases": [],
-      "authors": [
-        "OSTER project"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 6.5,
-        "extreme": 8.0,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
     "16": {
       "pv_id": 16,
       "name": "恋スルＶＯＣ＠ＬＯＩＤ",
       "name_en": "VOC@LOID in Love",
       "name_zh": "恋爱的ＶＯＣ＠ＬＯＩＤ",
-      "aliases": [],
+      "aliases": [
+        "💕"
+      ],
       "authors": [
         "OSTER project"
       ],
@@ -277,78 +195,11 @@
       },
       "source": "base"
     },
-    "17": {
-      "pv_id": 17,
-      "name": "荒野と森と魔法の歌",
-      "name_en": "A Song of Wastelands, Forests, and Magic",
-      "name_zh": "荒野、森林与魔法之歌",
-      "aliases": [],
-      "authors": [
-        "トラボルタ"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 6.5,
-        "exextreme": 7.5
-      },
-      "source": "dlc"
-    },
-    "18": {
-      "pv_id": 18,
-      "name": "いのちの歌",
-      "name_en": "Song of Life",
-      "name_zh": "生命之歌",
-      "aliases": [],
-      "authors": [
-        "トラボルタ"
-      ],
-      "difficulty": {
-        "easy": 1.5,
-        "hard": 5.0,
-        "extreme": 6.0
-      },
-      "source": "dlc"
-    },
-    "20": {
-      "pv_id": 20,
-      "name": "moon",
-      "name_en": "moon",
-      "name_zh": "moon",
-      "aliases": [],
-      "authors": [
-        "iroha(sasaki)"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 4.0,
-        "hard": 5.5,
-        "extreme": 7.0,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "21": {
-      "pv_id": 21,
-      "name": "みくみく菌にご注意♪",
-      "name_en": "Beware of the Miku Miku Germs♪",
-      "name_zh": "小心 Miku Miku 菌♪",
-      "aliases": [],
-      "authors": [
-        "はやや"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 6.5,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
     "22": {
       "pv_id": 22,
       "name": "The secret garden",
       "name_en": "The secret garden",
-      "name_zh": "秘密花园",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "神前 暁"
@@ -361,64 +212,11 @@
       },
       "source": "base"
     },
-    "23": {
-      "pv_id": 23,
-      "name": "Dear cocoa girls",
-      "name_en": "Dear cocoa girls",
-      "name_zh": "Dear cocoa girls",
-      "aliases": [],
-      "authors": [
-        "神前 暁"
-      ],
-      "difficulty": {
-        "easy": 3.5,
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 6.5,
-        "exextreme": 7.5
-      },
-      "source": "dlc"
-    },
-    "24": {
-      "pv_id": 24,
-      "name": "天鵞絨アラベスク",
-      "name_en": "Velvet Arabesque",
-      "name_zh": "天鹅绒阿拉伯风",
-      "aliases": [],
-      "authors": [
-        "畑 亜貴"
-      ],
-      "difficulty": {
-        "easy": 1.5,
-        "normal": 3.0,
-        "hard": 4.5,
-        "extreme": 6.5,
-        "exextreme": 6.5
-      },
-      "source": "dlc"
-    },
-    "25": {
-      "pv_id": 25,
-      "name": "ラブリスト更新中？",
-      "name_en": "Updating My Love List?",
-      "name_zh": "恋爱清单更新中？",
-      "aliases": [],
-      "authors": [
-        "畑 亜貴"
-      ],
-      "difficulty": {
-        "easy": 3.0,
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 7.0
-      },
-      "source": "dlc"
-    },
     "28": {
       "pv_id": 28,
       "name": "みくみくにしてあげる♪【してやんよ】",
       "name_en": "I'll Miku-Miku You♪ (For Reals)",
-      "name_zh": "把你给 MikuMiku 掉♪【给我变成那样吧】",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ika_mo"
@@ -432,28 +230,11 @@
       },
       "source": "base"
     },
-    "29": {
-      "pv_id": 29,
-      "name": "金の聖夜霜雪に朽ちて",
-      "name_en": "Requiem for the Phantasma",
-      "name_zh": "金色圣夜霜雪中朽去",
-      "aliases": [],
-      "authors": [
-        "デッドボールP"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 7.5,
-        "extreme": 8.5,
-        "exextreme": 9.5
-      },
-      "source": "dlc"
-    },
     "30": {
       "pv_id": 30,
       "name": "えれくとりっく・えんじぇぅ",
       "name_en": "Electric Angel",
-      "name_zh": "电子天使",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ヤスオ"
@@ -505,7 +286,7 @@
       "pv_id": 37,
       "name": "初めての恋が終わる時",
       "name_en": "When First Love Ends",
-      "name_zh": "初恋结束时",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ryo"
@@ -523,7 +304,7 @@
       "pv_id": 38,
       "name": "こっち向いて Baby",
       "name_en": "Look This Way, Baby",
-      "name_zh": "看向这边 Baby",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ryo"
@@ -559,7 +340,7 @@
       "pv_id": 40,
       "name": "Yellow",
       "name_en": "Yellow",
-      "name_zh": "Yellow",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "kz"
@@ -577,7 +358,7 @@
       "pv_id": 41,
       "name": "カラフル×メロディ",
       "name_en": "Colorful × Melody",
-      "name_zh": "Colorful × Melody",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "doriko"
@@ -595,7 +376,7 @@
       "pv_id": 42,
       "name": "初音ミクの激唱",
       "name_en": "The Intense Voice of Hatsune Miku",
-      "name_zh": "初音未来的激唱",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "Storyteller"
@@ -631,7 +412,7 @@
       "pv_id": 44,
       "name": "magnet",
       "name_en": "Magnet",
-      "name_zh": "magnet",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "minato"
@@ -649,7 +430,7 @@
       "pv_id": 45,
       "name": "Dear",
       "name_en": "Dear",
-      "name_zh": "Dear",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "19-iku-"
@@ -667,8 +448,10 @@
       "pv_id": 46,
       "name": "from Y to Y",
       "name_en": "from Y to Y",
-      "name_zh": "from Y to Y",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "💍🚀"
+      ],
       "authors": [
         "ジミーサムP"
       ],
@@ -686,7 +469,9 @@
       "name": "ジェミニ",
       "name_en": "Gemini",
       "name_zh": "双子座",
-      "aliases": [],
+      "aliases": [
+        "♊♊︎"
+      ],
       "authors": [
         "Dixie Flatline"
       ],
@@ -702,7 +487,7 @@
       "pv_id": 48,
       "name": "愛言葉",
       "name_en": "Aikotoba",
-      "name_zh": "爱言叶",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "DECO*27"
@@ -721,7 +506,9 @@
       "name": "ぽっぴっぽー",
       "name_en": "Po Pi Po",
       "name_zh": "Po Pi Po",
-      "aliases": [],
+      "aliases": [
+        "🥬"
+      ],
       "authors": [
         "ラマーズP"
       ],
@@ -756,7 +543,7 @@
       "pv_id": 51,
       "name": "VOiCE -DIVA　MIX-",
       "name_en": "VOiCE -DIVA　MIX-",
-      "name_zh": "VOiCE -DIVA MIX-",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ラヴリーP"
@@ -775,7 +562,9 @@
       "name": "恋色病棟",
       "name_en": "Love-Colored Ward",
       "name_zh": "恋色病栋",
-      "aliases": [],
+      "aliases": [
+        "💉🏥"
+      ],
       "authors": [
         "OSTER project"
       ],
@@ -792,7 +581,7 @@
       "pv_id": 53,
       "name": "巨大少女",
       "name_en": "Gigantic Girl",
-      "name_zh": "巨大少女",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "40mP"
@@ -810,7 +599,7 @@
       "pv_id": 54,
       "name": "炉心融解",
       "name_en": "Roshin Yukai",
-      "name_zh": "炉心融解",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "iroha(sasaki)"
@@ -828,7 +617,7 @@
       "pv_id": 55,
       "name": "ココロ",
       "name_en": "Kokoro",
-      "name_zh": "心",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "トラボルタ"
@@ -847,7 +636,9 @@
       "name": "右肩の蝶",
       "name_en": "Butterfly on Your Right Shoulder",
       "name_zh": "右肩之蝶",
-      "aliases": [],
+      "aliases": [
+        "🦋Len1"
+      ],
       "authors": [
         "のりぴー"
       ],
@@ -863,7 +654,7 @@
       "pv_id": 57,
       "name": "ダブルラリアット",
       "name_en": "Double Lariat",
-      "name_zh": "双重套索",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "アゴアニキ"
@@ -899,7 +690,7 @@
       "pv_id": 59,
       "name": "Change me",
       "name_en": "Change Me",
-      "name_zh": "Change me",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "shu-t"
@@ -935,7 +726,7 @@
       "pv_id": 61,
       "name": "クローバー・クラブ",
       "name_en": "Clover♣Club",
-      "name_zh": "Clover♣Club",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ゆうゆ"
@@ -953,7 +744,7 @@
       "pv_id": 62,
       "name": "Promise",
       "name_en": "Promise",
-      "name_zh": "Promise",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "samfree"
@@ -966,42 +757,6 @@
         "exextreme": 8.0
       },
       "source": "base"
-    },
-    "63": {
-      "pv_id": 63,
-      "name": "ほんとは分かってる",
-      "name_en": "I Really Do Understand",
-      "name_zh": "其实我明白",
-      "aliases": [],
-      "authors": [
-        "フナコシP"
-      ],
-      "difficulty": {
-        "easy": 3.5,
-        "normal": 4.0,
-        "hard": 5.5,
-        "extreme": 7.0,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "64": {
-      "pv_id": 64,
-      "name": "Innocence",
-      "name_en": "Innocence",
-      "name_zh": "Innocence",
-      "aliases": [],
-      "authors": [
-        "KazuP"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 6.0,
-        "exextreme": 7.5
-      },
-      "source": "dlc"
     },
     "65": {
       "pv_id": 65,
@@ -1025,7 +780,7 @@
       "pv_id": 66,
       "name": "Just Be Friends",
       "name_en": "Just Be Friends",
-      "name_zh": "Just Be Friends",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "Dixie Flatline"
@@ -1038,22 +793,6 @@
         "exextreme": 8.0
       },
       "source": "base"
-    },
-    "67": {
-      "pv_id": 67,
-      "name": "金の聖夜霜雪に朽ちて（extend版)",
-      "name_en": "Requiem for the Phantasma",
-      "name_zh": "金色圣夜霜雪中朽去（extend版）",
-      "aliases": [],
-      "authors": [
-        "デッドボールP"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 7.5,
-        "extreme": 8.5
-      },
-      "source": "dlc"
     },
     "68": {
       "pv_id": 68,
@@ -1076,7 +815,7 @@
       "pv_id": 79,
       "name": "SPiCa -39's Giving Day Edition-",
       "name_en": "SPiCa -39's Giving Day Edition-",
-      "name_zh": "SPiCa -39's Giving Day Edition-",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "とく"
@@ -1093,7 +832,7 @@
       "pv_id": 81,
       "name": "歌に形はないけれど",
       "name_en": "Though My Song Has No Form",
-      "name_zh": "虽然歌声无形",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "doriko"
@@ -1111,7 +850,7 @@
       "pv_id": 82,
       "name": "裏表ラバーズ",
       "name_en": "Two-Sided Lovers",
-      "name_zh": "里表情人",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "wowaka"
@@ -1141,28 +880,11 @@
       },
       "source": "base"
     },
-    "84": {
-      "pv_id": 84,
-      "name": "那由他の彼方まで",
-      "name_en": "To the End of Infinity",
-      "name_zh": "直到那由他的彼方",
-      "aliases": [],
-      "authors": [
-        "釣り師P"
-      ],
-      "difficulty": {
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 7.0,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
     "85": {
       "pv_id": 85,
       "name": "孤独の果て -extend edition-",
       "name_en": "Solitude's End -extend edition-",
-      "name_zh": "孤独的尽头 -extend edition-",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "光収容"
@@ -1180,7 +902,9 @@
       "name": "パズル",
       "name_en": "Puzzle",
       "name_zh": "Puzzle",
-      "aliases": [],
+      "aliases": [
+        "🧩"
+      ],
       "authors": [
         "クワガタP"
       ],
@@ -1197,7 +921,7 @@
       "pv_id": 87,
       "name": "Palette",
       "name_en": "Palette",
-      "name_zh": "Palette",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ゆよゆっぺ/meola"
@@ -1214,7 +938,7 @@
       "pv_id": 88,
       "name": "千年の独奏歌 (DIVA edit)",
       "name_en": "Thousand Year Solo (DIVA Edit)",
-      "name_zh": "千年独奏歌 (DIVA edit)",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "yanagi"
@@ -1232,7 +956,7 @@
       "pv_id": 89,
       "name": "忘却心中",
       "name_en": "Lover's Suicide Oblivion",
-      "name_zh": "忘却心中",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "OPA"
@@ -1249,7 +973,7 @@
       "pv_id": 90,
       "name": "結んで開いて羅刹と骸",
       "name_en": "Close and Open, Demons and The Dead",
-      "name_zh": "结起打开罗刹与骸",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ハチ"
@@ -1266,7 +990,7 @@
       "pv_id": 91,
       "name": "ローリンガール",
       "name_en": "Rolling Girl",
-      "name_zh": "Rolling Girl",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "wowaka"
@@ -1283,8 +1007,10 @@
       "pv_id": 92,
       "name": "Starduster",
       "name_en": "Starduster",
-      "name_zh": "Starduster",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "🛰️"
+      ],
       "authors": [
         "ジミーサムP"
       ],
@@ -1300,7 +1026,7 @@
       "pv_id": 93,
       "name": "パラジクロロベンゼン",
       "name_en": "Paradichlorobenzene",
-      "name_zh": "对二氯苯",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "オワタP"
@@ -1317,7 +1043,7 @@
       "pv_id": 94,
       "name": "番凩",
       "name_en": "Wintry Winds",
-      "name_zh": "番凩",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "hinayukki@仕事してP"
@@ -1336,7 +1062,9 @@
       "name": "ねこみみスイッチ",
       "name_en": "NekoMimi Switch",
       "name_zh": "猫耳开关",
-      "aliases": [],
+      "aliases": [
+        "🐱1"
+      ],
       "authors": [
         "daniwell"
       ],
@@ -1352,7 +1080,7 @@
       "pv_id": 96,
       "name": "積乱雲グラフィティ",
       "name_en": "Sekiranun Graffiti",
-      "name_zh": "积雨云涂鸦",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ryo"
@@ -1383,23 +1111,6 @@
       },
       "source": "base"
     },
-    "101": {
-      "pv_id": 101,
-      "name": "Magical Sound Shower",
-      "name_en": "Magical Sound Shower",
-      "name_zh": "Magical Sound Shower",
-      "aliases": [],
-      "authors": [
-        "HIRO"
-      ],
-      "difficulty": {
-        "normal": 6.5,
-        "hard": 8.0,
-        "extreme": 8.5,
-        "exextreme": 9.0
-      },
-      "source": "dlc"
-    },
     "102": {
       "pv_id": 102,
       "name": "多重未来のカルテット -Quartet Theme-",
@@ -1421,7 +1132,7 @@
       "pv_id": 103,
       "name": "AFTER BURNER",
       "name_en": "AFTER BURNER",
-      "name_zh": "AFTER BURNER",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "HIRO"
@@ -1437,8 +1148,10 @@
       "pv_id": 104,
       "name": "LIKE THE WIND",
       "name_en": "LIKE THE WIND",
-      "name_zh": "LIKE THE WIND",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "🏎️"
+      ],
       "authors": [
         "HIRO"
       ],
@@ -1470,7 +1183,7 @@
       "pv_id": 202,
       "name": "StargazeR",
       "name_en": "StargazeR",
-      "name_zh": "StargazeR",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "骨盤P"
@@ -1482,142 +1195,6 @@
         "exextreme": 8.0
       },
       "source": "base"
-    },
-    "203": {
-      "pv_id": 203,
-      "name": "孤独の果て",
-      "name_en": "Solitude's End",
-      "name_zh": "孤独的尽头",
-      "aliases": [],
-      "authors": [
-        "光収容"
-      ],
-      "difficulty": {
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "204": {
-      "pv_id": 204,
-      "name": "タイムリミット",
-      "name_en": "Time Limit",
-      "name_zh": "时间限制",
-      "aliases": [],
-      "authors": [
-        "North-T"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 8.0,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "205": {
-      "pv_id": 205,
-      "name": "Holy Star -2010 DIVA mix-",
-      "name_en": "Holy Star -2010 DIVA mix-",
-      "name_zh": "Holy Star -2010 DIVA mix-",
-      "aliases": [],
-      "authors": [
-        "Kouhei (K's Sound Project)"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 7.0
-      },
-      "source": "dlc"
-    },
-    "206": {
-      "pv_id": 206,
-      "name": "melody...",
-      "name_en": "melody...",
-      "name_zh": "melody...",
-      "aliases": [],
-      "authors": [
-        "mikuru396"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 3.5,
-        "hard": 5.5,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "208": {
-      "pv_id": 208,
-      "name": "迷的サイバネティックス",
-      "name_en": "Meiteki Cybernetics",
-      "name_zh": "迷的控制论",
-      "aliases": [],
-      "authors": [
-        "otetsu"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 5.0,
-        "hard": 6.0,
-        "extreme": 8.0,
-        "exextreme": 9.0
-      },
-      "source": "dlc"
-    },
-    "209": {
-      "pv_id": 209,
-      "name": "ピンクムーン",
-      "name_en": "Pink Moon",
-      "name_zh": "粉红月亮",
-      "aliases": [],
-      "authors": [
-        "もじょP"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 6.5,
-        "extreme": 7.5,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "210": {
-      "pv_id": 210,
-      "name": "透明水彩",
-      "name_en": "Transparent Watercolors",
-      "name_zh": "透明水彩",
-      "aliases": [],
-      "authors": [
-        "ヤスオ"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 6.5,
-        "extreme": 8.5,
-        "exextreme": 9.0
-      },
-      "source": "dlc"
-    },
-    "211": {
-      "pv_id": 211,
-      "name": "いろは唄",
-      "name_en": "Iroha Uta",
-      "name_zh": "伊吕波歌",
-      "aliases": [],
-      "authors": [
-        "銀サク"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 7.0,
-        "extreme": 9.0,
-        "exextreme": 9.5
-      },
-      "source": "dlc"
     },
     "212": {
       "pv_id": 212,
@@ -1640,7 +1217,7 @@
       "pv_id": 213,
       "name": "ルカルカ★ナイトフィーバー",
       "name_en": "Luka Luka ★ Night Fever",
-      "name_zh": "Luka Luka★Night Fever",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "samfree"
@@ -1654,27 +1231,11 @@
       },
       "source": "base"
     },
-    "214": {
-      "pv_id": 214,
-      "name": "右肩の蝶 -39's Giving Day Edition-",
-      "name_en": "Butterfly on Your Right Shoulder -39's Giving Day Edition-",
-      "name_zh": "右肩之蝶 -39's Giving Day Edition-",
-      "aliases": [],
-      "authors": [
-        "のりぴー"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 6.5,
-        "extreme": 8.5
-      },
-      "source": "dlc"
-    },
     "215": {
       "pv_id": 215,
       "name": "Leia",
       "name_en": "Leia",
-      "name_zh": "Leia",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ゆよゆっぺ"
@@ -1686,23 +1247,6 @@
         "exextreme": 9.5
       },
       "source": "base"
-    },
-    "216": {
-      "pv_id": 216,
-      "name": "千本桜",
-      "name_en": "Senbonzakura",
-      "name_zh": "千本樱",
-      "aliases": [],
-      "authors": [
-        "黒うさＰ (WhiteFlame)"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 4.0,
-        "hard": 6.5,
-        "extreme": 8.0
-      },
-      "source": "dlc"
     },
     "218": {
       "pv_id": 218,
@@ -1725,7 +1269,7 @@
       "pv_id": 219,
       "name": "深海少女",
       "name_en": "Deep Sea Girl",
-      "name_zh": "深海少女",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ゆうゆ"
@@ -1762,7 +1306,9 @@
       "name": "ネコミミアーカイブ",
       "name_en": "NekoMimi Archive",
       "name_zh": "猫耳备档",
-      "aliases": [],
+      "aliases": [
+        "🐱4"
+      ],
       "authors": [
         "糞田舎P"
       ],
@@ -1792,27 +1338,11 @@
       },
       "source": "base"
     },
-    "223": {
-      "pv_id": 223,
-      "name": "アウト オブ エデン",
-      "name_en": "Out of Eden",
-      "name_zh": "Out of Eden",
-      "aliases": [],
-      "authors": [
-        "Kouhei (K's Sound Project)"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 6.0,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
     "224": {
       "pv_id": 224,
       "name": "Rosary Pale",
       "name_en": "Rosary Pale",
-      "name_zh": "苍白玫瑰经",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "新城P"
@@ -1847,7 +1377,7 @@
       "pv_id": 226,
       "name": "on the rocks",
       "name_en": "On The Rocks",
-      "name_zh": "on the rocks",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "OSTER project"
@@ -1881,7 +1411,7 @@
       "pv_id": 228,
       "name": "No Logic",
       "name_en": "No Logic",
-      "name_zh": "No Logic",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ジミーサムP"
@@ -1898,7 +1428,9 @@
       "name": "キップル・インダストリー",
       "name_en": "Kipple Industry Inc.",
       "name_zh": "Kipple Industry, Inc.",
-      "aliases": [],
+      "aliases": [
+        "🍬"
+      ],
       "authors": [
         "millstones"
       ],
@@ -1914,7 +1446,7 @@
       "pv_id": 232,
       "name": "39",
       "name_en": "39",
-      "name_zh": "39",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "sasakure.UK"
@@ -1927,22 +1459,6 @@
         "exextreme": 8.0
       },
       "source": "base"
-    },
-    "233": {
-      "pv_id": 233,
-      "name": "ふたりで。",
-      "name_en": "The Two of Us - Futaride",
-      "name_zh": "两个人。",
-      "aliases": [],
-      "authors": [
-        "ねこぼーろ"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 7.5
-      },
-      "source": "dlc"
     },
     "234": {
       "pv_id": 234,
@@ -1962,44 +1478,11 @@
       },
       "source": "base"
     },
-    "235": {
-      "pv_id": 235,
-      "name": "ルシッドドリーミング",
-      "name_en": "Lucid Dreaming",
-      "name_zh": "清醒梦",
-      "aliases": [],
-      "authors": [
-        "くぇ（ナイーヴP）"
-      ],
-      "difficulty": {
-        "easy": 3.5,
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "236": {
-      "pv_id": 236,
-      "name": "Absolunote",
-      "name_en": "Absolunote",
-      "name_zh": "Absolunote",
-      "aliases": [],
-      "authors": [
-        "Lemm"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 8.5
-      },
-      "source": "dlc"
-    },
     "238": {
       "pv_id": 238,
       "name": "SING＆SMILE",
       "name_en": "SING&SMILE",
-      "name_zh": "SING&SMILE",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "Re:nG"
@@ -2064,7 +1547,7 @@
       "pv_id": 242,
       "name": "1/6 -out of the gravity-",
       "name_en": "1/6 -out of the gravity-",
-      "name_zh": "1/6 -脱离重力-",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ぼーかりおどP(noa)"
@@ -2099,7 +1582,9 @@
       "name": "スノーマン",
       "name_en": "Snowman",
       "name_zh": "雪人",
-      "aliases": [],
+      "aliases": [
+        "⛄"
+      ],
       "authors": [
         "halyosy"
       ],
@@ -2199,7 +1684,7 @@
       "pv_id": 251,
       "name": "PIANO*GIRL",
       "name_en": "PIANO*GIRL",
-      "name_zh": "PIANO*GIRL",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "OSTER project"
@@ -2216,7 +1701,7 @@
       "pv_id": 253,
       "name": "LOL -lots of laugh-",
       "name_en": "LOL -lots of laugh-",
-      "name_zh": "LOL -lots of laugh-",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "KeN"
@@ -2234,7 +1719,9 @@
       "name": "アマツキツネ",
       "name_en": "Amatsu Kitsune",
       "name_zh": "天狐",
-      "aliases": [],
+      "aliases": [
+        "🦊"
+      ],
       "authors": [
         "まらしぃ"
       ],
@@ -2267,7 +1754,7 @@
       "pv_id": 257,
       "name": "shake it！",
       "name_en": "shake it!",
-      "name_zh": "shake it！",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "emon(Tes.)"
@@ -2319,7 +1806,9 @@
       "name": "君の体温",
       "name_en": "Kimi no Taion",
       "name_zh": "你的体温",
-      "aliases": [],
+      "aliases": [
+        "🌡️"
+      ],
       "authors": [
         "クワガタP"
       ],
@@ -2352,7 +1841,7 @@
       "pv_id": 263,
       "name": "1925",
       "name_en": "1925",
-      "name_zh": "1925",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "T-POCKET"
@@ -2420,7 +1909,7 @@
       "pv_id": 268,
       "name": "Catch the Wave",
       "name_en": "Catch the Wave",
-      "name_zh": "Catch the Wave",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "kz"
@@ -2455,7 +1944,9 @@
       "name": "エイリアンエイリアン",
       "name_en": "Alien Alien",
       "name_zh": "外星人外星人",
-      "aliases": [],
+      "aliases": [
+        "👽"
+      ],
       "authors": [
         "ナユタン星人"
       ],
@@ -2523,7 +2014,9 @@
       "name": "ジグソーパズル",
       "name_en": "Jigsaw puzzle",
       "name_zh": "拼图游戏",
-      "aliases": [],
+      "aliases": [
+        "🧩🎮️"
+      ],
       "authors": [
         "まふまふ"
       ],
@@ -2607,7 +2100,7 @@
       "pv_id": 279,
       "name": "劣等上等",
       "name_en": "BRING IT ON",
-      "name_zh": "劣等上等",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "Giga"
@@ -2654,542 +2147,14 @@
       },
       "source": "base"
     },
-    "401": {
-      "pv_id": 401,
-      "name": "片想いサンバ",
-      "name_en": "One-Sided Love Samba",
-      "name_zh": "单相思桑巴",
-      "aliases": [],
-      "authors": [
-        "オワタP"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 7.0,
-        "extreme": 7.5,
-        "exextreme": 9.5
-      },
-      "source": "dlc"
-    },
-    "402": {
-      "pv_id": 402,
-      "name": "サヨナラ・グッバイ",
-      "name_en": "Sayonara, Goodbye",
-      "name_zh": "再见·Goodbye",
-      "aliases": [],
-      "authors": [
-        "のぼる↑"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 7.0,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "403": {
-      "pv_id": 403,
-      "name": "崩壊歌姫 -disruptive diva-",
-      "name_en": "Disruptive Diva",
-      "name_zh": "崩坏歌姬 -disruptive diva-",
-      "aliases": [],
-      "authors": [
-        "マチゲリータ"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 7.0,
-        "extreme": 8.0,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "404": {
-      "pv_id": 404,
-      "name": "ZIGG-ZAGG",
-      "name_en": "ZIGG-ZAGG",
-      "name_zh": "ZIGG-ZAGG",
-      "aliases": [],
-      "authors": [
-        "Junky"
-      ],
-      "difficulty": {
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 8.0,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "405": {
-      "pv_id": 405,
-      "name": "ナイトメア☆パーティーナイト",
-      "name_en": "Nightmare ☆ Party Night",
-      "name_zh": "Nightmare☆Party Night",
-      "aliases": [],
-      "authors": [
-        "くちばし"
-      ],
-      "difficulty": {
-        "easy": 3.0,
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 6.5,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "407": {
-      "pv_id": 407,
-      "name": "恋ノート////",
-      "name_en": "Love's note",
-      "name_zh": "恋爱笔记////",
-      "aliases": [],
-      "authors": [
-        "ジェバンニP+ハットリP"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 6.5,
-        "extreme": 7.5,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "408": {
-      "pv_id": 408,
-      "name": "SYMPHONIC DIVE - DIVA FT edit -",
-      "name_en": "SYMPHONIC DIVE - DIVA FT edit -",
-      "name_zh": "SYMPHONIC DIVE - DIVA FT edit -",
-      "aliases": [],
-      "authors": [
-        "Re:nG"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "409": {
-      "pv_id": 409,
-      "name": "どうしてこうなった",
-      "name_en": "How'd It Get To Be Like This?",
-      "name_zh": "为什么会变成这样",
-      "aliases": [],
-      "authors": [
-        "うどんゲルゲ"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 9.0
-      },
-      "source": "dlc"
-    },
-    "410": {
-      "pv_id": 410,
-      "name": "オオカミガール",
-      "name_en": "Wolf Girl",
-      "name_zh": "狼女孩",
-      "aliases": [],
-      "authors": [
-        "くらP"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 7.5,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "411": {
-      "pv_id": 411,
-      "name": "Starlite★Lydian",
-      "name_en": "Starlite★Lydian",
-      "name_zh": "Starlite★Lydian",
-      "aliases": [],
-      "authors": [
-        "Masaki"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 6.0,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "412": {
-      "pv_id": 412,
-      "name": "ペリコ・スペースシッパー",
-      "name_en": "Perico Space Shipper",
-      "name_zh": "Perico Space Shipper",
-      "aliases": [],
-      "authors": [
-        "ワンカップP"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 7.5,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "413": {
-      "pv_id": 413,
-      "name": "マスターオブパペッツ",
-      "name_en": "Master of Puppets",
-      "name_zh": "木偶大师",
-      "aliases": [],
-      "authors": [
-        "デスおはぎ"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 6.5,
-        "extreme": 8.5,
-        "exextreme": 9.5
-      },
-      "source": "dlc"
-    },
-    "414": {
-      "pv_id": 414,
-      "name": "Pane dhiria",
-      "name_en": "Pane dhiria",
-      "name_zh": "Pane dhiria",
-      "aliases": [],
-      "authors": [
-        "新城P"
-      ],
-      "difficulty": {
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 8.5,
-        "exextreme": 9.0
-      },
-      "source": "dlc"
-    },
-    "415": {
-      "pv_id": 415,
-      "name": "ほしをつくるひと",
-      "name_en": "The Star Maker",
-      "name_zh": "造星之人",
-      "aliases": [],
-      "authors": [
-        "MazoP"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 8.0,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "416": {
-      "pv_id": 416,
-      "name": "So much loving you★ -DIVA Edit-",
-      "name_en": "So Much Loving You★ -DIVA Edit-",
-      "name_zh": "So much loving you★ -DIVA Edit-",
-      "aliases": [],
-      "authors": [
-        "古墳P"
-      ],
-      "difficulty": {
-        "easy": 3.0,
-        "normal": 4.5,
-        "hard": 5.5,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "417": {
-      "pv_id": 417,
-      "name": "ジュゲムシーケンサー",
-      "name_en": "Jugemu Sequencer",
-      "name_zh": "寿限无音序器",
-      "aliases": [],
-      "authors": [
-        "ぼーかりおどP（noa）"
-      ],
-      "difficulty": {
-        "normal": 4.5,
-        "hard": 6.5,
-        "extreme": 8.5,
-        "exextreme": 10.0
-      },
-      "source": "dlc"
-    },
-    "418": {
-      "pv_id": 418,
-      "name": "さあ、どっち？",
-      "name_en": "Now Choose",
-      "name_zh": "来吧，选哪边？",
-      "aliases": [],
-      "authors": [
-        "ひなた春花"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 4.0,
-        "hard": 5.0,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "419": {
-      "pv_id": 419,
-      "name": "イヤイヤ星人",
-      "name_en": "Iya Iya Seijin",
-      "name_zh": "讨厌讨厌星人",
-      "aliases": [],
-      "authors": [
-        "イヤイヤP"
-      ],
-      "difficulty": {
-        "easy": 3.5,
-        "normal": 5.0,
-        "hard": 7.0,
-        "extreme": 9.5
-      },
-      "source": "dlc"
-    },
-    "420": {
-      "pv_id": 420,
-      "name": "Equation+**",
-      "name_en": "Equation+**",
-      "name_zh": "Equation+**",
-      "aliases": [],
-      "authors": [
-        "ぽわぽわP"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 6.5,
-        "extreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "421": {
-      "pv_id": 421,
-      "name": "嘘つきベティ",
-      "name_en": "Betty The Liar",
-      "name_zh": "说谎的贝蒂",
-      "aliases": [],
-      "authors": [
-        "PolyphonicBranch"
-      ],
-      "difficulty": {
-        "normal": 4.5,
-        "hard": 5.5,
-        "extreme": 8.0,
-        "exextreme": 9.5
-      },
-      "source": "dlc"
-    },
-    "422": {
-      "pv_id": 422,
-      "name": "数多の舞 -Dance of many-",
-      "name_en": "Dance of Many",
-      "name_zh": "数多之舞 -Dance of many-",
-      "aliases": [],
-      "authors": [
-        "koushirou（卑屈P）"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 7.0,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "423": {
-      "pv_id": 423,
-      "name": "迷子ライフ",
-      "name_en": "maigo life",
-      "name_zh": "迷路人生",
-      "aliases": [],
-      "authors": [
-        "TOKOTOKO（西沢さんP）"
-      ],
-      "difficulty": {
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 7.0,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "424": {
-      "pv_id": 424,
-      "name": "ハイスクール Days - DIVA EDIT",
-      "name_en": "High School Days - DIVA EDIT",
-      "name_zh": "High School Days - DIVA EDIT",
-      "aliases": [],
-      "authors": [
-        "U-ji（霊長類P）"
-      ],
-      "difficulty": {
-        "easy": 3.0,
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 8.0,
-        "exextreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "425": {
-      "pv_id": 425,
-      "name": "そいやっさぁ!!",
-      "name_en": "Soiyassa!!",
-      "name_zh": "嘿呀呀!!",
-      "aliases": [],
-      "authors": [
-        "囚人P"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 7.0,
-        "extreme": 8.5,
-        "exextreme": 9.5
-      },
-      "source": "dlc"
-    },
-    "426": {
-      "pv_id": 426,
-      "name": "break;down",
-      "name_en": "break;down",
-      "name_zh": "break;down",
-      "aliases": [],
-      "authors": [
-        "hmtk"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 6.5,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "427": {
-      "pv_id": 427,
-      "name": "花舞月詠譚",
-      "name_en": "Hanamai Tsukuyomi Tan",
-      "name_zh": "花舞月咏谭",
-      "aliases": [],
-      "authors": [
-        "Hoskey"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 4.0,
-        "hard": 5.5,
-        "extreme": 7.5,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "428": {
-      "pv_id": 428,
-      "name": "フランシスカ",
-      "name_en": "Francisca",
-      "name_zh": "Francisca",
-      "aliases": [],
-      "authors": [
-        "ぢゅ＠メラゾーマP"
-      ],
-      "difficulty": {
-        "normal": 5.5,
-        "hard": 7.0,
-        "extreme": 9.0,
-        "exextreme": 9.0
-      },
-      "source": "dlc"
-    },
-    "429": {
-      "pv_id": 429,
-      "name": "悠久-Song of Eternity-DIVAMIX-",
-      "name_en": "Song of Eternity -DIVAMIX-",
-      "name_zh": "悠久 -Song of Eternity- DIVAMIX-",
-      "aliases": [],
-      "authors": [
-        "てぃあら"
-      ],
-      "difficulty": {
-        "easy": 1.0,
-        "normal": 3.0,
-        "hard": 4.5,
-        "extreme": 6.5,
-        "exextreme": 7.5
-      },
-      "source": "dlc"
-    },
-    "430": {
-      "pv_id": 430,
-      "name": "slump",
-      "name_en": "slump",
-      "name_zh": "slump",
-      "aliases": [],
-      "authors": [
-        "しばいぬ"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "431": {
-      "pv_id": 431,
-      "name": "Gothic and Loneliness 〜I'm the very DIVA〜",
-      "name_en": "Gothic and Loneliness ～I'm the very DIVA～",
-      "name_zh": "Gothic and Loneliness ～I'm the very DIVA～",
-      "aliases": [],
-      "authors": [
-        "なるしまたかし"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 7.5,
-        "extreme": 9.0,
-        "exextreme": 10.0
-      },
-      "source": "dlc"
-    },
-    "432": {
-      "pv_id": 432,
-      "name": "唐傘さんが通る",
-      "name_en": "Here Comes Karakasa-san",
-      "name_zh": "唐伞先生经过",
-      "aliases": [],
-      "authors": [
-        "イヤイヤP"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 3.5,
-        "hard": 5.0,
-        "extreme": 7.0
-      },
-      "source": "dlc"
-    },
     "433": {
       "pv_id": 433,
       "name": "巴里映画少女",
       "name_en": "Paris Cinema Girl",
       "name_zh": "巴黎电影少女",
-      "aliases": [],
+      "aliases": [
+        "🎬"
+      ],
       "authors": [
         "apfel note"
       ],
@@ -3201,29 +2166,14 @@
       },
       "source": "base"
     },
-    "434": {
-      "pv_id": 434,
-      "name": "おはヨーデル (Oha-Yo-del!!)",
-      "name_en": "Oha-Yo-del!!",
-      "name_zh": "早安约德尔 (Oha-Yo-del!!)",
-      "aliases": [],
-      "authors": [
-        "爆弾ポピー"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 3.0,
-        "hard": 5.5,
-        "extreme": 9.0
-      },
-      "source": "dlc"
-    },
     "435": {
       "pv_id": 435,
       "name": "デンパラダイム",
       "name_en": "Denparadigm",
       "name_zh": "电波模范",
-      "aliases": [],
+      "aliases": [
+        "🤖🎈"
+      ],
       "authors": [
         "lumo"
       ],
@@ -3235,146 +2185,14 @@
       },
       "source": "base"
     },
-    "436": {
-      "pv_id": 436,
-      "name": "月向うまでのトラベル",
-      "name_en": "Travel to The Other Side of The Moon",
-      "name_zh": "到月亮彼端的旅行",
-      "aliases": [],
-      "authors": [
-        "vilP"
-      ],
-      "difficulty": {
-        "easy": 3.0,
-        "normal": 5.5,
-        "hard": 6.5,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "437": {
-      "pv_id": 437,
-      "name": "ブラックノートに溺れさせて",
-      "name_en": "Let Me Lose Myself in The Black Note",
-      "name_zh": "让我沉溺于黑色音符",
-      "aliases": [],
-      "authors": [
-        "Shun13"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 6.0,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "438": {
-      "pv_id": 438,
-      "name": "ステップフォワード",
-      "name_en": "Step Forward",
-      "name_zh": "Step Forward",
-      "aliases": [],
-      "authors": [
-        "Chesa"
-      ],
-      "difficulty": {
-        "normal": 6.0,
-        "hard": 7.5,
-        "extreme": 9.0
-      },
-      "source": "dlc"
-    },
-    "439": {
-      "pv_id": 439,
-      "name": "キミに",
-      "name_en": "Kimi Ni",
-      "name_zh": "给你",
-      "aliases": [],
-      "authors": [
-        "teaeye"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "440": {
-      "pv_id": 440,
-      "name": "ナイト・オブ・ライト",
-      "name_en": "Knight of Light",
-      "name_zh": "光之骑士",
-      "aliases": [],
-      "authors": [
-        "いーえるP @ TinySymphony"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 4.5,
-        "hard": 6.0,
-        "extreme": 7.5
-      },
-      "source": "dlc"
-    },
-    "441": {
-      "pv_id": 441,
-      "name": "Mellow Yellow",
-      "name_en": "Mellow Yellow",
-      "name_zh": "Mellow Yellow",
-      "aliases": [],
-      "authors": [
-        "めりっさP"
-      ],
-      "difficulty": {
-        "normal": 5.0,
-        "hard": 6.5,
-        "extreme": 8.0,
-        "exextreme": 8.5
-      },
-      "source": "dlc"
-    },
-    "442": {
-      "pv_id": 442,
-      "name": "ぎずも",
-      "name_en": "Gizmo",
-      "name_zh": "Gizmo",
-      "aliases": [],
-      "authors": [
-        "uguis08"
-      ],
-      "difficulty": {
-        "easy": 2.0,
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 8.0
-      },
-      "source": "dlc"
-    },
-    "443": {
-      "pv_id": 443,
-      "name": "偶像無線(Game edit)",
-      "name_en": "Idol Radio (Game Edit)",
-      "name_zh": "偶像无线(Game edit)",
-      "aliases": [],
-      "authors": [
-        "Daisuke Ohnuma(大福P)"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 3.5,
-        "hard": 5.0,
-        "extreme": 7.5
-      },
-      "source": "dlc"
-    },
     "600": {
       "pv_id": 600,
       "name": "キャットフード",
       "name_en": "Cat Food",
       "name_zh": "Cat Food",
-      "aliases": [],
+      "aliases": [
+        "🐱🎪"
+      ],
       "authors": [
         "doriko"
       ],
@@ -3392,7 +2210,9 @@
       "name": "モノクロ∞ブルースカイ",
       "name_en": "Monochrome∞Blue Sky",
       "name_zh": "黑白∞蓝天",
-      "aliases": [],
+      "aliases": [
+        "🐟"
+      ],
       "authors": [
         "のぼる↑"
       ],
@@ -3408,8 +2228,10 @@
       "pv_id": 602,
       "name": "Fire◎Flower",
       "name_en": "Fire◎Flower",
-      "name_zh": "Fire◎Flower",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "🎇🎆"
+      ],
       "authors": [
         "halyosy"
       ],
@@ -3426,8 +2248,10 @@
       "pv_id": 603,
       "name": "DYE",
       "name_en": "DYE",
-      "name_zh": "DYE",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "🧊"
+      ],
       "authors": [
         "AVTechNO!"
       ],
@@ -3477,8 +2301,10 @@
       "pv_id": 607,
       "name": "秘密警察",
       "name_en": "Secret Police",
-      "name_zh": "秘密警察",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "🚓"
+      ],
       "authors": [
         "ぶりる"
       ],
@@ -3494,7 +2320,9 @@
       "name": "どういうことなの！？",
       "name_en": "What Do You Mean!?",
       "name_zh": "是怎么回事呢！？",
-      "aliases": [],
+      "aliases": [
+        "➕➖✖️➗"
+      ],
       "authors": [
         "くちばしP"
       ],
@@ -3510,8 +2338,10 @@
       "pv_id": 609,
       "name": "神曲",
       "name_en": "God-Tier Tune",
-      "name_zh": "神曲",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "🌱"
+      ],
       "authors": [
         "おにゅうP"
       ],
@@ -3528,7 +2358,9 @@
       "name": "Nyanyanyanyanyanyanya!",
       "name_en": "Nyanyanyanyanyanyanya!",
       "name_zh": "喵喵喵喵喵喵喵！",
-      "aliases": [],
+      "aliases": [
+        "🌈🐱"
+      ],
       "authors": [
         "daniwell"
       ],
@@ -3544,7 +2376,7 @@
       "pv_id": 611,
       "name": "ACUTE",
       "name_en": "ACUTE",
-      "name_zh": "ACUTE",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "黒うさ"
@@ -3562,7 +2394,9 @@
       "name": "タイムマシン",
       "name_en": "Time Machine",
       "name_zh": "时光机",
-      "aliases": [],
+      "aliases": [
+        "🌻"
+      ],
       "authors": [
         "40mP"
       ],
@@ -3597,7 +2431,9 @@
       "name": "MEGANE",
       "name_en": "Glasses",
       "name_zh": "眼镜",
-      "aliases": [],
+      "aliases": [
+        "👓"
+      ],
       "authors": [
         "Ultra-Noob"
       ],
@@ -3631,7 +2467,9 @@
       "name": "アンハッピーリフレイン",
       "name_en": "Unhappy Refrain",
       "name_zh": "Unhappy Refrain",
-      "aliases": [],
+      "aliases": [
+        "💔🖤🤍"
+      ],
       "authors": [
         "wowaka"
       ],
@@ -3661,29 +2499,14 @@
       },
       "source": "base"
     },
-    "618": {
-      "pv_id": 618,
-      "name": "鏡音八八花合戦",
-      "name_en": "Kagamine HachiHachi Flower Fight",
-      "name_zh": "镜音八八花合战",
-      "aliases": [],
-      "authors": [
-        "モジャP"
-      ],
-      "difficulty": {
-        "easy": 2.5,
-        "normal": 4.0,
-        "hard": 6.0,
-        "extreme": 8.5
-      },
-      "source": "dlc"
-    },
     "619": {
       "pv_id": 619,
       "name": "天樂",
       "name_en": "Tengaku",
       "name_zh": "天乐",
-      "aliases": [],
+      "aliases": [
+        "🔥"
+      ],
       "authors": [
         "ゆうゆ"
       ],
@@ -3715,7 +2538,7 @@
       "pv_id": 621,
       "name": "Nostalogic",
       "name_en": "Nostalogic",
-      "name_zh": "Nostalogic",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "yuukiss"
@@ -3731,8 +2554,10 @@
       "pv_id": 622,
       "name": "Stay with me",
       "name_en": "Stay with me",
-      "name_zh": "Stay with me",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "🎄"
+      ],
       "authors": [
         "shu-t"
       ],
@@ -3748,7 +2573,7 @@
       "pv_id": 623,
       "name": "Sadistic.Music∞Factory",
       "name_en": "Sadistic.Music∞Factory",
-      "name_zh": "Sadistic.Music∞Factory",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "cosMo＠暴走P"
@@ -3782,7 +2607,7 @@
       "pv_id": 625,
       "name": "ODDS&ENDS",
       "name_en": "Odds & Ends",
-      "name_zh": "ODDS&ENDS",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ryo"
@@ -3799,7 +2624,7 @@
       "pv_id": 626,
       "name": "Weekender Girl",
       "name_en": "Weekender Girl",
-      "name_zh": "Weekender Girl",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "八王子P"
@@ -3816,7 +2641,7 @@
       "pv_id": 627,
       "name": "WORLD'S END UMBRELLA",
       "name_en": "World's End Umbrella",
-      "name_zh": "WORLD'S END UMBRELLA",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ハチ"
@@ -3833,7 +2658,7 @@
       "pv_id": 628,
       "name": "FREELY TOMORROW",
       "name_en": "Freely Tomorrow",
-      "name_zh": "FREELY TOMORROW",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "Mitchie M"
@@ -3851,7 +2676,9 @@
       "name": "ネガポジ＊コンティニューズ",
       "name_en": "Negaposi＊Continues",
       "name_zh": "Negaposi＊Continues",
-      "aliases": [],
+      "aliases": [
+        "🕹🎮️"
+      ],
       "authors": [
         "sasakure.UK"
       ],
@@ -3917,7 +2744,7 @@
       "pv_id": 638,
       "name": "Tell Your World",
       "name_en": "Tell Your World",
-      "name_zh": "Tell Your World",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "kz"
@@ -3936,7 +2763,9 @@
       "name": "東京テディベア",
       "name_en": "Tokyo Teddy Bear",
       "name_zh": "东京泰迪熊",
-      "aliases": [],
+      "aliases": [
+        "🧸✂️"
+      ],
       "authors": [
         "Neru"
       ],
@@ -3986,8 +2815,10 @@
       "pv_id": 642,
       "name": "Sweet Devil",
       "name_en": "Sweet Devil",
-      "name_zh": "Sweet Devil",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "😈👿"
+      ],
       "authors": [
         "八王子P"
       ],
@@ -4038,7 +2869,9 @@
       "name": "桜ノ雨",
       "name_en": "Sakura no Ame",
       "name_zh": "樱之雨",
-      "aliases": [],
+      "aliases": [
+        "🌸"
+      ],
       "authors": [
         "halyosy"
       ],
@@ -4055,7 +2888,9 @@
       "name": "メテオ",
       "name_en": "Meteor",
       "name_zh": "Meteor",
-      "aliases": [],
+      "aliases": [
+        "🌠☄"
+      ],
       "authors": [
         "じょん"
       ],
@@ -4089,7 +2924,9 @@
       "name": "エンヴィキャットウォーク",
       "name_en": "Envy Cat Walk",
       "name_zh": "Envy Cat Walk",
-      "aliases": [],
+      "aliases": [
+        "🐱🐾"
+      ],
       "authors": [
         "トーマ"
       ],
@@ -4123,7 +2960,9 @@
       "name": "からくりピエロ",
       "name_en": "Karakuri Pierrot",
       "name_zh": "活动小丑",
-      "aliases": [],
+      "aliases": [
+        "🤡"
+      ],
       "authors": [
         "40mP"
       ],
@@ -4156,7 +2995,7 @@
       "pv_id": 728,
       "name": "erase or zero",
       "name_en": "Erase or Zero",
-      "name_zh": "erase or zero",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "クリスタルP"
@@ -4190,7 +3029,7 @@
       "pv_id": 730,
       "name": "Hello, Worker",
       "name_en": "Hello, Worker",
-      "name_zh": "Hello, Worker",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "KEI"
@@ -4208,8 +3047,10 @@
       "pv_id": 731,
       "name": "Knife",
       "name_en": "Knife",
-      "name_zh": "Knife",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "🔪"
+      ],
       "authors": [
         "れるりり"
       ],
@@ -4293,7 +3134,7 @@
       "pv_id": 737,
       "name": "soundless voice",
       "name_en": "Soundless Voice",
-      "name_zh": "soundless voice",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ひとしずくP"
@@ -4310,8 +3151,10 @@
       "pv_id": 738,
       "name": "Blackjack",
       "name_en": "Blackjack",
-      "name_zh": "Blackjack",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "♥♦♠♣"
+      ],
       "authors": [
         "ゆちゃＰ"
       ],
@@ -4326,7 +3169,7 @@
       "pv_id": 739,
       "name": "DECORATOR",
       "name_en": "Decorator",
-      "name_zh": "DECORATOR",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "kz"
@@ -4343,7 +3186,7 @@
       "pv_id": 740,
       "name": "Glory 3usi9",
       "name_en": "Glory 3usi9",
-      "name_zh": "Glory 3usi9",
+      "name_zh": null,
       "aliases": [],
       "authors": [
         "ナノウ"
@@ -4377,8 +3220,10 @@
       "pv_id": 832,
       "name": "Hand in Hand",
       "name_en": "Hand in Hand",
-      "name_zh": "Hand in Hand",
-      "aliases": [],
+      "name_zh": null,
+      "aliases": [
+        "✋👋"
+      ],
       "authors": [
         "kz"
       ],
