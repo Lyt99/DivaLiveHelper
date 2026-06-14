@@ -85,8 +85,8 @@ Files required at startup:
 - `HanziKanjiDict.txt` — hanzi→kanji conversion for cross-script search
 
 Files used when rebuilding the local DB:
-- `base_song_db.json` — embedded official song DB; keyed by `pv_id` string; includes base-game and DLC songs, original name, English name, Chinese name, authors, difficulty, empty aliases, and `source: "base"` or `source: "dlc"`
-- `pv_db.txt` / `mdata_pv_db.txt` — legacy base-game and DLC fallbacks used only when `base_song_db.json` is missing
+- `base_song_db.json` — build-time source for the official song DB embedded into the Rust binary with `include_str!`; keyed by `pv_id` string; includes base-game and DLC songs, original name, English name, Chinese name, authors, difficulty, empty aliases, and `source: "base"` or `source: "dlc"`. It is used only by the rebuild flow to merge official songs into `song_db.json`; runtime loading still reads `song_db.json` plus `song_name_zh.json`.
+- `pv_db.txt` / `mdata_pv_db.txt` — legacy source files kept for reference and regeneration of `base_song_db.json`; the app no longer reads them during rebuild when using the embedded base DB.
 
 Generated public site:
 - `docs/` — static GitHub Pages-compatible Chinese-name database browser containing frontend assets and `docs/data/` copies of public data.
@@ -126,5 +126,5 @@ Game process: `DivaMegaMix.exe`. Key offsets from `base_address`:
 - Root directory is the Tauri project root; do not put the active Rust project under `app/`.
 - All user-facing strings and comments are in Chinese.
 - Keep `config.json` ignored; never commit credentials/cookies.
-- Tauri resource path for bundled data is `src-tauri/tauri.conf.json` → `bundle.resources: ["../Data"]`.
+- Tauri bundled runtime data is listed explicitly in `src-tauri/tauri.conf.json` (`song_db.json`, `song_name_zh.json`, `AnotherSongName.json`, `HanziKanjiDict.txt`). `base_song_db.json` is compiled into the Rust binary instead of being shipped as a runtime resource.
 - VocaDB does **not** reliably provide Chinese song names; do not rely on it for bulk Chinese name population.

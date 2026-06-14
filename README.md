@@ -96,12 +96,12 @@ http://127.0.0.1:8765/api/queue
 
 `Data/` 是运行时数据目录，保留在仓库根目录：
 
-- `base_song_db.json`：内置基础歌曲库，包含本体与 DLC 曲目的原名、英文名、中文名、作者和难度；`source` 标记为 `base` 或 `dlc`。
+- `base_song_db.json`：编译期基础歌曲库源文件，会通过 Rust `include_str!` 嵌入二进制；包含本体与 DLC 曲目的原名、英文名、中文名、作者和难度，`source` 标记为 `base` 或 `dlc`。它只在“重建歌曲库”时用于合并生成 `song_db.json`，运行时读取仍使用 `song_db.json` 与 `song_name_zh.json`。
 - `song_db.json`：结构化运行时歌曲数据库，通常由工具合并内置基础库与 MOD 数据生成。
 - `song_name_zh.json`：中文曲名数据库，version 3 `entries` 格式。
 - `AnotherSongName.json`：旧别名映射。
 - `HanziKanjiDict.txt`：汉字/汉字转写搜索辅助表。
-- `pv_db.txt` / `mdata_pv_db.txt`：旧版本体与 DLC 歌曲数据库，仅在缺少 `base_song_db.json` 时作为兼容导入来源。
+- `pv_db.txt` / `mdata_pv_db.txt`：旧版本体与 DLC 歌曲数据库，保留用于参考或重新生成 `base_song_db.json`，应用重建时不再直接读取。
 
 `docs/` 是已生成的公开中文曲名数据库静态站点，可用于 GitHub Pages 发布。
 
