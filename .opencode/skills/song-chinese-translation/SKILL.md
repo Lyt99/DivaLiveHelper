@@ -56,7 +56,7 @@ For each new or changed entry, record enough evidence for future review:
 
 1. Load `Data/song_db.json` and identify original song names needing Chinese names.
 2. Check existing `Data/song_name_zh.json` before adding anything.
-3. When many names are missing, use `scripts/collect_translation_candidates.py` from this skill to gather review candidates before writing bulk translations. It can query local `song_name_zh.json`, optional public platform suggestions, and manual review URLs, then writes a TSV for human review.
+3. When many names are missing, use `scripts/collect_translation_candidates.py` from this skill to gather review candidates before writing bulk translations. It can query local `song_name_zh.json`, optional public platform suggestions, and manual review URLs, then writes a candidate-review TSV for human review.
 4. For each candidate, decide whether it is official/common/uncertain. Platform suggestions are evidence hints, not proof; keep weak candidates as `needs_review`.
 5. Write entries under `entries` keyed by original name.
 6. Preserve existing audit fields unless intentionally correcting them.
@@ -83,7 +83,13 @@ Useful options:
 - `--limit N` — sample the first N missing songs when testing the workflow.
 - `--search-urls` — include Bilibili and Moegirl search URLs for manual review.
 
-Review the TSV before changing JSON. Do not bulk-mark candidates from public suggestions as `verified` unless you independently confirm they are official or strongly established community names.
+The candidate TSV is a working file, not `song_name_zh.audit.tsv`. Its columns are optimized for review (`pv_id`, platform, confidence, evidence URL), while the audit TSV keeps the stable project schema:
+
+```text
+status	source	name	name_en	author	candidate	name_zh	evidence
+```
+
+Review candidate TSV rows before changing JSON. When accepting a candidate, write a normal `song_name_zh.json` entry and then add/update a row in the audit TSV using the stable audit schema above. Do not bulk-mark candidates from public suggestions as `verified` unless you independently confirm they are official or strongly established community names.
 
 ## Output Style
 

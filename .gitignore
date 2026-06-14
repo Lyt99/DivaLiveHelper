@@ -6,6 +6,9 @@ src-tauri/target/
 # Local tool/runtime artifacts
 .sisyphus/
 Data/*.7z
+__pycache__/
+*.pyc
+Data/song_name_zh.candidates.tsv
 
 # Local runtime config may contain cookies or LLM API keys
 config.json
