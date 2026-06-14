@@ -187,10 +187,8 @@ impl SongDatabase {
         Ok(imported)
     }
 
-    pub fn import_base_json(&mut self, path: &Path) -> Result<usize, String> {
-        let content =
-            fs::read_to_string(path).map_err(|error| format!("读取内置基础歌曲库失败: {error}"))?;
-        let parsed: BaseSongDatabaseFile = serde_json::from_str(&content)
+    pub fn import_base_json_str(&mut self, content: &str) -> Result<usize, String> {
+        let parsed: BaseSongDatabaseFile = serde_json::from_str(content)
             .map_err(|error| format!("解析内置基础歌曲库失败: {error}"))?;
         if parsed.version == 0 {
             return Err("内置基础歌曲库版本无效".to_string());
@@ -220,6 +218,12 @@ impl SongDatabase {
             imported += 1;
         }
         Ok(imported)
+    }
+
+    pub fn import_base_json(&mut self, path: &Path) -> Result<usize, String> {
+        let content =
+            fs::read_to_string(path).map_err(|error| format!("读取内置基础歌曲库失败: {error}"))?;
+        self.import_base_json_str(&content)
     }
 
     pub fn import_aliases(&mut self, path: &Path) -> Result<usize, String> {

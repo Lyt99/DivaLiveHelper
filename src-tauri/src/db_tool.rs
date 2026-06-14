@@ -5,6 +5,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::song_db::SongDatabase;
 
+const EMBEDDED_BASE_SONG_DB: &str = include_str!("../../Data/base_song_db.json");
+
 #[derive(Debug, Clone, Serialize)]
 pub struct RebuildReport {
     pub data_dir: String,
@@ -55,21 +57,7 @@ pub fn rebuild_database(data_dir: &Path, mods_dir: Option<&Path>) -> Result<Rebu
         SongDatabase::default()
     };
 
-    let base_db = data_dir.join("base_song_db.json");
-    let base_imported = if base_db.exists() {
-        database.import_base_json(&base_db)?
-    } else {
-        let mut imported = 0;
-        let pv_db = data_dir.join("pv_db.txt");
-        if pv_db.exists() {
-            imported += database.import_from_pvdb(&pv_db, "base")?;
-        }
-        let mdata_pv_db = data_dir.join("mdata_pv_db.txt");
-        if mdata_pv_db.exists() {
-            imported += database.import_from_pvdb(&mdata_pv_db, "dlc")?;
-        }
-        imported
-    };
+    let base_imported = database.import_base_json_str(EMBEDDED_BASE_SONG_DB)?;
 
     let mut mods_imported = 0;
     let mut mods_scanned = 0;
