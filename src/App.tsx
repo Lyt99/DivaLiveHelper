@@ -6,11 +6,14 @@ import ConfigPage from './pages/Config';
 import LibraryPage from './pages/SongLibrary';
 import LogsPage from './pages/Logs';
 import QueuePage from './pages/Queue';
+import WizardPage from './pages/Wizard';
+import { api } from './lib/tauri';
 import type { DanmakuEvent } from './types';
 
 export default function App() {
   const [logs, setLogs] = useState<string[]>([]);
   const [recentDanmaku, setRecentDanmaku] = useState<DanmakuEvent[]>([]);
+  const [firstRun, setFirstRun] = useState<boolean | null>(null);
 
   useEffect(() => {
     const logPromise = listen<string>('log-event', (event) => {
@@ -24,6 +27,14 @@ export default function App() {
       danmakuPromise.then((unlisten) => unlisten()).catch(() => undefined);
     };
   }, []);
+
+  useEffect(() => {
+    api.isFirstRun().then(setFirstRun).catch(() => setFirstRun(false));
+  }, []);
+
+  if (firstRun === null) return null;
+
+  if (firstRun) return <WizardPage />;
 
   return (
     <Layout>

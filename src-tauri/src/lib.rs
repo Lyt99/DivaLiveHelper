@@ -37,6 +37,7 @@ pub struct AppState {
     pub danmaku: Arc<Mutex<DanmakuManager>>,
     pub hotkey: Arc<Mutex<HotkeyManager>>,
     pub obs_overlay: Arc<Mutex<OBSOverlayServer>>,
+    pub first_run: bool,
 }
 
 pub fn play_next_song(app: &tauri::AppHandle) -> Result<Option<SongRequest>, String> {
@@ -50,7 +51,7 @@ pub fn play_next_song(app: &tauri::AppHandle) -> Result<Option<SongRequest>, Str
         .selector
         .lock()
         .map_err(|_| "切歌器锁失败".to_string())?
-        .change_song(request.song_id)
+        .change_song(request.song_id, &request.difficulty_tier)
     {
         state.queue.requeue_front(request);
         return Err(error);
@@ -79,16 +80,20 @@ pub fn run() {
                 .build(),
         )
         .setup(|app| {
-            let config_dir = app.path().app_config_dir()?;
-            fs::create_dir_all(&config_dir)?;
-            let config_path = config_dir.join("config.json");
+            // Read config from the executable's parent directory
+            let exe_dir = std::env::current_exe()
+                .ok()
+                .and_then(|p| p.parent().map(|p| p.to_path_buf()))
+                .unwrap_or_else(|| std::env::current_dir().unwrap_or_default());
+            let config_path = exe_dir.join("config.json");
+            let first_run = !config_path.exists();
             let config = load_config_with_dev_fallback(&config_path);
-            if !config_path.exists() {
-                config.save(&config_path).map_err(std::io::Error::other)?;
-            }
+            // Don't auto-create config.json on first run — the wizard will save it
 
             let resource_dir = app.path().resource_dir().ok();
             let data_dir = resolve_data_dir(&config.data_dir, resource_dir.as_deref());
+            // Ensure Data directory exists
+            std::fs::create_dir_all(&data_dir).ok();
             let database = SongDatabase::load_with_chinese_names(&data_dir).unwrap_or_default();
             let searcher = SongSearcher::from_database(&database, &data_dir);
             let queue = Arc::new(SongQueue::new(
@@ -115,6 +120,7 @@ pub fn run() {
                 danmaku: Arc::new(Mutex::new(DanmakuManager::default())),
                 hotkey: Arc::new(Mutex::new(hotkey)),
                 obs_overlay: Arc::new(Mutex::new(obs_overlay)),
+                first_run,
             });
 
             let state = app.state::<AppState>();
@@ -171,6 +177,7 @@ pub fn run() {
             commands::start_obs_overlay,
             commands::stop_obs_overlay,
             commands::get_obs_overlay_status,
+            commands::is_first_run,
         ])
         .run(tauri::generate_context!())
         .expect("运行 Tauri 应用失败");
@@ -196,17 +203,20 @@ fn resolve_data_dir(configured: &str, resource_dir: Option<&Path>) -> PathBuf {
         return configured_path;
     }
 
+    let exe_dir = std::env::current_exe()
+        .ok()
+        .and_then(|p| p.parent().map(|p| p.to_path_buf()));
+
     let mut candidates = Vec::new();
-    if let Ok(current_dir) = std::env::current_dir() {
-        candidates.push(current_dir.join(configured));
-        candidates.push(current_dir.join("..").join(configured));
-        candidates.push(current_dir.join("..").join("..").join(configured));
+    // Next to the executable
+    if let Some(ref dir) = exe_dir {
+        candidates.push(dir.join(configured));
+        candidates.push(dir.join("Data"));
     }
+    // Bundled resource directory
     if let Some(resource_dir) = resource_dir {
         candidates.push(resource_dir.join(configured));
         candidates.push(resource_dir.join("Data"));
-        candidates.push(resource_dir.to_path_buf());
-        candidates.push(resource_dir.join("_up_").join("Data"));
     }
 
     if let Some(candidate) = candidates
@@ -226,9 +236,5 @@ fn dev_config_candidates() -> Vec<PathBuf> {
     let Ok(current_dir) = std::env::current_dir() else {
         return Vec::new();
     };
-    vec![
-        current_dir.join("config.json"),
-        current_dir.join("..").join("config.json"),
-        current_dir.join("..").join("..").join("config.json"),
-    ]
+    vec![current_dir.join("config.json")]
 }

@@ -5,11 +5,11 @@ use crate::config::Config;
 const SYSTEM_PROMPT: &str = r#"你是一个B站直播间的点歌助手。分析弹幕是否包含点歌意图，提取歌名和作者名。
 
 分析规则：
-1. 明确想听某首歌（"点歌xxx"、"我想听xxx"、"来一首xxx"、"放xxx"等）→ is_song_request=true
+1. 想听某首歌（"点歌xxx"、"我想听xxx"、"来一首xxx"、"放xxx"、"有没有xxx"等）→ is_song_request=true
 2. 普通聊天、刷屏、表情等 → is_song_request=false
 3. song_name：歌曲名称本身，去掉"点歌"等前缀。若只提到作者没提歌名则为null
 4. author：若弹幕提到"xxx的歌"、"来首xxx的"等，填入作者名；若没提作者则为null
-5. 不要提取难度星级或难度档位；即使弹幕包含"7星"、"ex"、"hard"等，也只根据歌名和作者判断点歌意图
+5. 不要提取难度星级或难度档位；即使弹幕包含"7星"、"ex"、"hard"、"红/蓝/紫谱"等，也只根据歌名和作者判断点歌意图
 
 输出必须是JSON，不要其他文字：
 {"is_song_request": true/false, "song_name": "歌名或null", "author": "作者名或null"}"#;
@@ -22,12 +22,14 @@ pub struct SongIntent {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(rename_all = "snake_case")]
 struct ChatRequest {
     model: String,
     messages: Vec<ChatMessage>,
     response_format: ResponseFormat,
     temperature: f32,
-    max_tokens: u32,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    max_tokens: Option<u32>,
 }
 
 #[derive(Debug, Serialize)]
@@ -90,7 +92,7 @@ pub async fn analyze(config: &Config, message: &str) -> Result<SongIntent, Strin
             kind: "json_object",
         },
         temperature: 0.1,
-        max_tokens: 150,
+        max_tokens: config.llm_max_tokens,
     };
 
     let mut request_builder = client.post(endpoint).json(&request);

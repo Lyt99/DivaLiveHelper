@@ -64,7 +64,7 @@ export default function LogsPage({ externalLogs }: LogsPageProps) {
 
   return (
     <section className="page">
-      <header className="page-header"><p className="eyebrow">Telemetry</p><h1>日志 / 状态</h1></header>
+      <header className="page-header"><h1>日志 / 状态</h1></header>
       <div className="status-grid">
         <StatusCard title="游戏进程" active={gameConnected} action="重新连接" onClick={reconnectGame} />
         <StatusCard title="B站弹幕" active={danmakuConnected} pending={danmakuConnecting} action={danmakuConnecting ? '连接中…' : danmakuConnected ? '断开' : '连接'} onClick={danmakuConnected ? stopDanmaku : connectDanmaku} />

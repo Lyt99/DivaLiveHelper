@@ -11,6 +11,7 @@ pub struct SongRequest {
     pub requester: String,
     pub timestamp: f64,
     pub difficulty: Option<f32>,
+    pub difficulty_tier: String,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -60,6 +61,7 @@ impl SongQueue {
         song_name: String,
         requester: String,
         difficulty: Option<f32>,
+        difficulty_tier: String,
     ) -> bool {
         let mut inner = self.inner();
         if !inner.allow_duplicates && inner.queue.iter().any(|item| item.song_id == song_id) {
@@ -74,6 +76,7 @@ impl SongQueue {
             requester,
             timestamp: now_timestamp(),
             difficulty,
+            difficulty_tier,
         });
         true
     }

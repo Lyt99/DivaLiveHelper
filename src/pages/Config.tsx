@@ -113,7 +113,6 @@ export default function ConfigPage() {
     <section className="page">
       <header className="page-header">
         <div className="page-header-main">
-          <p className="eyebrow">Settings</p>
           <h1>可视化配置</h1>
           <p className="muted">替代手动编辑 config.json，保存后部分连接类设置需要重新启动对应服务。</p>
         </div>
@@ -157,6 +156,33 @@ export default function ConfigPage() {
           <p className="notice-text">修改路径后先保存设置，再重建歌曲库。重建会扫描基础 pv_db 与游戏 MOD 目录。</p>
         </ConfigPanel>
 
+        <ConfigPanel title="难度偏好">
+          <Field label="偏好难度">
+            <SegmentedControl
+              value={config.default_search_difficulty}
+              onChange={(v) => update('default_search_difficulty', v)}
+              options={[
+                { value: 'easy', label: '简单' },
+                { value: 'normal', label: '普通' },
+                { value: 'hard', label: '困难' },
+                { value: 'extreme', label: '极限' },
+                { value: 'exextreme', label: 'EX极限' },
+              ]}
+            />
+          </Field>
+          <Field label="偏好难度不存在时">
+            <SegmentedControl
+              value={config.difficulty_fallback}
+              onChange={(v) => update('difficulty_fallback', v)}
+              options={[
+                { value: 'easier', label: '更简单' },
+                { value: 'harder', label: '更难' },
+              ]}
+            />
+          </Field>
+          <p className="notice-text">点歌时优先显示偏好难度下的星级。若歌曲在该难度下无数据，则按此设置回退查找相邻难度。</p>
+        </ConfigPanel>
+
         <ConfigPanel title="OBS 覆盖层">
           <Toggle label="启用 OBS 覆盖层" checked={config.obs_overlay_enabled} onChange={(value) => update('obs_overlay_enabled', value)} />
           <Field label="OBS 地址"><input value={config.obs_overlay_host} onChange={(event) => update('obs_overlay_host', event.target.value)} /></Field>
@@ -176,6 +202,8 @@ export default function ConfigPage() {
           <Field label="Base URL"><input value={config.llm_base_url} placeholder="例如 https://api.deepseek.com 或 http://127.0.0.1:11434" onChange={(event) => update('llm_base_url', event.target.value)} /></Field>
           <p className="notice-text">Base URL 示例：DeepSeek https://api.deepseek.com；OpenAI https://api.openai.com；Ollama OpenAI 兼容地址 http://127.0.0.1:11434。</p>
           <Field label="模型"><input value={config.llm_model} onChange={(event) => update('llm_model', event.target.value)} /></Field>
+          <Field label="Max Tokens"><input value={config.llm_max_tokens ?? ''} type="number" min={1} placeholder="留空 = 不限制" onChange={(event) => update('llm_max_tokens', parseMaxTokens(event.target.value))} /></Field>
+          <p className="notice-text">限制 LLM 响应的最大 token 数；留空则不限制。点歌意图识别通常 150 足够。</p>
         </ConfigPanel>
       </div>
 
@@ -203,7 +231,9 @@ function ConfigPanel({ title, children }: { title: string; children: React.React
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return <label className="field"><span>{label}</span>{children}</label>;
+  // Use <div> instead of <label> to prevent click-forwarding to first
+  // interactive child, which breaks SegmentedControl hover/focus behavior.
+  return <div className="field"><span>{label}</span>{children}</div>;
 }
 
 function parseRoomId(value: string) {
@@ -211,6 +241,30 @@ function parseRoomId(value: string) {
   return digits ? Number(digits) : 0;
 }
 
+function parseMaxTokens(value: string): number | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const num = Number(trimmed);
+  return num > 0 ? num : null;
+}
+
 function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (value: boolean) => void }) {
   return <label className="toggle-row"><span>{label}</span><input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} /></label>;
+}
+
+function SegmentedControl({ value, onChange, options }: { value: string; onChange: (value: string) => void; options: { value: string; label: string }[] }) {
+  return (
+    <div className="segmented-control">
+      {options.map((opt) => (
+        <button
+          key={opt.value}
+          type="button"
+          className={`segmented-btn${opt.value === value ? ' active' : ''}`}
+          onClick={() => onChange(opt.value)}
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
 }

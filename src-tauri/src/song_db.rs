@@ -79,9 +79,19 @@ struct ChineseNameEntry {
 impl SongDatabase {
     pub fn load_with_chinese_names(data_dir: &Path) -> Result<Self, String> {
         let mut database = Self::load(&data_dir.join("song_db.json"))?;
+
+        // Start from the embedded base Chinese name DB
+        const EMBEDDED_BASE_ZH_DB: &str = include_str!("../../Data/song_name_zh.json");
+        let base_zh: HashMap<String, String> = serde_json::from_str::<ChineseNameFile>(EMBEDDED_BASE_ZH_DB)
+            .map(|file| file.entries.into_iter().map(|(name, entry)| (name, entry.name_zh)).collect())
+            .unwrap_or_default();
+        database.apply_chinese_names(&base_zh);
+
+        // Override with the on-disk file if present
         if let Ok(chinese_names) = load_chinese_names(&data_dir.join("song_name_zh.json")) {
             database.apply_chinese_names(&chinese_names);
         }
+
         Ok(database)
     }
 

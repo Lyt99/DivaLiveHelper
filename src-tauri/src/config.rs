@@ -24,10 +24,12 @@ pub struct Config {
     pub http_proxy: String,
     pub default_search_difficulty: String,
     pub difficulty_tolerance: f32,
+    pub difficulty_fallback: String,
     pub llm_enabled: bool,
     pub llm_api_key: String,
     pub llm_base_url: String,
     pub llm_model: String,
+    pub llm_max_tokens: Option<u32>,
     pub config_file: String,
 }
 
@@ -52,10 +54,12 @@ impl Default for Config {
             http_proxy: String::new(),
             default_search_difficulty: "extreme".to_string(),
             difficulty_tolerance: 0.5,
+            difficulty_fallback: "easier".to_string(),
             llm_enabled: false,
             llm_api_key: String::new(),
             llm_base_url: "https://api.deepseek.com".to_string(),
             llm_model: "deepseek-chat".to_string(),
+            llm_max_tokens: Some(150),
             config_file: "config.json".to_string(),
         }
     }

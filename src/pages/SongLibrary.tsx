@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../lib/tauri';
-import type { SongInfo } from '../types';
+import type { AppConfig, SongInfo } from '../types';
 
 export default function LibraryPage() {
   const [songs, setSongs] = useState<SongInfo[]>([]);
   const [query, setQuery] = useState('');
   const [message, setMessage] = useState('');
+  const [difficultyTier, setDifficultyTier] = useState('extreme');
 
   useEffect(() => {
     api.getAllSongs().then(setSongs).catch((error) => setMessage(String(error)));
+    api.getConfig().then((cfg) => setDifficultyTier(cfg.default_search_difficulty)).catch(() => {});
   }, []);
 
   const filtered = useMemo(() => {
@@ -21,7 +23,7 @@ export default function LibraryPage() {
 
   async function jump(songId: number) {
     try {
-      const result = await api.changeSong(songId);
+      const result = await api.changeSong(songId, difficultyTier);
       setMessage(result);
     } catch (error) {
       setMessage(String(error));
@@ -31,7 +33,7 @@ export default function LibraryPage() {
   return (
     <section className="page">
       <header className="page-header split">
-        <div><p className="eyebrow">Song Database</p><h1>歌曲库</h1><p className="muted">共 {songs.length} 首，列表最多显示 300 条匹配结果。</p></div>
+        <div><h1>歌曲库</h1><p className="muted">共 {songs.length} 首，列表最多显示 300 条匹配结果。</p></div>
         <input className="search-input" placeholder="搜索日文名 / 中文名 / 英文名 / 作者 / 别名" value={query} onChange={(event) => setQuery(event.target.value)} />
       </header>
       <div className="panel table-panel">

@@ -17,10 +17,12 @@ export interface AppConfig {
   http_proxy: string;
   default_search_difficulty: string;
   difficulty_tolerance: number;
+  difficulty_fallback: string;
   llm_enabled: boolean;
   llm_api_key: string;
   llm_base_url: string;
   llm_model: string;
+  llm_max_tokens: number | null;
   config_file: string;
 }
 
@@ -30,6 +32,7 @@ export interface SongRequest {
   requester: string;
   timestamp: number;
   difficulty: number | null;
+  difficulty_tier: string;
 }
 
 export interface SongInfo {
@@ -46,6 +49,7 @@ export interface SongInfo {
 export interface SearchResult {
   pv_id: number;
   display_name: string;
+  difficulty: number | null;
 }
 
 export interface DebugSongRequestResult {

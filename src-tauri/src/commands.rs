@@ -51,8 +51,10 @@ pub fn get_config(state: State<'_, AppState>) -> Result<Config, String> {
 }
 
 #[tauri::command]
-pub fn save_config(config: Config, state: State<'_, AppState>) -> Result<(), String> {
-    config.validate()?;
+pub fn save_config(config: Config, skip_validation: Option<bool>, state: State<'_, AppState>) -> Result<(), String> {
+    if !skip_validation.unwrap_or(false) {
+        config.validate()?;
+    }
     config.save(&state.config_path)?;
     let mut current = state
         .config
@@ -162,7 +164,7 @@ pub fn search_songs(
         .searcher
         .read()
         .map_err(|_| "读取搜索索引锁失败".to_string())?
-        .search(&query, difficulty, &key, config.difficulty_tolerance))
+        .search(&query, difficulty, &key, &config.difficulty_fallback, config.difficulty_tolerance))
 }
 
 #[tauri::command]
@@ -183,6 +185,7 @@ pub fn search_songs_by_author(
             &author,
             None,
             &config.default_search_difficulty,
+            &config.difficulty_fallback,
             config.difficulty_tolerance,
         ))
 }
@@ -268,6 +271,7 @@ fn resolve_debug_song_request(
             &query,
             None,
             &config.default_search_difficulty,
+            &config.difficulty_fallback,
             config.difficulty_tolerance,
         );
     let Some(result) = results.first() else {
@@ -322,7 +326,7 @@ pub fn next_song(app: AppHandle) -> Result<Option<SongRequest>, String> {
 }
 
 #[tauri::command]
-pub fn change_song(song_id: u32, state: State<'_, AppState>) -> Result<String, String> {
+pub fn change_song(song_id: u32, difficulty_tier: String, state: State<'_, AppState>) -> Result<String, String> {
     if !state
         .searcher
         .read()
@@ -335,7 +339,7 @@ pub fn change_song(song_id: u32, state: State<'_, AppState>) -> Result<String, S
         .selector
         .lock()
         .map_err(|_| "切歌器锁失败".to_string())?
-        .change_song(song_id)
+        .change_song(song_id, &difficulty_tier)
 }
 
 #[tauri::command]
@@ -479,6 +483,11 @@ pub fn get_obs_overlay_status(state: State<'_, AppState>) -> Result<OBSOverlaySt
         .lock()
         .map_err(|_| "OBS 覆盖层锁失败".to_string())?
         .status())
+}
+
+#[tauri::command]
+pub fn is_first_run(state: State<'_, AppState>) -> Result<bool, String> {
+    Ok(state.first_run)
 }
 
 fn resolve_data_dir(configured: &str, fallback: &Path) -> PathBuf {

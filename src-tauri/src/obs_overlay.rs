@@ -200,22 +200,95 @@ fn render_overlay(title: &str) -> String {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>__TITLE__</title>
   <style>
-    :root{--bg:rgba(5,10,18,.72);--panel:rgba(10,20,34,.78);--cyan:#32f6ff;--pink:#ff4fd8;--gold:#ffe27a;--text:#f7fbff;--muted:rgba(247,251,255,.68);--line:rgba(50,246,255,.22);font-family:"Microsoft YaHei UI","Microsoft YaHei","Segoe UI",sans-serif}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);background:transparent;overflow:hidden}
-    .overlay{width:min(680px,calc(100vw - 32px));margin:16px;padding:18px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 12% 0%,rgba(255,79,216,.24),transparent 32%),radial-gradient(circle at 88% 12%,rgba(50,246,255,.26),transparent 34%),linear-gradient(135deg,var(--bg),var(--panel));box-shadow:0 24px 80px rgba(0,0,0,.42),inset 0 0 34px rgba(50,246,255,.08);backdrop-filter:blur(14px)}
-    header{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;margin-bottom:14px}.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:.28em;text-transform:uppercase;text-shadow:0 0 14px rgba(50,246,255,.8)}
-    h1{margin:2px 0 0;font-size:34px;line-height:1;letter-spacing:.04em;text-shadow:3px 3px 0 rgba(255,79,216,.72),0 0 24px rgba(50,246,255,.42)}.counter{min-width:92px;padding:10px 12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,226,122,.28);text-align:center;color:var(--gold)}
-    .counter strong{display:block;font-size:26px;line-height:1}.counter span{font-size:11px;color:var(--muted)}.list{display:grid;gap:10px;max-height:calc(100vh - 150px);overflow:hidden}
-    .song{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;background:linear-gradient(90deg,rgba(255,255,255,.11),rgba(255,255,255,.045));border:1px solid rgba(255,255,255,.08);animation:slide-in 360ms ease both}
-    .song:first-child{background:linear-gradient(90deg,rgba(50,246,255,.24),rgba(255,79,216,.12));border-color:rgba(50,246,255,.34)}.pos{width:38px;height:38px;display:grid;place-items:center;border-radius:14px;color:#061019;background:linear-gradient(135deg,var(--cyan),var(--gold));font-weight:900;box-shadow:0 0 18px rgba(50,246,255,.35)}
-    .name{font-size:20px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{margin-top:3px;color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.difficulty{padding:7px 10px;border-radius:999px;color:var(--pink);background:rgba(255,79,216,.12);border:1px solid rgba(255,79,216,.22);font-weight:800;white-space:nowrap}
-    .empty{padding:34px 18px;border-radius:18px;border:1px dashed rgba(50,246,255,.28);color:var(--muted);text-align:center;background:rgba(0,0,0,.18)}@keyframes slide-in{from{opacity:0;transform:translateX(-16px) scale(.98)}to{opacity:1;transform:translateX(0) scale(1)}}
+    :root {
+      --panel: rgba(0, 0, 0, .55);
+      --border: rgba(255, 255, 255, .08);
+      --accent: #e0e0e0;
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, .50);
+      --dim: rgba(255, 255, 255, .32);
+      --playing: rgba(255, 255, 255, .07);
+      font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; color: var(--text); background: transparent; overflow: hidden; }
+
+    .overlay {
+      width: min(520px, calc(100vw - 24px));
+      margin: 12px;
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+    .header .count {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .list { display: flex; flex-direction: column; gap: 6px; max-height: calc(100vh - 100px); overflow: hidden; }
+
+    .song {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      animation: fade-in 280ms ease both;
+    }
+    .song.playing {
+      background: var(--playing);
+    }
+    .song .stars {
+      font-size: 14px;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 36px;
+      text-align: center;
+    }
+    .song.playing .stars {
+      color: var(--accent);
+    }
+    .song .name {
+      font-size: 18px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .empty {
+      padding: 24px 16px;
+      border-radius: 8px;
+      border: 1px dashed var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
   </style>
 </head>
 <body>
   <main class="overlay">
-    <header><div><div class="eyebrow">Project DIVA Live Helper</div><h1>__TITLE__</h1></div><div class="counter"><strong id="count">0</strong><span>首等待</span></div></header>
-    <section class="list" id="list"><div class="empty"><strong>等待点歌</strong><span>弹幕点歌会显示在这里</span></div></section>
+    <div class="header"><h1>__TITLE__</h1><span class="count"><strong id="count">0</strong> 首等待</span></div>
+    <section class="list" id="list"><div class="empty">等待点歌…</div></section>
   </main>
   <script>
     let lastSignature = '';
@@ -231,10 +304,10 @@ fn render_overlay(title: &str) -> String {
         lastSignature = signature;
         const list = document.getElementById('list');
         if (!songs.length) {
-          list.innerHTML = '<div class="empty"><strong>等待点歌</strong><span>弹幕点歌会显示在这里</span></div>';
+          list.innerHTML = '<div class="empty">等待点歌…</div>';
           return;
         }
-        list.innerHTML = songs.map((song, index) => `<article class="song" style="animation-delay:${index * 40}ms"><div class="pos">${escapeHtml(song.position)}</div><div><div class="name">${escapeHtml(song.song_name)}</div><div class="meta">点歌人：${escapeHtml(song.requester)} · ID ${escapeHtml(song.song_id)}</div></div><div class="difficulty">${song.difficulty ? `${escapeHtml(song.difficulty)}★` : 'READY'}</div></article>`).join('');
+        list.innerHTML = songs.map((song, index) => `<div class="song${index === 0 ? ' playing' : ''}" style="animation-delay:${index * 30}ms"><span class="stars">${song.difficulty != null ? escapeHtml(song.difficulty) + '★' : ''}</span><span class="name">${escapeHtml(song.song_name)}</span></div>`).join('');
       } catch (_error) {}
     }
     load();

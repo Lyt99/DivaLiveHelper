@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 use crate::song_db::SongDatabase;
 
 const EMBEDDED_BASE_SONG_DB: &str = include_str!("../../Data/base_song_db.json");
+const EMBEDDED_BASE_ZH_DB: &str = include_str!("../../Data/song_name_zh.json");
 
 #[derive(Debug, Clone, Serialize)]
 pub struct RebuildReport {
@@ -107,18 +108,25 @@ pub fn rebuild_database(data_dir: &Path, mods_dir: Option<&Path>) -> Result<Rebu
 }
 
 fn merge_chinese_names(data_dir: &Path, database: &SongDatabase) -> Result<usize, String> {
-    let zh_path = data_dir.join("song_name_zh.json");
-    let mut zh = if zh_path.exists() {
-        let content = std::fs::read_to_string(&zh_path)
-            .map_err(|error| format!("读取中文名数据库失败: {error}"))?;
-        serde_json::from_str::<ChineseNameFile>(&content).unwrap_or_default()
-    } else {
-        ChineseNameFile {
+    // Start from the embedded base Chinese name DB
+    let mut zh: ChineseNameFile =
+        serde_json::from_str(EMBEDDED_BASE_ZH_DB).unwrap_or_else(|_| ChineseNameFile {
             version: 3,
             entries: HashMap::new(),
-        }
-    };
+        });
     zh.version = 3;
+
+    // Merge entries from the on-disk file (overrides embedded entries)
+    let zh_path = data_dir.join("song_name_zh.json");
+    if zh_path.exists() {
+        let content = std::fs::read_to_string(&zh_path)
+            .map_err(|error| format!("读取中文名数据库失败: {error}"))?;
+        if let Ok(disk_zh) = serde_json::from_str::<ChineseNameFile>(&content) {
+            for (name, entry) in disk_zh.entries {
+                zh.entries.insert(name, entry);
+            }
+        }
+    }
 
     let cache = load_name_cache(&data_dir.join("song_name_cache.json"))?;
     let mut merged = 0;

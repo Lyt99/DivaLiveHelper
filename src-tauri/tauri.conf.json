@@ -31,7 +31,6 @@
     "icon": ["icons/icon.ico"],
     "resources": [
       "../Data/song_db.json",
-      "../Data/song_name_zh.json",
       "../Data/AnotherSongName.json",
       "../Data/HanziKanjiDict.txt"
     ]

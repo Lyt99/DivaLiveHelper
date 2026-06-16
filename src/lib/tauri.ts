@@ -3,7 +3,7 @@ import type { AppConfig, DanmakuStatus, DebugSongRequestResult, HotkeyStatus, OB
 
 export const api = {
   getConfig: () => invoke<AppConfig>('get_config'),
-  saveConfig: (config: AppConfig) => invoke<void>('save_config', { config }),
+  saveConfig: (config: AppConfig, skipValidation?: boolean) => invoke<void>('save_config', { config, skipValidation: skipValidation ?? false }),
   getAllSongs: () => invoke<SongInfo[]>('get_all_songs'),
   reloadDatabase: () => invoke<number>('reload_database'),
   rebuildDatabase: () => invoke<RebuildReport>('rebuild_database'),
@@ -20,7 +20,7 @@ export const api = {
   removeFromQueue: (songId: number) => invoke<boolean>('remove_from_queue', { songId }),
   clearQueue: () => invoke<void>('clear_queue'),
   nextSong: () => invoke<SongRequest | null>('next_song'),
-  changeSong: (songId: number) => invoke<string>('change_song', { songId }),
+  changeSong: (songId: number, difficultyTier: string) => invoke<string>('change_song', { songId, difficultyTier }),
   reconnectGame: () => invoke<boolean>('reconnect_game'),
   getGameConnectionStatus: () => invoke<boolean>('get_game_connection_status'),
   startDanmaku: (roomId: number) => invoke<void>('start_danmaku', { roomId }),
@@ -32,6 +32,7 @@ export const api = {
   startObsOverlay: () => invoke<OBSOverlayStatus>('start_obs_overlay'),
   stopObsOverlay: () => invoke<OBSOverlayStatus>('stop_obs_overlay'),
   getObsOverlayStatus: () => invoke<OBSOverlayStatus>('get_obs_overlay_status'),
+  isFirstRun: () => invoke<boolean>('is_first_run'),
 };
 
 export const emptyConfig: AppConfig = {
@@ -53,9 +54,11 @@ export const emptyConfig: AppConfig = {
   http_proxy: '',
   default_search_difficulty: 'extreme',
   difficulty_tolerance: 0.5,
+  difficulty_fallback: 'easier',
   llm_enabled: false,
   llm_api_key: '',
   llm_base_url: 'https://api.deepseek.com',
   llm_model: 'deepseek-chat',
+  llm_max_tokens: 150,
   config_file: 'config.json',
 };

@@ -10,6 +10,7 @@ use crate::song_db::SongDatabase;
 pub struct SearchResult {
     pub pv_id: u32,
     pub display_name: String,
+    pub difficulty: Option<f32>,
 }
 
 #[derive(Debug, Clone, Default)]
@@ -88,6 +89,7 @@ impl SongSearcher {
         query: &str,
         difficulty: Option<f32>,
         difficulty_key: &str,
+        difficulty_fallback: &str,
         tolerance: f32,
     ) -> Vec<SearchResult> {
         let query_lower = query.to_lowercase();
@@ -124,6 +126,7 @@ impl SongSearcher {
             .map(|(pv_id, display_name)| SearchResult {
                 pv_id,
                 display_name,
+                difficulty: self.difficulty_for(pv_id, difficulty_key, difficulty_fallback),
             })
             .collect()
     }
@@ -133,6 +136,7 @@ impl SongSearcher {
         author: &str,
         difficulty: Option<f32>,
         difficulty_key: &str,
+        difficulty_fallback: &str,
         tolerance: f32,
     ) -> Vec<SearchResult> {
         let author_lower = author.to_lowercase();
@@ -153,12 +157,45 @@ impl SongSearcher {
             .map(|(pv_id, display_name)| SearchResult {
                 pv_id,
                 display_name,
+                difficulty: self.difficulty_for(pv_id, difficulty_key, difficulty_fallback),
             })
             .collect()
     }
 
     pub fn check_id(&self, pv_id: u32) -> bool {
         self.id_to_name.contains_key(&pv_id)
+    }
+
+    const DIFFICULTY_TIERS: [&str; 5] = ["easy", "normal", "hard", "extreme", "exextreme"];
+
+    fn difficulty_for(&self, pv_id: u32, difficulty_key: &str, fallback: &str) -> Option<f32> {
+        let Some(difficulties) = self.id_to_difficulty.get(&pv_id) else {
+            return None;
+        };
+        if let Some(level) = difficulties.get(difficulty_key).copied() {
+            return Some(level);
+        }
+        // Preferred tier not found — try adjacent tiers based on fallback direction
+        let Some(start) = Self::DIFFICULTY_TIERS.iter().position(|&t| t == difficulty_key) else {
+            return None;
+        };
+        let tiers: Vec<usize> = if fallback == "harder" {
+            // Try harder first, then easier
+            let mut order: Vec<usize> = (start + 1..Self::DIFFICULTY_TIERS.len()).collect();
+            order.extend((0..start).rev());
+            order
+        } else {
+            // Default: try easier first, then harder
+            let mut order: Vec<usize> = (0..start).rev().collect();
+            order.extend(start + 1..Self::DIFFICULTY_TIERS.len());
+            order
+        };
+        for idx in tiers {
+            if let Some(level) = difficulties.get(Self::DIFFICULTY_TIERS[idx]).copied() {
+                return Some(level);
+            }
+        }
+        None
     }
 
     fn collect_matches(

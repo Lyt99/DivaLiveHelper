@@ -24,18 +24,19 @@ impl SongSelector {
         self.connected
     }
 
-    pub fn change_song(&mut self, song_id: u32) -> Result<String, String> {
+    pub fn change_song(&mut self, song_id: u32, difficulty_tier: &str) -> Result<String, String> {
         if !self.is_connected() && !self.reconnect() {
             return Err("游戏进程未连接".to_string());
         }
         #[cfg(windows)]
         {
-            windows_impl::change_song(song_id)?;
+            windows_impl::change_song(song_id, difficulty_tier)?;
             return Ok("success!".to_string());
         }
         #[cfg(not(windows))]
         {
             let _ = song_id;
+            let _ = difficulty_tier;
             Err("切歌功能仅支持 Windows".to_string())
         }
     }
@@ -60,15 +61,27 @@ mod windows_impl {
     const LAST_SELECT_PVID: usize = 0x12B6350;
     const LAST_SELECT_SORT: usize = 0x12B6354;
     const LAST_SELECT_DIFF: usize = 0x12B635C;
+    const DIFFICULTY_SELECT: usize = 0x12B634C;
     const EDEN_OFFSET: usize = 0x105F460;
     const CHANGE_SONG_SELECT: usize = 0xCC61098;
     const START_CHANGE: usize = 0xCC610A0;
+
+    fn difficulty_tier_to_i32(tier: &str) -> i32 {
+        match tier {
+            "easy" => 0,
+            "normal" => 1,
+            "hard" => 2,
+            "extreme" => 3,
+            "exextreme" => 4,
+            _ => 3, // 默认极限
+        }
+    }
 
     pub fn process_exists(name: &str) -> bool {
         find_process(name).is_some()
     }
 
-    pub fn change_song(song_id: u32) -> Result<(), String> {
+    pub fn change_song(song_id: u32, difficulty_tier: &str) -> Result<(), String> {
         let pid = find_process(PROCESS_NAME).ok_or_else(|| "游戏进程未连接".to_string())?;
         let base =
             module_base(pid, PROCESS_NAME).ok_or_else(|| "无法获取游戏模块基地址".to_string())?;
@@ -81,17 +94,18 @@ mod windows_impl {
         }
         .map_err(|error| format!("打开游戏进程失败: {error}"))?;
 
-        let result = write_song(process, base, song_id);
+        let result = write_song(process, base, song_id, difficulty_tier);
         unsafe {
             let _ = CloseHandle(process);
         }
         result
     }
 
-    fn write_song(process: HANDLE, base: usize, song_id: u32) -> Result<(), String> {
+    fn write_song(process: HANDLE, base: usize, song_id: u32, difficulty_tier: &str) -> Result<(), String> {
         let mut pvid = base + LAST_SELECT_PVID;
         let mut sort = base + LAST_SELECT_SORT;
         let mut diff = base + LAST_SELECT_DIFF;
+        let mut diff_select = base + DIFFICULTY_SELECT;
         let change_song_select = base + CHANGE_SONG_SELECT;
         let start_change = base + START_CHANGE;
 
@@ -99,6 +113,7 @@ mod windows_impl {
             pvid += EDEN_OFFSET;
             sort += EDEN_OFFSET;
             diff += EDEN_OFFSET;
+            diff_select += EDEN_OFFSET;
         }
 
         std::thread::sleep(std::time::Duration::from_millis(100));
@@ -107,7 +122,7 @@ mod windows_impl {
             write_i32(process, start_change, 2)?;
             std::thread::sleep(std::time::Duration::from_millis(100));
         }
-        write_selection(process, pvid, sort, diff, song_id)?;
+        write_selection(process, pvid, sort, diff, diff_select, song_id, difficulty_tier)?;
         trigger_selection(process, change_song_select, start_change)?;
         Ok(())
     }
@@ -117,11 +132,14 @@ mod windows_impl {
         pvid: usize,
         sort: usize,
         diff: usize,
+        diff_select: usize,
         song_id: u32,
+        difficulty_tier: &str,
     ) -> Result<(), String> {
         write_i32(process, pvid, song_id as i32)?;
         write_i32(process, sort, 1)?;
-        write_i32(process, diff, 19)
+        write_i32(process, diff, 19)?;
+        write_i32(process, diff_select, difficulty_tier_to_i32(difficulty_tier))
     }
 
     fn trigger_selection(

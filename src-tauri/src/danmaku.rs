@@ -594,6 +594,7 @@ fn enqueue_song(
         song_name,
         None,
         &config.default_search_difficulty,
+        &config.difficulty_fallback,
         config.difficulty_tolerance,
     );
     enqueue_first_result(app, results.first(), requester, song_name)
@@ -613,6 +614,7 @@ fn enqueue_author(
         author,
         None,
         &config.default_search_difficulty,
+        &config.difficulty_fallback,
         config.difficulty_tolerance,
     );
     enqueue_first_result(app, results.first(), requester, author)
@@ -634,7 +636,12 @@ fn enqueue_first_result(
         result.pv_id,
         result.display_name.clone(),
         requester.to_string(),
-        None,
+        result.difficulty,
+        state
+            .config
+            .read()
+            .map(|cfg| cfg.default_search_difficulty.clone())
+            .unwrap_or_else(|_| "extreme".to_string()),
     );
     let message = if added {
         format!("已加入队列: {} (点歌人: {requester})", result.display_name)

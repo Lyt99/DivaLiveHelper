@@ -118,12 +118,9 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
     <section className="page queue-page">
       <header className="hero-panel">
         <div>
-          <p className="eyebrow">
-            <span className="eyebrow-tag">STAGE</span>
-            <span className="eyebrow-meta">Live Stage Control</span>
-          </p>
+          <p className="eyebrow">Live Stage</p>
           <h1>点歌</h1>
-          <p className="muted">先连接直播间和游戏，再让弹幕点歌自动入队；也可以在歌曲库里手动搜索并切歌。</p>
+          <p className="muted">先连接直播间和游戏，再让弹幕点歌自动入队</p>
         </div>
         <div className="status-stack">
           {danmakuStatus.room_id ? (
@@ -140,7 +137,6 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
       <div className="control-grid">
         <div className="panel connection-card">
           <div>
-            <p className="eyebrow">Danmaku</p>
             <h2>连接直播间</h2>
             <p className="muted">当前房间号：{config.room_id || '未设置'}</p>
           </div>
@@ -151,7 +147,6 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
         </div>
         <div className="panel connection-card">
           <div>
-            <p className="eyebrow">Game Process</p>
             <h2>连接游戏</h2>
             <p className="muted">目标进程：DivaMegaMix.exe</p>
           </div>
@@ -219,8 +214,8 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
 
       <details className="debug-collapsible">
         <summary>
-          <span className="eyebrow debug-summary-eyebrow">Offline Debug</span>
-          <span className="muted">点歌调试 · 加入时复用直播间处理流程</span>
+          <span className="eyebrow debug-summary-eyebrow">离线调试</span>
+          <span className="muted">点歌调试</span>
         </summary>
         <div className="debug-command-row">
           <input
