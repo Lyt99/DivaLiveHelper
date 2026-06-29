@@ -326,3 +326,71 @@ fn escape_html(value: &str) -> String {
         .replace('"', "&quot;")
         .replace('\'', "&#39;")
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{escape_html, render_overlay};
+
+    // ----------------- escape_html -----------------
+
+    #[test]
+    fn escape_html_escapes_all_five_special_chars() {
+        let result = escape_html("&<>\"'");
+        assert_eq!(result, "&amp;&lt;&gt;&quot;&#39;");
+    }
+
+    #[test]
+    fn escape_html_replaces_ampersand_first_to_avoid_double_escape() {
+        // 关键顺序测试：& 必须先替换，否则后续插入的 &amp; 中的 & 会被再次替换
+        let result = escape_html("<&>");
+        assert_eq!(result, "&lt;&amp;&gt;");
+    }
+
+    #[test]
+    fn escape_html_passes_through_plain_text() {
+        assert_eq!(escape_html("Hello World"), "Hello World");
+        assert_eq!(escape_html("千本桜"), "千本桜");
+        assert_eq!(escape_html(""), "");
+    }
+
+    #[test]
+    fn escape_html_escapes_quotes_independently() {
+        assert_eq!(escape_html("\"quoted\""), "&quot;quoted&quot;");
+        assert_eq!(escape_html("it's"), "it&#39;s");
+    }
+
+    // ----------------- render_overlay -----------------
+
+    #[test]
+    fn render_overlay_returns_html_doctype() {
+        let html = render_overlay("Test");
+        assert!(html.starts_with("<!doctype html>"));
+        assert!(html.contains("</html>"));
+    }
+
+    #[test]
+    fn render_overlay_substitutes_title() {
+        let html = render_overlay("我的队列");
+        assert!(html.contains("<title>我的队列</title>"));
+        assert!(html.contains("<h1>我的队列</h1>"));
+        // 占位符应被完全替换
+        assert!(!html.contains("__TITLE__"));
+    }
+
+    #[test]
+    fn render_overlay_escapes_html_in_title() {
+        let html = render_overlay("<script>alert(1)</script>");
+        // title 和 h1 中的 <script> 应被转义（模板自身的 <script> 标签不受影响）
+        assert!(!html.contains("<title><script>"));
+        assert!(!html.contains("<h1><script>"));
+        assert!(html.contains("&lt;script&gt;"));
+        assert!(!html.contains("__TITLE__"));
+    }
+
+    #[test]
+    fn render_overlay_includes_polling_script() {
+        let html = render_overlay("Test");
+        assert!(html.contains("setInterval(load, 2000)"));
+        assert!(html.contains("/api/queue"));
+    }
+}

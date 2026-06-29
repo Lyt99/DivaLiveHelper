@@ -375,3 +375,320 @@ fn non_empty(value: &str) -> Option<String> {
         Some(value.to_string())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // ----------------- parse_level -----------------
+
+    #[test]
+    fn parse_level_valid_pv_lv_format() {
+        assert_eq!(parse_level("PV_LV_10_50"), Some(10.5));
+        assert_eq!(parse_level("PV_LV_8_0"), Some(8.0));
+        assert_eq!(parse_level("PV_LV_0_0"), Some(0.0));
+        assert_eq!(parse_level("PV_LV_12_25"), Some(12.25));
+    }
+
+    #[test]
+    fn parse_level_rejects_wrong_prefix() {
+        assert_eq!(parse_level("XX_LV_10_50"), None);
+        assert_eq!(parse_level("PV_XX_10_50"), None);
+    }
+
+    #[test]
+    fn parse_level_rejects_insufficient_parts() {
+        assert_eq!(parse_level(""), None);
+        assert_eq!(parse_level("PV"), None);
+        assert_eq!(parse_level("PV_LV"), None);
+        assert_eq!(parse_level("PV_LV_10"), None);
+    }
+
+    #[test]
+    fn parse_level_rejects_non_numeric() {
+        assert_eq!(parse_level("PV_LV_a_b"), None);
+        assert_eq!(parse_level("PV_LV_10_x"), None);
+    }
+
+    // ----------------- parse_difficulty -----------------
+
+    fn make_fields(pairs: &[(&str, &str)]) -> HashMap<String, String> {
+        pairs.iter().map(|(k, v)| (k.to_string(), v.to_string())).collect()
+    }
+
+    #[test]
+    fn parse_difficulty_extracts_all_base_tiers() {
+        let fields = make_fields(&[
+            ("difficulty.easy.0.level", "PV_LV_2_0"),
+            ("difficulty.normal.0.level", "PV_LV_5_0"),
+            ("difficulty.hard.0.level", "PV_LV_7_50"),
+            ("difficulty.extreme.0.level", "PV_LV_9_0"),
+        ]);
+        let diff = parse_difficulty(&fields);
+        assert_eq!(diff.get("easy"), Some(&2.0));
+        assert_eq!(diff.get("normal"), Some(&5.0));
+        assert_eq!(diff.get("hard"), Some(&7.5));
+        assert_eq!(diff.get("extreme"), Some(&9.0));
+        assert!(!diff.contains_key("exextreme"));
+    }
+
+    #[test]
+    fn parse_difficulty_extracts_exextreme_from_extreme_1() {
+        let fields = make_fields(&[
+            ("difficulty.extreme.0.level", "PV_LV_9_0"),
+            ("difficulty.extreme.1.level", "PV_LV_10_50"),
+        ]);
+        let diff = parse_difficulty(&fields);
+        assert_eq!(diff.get("extreme"), Some(&9.0));
+        assert_eq!(diff.get("exextreme"), Some(&10.5));
+    }
+
+    #[test]
+    fn parse_difficulty_returns_empty_for_no_data() {
+        let fields = HashMap::new();
+        let diff = parse_difficulty(&fields);
+        assert!(diff.is_empty());
+    }
+
+    #[test]
+    fn parse_difficulty_skips_invalid_levels() {
+        let fields = make_fields(&[
+            ("difficulty.easy.0.level", "invalid"),
+            ("difficulty.hard.0.level", "PV_LV_6_0"),
+        ]);
+        let diff = parse_difficulty(&fields);
+        assert!(!diff.contains_key("easy"));
+        assert_eq!(diff.get("hard"), Some(&6.0));
+    }
+
+    // ----------------- import_base_json_str -----------------
+
+    #[test]
+    fn import_base_json_str_imports_valid_entries() {
+        let json = r#"{
+            "version": 1,
+            "songs": {
+                "100": {"pv_id": 100, "name": "Song A", "name_en": "SongA", "source": "base"},
+                "200": {"pv_id": 200, "name": "Song B", "name_en": "SongB", "source": "dlc"}
+            }
+        }"#;
+        let mut db = SongDatabase::default();
+        let count = db.import_base_json_str(json).unwrap();
+        assert_eq!(count, 2);
+        assert_eq!(db.songs.len(), 2);
+        assert_eq!(db.songs.get(&100).unwrap().name, "Song A");
+        assert_eq!(db.songs.get(&200).unwrap().source, "dlc");
+    }
+
+    #[test]
+    fn import_base_json_str_rejects_version_zero() {
+        let json = r#"{"version": 0, "songs": {}}"#;
+        let mut db = SongDatabase::default();
+        assert!(db.import_base_json_str(json).is_err());
+    }
+
+    #[test]
+    fn import_base_json_str_rejects_invalid_json() {
+        let mut db = SongDatabase::default();
+        assert!(db.import_base_json_str("not json").is_err());
+    }
+
+    #[test]
+    fn import_base_json_str_parses_pv_id_from_key_when_field_missing() {
+        // key 优先于 field 中的 pv_id
+        let json = r#"{
+            "version": 1,
+            "songs": {
+                "999": {"pv_id": 0, "name": "From Key", "name_en": "", "source": ""}
+            }
+        }"#;
+        let mut db = SongDatabase::default();
+        db.import_base_json_str(json).unwrap();
+        assert!(db.songs.contains_key(&999));
+        assert_eq!(db.songs.get(&999).unwrap().pv_id, 999);
+    }
+
+    #[test]
+    fn import_base_json_str_falls_back_source_to_base_when_empty() {
+        let json = r#"{
+            "version": 1,
+            "songs": {
+                "1": {"pv_id": 1, "name": "X", "name_en": "", "source": "  "}
+            }
+        }"#;
+        let mut db = SongDatabase::default();
+        db.import_base_json_str(json).unwrap();
+        assert_eq!(db.songs.get(&1).unwrap().source, "base");
+    }
+
+    #[test]
+    fn import_base_json_str_preserves_difficulty_and_chinese_name() {
+        let json = r#"{
+            "version": 1,
+            "songs": {
+                "1": {
+                    "pv_id": 1, "name": "Test", "name_en": "TestEN",
+                    "source": "base",
+                    "name_zh": "测试",
+                    "difficulty": {"extreme": 8.5, "exextreme": 9.5}
+                }
+            }
+        }"#;
+        let mut db = SongDatabase::default();
+        db.import_base_json_str(json).unwrap();
+        let entry = db.songs.get(&1).unwrap();
+        assert_eq!(entry.name_zh, Some("测试".to_string()));
+        assert_eq!(entry.difficulty.get("extreme"), Some(&8.5));
+        assert_eq!(entry.difficulty.get("exextreme"), Some(&9.5));
+    }
+
+    // ----------------- remove_source / remove_unnamed -----------------
+
+    #[test]
+    fn remove_source_removes_matching_entries() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry { pv_id: 1, name: "A".into(), source: "base".into(), ..Default::default() });
+        db.songs.insert(2, SongEntry { pv_id: 2, name: "B".into(), source: "dlc".into(), ..Default::default() });
+        db.songs.insert(3, SongEntry { pv_id: 3, name: "C".into(), source: "base".into(), ..Default::default() });
+        let removed = db.remove_source("base");
+        assert_eq!(removed, 2);
+        assert!(!db.songs.contains_key(&1));
+        assert!(db.songs.contains_key(&2));
+        assert!(!db.songs.contains_key(&3));
+    }
+
+    #[test]
+    fn remove_source_returns_zero_when_no_match() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry { pv_id: 1, name: "A".into(), source: "base".into(), ..Default::default() });
+        assert_eq!(db.remove_source("mod"), 0);
+        assert_eq!(db.songs.len(), 1);
+    }
+
+    #[test]
+    fn remove_unnamed_removes_entries_with_no_name_or_name_en() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry { pv_id: 1, name: "Has".into(), name_en: "HasEN".into(), ..Default::default() });
+        db.songs.insert(2, SongEntry { pv_id: 2, name: "".into(), name_en: "OnlyEN".into(), ..Default::default() });
+        db.songs.insert(3, SongEntry { pv_id: 3, name: "".into(), name_en: "".into(), ..Default::default() });
+        let removed = db.remove_unnamed();
+        assert_eq!(removed, 1);
+        assert!(db.songs.contains_key(&1));
+        assert!(db.songs.contains_key(&2));
+        assert!(!db.songs.contains_key(&3));
+    }
+
+    // ----------------- source_stats -----------------
+
+    #[test]
+    fn source_stats_collapses_mod_prefix_to_single_bucket() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry { pv_id: 1, name: "A".into(), source: "mod:foo".into(), ..Default::default() });
+        db.songs.insert(2, SongEntry { pv_id: 2, name: "B".into(), source: "mod:bar".into(), ..Default::default() });
+        db.songs.insert(3, SongEntry { pv_id: 3, name: "C".into(), source: "base".into(), ..Default::default() });
+        let stats = db.source_stats();
+        assert_eq!(stats.get("mod"), Some(&2));
+        assert_eq!(stats.get("base"), Some(&1));
+        assert!(!stats.contains_key("mod:foo"));
+    }
+
+    #[test]
+    fn source_stats_empty_database() {
+        let db = SongDatabase::default();
+        assert!(db.source_stats().is_empty());
+    }
+
+    // ----------------- apply_chinese_names -----------------
+
+    #[test]
+    fn apply_chinese_names_sets_name_zh_on_match() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry { pv_id: 1, name: "Senbonzakura".into(), ..Default::default() });
+        let mut zh = HashMap::new();
+        zh.insert("Senbonzakura".to_string(), "千本桜".to_string());
+        db.apply_chinese_names(&zh);
+        assert_eq!(db.songs.get(&1).unwrap().name_zh, Some("千本桜".to_string()));
+    }
+
+    #[test]
+    fn apply_chinese_names_does_not_clear_on_miss() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry {
+            pv_id: 1,
+            name: "Song".to_string(),
+            name_zh: Some("已有中文".to_string()),
+            ..Default::default()
+        });
+        let zh = HashMap::new(); // 无匹配
+        db.apply_chinese_names(&zh);
+        assert_eq!(db.songs.get(&1).unwrap().name_zh, Some("已有中文".to_string()));
+    }
+
+    #[test]
+    fn apply_chinese_names_no_op_on_empty_db() {
+        let mut db = SongDatabase::default();
+        let mut zh = HashMap::new();
+        zh.insert("x".to_string(), "y".to_string());
+        db.apply_chinese_names(&zh);
+        assert!(db.songs.is_empty());
+    }
+
+    // ----------------- to_song_infos -----------------
+
+    #[test]
+    fn to_song_infos_sorts_by_pv_id() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(30, SongEntry { pv_id: 30, name: "C".into(), ..Default::default() });
+        db.songs.insert(10, SongEntry { pv_id: 10, name: "A".into(), ..Default::default() });
+        db.songs.insert(20, SongEntry { pv_id: 20, name: "B".into(), ..Default::default() });
+        let infos = db.to_song_infos();
+        assert_eq!(infos.len(), 3);
+        assert_eq!(infos[0].pv_id, 10);
+        assert_eq!(infos[1].pv_id, 20);
+        assert_eq!(infos[2].pv_id, 30);
+    }
+
+    #[test]
+    fn to_song_infos_converts_empty_strings_to_none() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry {
+            pv_id: 1,
+            name: "HasName".into(),
+            name_en: "".into(),
+            source: "  ".into(),
+            ..Default::default()
+        });
+        let infos = db.to_song_infos();
+        assert_eq!(infos[0].name, "HasName");
+        assert_eq!(infos[0].name_en, None);
+        assert_eq!(infos[0].source, None);
+    }
+
+    #[test]
+    fn to_song_infos_preserves_name_zh() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry {
+            pv_id: 1,
+            name: "X".into(),
+            name_zh: Some("中文".to_string()),
+            ..Default::default()
+        });
+        let infos = db.to_song_infos();
+        assert_eq!(infos[0].name_zh, Some("中文".to_string()));
+    }
+
+    // ----------------- non_empty -----------------
+
+    #[test]
+    fn non_empty_returns_none_for_whitespace_only() {
+        assert_eq!(non_empty(""), None);
+        assert_eq!(non_empty("   "), None);
+        assert_eq!(non_empty("\t\n"), None);
+    }
+
+    #[test]
+    fn non_empty_returns_some_for_non_empty() {
+        assert_eq!(non_empty("x"), Some("x".to_string()));
+        assert_eq!(non_empty("  x  "), Some("  x  ".to_string())); // 不 trim 内容
+    }
+}

@@ -256,4 +256,63 @@ mod windows_impl {
             .unwrap_or(buffer.len());
         String::from_utf16_lossy(&buffer[..length])
     }
+
+    #[cfg(test)]
+    mod tests {
+        use super::{difficulty_tier_to_i32, wide_to_string};
+
+        // ----------------- difficulty_tier_to_i32 -----------------
+
+        #[test]
+        fn difficulty_tier_maps_each_named_tier() {
+            assert_eq!(difficulty_tier_to_i32("easy"), 0);
+            assert_eq!(difficulty_tier_to_i32("normal"), 1);
+            assert_eq!(difficulty_tier_to_i32("hard"), 2);
+            assert_eq!(difficulty_tier_to_i32("extreme"), 3);
+            assert_eq!(difficulty_tier_to_i32("exextreme"), 4);
+        }
+
+        #[test]
+        fn difficulty_tier_defaults_to_extreme_for_unknown() {
+            assert_eq!(difficulty_tier_to_i32(""), 3);
+            assert_eq!(difficulty_tier_to_i32("master"), 3);
+            assert_eq!(difficulty_tier_to_i32("Easy"), 3); // 大小写敏感
+            assert_eq!(difficulty_tier_to_i32("EXTREME"), 3);
+        }
+
+        // ----------------- wide_to_string -----------------
+
+        #[test]
+        fn wide_to_string_converts_simple_ascii() {
+            let buffer: Vec<u16> = "Hello".encode_utf16().chain(std::iter::once(0)).collect();
+            assert_eq!(wide_to_string(&buffer), "Hello");
+        }
+
+        #[test]
+        fn wide_to_string_handles_no_null_terminator() {
+            let buffer: Vec<u16> = "ABC".encode_utf16().collect();
+            assert_eq!(wide_to_string(&buffer), "ABC");
+        }
+
+        #[test]
+        fn wide_to_string_stops_at_first_null() {
+            let buffer: Vec<u16> = "AB".encode_utf16()
+                .chain(std::iter::once(0))
+                .chain("CD".encode_utf16())
+                .collect();
+            assert_eq!(wide_to_string(&buffer), "AB");
+        }
+
+        #[test]
+        fn wide_to_string_empty_buffer_returns_empty_string() {
+            let buffer: Vec<u16> = vec![0];
+            assert_eq!(wide_to_string(&buffer), "");
+        }
+
+        #[test]
+        fn wide_to_string_handles_cjk() {
+            let buffer: Vec<u16> = "千本桜".encode_utf16().chain(std::iter::once(0)).collect();
+            assert_eq!(wide_to_string(&buffer), "千本桜");
+        }
+    }
 }
