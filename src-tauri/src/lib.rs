@@ -10,7 +10,6 @@ mod song_db;
 mod song_search;
 mod song_select;
 
-use std::fs;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, RwLock};
 
@@ -37,7 +36,6 @@ pub struct AppState {
     pub danmaku: Arc<Mutex<DanmakuManager>>,
     pub hotkey: Arc<Mutex<HotkeyManager>>,
     pub obs_overlay: Arc<Mutex<OBSOverlayServer>>,
-    pub first_run: bool,
 }
 
 pub fn play_next_song(app: &tauri::AppHandle) -> Result<Option<SongRequest>, String> {
@@ -86,8 +84,11 @@ pub fn run() {
                 .and_then(|p| p.parent().map(|p| p.to_path_buf()))
                 .unwrap_or_else(|| std::env::current_dir().unwrap_or_default());
             let config_path = exe_dir.join("config.json");
-            let first_run = !config_path.exists();
-            let config = load_config_with_dev_fallback(&config_path);
+            let config = if config_path.exists() {
+                Config::load_or_default(&config_path)
+            } else {
+                Config::default()
+            };
             // Don't auto-create config.json on first run — the wizard will save it
 
             let resource_dir = app.path().resource_dir().ok();
@@ -120,7 +121,6 @@ pub fn run() {
                 danmaku: Arc::new(Mutex::new(DanmakuManager::default())),
                 hotkey: Arc::new(Mutex::new(hotkey)),
                 obs_overlay: Arc::new(Mutex::new(obs_overlay)),
-                first_run,
             });
 
             let state = app.state::<AppState>();
@@ -178,26 +178,15 @@ pub fn run() {
             commands::stop_obs_overlay,
             commands::get_obs_overlay_status,
             commands::is_first_run,
+            commands::open_queue_overlay,
+            commands::close_queue_overlay,
+            commands::toggle_queue_overlay_top,
         ])
         .run(tauri::generate_context!())
         .expect("运行 Tauri 应用失败");
 }
 
-fn load_config_with_dev_fallback(config_path: &Path) -> Config {
-    if config_path.exists() {
-        return Config::load_or_default(config_path);
-    }
-
-    for candidate in dev_config_candidates() {
-        if candidate.exists() {
-            return Config::load_or_default(&candidate);
-        }
-    }
-
-    Config::default()
-}
-
-fn resolve_data_dir(configured: &str, resource_dir: Option<&Path>) -> PathBuf {
+pub(crate) fn resolve_data_dir(configured: &str, resource_dir: Option<&Path>) -> PathBuf {
     let configured_path = PathBuf::from(configured);
     if configured_path.is_absolute() && configured_path.exists() {
         return configured_path;
@@ -226,15 +215,5 @@ fn resolve_data_dir(configured: &str, resource_dir: Option<&Path>) -> PathBuf {
         return candidate.clone();
     }
 
-    candidates
-        .into_iter()
-        .find(|candidate| candidate.exists())
-        .unwrap_or(configured_path)
-}
-
-fn dev_config_candidates() -> Vec<PathBuf> {
-    let Ok(current_dir) = std::env::current_dir() else {
-        return Vec::new();
-    };
-    vec![current_dir.join("config.json")]
+    candidates.into_iter().next().unwrap_or(configured_path)
 }

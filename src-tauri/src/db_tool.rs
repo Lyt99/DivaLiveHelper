@@ -18,6 +18,7 @@ pub struct RebuildReport {
     pub mods_scanned: usize,
     pub aliases_imported: usize,
     pub chinese_names_merged: usize,
+    pub chinese_names_total: usize,
     pub removed_mdata: usize,
     pub removed_unnamed: usize,
     pub sources: HashMap<String, usize>,
@@ -87,7 +88,7 @@ pub fn rebuild_database(data_dir: &Path, mods_dir: Option<&Path>) -> Result<Rebu
     let removed_mdata = database.remove_source("mdata");
     let removed_unnamed = database.remove_unnamed();
     let aliases_imported = database.import_aliases(&data_dir.join("AnotherSongName.json"))?;
-    let chinese_names_merged = merge_chinese_names(data_dir, &database)?;
+    let (chinese_names_merged, chinese_names_total) = merge_chinese_names(data_dir, &database)?;
     database.save(&db_path)?;
 
     Ok(RebuildReport {
@@ -101,13 +102,14 @@ pub fn rebuild_database(data_dir: &Path, mods_dir: Option<&Path>) -> Result<Rebu
         mods_scanned,
         aliases_imported,
         chinese_names_merged,
+        chinese_names_total,
         removed_mdata,
         removed_unnamed,
         sources: database.source_stats(),
     })
 }
 
-fn merge_chinese_names(data_dir: &Path, database: &SongDatabase) -> Result<usize, String> {
+fn merge_chinese_names(data_dir: &Path, database: &SongDatabase) -> Result<(usize, usize), String> {
     // Start from the embedded base Chinese name DB
     let mut zh: ChineseNameFile =
         serde_json::from_str(EMBEDDED_BASE_ZH_DB).unwrap_or_else(|_| ChineseNameFile {
@@ -169,7 +171,7 @@ fn merge_chinese_names(data_dir: &Path, database: &SongDatabase) -> Result<usize
     let content = serde_json::to_string_pretty(&zh)
         .map_err(|error| format!("序列化中文名数据库失败: {error}"))?;
     std::fs::write(&zh_path, content).map_err(|error| format!("保存中文名数据库失败: {error}"))?;
-    Ok(merged)
+    Ok((merged, zh.entries.len()))
 }
 
 fn load_name_cache(path: &Path) -> Result<HashMap<String, String>, String> {

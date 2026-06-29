@@ -1,8 +1,8 @@
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use serde::Serialize;
-use tauri::{AppHandle, Manager, State};
+use tauri::{AppHandle, Emitter, Manager, State};
 
 use crate::config::Config;
 use crate::danmaku::{self, DanmakuEvent, DanmakuStatus, SongProcessOutcome};
@@ -12,7 +12,7 @@ use crate::obs_overlay::OBSOverlayStatus;
 use crate::queue::SongRequest;
 use crate::song_db::{SongDatabase, SongInfo};
 use crate::song_search::{SearchResult, SongSearcher};
-use crate::{play_next_song, AppState};
+use crate::{play_next_song, resolve_data_dir, AppState};
 
 #[derive(Debug, Clone, Serialize)]
 pub struct DebugSongRequestResult {
@@ -86,12 +86,7 @@ pub fn reload_database(state: State<'_, AppState>) -> Result<usize, String> {
         .read()
         .map_err(|_| "读取配置锁失败".to_string())?
         .clone();
-    let fallback = state
-        .data_dir
-        .read()
-        .map_err(|_| "读取数据目录锁失败".to_string())?
-        .clone();
-    let data_dir = resolve_data_dir(&config.data_dir, &fallback);
+    let data_dir = resolve_data_dir(&config.data_dir, None);
     let database = SongDatabase::load_with_chinese_names(&data_dir)?;
     let searcher = SongSearcher::from_database(&database, &data_dir);
     let count = database.songs.len();
@@ -117,12 +112,8 @@ pub fn rebuild_database(state: State<'_, AppState>) -> Result<RebuildReport, Str
         .read()
         .map_err(|_| "读取配置锁失败".to_string())?
         .clone();
-    let fallback = state
-        .data_dir
-        .read()
-        .map_err(|_| "读取数据目录锁失败".to_string())?
-        .clone();
-    let data_dir = resolve_data_dir(&config.data_dir, &fallback);
+    let data_dir = resolve_data_dir(&config.data_dir, None);
+    std::fs::create_dir_all(&data_dir).map_err(|error| format!("创建数据目录失败: {error}"))?;
     let mods_dir = if config.mods_dir.trim().is_empty() {
         None
     } else {
@@ -250,6 +241,8 @@ fn resolve_debug_song_request(
         .trim_start_matches(&config.song_command_prefix)
         .trim()
         .to_string();
+    // 去除弹幕小表情代码，与生产弹幕路径行为一致
+    let query = danmaku::strip_danmaku_emojis(&query);
     if query.is_empty() {
         return Ok(DebugSongRequestResult {
             is_song_request: true,
@@ -310,13 +303,18 @@ pub fn get_queue_history(state: State<'_, AppState>) -> Result<Vec<SongRequest>,
 }
 
 #[tauri::command]
-pub fn remove_from_queue(song_id: u32, state: State<'_, AppState>) -> Result<bool, String> {
-    Ok(state.queue.remove(song_id))
+pub fn remove_from_queue(song_id: u32, app: AppHandle, state: State<'_, AppState>) -> Result<bool, String> {
+    let removed = state.queue.remove(song_id);
+    if removed {
+        let _ = app.emit("queue-updated", state.queue.snapshot());
+    }
+    Ok(removed)
 }
 
 #[tauri::command]
-pub fn clear_queue(state: State<'_, AppState>) -> Result<(), String> {
+pub fn clear_queue(app: AppHandle, state: State<'_, AppState>) -> Result<(), String> {
     state.queue.clear();
+    let _ = app.emit("queue-updated", state.queue.snapshot());
     Ok(())
 }
 
@@ -487,29 +485,51 @@ pub fn get_obs_overlay_status(state: State<'_, AppState>) -> Result<OBSOverlaySt
 
 #[tauri::command]
 pub fn is_first_run(state: State<'_, AppState>) -> Result<bool, String> {
-    Ok(state.first_run)
+    Ok(!state.config_path.exists())
 }
 
-fn resolve_data_dir(configured: &str, fallback: &Path) -> PathBuf {
-    let configured_path = PathBuf::from(configured);
-    if configured_path.is_absolute() && configured_path.exists() {
-        return configured_path;
+#[tauri::command]
+pub fn open_queue_overlay(app: AppHandle) -> Result<(), String> {
+    use tauri::{WebviewUrl, WebviewWindowBuilder};
+    if let Some(existing) = app.get_webview_window("overlay") {
+        let _ = existing.set_focus();
+        return Ok(());
     }
+    WebviewWindowBuilder::new(&app, "overlay", WebviewUrl::App("index.html".into()))
+        .title("点歌队列")
+        .inner_size(420.0, 720.0)
+        .min_inner_size(320.0, 360.0)
+        .decorations(false)
+        .transparent(true)
+        .always_on_top(true)
+        .skip_taskbar(true)
+        .resizable(true)
+        .build()
+        .map_err(|error| format!("创建悬浮窗失败: {error}"))?;
+    Ok(())
+}
 
-    let candidates = [
-        configured_path.clone(),
-        fallback.to_path_buf(),
-        fallback.join(configured),
-        fallback.join("Data"),
-        fallback.join("_up_").join("Data"),
-    ];
+#[tauri::command]
+pub fn close_queue_overlay(app: AppHandle) -> Result<(), String> {
+    if let Some(window) = app.get_webview_window("overlay") {
+        window.close().map_err(|error| format!("关闭悬浮窗失败: {error}"))?;
+    }
+    Ok(())
+}
 
-    candidates
-        .iter()
-        .find(|candidate| candidate.join("song_db.json").exists())
-        .cloned()
-        .or_else(|| candidates.into_iter().find(|candidate| candidate.exists()))
-        .unwrap_or(configured_path)
+#[tauri::command]
+pub fn toggle_queue_overlay_top(app: AppHandle) -> Result<bool, String> {
+    let Some(window) = app.get_webview_window("overlay") else {
+        return Err("悬浮窗未打开".to_string());
+    };
+    let current = window
+        .is_always_on_top()
+        .map_err(|error| format!("读取置顶状态失败: {error}"))?;
+    let next = !current;
+    window
+        .set_always_on_top(next)
+        .map_err(|error| format!("切换置顶失败: {error}"))?;
+    Ok(next)
 }
 
 fn current_timestamp() -> f64 {
