@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { open } from '@tauri-apps/plugin-dialog';
 import { api, emptyConfig } from '../lib/tauri';
 import type { AppConfig, RebuildReport } from '../types';
@@ -27,6 +28,12 @@ export default function Wizard() {
   const [step, setStep] = useState(0);
   const [config, setConfig] = useState<AppConfig>({ ...emptyConfig });
   const [rebuildReport, setRebuildReport] = useState<RebuildReport | null>(null);
+  const appWindow = getCurrentWindow();
+
+  const startWindowDrag = (event: MouseEvent<HTMLElement>) => {
+    if (event.button !== 0) return;
+    void appWindow.startDragging();
+  };
 
   useEffect(() => {
     api.getConfig().then(setConfig);
@@ -38,7 +45,8 @@ export default function Wizard() {
 
   const finish = async () => {
     try {
-      await api.saveConfig({ ...config });
+      // Skip validation — room_id is optional and may be 0 if the user skipped that step
+      await api.saveConfig({ ...config }, true);
       window.location.reload();
     } catch (e) {
       alert(`保存配置失败: ${e}`);
@@ -47,6 +55,17 @@ export default function Wizard() {
 
   return (
     <div className="wizard">
+      <header className="titlebar wizard-titlebar" onMouseDown={startWindowDrag}>
+        <div className="titlebar-left">
+          <span>DIVA 直播助手 · 初始配置</span>
+        </div>
+        <div className="window-controls" onMouseDown={(event) => event.stopPropagation()}>
+          <button type="button" aria-label="最小化" onClick={() => appWindow.minimize()}>—</button>
+          <button type="button" aria-label="最大化" onClick={() => appWindow.toggleMaximize()}>□</button>
+          <button type="button" aria-label="关闭" className="close" onClick={() => appWindow.close()}>×</button>
+        </div>
+      </header>
+
       <div className="wizard-progress">
         {Array.from({ length: 7 }, (_, i) => (
           <div
@@ -59,7 +78,7 @@ export default function Wizard() {
       <div className="wizard-body">
         {step === 0 && <WelcomeStep next={next} />}
         {step === 1 && <ModsDirStep config={config} setConfig={setConfig} next={next} back={back} />}
-        {step === 2 && <RebuildStep report={rebuildReport} setReport={setRebuildReport} next={next} back={back} />}
+        {step === 2 && <RebuildStep config={config} setConfig={setConfig} report={rebuildReport} setReport={setRebuildReport} next={next} back={back} />}
         {step === 3 && <RoomIdStep config={config} setConfig={setConfig} next={next} back={back} />}
         {step === 4 && <PrefixStep config={config} setConfig={setConfig} next={next} back={back} />}
         {step === 5 && <DifficultyStep config={config} setConfig={setConfig} next={next} back={back} />}
@@ -123,7 +142,7 @@ function ModsDirStep({ config, setConfig, next, back }: StepProps) {
 
 /* ── Step 3: Rebuild song database ──────────────── */
 
-function RebuildStep({ report, setReport, next, back }: Omit<StepProps, 'config' | 'setConfig'> & { report: RebuildReport | null; setReport: (r: RebuildReport | null) => void }) {
+function RebuildStep({ config, report, setReport, next, back }: StepProps & { report: RebuildReport | null; setReport: (r: RebuildReport | null) => void }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -132,8 +151,8 @@ function RebuildStep({ report, setReport, next, back }: Omit<StepProps, 'config'
     setError('');
     setReport(null);
     try {
-      // Save config first so the backend picks up mods_dir (skip validation — room_id may be 0 during wizard)
-      await api.saveConfig({ ...(await api.getConfig()) }, true);
+      // Save wizard config first so the backend picks up mods_dir (skip validation — room_id may be 0 during wizard)
+      await api.saveConfig({ ...config }, true);
       const r = await api.rebuildDatabase();
       setReport(r);
     } catch (e) {
@@ -152,7 +171,7 @@ function RebuildStep({ report, setReport, next, back }: Omit<StepProps, 'config'
           <div className="wizard-report-row"><span>基础歌曲</span><span>{report.base_imported} 首</span></div>
           <div className="wizard-report-row"><span>MOD 歌曲</span><span>{report.mods_imported} 首</span></div>
           <div className="wizard-report-row"><span>别名导入</span><span>{report.aliases_imported} 条</span></div>
-          <div className="wizard-report-row"><span>中文名合并</span><span>{report.chinese_names_merged} 条</span></div>
+          <div className="wizard-report-row"><span>中文名库</span><span>{report.chinese_names_total} 条（新增 {report.chinese_names_merged}）</span></div>
           <div className="wizard-report-total">共 {report.total} 首</div>
         </div>
       ) : error ? (
