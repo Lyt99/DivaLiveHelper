@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { listen } from '@tauri-apps/api/event';
 import { api, emptyConfig } from '../lib/tauri';
-import type { AppConfig, DanmakuEvent, DanmakuStatus, DebugSongRequestResult, SongRequest } from '../types';
+import type { AppConfig, DanmakuEvent, DanmakuStatus, DebugSongRequestResult, SongRequest, SongRequestFailure } from '../types';
+
+interface FailureToast extends SongRequestFailure {
+  id: number;
+}
 
 interface QueuePageProps {
   recentDanmaku: DanmakuEvent[];
@@ -16,6 +20,7 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
   const [debugText, setDebugText] = useState('点歌 ');
   const [debugResult, setDebugResult] = useState<DebugSongRequestResult | null>(null);
   const [message, setMessage] = useState('准备就绪');
+  const [failures, setFailures] = useState<FailureToast[]>([]);
 
   const refresh = useCallback(async () => {
     const [items, connected, status] = await Promise.all([api.getQueue(), api.getGameConnectionStatus(), api.getDanmakuStatus()]);
@@ -38,10 +43,18 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
       setMessage(event.payload);
       refresh().catch((error) => setMessage(String(error)));
     });
+    const failurePromise = listen<SongRequestFailure>('song-request-failed', (event) => {
+      const toast: FailureToast = { id: Date.now() + Math.random(), ...event.payload };
+      setFailures((prev) => [...prev.slice(-2), toast]);
+      window.setTimeout(() => {
+        setFailures((prev) => prev.filter((item) => item.id !== toast.id));
+      }, 4000);
+    });
     return () => {
       queuePromise.then((unlisten) => unlisten()).catch(() => undefined);
       danmakuPromise.then((unlisten) => unlisten()).catch(() => undefined);
       connectionPromise.then((unlisten) => unlisten()).catch(() => undefined);
+      failurePromise.then((unlisten) => unlisten()).catch(() => undefined);
     };
   }, [refresh]);
 
@@ -50,6 +63,15 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
       const song = await api.nextSong();
       await refresh();
       setMessage(song ? `已切换：${song.song_name}` : '队列为空');
+    } catch (error) {
+      setMessage(String(error));
+    }
+  }
+
+  async function handleOpenOverlay() {
+    try {
+      await api.openQueueOverlay();
+      setMessage('已打开悬浮窗');
     } catch (error) {
       setMessage(String(error));
     }
@@ -156,6 +178,17 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
         </div>
       </div>
 
+      {failures.length > 0 ? (
+        <div className="failure-toasts" aria-live="assertive">
+          {failures.map((item) => (
+            <div key={item.id} className="failure-toast" role="alert">
+              <span className="failure-toast-requester">{item.requester}</span>
+              <span className="failure-toast-message">{item.message}</span>
+            </div>
+          ))}
+        </div>
+      ) : null}
+
       <div className="grid-two">
         <div className="panel queue-panel">
           <div className="panel-header">
@@ -167,6 +200,7 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
               <p className="muted">当前 {queue.length} 首</p>
             </div>
             <button type="button" className="primary-button" onClick={handleNextSong}>切下一首</button>
+            <button type="button" className="ghost-button" onClick={handleOpenOverlay}>打开悬浮窗</button>
           </div>
           {queue.length === 0 ? (
             <div className="empty-state">等待观众点歌中…</div>

@@ -33,6 +33,9 @@ export const api = {
   stopObsOverlay: () => invoke<OBSOverlayStatus>('stop_obs_overlay'),
   getObsOverlayStatus: () => invoke<OBSOverlayStatus>('get_obs_overlay_status'),
   isFirstRun: () => invoke<boolean>('is_first_run'),
+  openQueueOverlay: () => invoke<void>('open_queue_overlay'),
+  closeQueueOverlay: () => invoke<void>('close_queue_overlay'),
+  toggleQueueOverlayTop: () => invoke<boolean>('toggle_queue_overlay_top'),
 };
 
 export const emptyConfig: AppConfig = {

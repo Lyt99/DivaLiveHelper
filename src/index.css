@@ -1013,6 +1013,14 @@ input[type='checkbox'] {
   color: var(--text);
 }
 
+.wizard-titlebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
 .wizard-progress {
   display: flex;
   gap: 10px;
@@ -1147,4 +1155,49 @@ input[type='checkbox'] {
   color: var(--bad);
   font-size: 13px;
   margin: 0;
+}
+
+/* Failure toasts (Queue page) */
+.failure-toasts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.failure-toast {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(225, 40, 133, 0.10);
+  border: 1px solid rgba(225, 40, 133, 0.30);
+  animation: failure-toast-in 200ms ease both;
+}
+
+.failure-toast-requester {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent, #E12885);
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.failure-toast-message {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+@keyframes failure-toast-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
