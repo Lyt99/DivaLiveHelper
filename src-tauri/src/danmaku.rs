@@ -53,8 +53,8 @@ pub struct DanmakuStatus {
     pub room_id: u64,
 }
 
-#[derive(Debug, Clone)]
-pub(crate) struct SongProcessOutcome {
+#[derive(Debug, Clone, Serialize)]
+pub struct SongProcessOutcome {
     pub is_song_request: bool,
     pub query: String,
     pub matched: bool,
@@ -62,6 +62,14 @@ pub(crate) struct SongProcessOutcome {
     pub song_name: Option<String>,
     pub added: bool,
     pub requester: String,
+    pub message: String,
+}
+
+/// 点歌失败通知（已识别为点歌意图，但匹配/入队失败时发送给前端）
+#[derive(Debug, Clone, Serialize)]
+pub struct SongRequestFailure {
+    pub requester: String,
+    pub query: String,
     pub message: String,
 }
 
@@ -498,7 +506,19 @@ async fn handle_packet(app: &AppHandle, operation: u32, payload: &[u8]) {
         .is_some_and(|cmd| cmd.starts_with("DANMU_MSG"))
     {
         if let Some(event) = parse_danmaku_event(app, value) {
-            let _ = process_song_request(app, &event).await;
+            let outcome = process_song_request(app, &event).await;
+            // 已识别为点歌意图但匹配/入队失败 → 推送失败通知
+            // （LLM 判断不是点歌指令的情况 is_song_request=false，不算失败）
+            if outcome.is_song_request && !outcome.added {
+                let _ = app.emit(
+                    "song-request-failed",
+                    SongRequestFailure {
+                        requester: outcome.requester.clone(),
+                        query: outcome.query.clone(),
+                        message: outcome.message.clone(),
+                    },
+                );
+            }
             let _ = app.emit("danmaku", event);
         } else {
             let _ = app.emit("log-event", "收到弹幕消息，但解析字段失败");
@@ -590,14 +610,16 @@ fn enqueue_song(
     let Ok(searcher) = state.searcher.read() else {
         return SongProcessOutcome::miss(requester, song_name, "读取搜索索引失败");
     };
+    // 去除弹幕小表情代码（如 [喝彩]、[doge]），避免干扰歌名搜索
+    let cleaned = strip_danmaku_emojis(song_name);
     let results = searcher.search(
-        song_name,
+        &cleaned,
         None,
         &config.default_search_difficulty,
         &config.difficulty_fallback,
         config.difficulty_tolerance,
     );
-    enqueue_first_result(app, results.first(), requester, song_name)
+    enqueue_first_result(app, results.first(), requester, &cleaned)
 }
 
 fn enqueue_author(
@@ -610,14 +632,15 @@ fn enqueue_author(
     let Ok(searcher) = state.searcher.read() else {
         return SongProcessOutcome::miss(requester, author, "读取搜索索引失败");
     };
+    let cleaned = strip_danmaku_emojis(author);
     let results = searcher.search_by_author(
-        author,
+        &cleaned,
         None,
         &config.default_search_difficulty,
         &config.difficulty_fallback,
         config.difficulty_tolerance,
     );
-    enqueue_first_result(app, results.first(), requester, author)
+    enqueue_first_result(app, results.first(), requester, &cleaned)
 }
 
 fn enqueue_first_result(
@@ -637,11 +660,15 @@ fn enqueue_first_result(
         result.display_name.clone(),
         requester.to_string(),
         result.difficulty,
-        state
-            .config
-            .read()
-            .map(|cfg| cfg.default_search_difficulty.clone())
-            .unwrap_or_else(|_| "extreme".to_string()),
+        // 优先使用搜索时实际匹配到的难度档位（可能经 fallback 得到，如 exextreme→extreme）；
+        // 仅当歌曲完全无难度数据时才退回 config 默认档位。
+        result.difficulty_tier.clone().unwrap_or_else(|| {
+            state
+                .config
+                .read()
+                .map(|cfg| cfg.default_search_difficulty.clone())
+                .unwrap_or_else(|_| "extreme".to_string())
+        }),
     );
     let message = if added {
         format!("已加入队列: {} (点歌人: {requester})", result.display_name)
@@ -700,6 +727,38 @@ fn parse_prefix_request(raw: &str) -> Option<String> {
         return None;
     }
     Some(raw.to_string())
+}
+
+/// 去除弹幕文本中的 B站小表情代码（`[xxx]` 格式，如 `[喝彩]`、`[doge]`、`[2233娘]`）。
+///
+/// 这些表情在弹幕 `info[1]` 文本字段中以方括号字面量出现，会干扰歌名搜索。
+/// 使用逐字符扫描而非 regex crate，避免引入新依赖。
+pub(crate) fn strip_danmaku_emojis(text: &str) -> String {
+    let mut result = String::with_capacity(text.len());
+    let mut chars = text.chars().peekable();
+    while let Some(ch) = chars.next() {
+        if ch == '[' {
+            // 尝试找到匹配的 `]`；如果找到则跳过整段，否则保留 `[`
+            let mut consumed = String::from('[');
+            let mut found_close = false;
+            while let Some(inner) = chars.next() {
+                consumed.push(inner);
+                if inner == ']' {
+                    found_close = true;
+                    break;
+                }
+            }
+            if found_close && consumed.len() > 2 {
+                // `[xxx]` —— 跳过（不写入 result）
+            } else {
+                // 无闭合 `]` 或 `[]` 空括号 —— 保留原文
+                result.push_str(&consumed);
+            }
+        } else {
+            result.push(ch);
+        }
+    }
+    result
 }
 
 #[derive(Debug)]
@@ -778,4 +837,346 @@ fn now_timestamp() -> f64 {
         .duration_since(UNIX_EPOCH)
         .map(|duration| duration.as_secs_f64())
         .unwrap_or_default()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // ----------------- SongProcessOutcome constructors -----------------
+
+    #[test]
+    fn outcome_not_request_sets_all_none_fields() {
+        let outcome = SongProcessOutcome::not_request("user1", "some reason");
+        assert!(!outcome.is_song_request);
+        assert!(!outcome.matched);
+        assert!(!outcome.added);
+        assert_eq!(outcome.song_id, None);
+        assert_eq!(outcome.song_name, None);
+        assert_eq!(outcome.query, "");
+        assert_eq!(outcome.requester, "user1");
+        assert_eq!(outcome.message, "some reason");
+    }
+
+    #[test]
+    fn outcome_miss_marks_song_request_but_not_matched() {
+        let outcome = SongProcessOutcome::miss("user2", "千本桜", "未找到匹配的歌曲");
+        assert!(outcome.is_song_request);
+        assert!(!outcome.matched);
+        assert!(!outcome.added);
+        assert_eq!(outcome.song_id, None);
+        assert_eq!(outcome.song_name, None);
+        assert_eq!(outcome.query, "千本桜");
+        assert_eq!(outcome.requester, "user2");
+    }
+
+    // ----------------- parse_prefix_request -----------------
+
+    #[test]
+    fn parse_prefix_request_returns_trimmed_non_empty() {
+        assert_eq!(parse_prefix_request("  hello  "), Some("hello".to_string()));
+        assert_eq!(parse_prefix_request("千本桜"), Some("千本桜".to_string()));
+    }
+
+    #[test]
+    fn parse_prefix_request_returns_none_for_empty_or_whitespace() {
+        assert_eq!(parse_prefix_request(""), None);
+        assert_eq!(parse_prefix_request("   "), None);
+        assert_eq!(parse_prefix_request("\t\n"), None);
+    }
+
+    // ----------------- encode_packet / decode_packets -----------------
+
+    #[test]
+    fn encode_packet_produces_correct_header_layout() {
+        let payload = b"hello";
+        let encoded = encode_packet(7, payload);
+        // 16 字节 header + 5 字节 payload = 21
+        assert_eq!(encoded.len(), 16 + 5);
+        // packet_len (u32 BE)
+        assert_eq!(u32::from_be_bytes(encoded[0..4].try_into().unwrap()), 21);
+        // header_len (u16 BE) = 16
+        assert_eq!(u16::from_be_bytes(encoded[4..6].try_into().unwrap()), 16);
+        // protocol (u16 BE) = 0 (PROTOCOL_JSON)
+        assert_eq!(u16::from_be_bytes(encoded[6..8].try_into().unwrap()), 0);
+        // operation (u32 BE) = 7
+        assert_eq!(u32::from_be_bytes(encoded[8..12].try_into().unwrap()), 7);
+        // sequence (u32 BE) = 1
+        assert_eq!(u32::from_be_bytes(encoded[12..16].try_into().unwrap()), 1);
+        // payload
+        assert_eq!(&encoded[16..], b"hello");
+    }
+
+    #[test]
+    fn encode_packet_with_empty_payload() {
+        let encoded = encode_packet(2, b"");
+        assert_eq!(encoded.len(), 16);
+        assert_eq!(u32::from_be_bytes(encoded[0..4].try_into().unwrap()), 16);
+    }
+
+    #[test]
+    fn decode_packets_round_trips_single_packet() {
+        let original_payload = b"{\"cmd\":\"test\"}";
+        let encoded = encode_packet(5, original_payload);
+        let packets = decode_packets(&encoded).unwrap();
+        assert_eq!(packets.len(), 1);
+        assert_eq!(packets[0].operation, 5);
+        assert_eq!(packets[0].payload, original_payload);
+    }
+
+    #[test]
+    fn decode_packets_round_trips_multiple_concatenated() {
+        let p1 = encode_packet(1, b"one");
+        let p2 = encode_packet(2, b"two");
+        let mut combined = p1.clone();
+        combined.extend_from_slice(&p2);
+        let packets = decode_packets(&combined).unwrap();
+        assert_eq!(packets.len(), 2);
+        assert_eq!(packets[0].operation, 1);
+        assert_eq!(packets[0].payload, b"one");
+        assert_eq!(packets[1].operation, 2);
+        assert_eq!(packets[1].payload, b"two");
+    }
+
+    #[test]
+    fn decode_packets_rejects_truncated_data() {
+        // 不足 16 字节 header → 循环不执行，返回空 vec（非错误）
+        let packets = decode_packets(b"short").unwrap();
+        assert!(packets.is_empty());
+    }
+
+    #[test]
+    fn decode_packets_rejects_zero_packet_len() {
+        let mut bad = vec![0u8; 16];
+        bad[0..4].copy_from_slice(&0u32.to_be_bytes()); // packet_len = 0
+        assert!(decode_packets(&bad).is_err());
+    }
+
+    #[test]
+    fn decode_packets_empty_input_returns_empty_vec() {
+        let packets = decode_packets(b"").unwrap();
+        assert!(packets.is_empty());
+    }
+
+    // ----------------- parse_auth_reply -----------------
+
+    #[test]
+    fn parse_auth_reply_success_when_code_zero() {
+        let payload = br#"{"code":0,"message":"ok"}"#;
+        assert!(parse_auth_reply(payload).is_ok());
+    }
+
+    #[test]
+    fn parse_auth_reply_fails_with_message_when_nonzero() {
+        let payload = "{\"code\":-101,\"message\":\"账号未登录\"}".as_bytes();
+        let result = parse_auth_reply(payload);
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("账号未登录"));
+    }
+
+    #[test]
+    fn parse_auth_reply_falls_back_to_msg_field() {
+        let payload = "{\"code\":1,\"msg\":\"fallback error\"}".as_bytes();
+        let result = parse_auth_reply(payload);
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("fallback error"));
+    }
+
+    #[test]
+    fn parse_auth_reply_falls_back_to_code_when_no_message() {
+        let payload = br#"{"code":-352}"#;
+        let result = parse_auth_reply(payload);
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("-352"));
+    }
+
+    #[test]
+    fn parse_auth_reply_falls_back_to_unknown_when_nothing() {
+        let payload = br#"{"foo":"bar"}"#;
+        let result = parse_auth_reply(payload);
+        assert!(result.is_err());
+        assert!(result.unwrap_err().contains("未知错误"));
+    }
+
+    #[test]
+    fn parse_auth_reply_rejects_invalid_json() {
+        assert!(parse_auth_reply(b"not json").is_err());
+    }
+
+    // ----------------- extract_wbi_key -----------------
+
+    #[test]
+    fn extract_wbi_key_extracts_filename_stem() {
+        let url = "https://example.com/path/img/wbi/img.png";
+        assert_eq!(extract_wbi_key(Some(url)).unwrap(), "img");
+    }
+
+    #[test]
+    fn extract_wbi_key_strips_query_and_fragment() {
+        let url = "https://example.com/wbi/key.png?version=1#anchor";
+        assert_eq!(extract_wbi_key(Some(url)).unwrap(), "key");
+    }
+
+    #[test]
+    fn extract_wbi_key_returns_err_for_none() {
+        assert!(extract_wbi_key(None).is_err());
+    }
+
+    #[test]
+    fn extract_wbi_key_returns_err_for_url_without_extension() {
+        // rsplit_once('.') 找不到 '.'，filename 为空 → Err
+        let url = "https://example.com/noext";
+        assert!(extract_wbi_key(Some(url)).is_err());
+    }
+
+    // ----------------- build_wbi_query -----------------
+
+    #[test]
+    fn build_wbi_query_encodes_key_value_pairs() {
+        let mut params = BTreeMap::new();
+        params.insert("foo".to_string(), "bar".to_string());
+        params.insert("baz".to_string(), "qux".to_string());
+        let query = build_wbi_query(&params);
+        // BTreeMap 按字母排序
+        assert_eq!(query, "baz=qux&foo=bar");
+    }
+
+    #[test]
+    fn build_wbi_query_strips_filter_chars_from_values() {
+        let mut params = BTreeMap::new();
+        params.insert("key".to_string(), "val!'(ue)*".to_string());
+        let query = build_wbi_query(&params);
+        // !'()* 被剥离 → "value"
+        assert_eq!(query, "key=value");
+    }
+
+    #[test]
+    fn build_wbi_query_url_encodes_special_chars() {
+        let mut params = BTreeMap::new();
+        params.insert("k".to_string(), "a b".to_string());
+        let query = build_wbi_query(&params);
+        assert_eq!(query, "k=a%20b");
+    }
+
+    #[test]
+    fn build_wbi_query_empty_params_returns_empty_string() {
+        let params = BTreeMap::new();
+        assert_eq!(build_wbi_query(&params), "");
+    }
+
+    // ----------------- DanmakuInfo::websocket_urls -----------------
+
+    fn make_host(host: &str, wss_port: u64) -> DanmakuHost {
+        DanmakuHost { host: host.to_string(), wss_port }
+    }
+
+    #[test]
+    fn websocket_urls_builds_wss_urls_from_valid_hosts() {
+        let info = DanmakuInfo {
+            token: "tok".to_string(),
+            hosts: vec![make_host("a.com", 443), make_host("b.com", 712)],
+        };
+        let urls = info.websocket_urls();
+        assert_eq!(urls, vec!["wss://a.com:443/sub", "wss://b.com:712/sub"]);
+    }
+
+    #[test]
+    fn websocket_urls_filters_empty_host_and_zero_port() {
+        let info = DanmakuInfo {
+            token: "tok".to_string(),
+            hosts: vec![make_host("", 443), make_host("b.com", 0), make_host("c.com", 712)],
+        };
+        let urls = info.websocket_urls();
+        assert_eq!(urls, vec!["wss://c.com:712/sub"]);
+    }
+
+    #[test]
+    fn websocket_urls_falls_back_when_all_hosts_invalid() {
+        let info = DanmakuInfo {
+            token: "tok".to_string(),
+            hosts: vec![make_host("", 0)],
+        };
+        let urls = info.websocket_urls();
+        assert_eq!(urls, vec![format!("wss://{FALLBACK_WS_HOST}:443/sub")]);
+    }
+
+    #[test]
+    fn websocket_urls_falls_back_when_empty() {
+        let info = DanmakuInfo {
+            token: "tok".to_string(),
+            hosts: vec![],
+        };
+        let urls = info.websocket_urls();
+        assert_eq!(urls.len(), 1);
+        assert!(urls[0].contains(FALLBACK_WS_HOST));
+    }
+
+    // ----------------- strip_danmaku_emojis -----------------
+
+    #[test]
+    fn strip_emojis_removes_single_cjk_emoji() {
+        assert_eq!(strip_danmaku_emojis("[喝彩]点歌 起风了"), "点歌 起风了");
+        assert_eq!(strip_danmaku_emojis("点歌[妙啊]千本桜"), "点歌千本桜");
+    }
+
+    #[test]
+    fn strip_emojis_removes_ascii_emoji() {
+        assert_eq!(strip_danmaku_emojis("[doge]点歌 MELTDOWN"), "点歌 MELTDOWN");
+        assert_eq!(strip_danmaku_emojis("点歌 [awsl] test"), "点歌  test");
+    }
+
+    #[test]
+    fn strip_emojis_removes_mixed_content_emoji() {
+        assert_eq!(strip_danmaku_emojis("[2233娘]点歌 test"), "点歌 test");
+        assert_eq!(strip_danmaku_emojis("[tv_白给]点歌"), "点歌");
+    }
+
+    #[test]
+    fn strip_emojis_removes_multiple_emojis() {
+        assert_eq!(strip_danmaku_emojis("[妙啊][赞]点歌 起风了"), "点歌 起风了");
+        assert_eq!(strip_danmaku_emojis("[a][b]点歌[c]"), "点歌");
+    }
+
+    #[test]
+    fn strip_emojis_removes_emoji_at_end() {
+        assert_eq!(strip_danmaku_emojis("点歌 起风了[喝彩]"), "点歌 起风了");
+    }
+
+    #[test]
+    fn strip_emojis_removes_emoji_in_middle() {
+        assert_eq!(strip_danmaku_emojis("点歌[喝彩]起风了"), "点歌起风了");
+    }
+
+    #[test]
+    fn strip_emojis_preserves_text_without_brackets() {
+        assert_eq!(strip_danmaku_emojis("点歌 千本桜"), "点歌 千本桜");
+        assert_eq!(strip_danmaku_emojis("Hello World"), "Hello World");
+        assert_eq!(strip_danmaku_emojis(""), "");
+    }
+
+    #[test]
+    fn strip_emojis_handles_pure_emoji_message() {
+        assert_eq!(strip_danmaku_emojis("[喝彩]"), "");
+        assert_eq!(strip_danmaku_emojis("[doge][妙啊]"), "");
+    }
+
+    #[test]
+    fn strip_emojis_preserves_unclosed_bracket() {
+        // 无闭合 `]` —— 保留原文
+        assert_eq!(strip_danmaku_emojis("点歌 [unclosed"), "点歌 [unclosed");
+    }
+
+    #[test]
+    fn strip_emojis_preserves_empty_brackets() {
+        // `[]` 空括号 —— 保留（避免误删合法的空方括号）
+        assert_eq!(strip_danmaku_emojis("点歌 []"), "点歌 []");
+    }
+
+    #[test]
+    fn strip_emojis_preserves_adjacent_brackets() {
+        // `[a][b]` —— 两个表情都被去除
+        assert_eq!(strip_danmaku_emojis("[a][b]"), "");
+        // 剩余的 `][` 是合法文本的一部分
+        assert_eq!(strip_danmaku_emojis("x[a][b]y"), "xy");
+    }
 }

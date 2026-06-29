@@ -50,6 +50,13 @@ export interface SearchResult {
   pv_id: number;
   display_name: string;
   difficulty: number | null;
+  difficulty_tier: string | null;
+}
+
+export interface SongRequestFailure {
+  requester: string;
+  query: string;
+  message: string;
 }
 
 export interface DebugSongRequestResult {
@@ -96,6 +103,7 @@ export interface RebuildReport {
   mods_scanned: number;
   aliases_imported: number;
   chinese_names_merged: number;
+  chinese_names_total: number;
   removed_mdata: number;
   removed_unnamed: number;
   sources: Record<string, number>;
