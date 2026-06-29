@@ -1,16 +1,25 @@
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../lib/tauri';
-import type { AppConfig, SongInfo } from '../types';
+import type { SongInfo } from '../types';
+
+type DifficultyTier = 'easy' | 'normal' | 'hard' | 'extreme' | 'exextreme';
+
+const DIFFICULTY_BUTTONS: { key: DifficultyTier; label: string }[] = [
+  { key: 'easy', label: '简单' },
+  { key: 'normal', label: '普通' },
+  { key: 'hard', label: '困难' },
+  { key: 'extreme', label: '极限' },
+  { key: 'exextreme', label: 'EX极限' },
+];
 
 export default function LibraryPage() {
   const [songs, setSongs] = useState<SongInfo[]>([]);
   const [query, setQuery] = useState('');
   const [message, setMessage] = useState('');
-  const [difficultyTier, setDifficultyTier] = useState('extreme');
+  const [switchingKey, setSwitchingKey] = useState<string | null>(null);
 
   useEffect(() => {
     api.getAllSongs().then(setSongs).catch((error) => setMessage(String(error)));
-    api.getConfig().then((cfg) => setDifficultyTier(cfg.default_search_difficulty)).catch(() => {});
   }, []);
 
   const filtered = useMemo(() => {
@@ -21,12 +30,17 @@ export default function LibraryPage() {
       .slice(0, 300);
   }, [query, songs]);
 
-  async function jump(songId: number) {
+  async function jump(song: SongInfo, tier: DifficultyTier) {
+    const actionKey = `${song.pv_id}:${tier}`;
+    setSwitchingKey(actionKey);
     try {
-      const result = await api.changeSong(songId, difficultyTier);
-      setMessage(result);
+      const result = await api.changeSong(song.pv_id, tier);
+      const label = DIFFICULTY_BUTTONS.find((item) => item.key === tier)?.label ?? tier;
+      setMessage(`${result}（${song.name_zh || song.name} · ${label}）`);
     } catch (error) {
       setMessage(String(error));
+    } finally {
+      setSwitchingKey(null);
     }
   }
 
@@ -43,8 +57,7 @@ export default function LibraryPage() {
               <span className="mono">#{song.pv_id}</span>
               <div><strong>{song.name_zh || song.name}</strong><span>{song.name}{song.name_en ? ` · ${song.name_en}` : ''}</span></div>
               <span>{song.authors[0] || '未知作者'}</span>
-              <span>{formatDifficulty(song.difficulty)}</span>
-              <button type="button" className="ghost-button" onClick={() => jump(song.pv_id)}>立即切歌</button>
+              <DifficultyButtons song={song} switchingKey={switchingKey} onJump={jump} />
             </div>
           ))}
         </div>
@@ -54,6 +67,39 @@ export default function LibraryPage() {
   );
 }
 
-function formatDifficulty(difficulty: Record<string, number>) {
-  return ['easy', 'normal', 'hard', 'extreme', 'exextreme'].filter((key) => difficulty[key]).map((key) => `${key}:${difficulty[key]}`).join(' / ') || '无难度信息';
+function DifficultyButtons({
+  song,
+  switchingKey,
+  onJump,
+}: {
+  song: SongInfo;
+  switchingKey: string | null;
+  onJump: (song: SongInfo, tier: DifficultyTier) => void;
+}) {
+  const available = DIFFICULTY_BUTTONS.filter(({ key }) => song.difficulty[key] !== undefined);
+  if (available.length === 0) {
+    return <span className="difficulty-empty">无难度信息</span>;
+  }
+
+  return (
+    <div className="library-difficulty-buttons" aria-label={`${song.name_zh || song.name} 可选难度`}>
+      {available.map(({ key, label }) => {
+        const actionKey = `${song.pv_id}:${key}`;
+        const level = song.difficulty[key];
+        return (
+          <button
+            key={key}
+            type="button"
+            className={`difficulty-jump difficulty-${key}`}
+            disabled={switchingKey !== null}
+            title={`切换到 ${song.name_zh || song.name} 的${label}难度`}
+            onClick={() => onJump(song, key)}
+          >
+            <span>{switchingKey === actionKey ? '切换中' : label}</span>
+            <strong>{level.toFixed(1)}</strong>
+          </button>
+        );
+      })}
+    </div>
+  );
 }
