@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import type { MouseEvent, ReactNode } from 'react';
+import packageJson from '../../package.json';
 import ThemeToggle from './ThemeToggle';
 
 const SongIcon = (
@@ -79,7 +80,7 @@ export default function Layout({ children }: LayoutProps) {
           </nav>
           <div className="sidebar-footer">
             <ThemeToggle />
-            <div className="mini-note">Powered by Milkchan</div>
+            <div className="mini-note">v{packageJson.version} Powered by Milkchan</div>
           </div>
         </aside>
         <main className="content">{children}</main>
