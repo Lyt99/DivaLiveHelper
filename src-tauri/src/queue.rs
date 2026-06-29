@@ -153,3 +153,192 @@ fn now_timestamp() -> f64 {
         .map(|duration| duration.as_secs_f64())
         .unwrap_or_default()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// 构造一条测试歌曲请求，简化测试样板
+    fn make_request(song_id: u32) -> SongRequest {
+        SongRequest {
+            song_id,
+            song_name: format!("Song {song_id}"),
+            requester: "tester".to_string(),
+            timestamp: 1000.0 + song_id as f64,
+            difficulty: Some(8.0),
+            difficulty_tier: "extreme".to_string(),
+        }
+    }
+
+    // ----------------- add -----------------
+
+    #[test]
+    fn add_returns_true_for_new_song() {
+        let queue = SongQueue::new(10, false);
+        assert!(queue.add(1, "A".into(), "u1".into(), Some(8.0), "extreme".into()));
+        assert_eq!(queue.list().len(), 1);
+    }
+
+    #[test]
+    fn add_rejects_duplicate_when_duplicates_disabled() {
+        let queue = SongQueue::new(10, false);
+        assert!(queue.add(1, "A".into(), "u1".into(), Some(8.0), "extreme".into()));
+        assert!(!queue.add(1, "A again".into(), "u2".into(), Some(9.0), "extreme".into()));
+        assert_eq!(queue.list().len(), 1);
+    }
+
+    #[test]
+    fn add_allows_duplicate_when_duplicates_enabled() {
+        let queue = SongQueue::new(10, true);
+        assert!(queue.add(1, "A".into(), "u1".into(), Some(8.0), "extreme".into()));
+        assert!(queue.add(1, "A again".into(), "u2".into(), Some(9.0), "extreme".into()));
+        assert_eq!(queue.list().len(), 2);
+    }
+
+    #[test]
+    fn add_rejects_when_queue_full() {
+        let queue = SongQueue::new(2, false);
+        assert!(queue.add(1, "A".into(), "u".into(), None, "extreme".into()));
+        assert!(queue.add(2, "B".into(), "u".into(), None, "extreme".into()));
+        assert!(!queue.add(3, "C".into(), "u".into(), None, "extreme".into()));
+        assert_eq!(queue.list().len(), 2);
+    }
+
+    #[test]
+    fn add_with_none_difficulty_is_stored() {
+        let queue = SongQueue::new(10, false);
+        assert!(queue.add(1, "A".into(), "u".into(), None, "extreme".into()));
+        let item = &queue.list()[0];
+        assert_eq!(item.difficulty, None);
+    }
+
+    // ----------------- next / complete / requeue_front -----------------
+
+    #[test]
+    fn next_returns_fifo_order() {
+        let queue = SongQueue::new(10, false);
+        queue.add(1, "A".into(), "u".into(), None, "extreme".into());
+        queue.add(2, "B".into(), "u".into(), None, "extreme".into());
+        let first = queue.next();
+        assert_eq!(first.unwrap().song_id, 1);
+        let second = queue.next();
+        assert_eq!(second.unwrap().song_id, 2);
+        assert!(queue.next().is_none());
+    }
+
+    #[test]
+    fn next_on_empty_returns_none() {
+        let queue = SongQueue::new(10, false);
+        assert!(queue.next().is_none());
+    }
+
+    #[test]
+    fn complete_writes_to_history() {
+        let queue = SongQueue::new(10, false);
+        let req = make_request(1);
+        queue.complete(req.clone());
+        let history = queue.history();
+        assert_eq!(history.len(), 1);
+        assert_eq!(history[0].song_id, 1);
+    }
+
+    #[test]
+    fn requeue_front_puts_song_at_head() {
+        let queue = SongQueue::new(10, false);
+        queue.add(1, "A".into(), "u".into(), None, "extreme".into());
+        queue.add(2, "B".into(), "u".into(), None, "extreme".into());
+        // 模拟切歌失败：把第 1 首放回队首
+        let first = queue.next().unwrap();
+        queue.requeue_front(first);
+        assert_eq!(queue.list()[0].song_id, 1);
+        assert_eq!(queue.list()[1].song_id, 2);
+    }
+
+    #[test]
+    fn next_does_not_auto_complete() {
+        // next() 只出队，不写历史 —— 调用方需显式 complete()
+        let queue = SongQueue::new(10, false);
+        queue.add(1, "A".into(), "u".into(), None, "extreme".into());
+        let _ = queue.next();
+        assert!(queue.history().is_empty());
+    }
+
+    // ----------------- remove -----------------
+
+    #[test]
+    fn remove_existing_song_succeeds() {
+        let queue = SongQueue::new(10, false);
+        queue.add(1, "A".into(), "u".into(), None, "extreme".into());
+        queue.add(2, "B".into(), "u".into(), None, "extreme".into());
+        assert!(queue.remove(1));
+        assert_eq!(queue.list().len(), 1);
+        assert_eq!(queue.list()[0].song_id, 2);
+    }
+
+    #[test]
+    fn remove_nonexistent_returns_false() {
+        let queue = SongQueue::new(10, false);
+        queue.add(1, "A".into(), "u".into(), None, "extreme".into());
+        assert!(!queue.remove(999));
+        assert_eq!(queue.list().len(), 1);
+    }
+
+    #[test]
+    fn remove_from_empty_queue_returns_false() {
+        let queue = SongQueue::new(10, false);
+        assert!(!queue.remove(1));
+    }
+
+    // ----------------- clear -----------------
+
+    #[test]
+    fn clear_empties_queue_but_not_history() {
+        let queue = SongQueue::new(10, false);
+        queue.add(1, "A".into(), "u".into(), None, "extreme".into());
+        queue.add(2, "B".into(), "u".into(), None, "extreme".into());
+        queue.complete(make_request(0));
+        queue.clear();
+        assert!(queue.list().is_empty());
+        assert_eq!(queue.history().len(), 1);
+    }
+
+    // ----------------- snapshot -----------------
+
+    #[test]
+    fn snapshot_reflects_current_state() {
+        let queue = SongQueue::new(50, false);
+        queue.add(1, "A".into(), "u".into(), Some(8.0), "extreme".into());
+        queue.add(2, "B".into(), "u".into(), Some(9.0), "exextreme".into());
+        let snap = queue.snapshot();
+        assert_eq!(snap.size, 2);
+        assert_eq!(snap.max_size, 50);
+        assert!(!snap.allow_duplicates);
+        assert_eq!(snap.songs.len(), 2);
+        assert_eq!(snap.songs[0].position, 1);
+        assert_eq!(snap.songs[1].position, 2);
+        assert_eq!(snap.songs[0].request.song_id, 1);
+    }
+
+    #[test]
+    fn snapshot_history_is_reversed_and_capped_at_5() {
+        let queue = SongQueue::new(50, false);
+        for i in 0..7 {
+            queue.complete(make_request(i));
+        }
+        let snap = queue.snapshot();
+        assert_eq!(snap.history.len(), 5);
+        // 最新的在前
+        assert_eq!(snap.history[0].song_id, 6);
+        assert_eq!(snap.history[4].song_id, 2);
+    }
+
+    #[test]
+    fn snapshot_empty_queue() {
+        let queue = SongQueue::new(10, true);
+        let snap = queue.snapshot();
+        assert_eq!(snap.size, 0);
+        assert!(snap.songs.is_empty());
+        assert!(snap.history.is_empty());
+        assert!(snap.allow_duplicates);
+    }
+}
