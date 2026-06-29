@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="DIVA直播助手图标">
+  <defs>
+    <linearGradient id="base" x1="128" y1="96" x2="896" y2="928" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#101824"/><stop offset="0.52" stop-color="#0d1117"/><stop offset="1" stop-color="#181126"/>
+    </linearGradient>
+    <radialGradient id="cyanGlow" cx="330" cy="270" r="430" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#39C5BB" stop-opacity="0.95"/><stop offset="1" stop-color="#39C5BB" stop-opacity="0"/></radialGradient>
+    <radialGradient id="pinkGlow" cx="750" cy="770" r="430" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E12885" stop-opacity="0.9"/><stop offset="1" stop-color="#E12885" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ribbon" x1="228" y1="722" x2="814" y2="302" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#39C5BB"/><stop offset="1" stop-color="#E12885"/></linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="34" stdDeviation="36" flood-color="#000000" flood-opacity="0.38"/></filter>
+  </defs>
+  <rect x="64" y="64" width="896" height="896" rx="218" fill="url(#base)"/>
+  <rect x="64" y="64" width="896" height="896" rx="218" fill="url(#cyanGlow)"/>
+  <rect x="64" y="64" width="896" height="896" rx="218" fill="url(#pinkGlow)"/>
+  <path d="M148 694C270 600 330 450 454 384c126-67 245-31 421-168" fill="none" stroke="#39C5BB" stroke-width="42" stroke-linecap="round" opacity="0.22"/>
+  <path d="M160 730c152-88 222-36 348-114 118-73 144-224 356-282" fill="none" stroke="url(#ribbon)" stroke-width="76" stroke-linecap="round" opacity="0.9"/>
+  <path d="M308 304H202v224h106" fill="none" stroke="#39C5BB" stroke-width="58" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
+  <path d="M716 304h106v224H716" fill="none" stroke="#E12885" stroke-width="58" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
+  <g filter="url(#softShadow)">
+    <circle cx="404" cy="694" r="88" fill="#F7FFFF"/>
+    <circle cx="640" cy="646" r="82" fill="#F7FFFF"/>
+    <rect x="478" y="318" width="58" height="378" rx="20" fill="#F7FFFF"/>
+    <rect x="704" y="270" width="58" height="372" rx="20" fill="#F7FFFF"/>
+    <path d="M507 338 733 290" fill="none" stroke="#F7FFFF" stroke-width="78" stroke-linecap="round"/>
+    <circle cx="404" cy="694" r="101" fill="none" stroke="#39C5BB" stroke-width="18" opacity="0.72"/>
+    <circle cx="640" cy="646" r="95" fill="none" stroke="#39C5BB" stroke-width="18" opacity="0.72"/>
+    <path d="M507 338 733 290" fill="none" stroke="#39C5BB" stroke-width="96" stroke-linecap="round" opacity="0.28"/>
+  </g>
+  <circle cx="676" cy="612" r="24" fill="#39C5BB"/><circle cx="746" cy="612" r="24" fill="#F7FFFF" opacity="0.92"/><circle cx="816" cy="612" r="24" fill="#E12885"/>
+  <path d="M304 842h126" stroke="#39C5BB" stroke-width="24" stroke-linecap="round" opacity="0.55"/>
+  <path d="M466 842h96" stroke="#F7FFFF" stroke-width="24" stroke-linecap="round" opacity="0.38"/>
+  <path d="M598 842h126" stroke="#E12885" stroke-width="24" stroke-linecap="round" opacity="0.55"/>
+  <rect x="64" y="64" width="896" height="896" rx="218" fill="none" stroke="#ffffff" stroke-width="12" opacity="0.12"/>
+</svg>
