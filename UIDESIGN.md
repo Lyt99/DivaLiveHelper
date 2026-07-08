@@ -291,16 +291,18 @@ transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
     <path d="M10 1 L12.1 7.1 L18.6 7.2 L13.4 11.1 L15.3 17.3 L10 13.6 L4.7 17.3 L6.6 11.1 L1.4 7.2 L7.9 7.1 Z" />
   </svg>
   8.0
+  <span class="difficulty-jump-label">极限</span>
 </button>
 ```
 
-- 显示星级图标 + 数值（如 `★ 8.0`），难度名称放在 `title` 提示中，避免视觉拥挤
+- 显示星级图标 + 数值 + 难度名称（如 `★ 8.0 极限`），单行排列
 - 星级图标：11×11 内联 SVG，五角星实心，`fill="currentColor"`（白色），`aria-hidden="true"`
+- 难度名称（`.difficulty-jump-label`）：UI 字体族，12px / 600，`opacity: 0.9` 与星级数值形成层次
 - 纯色背景（`var(--difficulty-color)`），白字
 - 边框 `color-mix(70% 难度色, 30% 黑)`
-- `border-radius: 6px; padding: 4px 10px; min-width: 52px`
-- 单行布局：`display: inline-flex; align-items: center; justify-content: center; gap: 4px; line-height: 1`
-- 字体：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 700
+- `border-radius: 6px; padding: 4px 9px`
+- 单行布局：`display: inline-flex; align-items: center; justify-content: center; gap: 5px; line-height: 1`
+- 字体（数值部分）：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 700
 - hover: `brightness(1.12)`，不位移
 - focus-visible: 2px outline（难度色 55% + 白 45%）
 - disabled: `cursor: wait`（配合全局 opacity）

@@ -98,6 +98,7 @@ function DifficultyButtons({
               <path d="M10 1 L12.1 7.1 L18.6 7.2 L13.4 11.1 L15.3 17.3 L10 13.6 L4.7 17.3 L6.6 11.1 L1.4 7.2 L7.9 7.1 Z" />
             </svg>
             {level.toFixed(1)}
+            <span className="difficulty-jump-label">{label}</span>
           </button>
         );
       })}
