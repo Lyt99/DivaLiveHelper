@@ -955,32 +955,40 @@ input[type='checkbox'] {
 
 .difficulty-jump {
   --difficulty-color: var(--miku);
+  --difficulty-text: #1a1a1a;
+  min-width: 64px;
   border: 1px solid color-mix(in srgb, var(--difficulty-color) 70%, #000 30%);
   border-radius: 6px;
-  padding: 4px 9px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  color: #fff;
+  padding: 4px 8px;
+  display: grid;
+  gap: 1px;
+  justify-items: center;
+  color: var(--difficulty-text);
   background: var(--difficulty-color);
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
   transition: filter 120ms ease;
 }
 
-.difficulty-jump svg {
-  flex: none;
+.difficulty-jump-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.1;
 }
 
-.difficulty-jump-label {
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.9;
+.difficulty-jump-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--difficulty-text);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.difficulty-jump-rating svg {
+  flex: none;
 }
 
 .difficulty-jump:hover:not(:disabled) {
@@ -999,8 +1007,8 @@ input[type='checkbox'] {
 .difficulty-easy { --difficulty-color: #009CC2; }
 .difficulty-normal { --difficulty-color: #1AB406; }
 .difficulty-hard { --difficulty-color: #D99800; }
-.difficulty-extreme { --difficulty-color: #DA011E; }
-.difficulty-exextreme { --difficulty-color: #A90EEA; }
+.difficulty-extreme { --difficulty-color: #DA011E; --difficulty-text: #fff; }
+.difficulty-exextreme { --difficulty-color: #A90EEA; --difficulty-text: #fff; }
 
 .difficulty-empty {
   color: var(--muted);

@@ -287,22 +287,27 @@ transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
 
 ```html
 <button class="difficulty-jump difficulty-extreme" onClick={...} title="切换到 恋爱战争 的极限难度（8.0 星）">
-  <svg width="11" height="11" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-    <path d="M10 1 L12.1 7.1 L18.6 7.2 L13.4 11.1 L15.3 17.3 L10 13.6 L4.7 17.3 L6.6 11.1 L1.4 7.2 L7.9 7.1 Z" />
-  </svg>
-  8.0
   <span class="difficulty-jump-label">极限</span>
+  <span class="difficulty-jump-rating">
+    <svg width="11" height="11" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M10 1 L12.1 7.1 L18.6 7.2 L13.4 11.1 L15.3 17.3 L10 13.6 L4.7 17.3 L6.6 11.1 L1.4 7.2 L7.9 7.1 Z" />
+    </svg>
+    8.0
+  </span>
 </button>
 ```
 
-- 显示星级图标 + 数值 + 难度名称（如 `★ 8.0 极限`），单行排列
-- 星级图标：11×11 内联 SVG，五角星实心，`fill="currentColor"`（白色），`aria-hidden="true"`
-- 难度名称（`.difficulty-jump-label`）：UI 字体族，12px / 600，`opacity: 0.9` 与星级数值形成层次
-- 纯色背景（`var(--difficulty-color)`），白字
+- 两行布局：上行难度名称（`.difficulty-jump-label`），下行星级图标 + 数值（`.difficulty-jump-rating`）
+- 难度名称：11px / 800 / `letter-spacing: .02em` / `line-height: 1.1`
+- 星级图标：11×11 内联 SVG，五角星实心，`fill="currentColor"`（继承文字色），`aria-hidden="true"`
+- 星级数值：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 800 / `line-height: 1.1`
+- 文字色 `--difficulty-text`：根据背景明度自动切换
+  - 浅色背景（简单/普通/困难）：`#1a1a1a`（深色文字，保证对比度）
+  - 深色背景（极限/EX极限）：`#fff`（白色文字）
+- 纯色背景（`var(--difficulty-color)`）
 - 边框 `color-mix(70% 难度色, 30% 黑)`
-- `border-radius: 6px; padding: 4px 9px`
-- 单行布局：`display: inline-flex; align-items: center; justify-content: center; gap: 5px; line-height: 1`
-- 字体（数值部分）：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 700
+- `border-radius: 6px; padding: 4px 8px; min-width: 64px`
+- 网格布局：`display: grid; gap: 1px; justify-items: center; align-items: center`
 - hover: `brightness(1.12)`，不位移
 - focus-visible: 2px outline（难度色 55% + 白 45%）
 - disabled: `cursor: wait`（配合全局 opacity）
