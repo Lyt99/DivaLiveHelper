@@ -286,15 +286,17 @@ transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
 ### 8.4 难度芯片
 
 ```html
-<button class="difficulty-jump difficulty-extreme" onClick={...}>
-  <span>极限</span>
-  <strong>9.5</strong>
+<button class="difficulty-jump difficulty-extreme" onClick={...} title="切换到 恋爱战争 的极限难度（8.0 星）">
+  8.0
 </button>
 ```
 
+- 仅显示星级数值（如 `8.0`），难度名称放在 `title` 提示中，避免视觉拥挤
 - 纯色背景（`var(--difficulty-color)`），白字
 - 边框 `color-mix(70% 难度色, 30% 黑)`
-- `border-radius: 6px; padding: 4px 8px`
+- `border-radius: 6px; padding: 4px 10px; min-width: 44px`
+- 单行布局：`display: inline-flex; align-items: center; justify-content: center; line-height: 1`
+- 字体：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 700
 - hover: `brightness(1.12)`，不位移
 - focus-visible: 2px outline（难度色 55% + 白 45%）
 - disabled: `cursor: wait`（配合全局 opacity）

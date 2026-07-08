@@ -948,22 +948,27 @@ input[type='checkbox'] {
 .library-difficulty-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 6px;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .difficulty-jump {
   --difficulty-color: var(--miku);
-  min-width: 64px;
+  min-width: 44px;
   border: 1px solid color-mix(in srgb, var(--difficulty-color) 70%, #000 30%);
   border-radius: 6px;
-  padding: 4px 8px;
-  display: grid;
-  gap: 1px;
-  justify-items: center;
+  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   background: var(--difficulty-color);
+  font-family: var(--mono);
+  font-size: 13px;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
   transition: filter 120ms ease;
 }
 
@@ -978,22 +983,6 @@ input[type='checkbox'] {
 .difficulty-jump:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--difficulty-color) 55%, #ffffff 45%);
   outline-offset: 2px;
-}
-
-.difficulty-jump span {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .02em;
-  line-height: 1.1;
-}
-
-.difficulty-jump strong {
-  margin: 0;
-  color: #fff;
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 800;
-  line-height: 1.1;
 }
 
 .difficulty-easy { --difficulty-color: #009CC2; }

@@ -84,7 +84,6 @@ function DifficultyButtons({
   return (
     <div className="library-difficulty-buttons" aria-label={`${song.name_zh || song.name} 可选难度`}>
       {available.map(({ key, label }) => {
-        const actionKey = `${song.pv_id}:${key}`;
         const level = song.difficulty[key];
         return (
           <button
@@ -92,11 +91,10 @@ function DifficultyButtons({
             type="button"
             className={`difficulty-jump difficulty-${key}`}
             disabled={switchingKey !== null}
-            title={`切换到 ${song.name_zh || song.name} 的${label}难度`}
+            title={`切换到 ${song.name_zh || song.name} 的${label}难度（${level.toFixed(1)} 星）`}
             onClick={() => onJump(song, key)}
           >
-            <span>{switchingKey === actionKey ? '切换中' : label}</span>
-            <strong>{level.toFixed(1)}</strong>
+            {level.toFixed(1)}
           </button>
         );
       })}
