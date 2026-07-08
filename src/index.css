@@ -955,13 +955,14 @@ input[type='checkbox'] {
 
 .difficulty-jump {
   --difficulty-color: var(--miku);
-  min-width: 44px;
+  min-width: 52px;
   border: 1px solid color-mix(in srgb, var(--difficulty-color) 70%, #000 30%);
   border-radius: 6px;
   padding: 4px 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
   color: #fff;
   background: var(--difficulty-color);
   font-family: var(--mono);
@@ -970,6 +971,10 @@ input[type='checkbox'] {
   font-variant-numeric: tabular-nums;
   line-height: 1;
   transition: filter 120ms ease;
+}
+
+.difficulty-jump svg {
+  flex: none;
 }
 
 .difficulty-jump:hover:not(:disabled) {

@@ -287,15 +287,19 @@ transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
 
 ```html
 <button class="difficulty-jump difficulty-extreme" onClick={...} title="切换到 恋爱战争 的极限难度（8.0 星）">
+  <svg width="11" height="11" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <path d="M10 1 L12.1 7.1 L18.6 7.2 L13.4 11.1 L15.3 17.3 L10 13.6 L4.7 17.3 L6.6 11.1 L1.4 7.2 L7.9 7.1 Z" />
+  </svg>
   8.0
 </button>
 ```
 
-- 仅显示星级数值（如 `8.0`），难度名称放在 `title` 提示中，避免视觉拥挤
+- 显示星级图标 + 数值（如 `★ 8.0`），难度名称放在 `title` 提示中，避免视觉拥挤
+- 星级图标：11×11 内联 SVG，五角星实心，`fill="currentColor"`（白色），`aria-hidden="true"`
 - 纯色背景（`var(--difficulty-color)`），白字
 - 边框 `color-mix(70% 难度色, 30% 黑)`
-- `border-radius: 6px; padding: 4px 10px; min-width: 44px`
-- 单行布局：`display: inline-flex; align-items: center; justify-content: center; line-height: 1`
+- `border-radius: 6px; padding: 4px 10px; min-width: 52px`
+- 单行布局：`display: inline-flex; align-items: center; justify-content: center; gap: 4px; line-height: 1`
 - 字体：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 700
 - hover: `brightness(1.12)`，不位移
 - focus-visible: 2px outline（难度色 55% + 白 45%）
