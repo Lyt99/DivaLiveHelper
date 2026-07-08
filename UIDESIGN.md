@@ -301,9 +301,7 @@ transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
 - 难度名称：11px / 800 / `letter-spacing: .02em` / `line-height: 1.1`
 - 星级图标：11×11 内联 SVG，五角星实心，`fill="currentColor"`（继承文字色），`aria-hidden="true"`
 - 星级数值：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 800 / `line-height: 1.1`
-- 文字色 `--difficulty-text`：根据背景明度自动切换
-  - 浅色背景（简单/普通/困难）：`#1a1a1a`（深色文字，保证对比度）
-  - 深色背景（极限/EX极限）：`#fff`（白色文字）
+- 文字色：统一 `#fff`（白色），覆盖所有难度色
 - 纯色背景（`var(--difficulty-color)`）
 - 边框 `color-mix(70% 难度色, 30% 黑)`
 - `border-radius: 6px; padding: 4px 8px; min-width: 64px`
