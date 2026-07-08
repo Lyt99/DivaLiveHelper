@@ -533,9 +533,7 @@ fn parse_danmaku_event(app: &AppHandle, value: Value) -> Option<DanmakuEvent> {
     let content = info.get(1)?.as_str()?.to_string();
     let user_name = info.get(2)?.as_array()?.get(1)?.as_str()?.to_string();
     Some(DanmakuEvent {
-        is_song_request: content
-            .trim_start()
-            .starts_with(&config.song_command_prefix),
+        is_song_request: strip_command_prefix(&content, &config.song_command_prefix).is_some(),
         user_name,
         content,
         timestamp: now_timestamp(),
@@ -552,15 +550,12 @@ pub(crate) async fn process_song_request(
     };
 
     if event.is_song_request {
-        let raw = event
-            .content
-            .trim_start()
-            .trim_start_matches(&config.song_command_prefix)
-            .trim();
-        if let Some(song_name) = parse_prefix_request(raw) {
+        let raw = strip_command_prefix(&event.content, &config.song_command_prefix)
+            .unwrap_or_else(|| event.content.trim().to_string());
+        if let Some(song_name) = parse_prefix_request(&raw) {
             return enqueue_song(app, &song_name, &event.user_name, &config);
         }
-        return SongProcessOutcome::miss(&event.user_name, raw, "已识别点歌前缀，但缺少歌曲名");
+        return SongProcessOutcome::miss(&event.user_name, &raw, "已识别点歌前缀，但缺少歌曲名");
     }
 
     if !config.llm_enabled {
@@ -729,6 +724,14 @@ fn parse_prefix_request(raw: &str) -> Option<String> {
     Some(raw.to_string())
 }
 
+pub(crate) fn strip_command_prefix(content: &str, prefix: &str) -> Option<String> {
+    let cleaned = strip_danmaku_emojis(content);
+    let trimmed = cleaned.trim_start();
+    trimmed
+        .strip_prefix(prefix)
+        .map(|request| request.trim().to_string())
+}
+
 /// 去除弹幕文本中的 B站小表情代码（`[xxx]` 格式，如 `[喝彩]`、`[doge]`、`[2233娘]`）。
 ///
 /// 这些表情在弹幕 `info[1]` 文本字段中以方括号字面量出现，会干扰歌名搜索。
@@ -883,6 +886,31 @@ mod tests {
         assert_eq!(parse_prefix_request(""), None);
         assert_eq!(parse_prefix_request("   "), None);
         assert_eq!(parse_prefix_request("\t\n"), None);
+    }
+
+    #[test]
+    fn strip_command_prefix_ignores_danmaku_emojis_before_prefix() {
+        assert_eq!(
+            strip_command_prefix("[喝彩]点歌 Fire Flower", "点歌"),
+            Some("Fire Flower".to_string())
+        );
+        assert_eq!(
+            strip_command_prefix(" [doge][妙啊]点歌 千本桜", "点歌"),
+            Some("千本桜".to_string())
+        );
+    }
+
+    #[test]
+    fn strip_command_prefix_removes_danmaku_emojis_inside_query() {
+        assert_eq!(
+            strip_command_prefix("点歌 [喝彩]Fire◎Flower[doge]", "点歌"),
+            Some("Fire◎Flower".to_string())
+        );
+    }
+
+    #[test]
+    fn strip_command_prefix_returns_none_without_prefix_after_emoji_strip() {
+        assert_eq!(strip_command_prefix("[喝彩]普通弹幕", "点歌"), None);
     }
 
     // ----------------- encode_packet / decode_packets -----------------
@@ -1067,7 +1095,10 @@ mod tests {
     // ----------------- DanmakuInfo::websocket_urls -----------------
 
     fn make_host(host: &str, wss_port: u64) -> DanmakuHost {
-        DanmakuHost { host: host.to_string(), wss_port }
+        DanmakuHost {
+            host: host.to_string(),
+            wss_port,
+        }
     }
 
     #[test]
@@ -1084,7 +1115,11 @@ mod tests {
     fn websocket_urls_filters_empty_host_and_zero_port() {
         let info = DanmakuInfo {
             token: "tok".to_string(),
-            hosts: vec![make_host("", 443), make_host("b.com", 0), make_host("c.com", 712)],
+            hosts: vec![
+                make_host("", 443),
+                make_host("b.com", 0),
+                make_host("c.com", 712),
+            ],
         };
         let urls = info.websocket_urls();
         assert_eq!(urls, vec!["wss://c.com:712/sub"]);
