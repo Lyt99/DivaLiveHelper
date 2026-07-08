@@ -935,7 +935,7 @@
       "pv_id": 61,
       "name": "クローバー・クラブ",
       "name_en": "Clover♣Club",
-      "name_zh": "Clover♣Club",
+      "name_zh": "四叶草俱乐部",
       "aliases": [],
       "authors": [
         "ゆうゆ"
@@ -3996,23 +3996,6 @@
         "normal": 4.0,
         "hard": 6.0,
         "extreme": 9.0
-      },
-      "source": "base"
-    },
-    "700": {
-      "pv_id": 700,
-      "name": "Ievan Polkka",
-      "name_en": "",
-      "name_zh": "Ievan Polkka",
-      "aliases": [],
-      "authors": [
-        "未設定"
-      ],
-      "difficulty": {
-        "easy": 1.0,
-        "normal": 1.0,
-        "hard": 1.0,
-        "extreme": 1.0
       },
       "source": "base"
     },
