@@ -147,6 +147,10 @@ On first launch (no `config.json` next to the executable), the `is_first_run` co
 ### Chinese-name Loading
 `SongDatabase::load_with_chinese_names` first loads `song_db.json`, then applies the embedded `song_name_zh.json` (compiled in via `include_str!`) as the base, then overrides with the on-disk `data_dir/song_name_zh.json` if present. `SongEntry.name_zh` is `#[serde(skip)]` in `song_db.json`, so Chinese names are never persisted into `song_db.json` by the rebuild flow either — they must be propagated into `song_name_zh.json` (see `merge_chinese_names` in `db_tool.rs`). `BaseSongEntry.name_zh` is `#[serde(default)]`, so `base_song_db.json` itself does carry Chinese names.
 
+## UI Design
+
+See [`UIDESIGN.md`](./UIDESIGN.md) for the full design system: color tokens, typography, spacing, component patterns, and overlay window rules. All frontend changes must follow it.
+
 ## Conventions
 
 - Root directory is the Tauri project root; do not put the active Rust project under `app/`.
