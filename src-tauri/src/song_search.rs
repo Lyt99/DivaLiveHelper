@@ -96,10 +96,23 @@ impl SongSearcher {
         tolerance: f32,
     ) -> Vec<SearchResult> {
         let query_lower = query.to_lowercase();
+        let query_normalized = normalize_search_text(query);
         let mut candidates = Vec::new();
 
-        self.collect_matches(&self.name_to_ids, &query_lower, &mut candidates, false);
-        self.collect_matches(&self.name_to_ids_zh, &query_lower, &mut candidates, false);
+        self.collect_matches(
+            &self.name_to_ids,
+            &query_lower,
+            &query_normalized,
+            &mut candidates,
+            false,
+        );
+        self.collect_matches(
+            &self.name_to_ids_zh,
+            &query_lower,
+            &query_normalized,
+            &mut candidates,
+            false,
+        );
 
         if candidates.is_empty() {
             let converted = self.hanzi_to_kanji_convert(query);
@@ -107,6 +120,7 @@ impl SongSearcher {
                 self.collect_matches(
                     &self.name_to_ids,
                     &converted.to_lowercase(),
+                    &normalize_search_text(&converted),
                     &mut candidates,
                     false,
                 );
@@ -114,10 +128,22 @@ impl SongSearcher {
         }
 
         if candidates.is_empty() {
-            self.collect_matches(&self.alias_to_ids, &query_lower, &mut candidates, true);
+            self.collect_matches(
+                &self.alias_to_ids,
+                &query_lower,
+                &query_normalized,
+                &mut candidates,
+                true,
+            );
         }
 
-        self.collect_matches(&self.name_to_ids_en, &query_lower, &mut candidates, false);
+        self.collect_matches(
+            &self.name_to_ids_en,
+            &query_lower,
+            &query_normalized,
+            &mut candidates,
+            false,
+        );
         dedupe(&mut candidates);
 
         if let Some(target) = difficulty {
@@ -149,9 +175,13 @@ impl SongSearcher {
         tolerance: f32,
     ) -> Vec<SearchResult> {
         let author_lower = author.to_lowercase();
+        let author_normalized = normalize_search_text(author);
         let mut candidates = Vec::new();
         for (stored_author, ids) in &self.author_to_ids {
-            if stored_author.contains(&author_lower) {
+            if stored_author.contains(&author_lower)
+                || (!author_normalized.is_empty()
+                    && normalize_search_text(stored_author).contains(&author_normalized))
+            {
                 for pv_id in ids {
                     candidates.push((*pv_id, self.display_name(*pv_id)));
                 }
@@ -196,7 +226,10 @@ impl SongSearcher {
             return Some((level, difficulty_key.to_string()));
         }
         // Preferred tier not found — try adjacent tiers based on fallback direction
-        let Some(start) = Self::DIFFICULTY_TIERS.iter().position(|&t| t == difficulty_key) else {
+        let Some(start) = Self::DIFFICULTY_TIERS
+            .iter()
+            .position(|&t| t == difficulty_key)
+        else {
             return None;
         };
         let tiers: Vec<usize> = if fallback == "harder" {
@@ -223,11 +256,15 @@ impl SongSearcher {
         &self,
         index: &HashMap<String, Vec<u32>>,
         query_lower: &str,
+        query_normalized: &str,
         candidates: &mut Vec<(u32, String)>,
         use_display_name: bool,
     ) {
         for (name, ids) in index {
-            if name.to_lowercase().contains(query_lower) {
+            let name_lower = name.to_lowercase();
+            let normalized_match = !query_normalized.is_empty()
+                && normalize_search_text(name).contains(query_normalized);
+            if name_lower.contains(query_lower) || normalized_match {
                 for pv_id in ids {
                     let display = if use_display_name {
                         self.display_name(*pv_id)
@@ -306,6 +343,13 @@ fn dedupe(candidates: &mut Vec<(u32, String)>) {
     candidates.retain(|(pv_id, display_name)| seen.insert((*pv_id, display_name.clone())));
 }
 
+fn normalize_search_text(text: &str) -> String {
+    text.chars()
+        .flat_map(char::to_lowercase)
+        .filter(|character| character.is_alphanumeric())
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -315,9 +359,7 @@ mod tests {
     fn make_searcher(pv_id: u32, name: &str, difficulties: &[(&str, f32)]) -> SongSearcher {
         let mut searcher = SongSearcher::default();
         searcher.id_to_name.insert(pv_id, name.to_string());
-        searcher
-            .name_to_ids
-            .insert(name.to_string(), vec![pv_id]);
+        searcher.name_to_ids.insert(name.to_string(), vec![pv_id]);
         if !difficulties.is_empty() {
             let mut map = HashMap::new();
             for (tier, stars) in difficulties {
@@ -420,14 +462,93 @@ mod tests {
         assert_eq!(results[0].difficulty_tier, None);
     }
 
+    #[test]
+    fn search_is_case_insensitive_for_mixed_case_titles() {
+        // 用户输入不应必须和曲库标题大小写完全一致。
+        let searcher = make_searcher(12, "Fire◎Flower", &[("extreme", 8.0)]);
+        let results = searcher.search("fire◎flower", None, "extreme", "easier", 0.5);
+        assert_eq!(results.len(), 1);
+        assert_eq!(results[0].pv_id, 12);
+    }
+
+    #[test]
+    fn search_ignores_symbols_and_spaces_in_titles() {
+        // 回归测试：Fire◎Flower 中的 ◎ 难以输入，用户输入 fire flower 也应命中。
+        let searcher = make_searcher(13, "Fire◎Flower", &[("extreme", 8.0)]);
+        let results = searcher.search("fire flower", None, "extreme", "easier", 0.5);
+        assert_eq!(results.len(), 1);
+        assert_eq!(results[0].pv_id, 13);
+    }
+
+    #[test]
+    fn search_ignores_symbols_in_english_names() {
+        let mut searcher = make_searcher(14, "Japanese Title", &[("extreme", 8.0)]);
+        searcher.id_to_name_en.insert(14, "Shake it!".to_string());
+        searcher
+            .name_to_ids_en
+            .insert("Shake it!".to_string(), vec![14]);
+
+        let results = searcher.search("shakeit", None, "extreme", "easier", 0.5);
+        assert_eq!(results.len(), 1);
+        assert_eq!(results[0].pv_id, 14);
+    }
+
+    #[test]
+    fn search_ignores_symbols_in_aliases() {
+        let mut searcher = make_searcher(15, "Fire◎Flower", &[("extreme", 8.0)]);
+        searcher
+            .alias_to_ids
+            .insert("fire◎flower".to_string(), vec![15]);
+
+        let results = searcher.search("fire flower", None, "extreme", "easier", 0.5);
+        assert_eq!(results.len(), 1);
+        assert_eq!(results[0].pv_id, 15);
+    }
+
+    #[test]
+    fn search_by_author_ignores_symbols_and_case() {
+        let mut searcher = SongSearcher::default();
+        searcher.id_to_name.insert(16, "Author Song".to_string());
+        searcher
+            .id_to_author
+            .insert(16, "OSTER project".to_string());
+        searcher
+            .author_to_ids
+            .insert("oster project".to_string(), vec![16]);
+        searcher
+            .id_to_difficulty
+            .insert(16, HashMap::from([("extreme".to_string(), 8.0)]));
+
+        let results = searcher.search_by_author("oster-project", None, "extreme", "easier", 0.5);
+        assert_eq!(results.len(), 1);
+        assert_eq!(results[0].pv_id, 16);
+    }
+
+    #[test]
+    fn normalize_search_text_lowercases_and_keeps_cjk() {
+        assert_eq!(normalize_search_text("Fire◎Flower"), "fireflower");
+        assert_eq!(normalize_search_text("fire flower"), "fireflower");
+        assert_eq!(normalize_search_text("FIRE-FLOWER!!"), "fireflower");
+        assert_eq!(normalize_search_text("千本桜"), "千本桜");
+        assert_eq!(
+            normalize_search_text("みくみくにしてあげる♪"),
+            "みくみくにしてあげる"
+        );
+        assert_eq!(normalize_search_text("!!!!"), "");
+    }
+
     // ----------------- filter_by_difficulty -----------------
 
     #[test]
     fn filter_by_difficulty_keeps_songs_within_tolerance_window() {
         // target=8.0, tolerance=0.5 → [7.5, 8.5] 范围内的歌曲保留
         let mut searcher = SongSearcher::default();
-        searcher.id_to_difficulty.insert(100, HashMap::from([("extreme".to_string(), 8.0)]));
-        searcher.id_to_difficulty.insert(101, HashMap::from([("extreme".to_string(), 8.3)]));
+        searcher
+            .id_to_difficulty
+            .insert(100, HashMap::from([("extreme".to_string(), 8.0)]));
+        searcher
+            .id_to_difficulty
+            .insert(101, HashMap::from([("extreme".to_string(), 8.3)]));
         let candidates = vec![(100, "A".to_string()), (101, "B".to_string())];
         let kept = searcher.filter_by_difficulty(candidates, 8.0, "extreme", 0.5);
         let kept_ids: Vec<u32> = kept.iter().map(|(id, _)| *id).collect();
@@ -438,8 +559,12 @@ mod tests {
     fn filter_by_difficulty_drops_songs_outside_tolerance() {
         // target=8.0, tolerance=0.5 → 9.5 超出 [7.5, 8.5] 被剔除
         let mut searcher = SongSearcher::default();
-        searcher.id_to_difficulty.insert(100, HashMap::from([("extreme".to_string(), 8.0)]));
-        searcher.id_to_difficulty.insert(101, HashMap::from([("extreme".to_string(), 9.5)]));
+        searcher
+            .id_to_difficulty
+            .insert(100, HashMap::from([("extreme".to_string(), 8.0)]));
+        searcher
+            .id_to_difficulty
+            .insert(101, HashMap::from([("extreme".to_string(), 9.5)]));
         let candidates = vec![(100, "A".to_string()), (101, "B".to_string())];
         let kept = searcher.filter_by_difficulty(candidates, 8.0, "extreme", 0.5);
         let kept_ids: Vec<u32> = kept.iter().map(|(id, _)| *id).collect();
@@ -450,7 +575,9 @@ mod tests {
     fn filter_by_difficulty_keeps_songs_missing_requested_tier() {
         // 歌曲没有请求的档位 → 保留（不参与过滤）
         let mut searcher = SongSearcher::default();
-        searcher.id_to_difficulty.insert(100, HashMap::from([("hard".to_string(), 5.0)]));
+        searcher
+            .id_to_difficulty
+            .insert(100, HashMap::from([("hard".to_string(), 5.0)]));
         let candidates = vec![(100, "A".to_string())];
         let kept = searcher.filter_by_difficulty(candidates, 9.0, "exextreme", 0.5);
         assert_eq!(kept.len(), 1);
@@ -474,7 +601,9 @@ mod tests {
         searcher.id_to_name.insert(20, "Miku Song".to_string());
         searcher.id_to_author.insert(20, "ryo".to_string());
         searcher.author_to_ids.insert("ryo".to_string(), vec![20]);
-        searcher.id_to_difficulty.insert(20, HashMap::from([("extreme".to_string(), 8.0)]));
+        searcher
+            .id_to_difficulty
+            .insert(20, HashMap::from([("extreme".to_string(), 8.0)]));
 
         let results = searcher.search_by_author("ryo", None, "exextreme", "easier", 0.5);
         assert_eq!(results.len(), 1);
