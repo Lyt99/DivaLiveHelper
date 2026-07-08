@@ -58,6 +58,15 @@ h1, h2, p { margin: 0; }
  *  Body
  * ===================================================================== */
 
+/* 悬浮窗标记 <html data-window="overlay">，全局样式不应用到悬浮窗 */
+html[data-window='overlay'] body {
+  margin: 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
 body {
   margin: 0;
   min-width: 860px;
@@ -444,6 +453,23 @@ h2 {
 
 .room-id-label { color: var(--miku); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .room-id-value { color: var(--text); font-family: var(--mono); font-size: 16px; font-weight: 700; }
+
+.hero-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  max-width: 60%;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
 
 /* =====================================================================
  *  Connection cards
@@ -928,38 +954,30 @@ input[type='checkbox'] {
 
 .difficulty-jump {
   --difficulty-color: var(--miku);
-  position: relative;
   min-width: 64px;
-  border: 1px solid color-mix(in srgb, var(--difficulty-color) 76%, #ffffff 24%);
-  border-radius: 10px;
-  padding: 6px 8px 5px;
+  border: 1px solid color-mix(in srgb, var(--difficulty-color) 70%, #000 30%);
+  border-radius: 6px;
+  padding: 4px 8px;
   display: grid;
   gap: 1px;
   justify-items: center;
   color: #fff;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0)),
-    var(--difficulty-color);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, .05) inset, 0 8px 18px color-mix(in srgb, var(--difficulty-color) 32%, transparent);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .34);
-  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
+  background: var(--difficulty-color);
+  font-weight: 700;
+  transition: filter 120ms ease;
 }
 
 .difficulty-jump:hover:not(:disabled) {
-  transform: translateY(-1px);
-  filter: brightness(1.08) saturate(1.08);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, .12) inset, 0 10px 24px color-mix(in srgb, var(--difficulty-color) 42%, transparent);
+  filter: brightness(1.12);
 }
 
 .difficulty-jump:disabled {
   cursor: wait;
-  filter: grayscale(.18) brightness(.82);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, .04) inset;
 }
 
 .difficulty-jump:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--difficulty-color) 50%, #ffffff 50%);
-  outline-offset: 3px;
+  outline: 2px solid color-mix(in srgb, var(--difficulty-color) 55%, #ffffff 45%);
+  outline-offset: 2px;
 }
 
 .difficulty-jump span {

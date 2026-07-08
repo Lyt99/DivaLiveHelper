@@ -95,17 +95,36 @@ export default function Overlay() {
       .catch(() => undefined);
   };
 
-  const handleTogglePin = () => {
-    const next = !pinned;
-    setPinned(next);
+  const handleTogglePin = async () => {
+    try {
+      const next = await api.toggleQueueOverlayTop();
+      setPinned(next);
+    } catch {
+      // 静默失败
+    }
+  };
+
+  const startResize = (direction: string) => (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (event.button !== 0) return;
+    event.preventDefault();
+    event.stopPropagation();
     void getCurrentWindow()
-      .setAlwaysOnTop(next)
+      .startResizeDragging(direction as never)
       .catch(() => undefined);
   };
 
   return (
     <div className="ov-root">
       <style>{STYLES}</style>
+      {/* 缩放手柄：无装饰窗口需要手动实现 */}
+      <div className="ov-resize ov-resize-n" onMouseDown={startResize('North')} />
+      <div className="ov-resize ov-resize-s" onMouseDown={startResize('South')} />
+      <div className="ov-resize ov-resize-e" onMouseDown={startResize('East')} />
+      <div className="ov-resize ov-resize-w" onMouseDown={startResize('West')} />
+      <div className="ov-resize ov-resize-ne" onMouseDown={startResize('NorthEast')} />
+      <div className="ov-resize ov-resize-nw" onMouseDown={startResize('NorthWest')} />
+      <div className="ov-resize ov-resize-se" onMouseDown={startResize('SouthEast')} />
+      <div className="ov-resize ov-resize-sw" onMouseDown={startResize('SouthWest')} />
       <main className="ov-overlay" aria-label="点歌队列悬浮窗">
         <div
           className="ov-titlebar"
@@ -124,9 +143,23 @@ export default function Overlay() {
               onClick={handleTogglePin}
               onMouseDown={stopDrag}
               title={pinned ? '取消置顶' : '置顶'}
+              aria-label={pinned ? '取消置顶' : '置顶'}
               aria-pressed={pinned}
             >
-              {pinned ? '置顶中' : '置顶'}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                {pinned ? (
+                  <>
+                    <path d="M12 17v5" />
+                    <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z" />
+                  </>
+                ) : (
+                  <>
+                    <path d="M12 17v5" />
+                    <path d="M15.93 9.34a2 2 0 0 1-.07 1.94l-1.7 2.83A2 2 0 0 0 14 15.5V16a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-.5a2 2 0 0 0-.3-1.06L8 11.28a2 2 0 0 1-.07-1.94L9.5 5.5h5z" />
+                    <path d="M8.5 5.5 8 3l8 .5-.5 2" />
+                  </>
+                )}
+              </svg>
             </button>
             <button
               type="button"
@@ -156,7 +189,6 @@ export default function Overlay() {
                 ) : null}
                 <div className="ov-song-main">
                   <span className="ov-name">{item.song_name}</span>
-                  <span className="ov-requester">{item.requester}</span>
                 </div>
               </div>
             ))
@@ -195,7 +227,8 @@ body,
   background: transparent;
   color: #ffffff;
   font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 .ov-root *,
 .ov-root *::before,
@@ -205,12 +238,24 @@ body,
   padding: 0;
 }
 
+/* 缩放手柄 —— 无装饰窗口需要自己实现 */
+.ov-resize { position: fixed; z-index: 10; }
+.ov-resize-n  { top: 0; left: 6px; right: 6px; height: 6px; cursor: ns-resize; }
+.ov-resize-s  { bottom: 0; left: 6px; right: 6px; height: 6px; cursor: ns-resize; }
+.ov-resize-e  { right: 0; top: 6px; bottom: 6px; width: 6px; cursor: ew-resize; }
+.ov-resize-w  { left: 0; top: 6px; bottom: 6px; width: 6px; cursor: ew-resize; }
+.ov-resize-ne { top: 0; right: 0; width: 12px; height: 12px; cursor: nesw-resize; }
+.ov-resize-nw { top: 0; left: 0; width: 12px; height: 12px; cursor: nwse-resize; }
+.ov-resize-se { bottom: 0; right: 0; width: 12px; height: 12px; cursor: nwse-resize; }
+.ov-resize-sw { bottom: 0; left: 0; width: 12px; height: 12px; cursor: nesw-resize; }
+
 .ov-overlay {
-  width: min(520px, calc(100vw - 24px));
-  margin: 12px;
-  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 5px;
   background: rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #ffffff;
@@ -290,6 +335,14 @@ body,
   border-color: rgba(255, 255, 255, 0.45);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
 }
+.ov-pin-btn {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .ov-pin-btn.active {
   background: rgba(255, 255, 255, 0.16);
   border-color: rgba(255, 255, 255, 0.32);
@@ -314,8 +367,9 @@ body,
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 12px 18px 16px;
-  max-height: calc(100vh - 56px);
+  padding: 8px 5px 16px;
+  flex: 1 1 0;
+  min-height: 0;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
@@ -340,8 +394,8 @@ body,
 }
 
 .ov-stars {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
   flex-shrink: 0;
   min-width: 36px;
@@ -359,7 +413,8 @@ body,
 }
 
 .ov-name {
-  font-size: 18px;
+  margin: 5px 0;
+  font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
