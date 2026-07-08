@@ -144,15 +144,21 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
           <h1>点歌</h1>
           <p className="muted">先连接直播间和游戏，再让弹幕点歌自动入队</p>
         </div>
-        <div className="status-stack">
-          {danmakuStatus.room_id ? (
-            <div className="room-id-display" aria-label={`直播间房间号 ${danmakuStatus.room_id}`}>
-              <span className="room-id-label">ROOM</span>
-              <span className="room-id-value">#{danmakuStatus.room_id}</span>
-            </div>
-          ) : null}
-          <span className={`status-pill ${danmakuStatus.connected ? 'ok' : 'bad'}`}>{danmakuStatus.connected ? `直播间 ${danmakuStatus.room_id} 已连接` : '直播间未连接'}</span>
-          <span className={`status-pill ${gameConnected ? 'ok' : 'bad'}`}>{gameConnected ? '游戏已连接' : '游戏未连接'}</span>
+        <div className="hero-side">
+          <div className="status-stack">
+            {danmakuStatus.room_id ? (
+              <div className="room-id-display" aria-label={`直播间房间号 ${danmakuStatus.room_id}`}>
+                <span className="room-id-label">ROOM</span>
+                <span className="room-id-value">#{danmakuStatus.room_id}</span>
+              </div>
+            ) : null}
+            <span className={`status-pill ${danmakuStatus.connected ? 'ok' : 'bad'}`}>{danmakuStatus.connected ? `直播间 ${danmakuStatus.room_id} 已连接` : '直播间未连接'}</span>
+            <span className={`status-pill ${gameConnected ? 'ok' : 'bad'}`}>{gameConnected ? '游戏已连接' : '游戏未连接'}</span>
+          </div>
+          <div className="hero-actions">
+            <button type="button" className="primary-button" onClick={handleNextSong}>切下一首</button>
+            <button type="button" className="secondary-button" onClick={handleOpenOverlay}>打开悬浮窗</button>
+          </div>
         </div>
       </header>
 
@@ -199,8 +205,6 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
               </h2>
               <p className="muted">当前 {queue.length} 首</p>
             </div>
-            <button type="button" className="primary-button" onClick={handleNextSong}>切下一首</button>
-            <button type="button" className="ghost-button" onClick={handleOpenOverlay}>打开悬浮窗</button>
           </div>
           {queue.length === 0 ? (
             <div className="empty-state">等待观众点歌中…</div>
