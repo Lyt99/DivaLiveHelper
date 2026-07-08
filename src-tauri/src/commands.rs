@@ -51,7 +51,11 @@ pub fn get_config(state: State<'_, AppState>) -> Result<Config, String> {
 }
 
 #[tauri::command]
-pub fn save_config(config: Config, skip_validation: Option<bool>, state: State<'_, AppState>) -> Result<(), String> {
+pub fn save_config(
+    config: Config,
+    skip_validation: Option<bool>,
+    state: State<'_, AppState>,
+) -> Result<(), String> {
     if !skip_validation.unwrap_or(false) {
         config.validate()?;
     }
@@ -155,7 +159,13 @@ pub fn search_songs(
         .searcher
         .read()
         .map_err(|_| "读取搜索索引锁失败".to_string())?
-        .search(&query, difficulty, &key, &config.difficulty_fallback, config.difficulty_tolerance))
+        .search(
+            &query,
+            difficulty,
+            &key,
+            &config.difficulty_fallback,
+            config.difficulty_tolerance,
+        ))
 }
 
 #[tauri::command]
@@ -200,8 +210,8 @@ pub async fn debug_enqueue_song(
         .read()
         .map_err(|_| "读取配置锁失败".to_string())?
         .clone();
-    let trimmed = text.trim_start();
-    let is_song_request = trimmed.starts_with(&config.song_command_prefix);
+    let is_song_request =
+        danmaku::strip_command_prefix(&text, &config.song_command_prefix).is_some();
     let event = DanmakuEvent {
         user_name: "调试".to_string(),
         content: text,
@@ -220,8 +230,7 @@ fn resolve_debug_song_request(
         .read()
         .map_err(|_| "读取配置锁失败".to_string())?
         .clone();
-    let trimmed = text.trim_start();
-    if !trimmed.starts_with(&config.song_command_prefix) {
+    let Some(query) = danmaku::strip_command_prefix(text, &config.song_command_prefix) else {
         return Ok(DebugSongRequestResult {
             is_song_request: false,
             query: String::new(),
@@ -235,14 +244,7 @@ fn resolve_debug_song_request(
                 config.song_command_prefix
             ),
         });
-    }
-
-    let query = trimmed
-        .trim_start_matches(&config.song_command_prefix)
-        .trim()
-        .to_string();
-    // 去除弹幕小表情代码，与生产弹幕路径行为一致
-    let query = danmaku::strip_danmaku_emojis(&query);
+    };
     if query.is_empty() {
         return Ok(DebugSongRequestResult {
             is_song_request: true,
@@ -303,7 +305,11 @@ pub fn get_queue_history(state: State<'_, AppState>) -> Result<Vec<SongRequest>,
 }
 
 #[tauri::command]
-pub fn remove_from_queue(song_id: u32, app: AppHandle, state: State<'_, AppState>) -> Result<bool, String> {
+pub fn remove_from_queue(
+    song_id: u32,
+    app: AppHandle,
+    state: State<'_, AppState>,
+) -> Result<bool, String> {
     let removed = state.queue.remove(song_id);
     if removed {
         let _ = app.emit("queue-updated", state.queue.snapshot());
@@ -324,7 +330,11 @@ pub fn next_song(app: AppHandle) -> Result<Option<SongRequest>, String> {
 }
 
 #[tauri::command]
-pub fn change_song(song_id: u32, difficulty_tier: String, state: State<'_, AppState>) -> Result<String, String> {
+pub fn change_song(
+    song_id: u32,
+    difficulty_tier: String,
+    state: State<'_, AppState>,
+) -> Result<String, String> {
     if !state
         .searcher
         .read()
@@ -488,8 +498,11 @@ pub fn is_first_run(state: State<'_, AppState>) -> Result<bool, String> {
     Ok(!state.config_path.exists())
 }
 
+// 必须是 async：同步 command 在主线程上执行，而创建 WebviewWindow 需要向主线程
+// 事件循环派发消息并等待，同步执行会在 Windows 上死锁（悬浮窗白屏卡死 + 主窗口失去响应）。
+// 参见 Tauri v2 文档 / wry#583。
 #[tauri::command]
-pub fn open_queue_overlay(app: AppHandle) -> Result<(), String> {
+pub async fn open_queue_overlay(app: AppHandle) -> Result<(), String> {
     use tauri::{WebviewUrl, WebviewWindowBuilder};
     if let Some(existing) = app.get_webview_window("overlay") {
         let _ = existing.set_focus();
@@ -497,28 +510,32 @@ pub fn open_queue_overlay(app: AppHandle) -> Result<(), String> {
     }
     WebviewWindowBuilder::new(&app, "overlay", WebviewUrl::App("index.html".into()))
         .title("点歌队列")
-        .inner_size(420.0, 720.0)
-        .min_inner_size(320.0, 360.0)
+        .inner_size(320.0, 512.0)
+        .min_inner_size(280.0, 360.0)
         .decorations(false)
         .transparent(true)
+        .shadow(false)
         .always_on_top(true)
         .skip_taskbar(true)
         .resizable(true)
+        .focused(false)
         .build()
         .map_err(|error| format!("创建悬浮窗失败: {error}"))?;
     Ok(())
 }
 
 #[tauri::command]
-pub fn close_queue_overlay(app: AppHandle) -> Result<(), String> {
+pub async fn close_queue_overlay(app: AppHandle) -> Result<(), String> {
     if let Some(window) = app.get_webview_window("overlay") {
-        window.close().map_err(|error| format!("关闭悬浮窗失败: {error}"))?;
+        window
+            .close()
+            .map_err(|error| format!("关闭悬浮窗失败: {error}"))?;
     }
     Ok(())
 }
 
 #[tauri::command]
-pub fn toggle_queue_overlay_top(app: AppHandle) -> Result<bool, String> {
+pub async fn toggle_queue_overlay_top(app: AppHandle) -> Result<bool, String> {
     let Some(window) = app.get_webview_window("overlay") else {
         return Err("悬浮窗未打开".to_string());
     };

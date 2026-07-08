@@ -182,6 +182,16 @@ pub fn run() {
             commands::close_queue_overlay,
             commands::toggle_queue_overlay_top,
         ])
+        .on_window_event(|window, event| {
+            // 主窗口关闭时一并关闭悬浮窗，避免悬浮窗成为孤儿窗口
+            if window.label() == "main" {
+                if let tauri::WindowEvent::CloseRequested { .. } = event {
+                    if let Some(overlay) = window.app_handle().get_webview_window("overlay") {
+                        let _ = overlay.close();
+                    }
+                }
+            }
+        })
         .run(tauri::generate_context!())
         .expect("运行 Tauri 应用失败");
 }
