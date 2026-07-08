@@ -956,7 +956,7 @@ input[type='checkbox'] {
 .difficulty-jump {
   --difficulty-color: var(--miku);
   min-width: 64px;
-  border: 1px solid color-mix(in srgb, var(--difficulty-color) 70%, #000 30%);
+  border: 1px solid var(--difficulty-color);
   border-radius: 6px;
   padding: 4px 8px;
   display: grid;
@@ -968,6 +968,7 @@ input[type='checkbox'] {
 }
 
 .difficulty-jump-label {
+  color: #fff !important;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .02em;
@@ -975,6 +976,7 @@ input[type='checkbox'] {
 }
 
 .difficulty-jump-rating {
+  color: #fff !important;
   display: inline-flex;
   align-items: center;
   gap: 3px;
@@ -987,6 +989,7 @@ input[type='checkbox'] {
 
 .difficulty-jump-rating svg {
   flex: none;
+  color: #fff;
 }
 
 .difficulty-jump:hover:not(:disabled) {

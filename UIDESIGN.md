@@ -298,12 +298,13 @@ transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
 ```
 
 - 两行布局：上行难度名称（`.difficulty-jump-label`），下行星级图标 + 数值（`.difficulty-jump-rating`）
-- 难度名称：11px / 800 / `letter-spacing: .02em` / `line-height: 1.1`
+- 难度名称：11px / 800 / `letter-spacing: .02em` / `line-height: 1.1`，颜色统一 `#fff`
 - 星级图标：11×11 内联 SVG，五角星实心，`fill="currentColor"`（继承文字色），`aria-hidden="true"`
 - 星级数值：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 800 / `line-height: 1.1`
-- 文字色：统一 `#fff`（白色），覆盖所有难度色
-- 纯色背景（`var(--difficulty-color)`）
-- 边框 `color-mix(70% 难度色, 30% 黑)`
+- 难度名称、星星图标、星级数值颜色全部统一 `#fff`；必要时用 `font-weight: 800` 保证可读性
+- 每个难度类只显式声明 `--difficulty-color`（深色纯色背景）
+- 纯色背景：`background: var(--difficulty-color)`，不能使用渐变或透明描边标签样式
+- 边框：`border: 1px solid var(--difficulty-color)`
 - `border-radius: 6px; padding: 4px 8px; min-width: 64px`
 - 网格布局：`display: grid; gap: 1px; justify-items: center; align-items: center`
 - hover: `brightness(1.12)`，不位移
