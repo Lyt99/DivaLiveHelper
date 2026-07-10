@@ -92,7 +92,7 @@ pub fn reload_database(state: State<'_, AppState>) -> Result<usize, String> {
         .clone();
     let data_dir = resolve_data_dir(&config.data_dir, None);
     let database = SongDatabase::load_with_chinese_names(&data_dir)?;
-    let searcher = SongSearcher::from_database(&database, &data_dir);
+    let searcher = SongSearcher::from_database(&database);
     let count = database.songs.len();
     *state
         .database
@@ -126,7 +126,7 @@ pub fn rebuild_database(state: State<'_, AppState>) -> Result<RebuildReport, Str
     let report = db_tool::rebuild_database(&data_dir, mods_dir.as_deref())?;
 
     let database = SongDatabase::load_with_chinese_names(&data_dir)?;
-    let searcher = SongSearcher::from_database(&database, &data_dir);
+    let searcher = SongSearcher::from_database(&database);
     *state
         .database
         .write()

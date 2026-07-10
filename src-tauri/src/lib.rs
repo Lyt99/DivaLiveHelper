@@ -96,7 +96,7 @@ pub fn run() {
             // Ensure Data directory exists
             std::fs::create_dir_all(&data_dir).ok();
             let database = SongDatabase::load_with_chinese_names(&data_dir).unwrap_or_default();
-            let searcher = SongSearcher::from_database(&database, &data_dir);
+            let searcher = SongSearcher::from_database(&database);
             let queue = Arc::new(SongQueue::new(
                 config.max_queue_size,
                 config.allow_duplicates,

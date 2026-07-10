@@ -29,10 +29,6 @@
     "active": true,
     "targets": "all",
     "icon": ["icons/icon.ico"],
-    "resources": [
-      "../Data/song_db.json",
-      "../Data/AnotherSongName.json",
-      "../Data/HanziKanjiDict.txt"
-    ]
+    "resources": []
   }
 }

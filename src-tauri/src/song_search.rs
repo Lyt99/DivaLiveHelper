@@ -1,10 +1,10 @@
 use std::collections::HashMap;
-use std::fs;
-use std::path::Path;
 
 use serde::Serialize;
 
 use crate::song_db::SongDatabase;
+
+const EMBEDDED_HANZI_KANJI_DICT: &str = include_str!("../../Data/HanziKanjiDict.txt");
 
 #[derive(Debug, Clone, Serialize)]
 pub struct SearchResult {
@@ -32,9 +32,9 @@ pub struct SongSearcher {
 }
 
 impl SongSearcher {
-    pub fn from_database(database: &SongDatabase, data_dir: &Path) -> Self {
+    pub fn from_database(database: &SongDatabase) -> Self {
         let mut searcher = Self::default();
-        searcher.hanzi_to_kanji = load_hanzi_kanji(&data_dir.join("HanziKanjiDict.txt"));
+        searcher.hanzi_to_kanji = parse_hanzi_kanji(EMBEDDED_HANZI_KANJI_DICT);
 
         for entry in database.songs.values() {
             let pv_id = entry.pv_id;
@@ -320,10 +320,7 @@ impl SongSearcher {
     }
 }
 
-fn load_hanzi_kanji(path: &Path) -> HashMap<char, char> {
-    let Ok(content) = fs::read_to_string(path) else {
-        return HashMap::new();
-    };
+fn parse_hanzi_kanji(content: &str) -> HashMap<char, char> {
     let mut mapping = HashMap::new();
     for line in content.lines() {
         let mut parts = line.split_whitespace();
@@ -522,6 +519,28 @@ mod tests {
         let results = searcher.search_by_author("oster-project", None, "extreme", "easier", 0.5);
         assert_eq!(results.len(), 1);
         assert_eq!(results[0].pv_id, 16);
+    }
+
+    #[test]
+    fn parse_hanzi_kanji_loads_embedded_mapping() {
+        let mapping = parse_hanzi_kanji(EMBEDDED_HANZI_KANJI_DICT);
+        assert!(mapping.len() > 100);
+        assert_eq!(mapping.get(&'爱'), Some(&'愛'));
+    }
+
+    #[test]
+    fn search_matches_japanese_title_via_hanzi_to_kanji_conversion() {
+        let mut searcher = SongSearcher::default();
+        searcher.hanzi_to_kanji = parse_hanzi_kanji(EMBEDDED_HANZI_KANJI_DICT);
+        searcher.id_to_name.insert(17, "愛言葉".to_string());
+        searcher.name_to_ids.insert("愛言葉".to_string(), vec![17]);
+        searcher
+            .id_to_difficulty
+            .insert(17, HashMap::from([("extreme".to_string(), 8.0)]));
+
+        let results = searcher.search("爱言叶", None, "extreme", "easier", 0.5);
+        assert_eq!(results.len(), 1);
+        assert_eq!(results[0].pv_id, 17);
     }
 
     #[test]
