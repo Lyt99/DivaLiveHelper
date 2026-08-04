@@ -17,7 +17,7 @@
 - **弹幕监听**：实时连接 B 站直播间弹幕，支持 SESSDATA Cookie 和 WBI 签名获取弹幕 token。
 - **点歌解析**：识别 `点歌 <歌名>` 前缀弹幕进行本地解析；可启用 OpenAI 兼容 LLM 解析自然语言点歌请求。
 - **多策略搜索**：基于原名、中文名、汉字→汉字转写、别名索引、英文名进行多轮模糊匹配，支持难度星级过滤与回退。
-- **队列管理**：桌面 UI 管理点歌队列、配置、歌曲库、日志，支持自动切歌、重复策略、队列容量限制。
+- **队列管理**：桌面 UI 管理点歌队列、配置、歌曲库、日志，支持重复策略、队列容量限制。
 - **游戏切歌**：通过快捷键或 UI 操作，写入 `DivaMegaMix.exe` 内存完成切歌，支持 MOD 歌曲。
 - **OBS 覆盖层**：内置本地 HTTP 服务器，提供 OBS 浏览器源页面，实时展示点歌队列。
 - **首次引导**：首次启动时通过向导完成直播间、快捷键、MOD 路径、LLM、难度偏好等配置。
@@ -96,14 +96,13 @@ cargo test --manifest-path src-tauri/Cargo.toml
 | `obs_overlay_enabled` | 启用 OBS 覆盖层 | `true` |
 | `obs_overlay_host` | 覆盖层监听地址（仅允许 `127.0.0.1` / `localhost`） | `127.0.0.1` |
 | `obs_overlay_port` | 覆盖层监听端口 | `8765` |
-| `auto_play_next` | 启用自动切歌 | `false` |
-| `auto_play_interval` | 自动切歌间隔（秒） | `300` |
 | `max_queue_size` | 队列容量上限 | `50` |
 | `allow_duplicates` | 允许重复点歌 | `false` |
 | `default_search_difficulty` | 默认搜索难度档位 | `extreme` |
 | `difficulty_tolerance` | 星级过滤容差（±） | `0.5` |
 | `difficulty_fallback` | 无匹配时的回退方向：`easier` 或 `harder` | `easier` |
 | `fetch_chinese_names` | 从外部来源抓取中文名 | `false` |
+| `log_to_file` | 保存日志到本地文件（数据目录 `logs/` 下，按日期分文件） | `false` |
 | `http_proxy` | LLM 客户端代理 | — |
 
 ## OBS 点歌队列覆盖层

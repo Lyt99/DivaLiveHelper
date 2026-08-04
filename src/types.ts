@@ -3,8 +3,6 @@ export interface AppConfig {
   hotkey: string;
   data_dir: string;
   mods_dir: string;
-  auto_play_next: boolean;
-  auto_play_interval: number;
   max_queue_size: number;
   allow_duplicates: boolean;
   obs_overlay_enabled: boolean;
@@ -14,6 +12,7 @@ export interface AppConfig {
   song_command_prefix: string;
   sessdata: string;
   fetch_chinese_names: boolean;
+  log_to_file: boolean;
   http_proxy: string;
   default_search_difficulty: string;
   difficulty_tolerance: number;

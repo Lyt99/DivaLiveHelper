@@ -2,18 +2,23 @@
 
 本文件固化项目的 UI 设计语言和组件规范。所有前端改动应遵循本文档。`AGENTS.md` 引用本文件作为 UI 实现的权威参考。
 
+设计语言：**直播控制台**。像专业音频/直播工具，不像营销页面——紧凑、扁平、功能优先，用等宽数字和发丝分割线建立秩序。
+
 ---
 
 ## 1. 设计原则
 
 | 原则 | 说明 |
 |---|---|
-| **扁平优先** | 不使用渐变色、投影 elevation、斜面或光泽。深度通过 1px 边框 + 4 级表面色阶传达。 |
-| **克制用色** | Miku cyan 是唯一主操作色；pink 保留给破坏性/次要 hover。难度色仅用于难度芯片。 |
-| **单一过渡** | 全局 120ms `ease`；入场动画 200ms。不使用 cubic-bezier 或弹性动画。 |
-| **桌面优先** | body `min-width: 860px`；唯一断点 `1000px`。不做移动端适配。 |
-| **中文界面** | 所有用户可见文字使用简体中文；代码注释同样使用中文。 |
-| **无 emoji** | 按钮和标签中不使用 emoji 或图标字体；图标用内联 SVG（`stroke-width: 1.5`）。 |
+| **控制台气质** | 页面是工具不是海报。禁止 hero 营销区、eyebrow 英文小标题、品牌色块卡片、侧栏管理后台布局。 |
+| **工具外壳** | 一体化顶栏（品牌 + 标签导航 + 窗口控制）+ 底部常驻状态栏（信号灯 + 状态回显）。页面不放重复大标题，头部是功能工具栏 `.toolbar`。 |
+| **扁平优先** | 不用渐变、投影 elevation。深度 = 1px 发丝线 + 表面色阶（`--bg` → `--raised`）。 |
+| **无卡片** | 页面布局不用卡片面板（`.panel` 已移除）。分组靠发丝线 + 留白 + 标题层级；整页撑高、区块内部滚动。 |
+| **克制用色** | Miku cyan 只做信号色：主按钮、选中态、队首、强调数字。pink 只给破坏性/点歌弹幕高亮。 |
+| **等宽数字** | 编号、ID、计数、日志、星级一律 `var(--mono)` + `tabular-nums`。 |
+| **日文用 JP 字形** | 歌名/作者等日文内容走 `--font-jp`，禁止用中文字形渲染日文。 |
+| **桌面优先** | body `min-width: 860px`；唯一断点 `1000px`。 |
+| **中文界面** | 用户可见文字均为简体中文；不用 emoji，图标用内联 SVG。 |
 
 ---
 
@@ -23,36 +28,40 @@
 
 | 变量 | 深色值 | 浅色值 | 用途 |
 |---|---|---|---|
-| `--miku` | `#39C5BB` | `#2da8a0` | 主操作色：主按钮、焦点环、导航高亮、数字强调 |
-| `--miku-dim` | `rgba(57,197,187,.12)` | `rgba(45,168,160,.08)` | hover 背景、品牌区、队列首位 |
-| `--miku-mid` | `rgba(57,197,187,.28)` | `rgba(45,168,160,.18)` | hover/focus 边框、滚动条 |
-| `--pink` | `#E12885` | `#c4226e` | 次要/破坏性：ghost 按钮 hover、失败提示 |
-| `--pink-dim` | `rgba(225,40,133,.10)` | `rgba(196,34,110,.06)` | ghost hover 背景、失败提示背景 |
-| `--pink-mid` | `rgba(225,40,133,.24)` | `rgba(196,34,110,.16)` | ghost hover 边框 |
+| `--miku` | `#39C5BB` | `#12a298` | 信号色：主按钮、导航选中条、队首、统计数字、焦点 |
+| `--miku-ink` | `#06302c` | `#05302c` | 主按钮文字（深青，不用白字） |
+| `--miku-dim` | `rgba(57,197,187,.10)` | `rgba(18,162,152,.09)` | 队首背景、焦点环 |
+| `--miku-mid` | `rgba(57,197,187,.34)` | `rgba(18,162,152,.30)` | hover/focus 边框、选区 |
+| `--pink` | `#E12885` | `#c22274` | 破坏性 hover、点歌弹幕、失败提示 |
+| `--pink-dim` / `--pink-mid` | 10% / 34% | 7% / 26% | 上述场景的背景与边框 |
 
-### 2.2 表面色阶（4 级）
+### 2.2 表面色阶（6 级）
 
 | 变量 | 深色值 | 浅色值 | 用途 |
 |---|---|---|---|
-| `--bg` | `#0d1117` | `#f6f8fa` | body 最底层 |
-| `--bg-2` | `#161b22` | `#ffffff` | 标题栏、侧边栏 |
-| `--panel` | `#1c2128` | `#ffffff` | 面板卡片 |
-| `--panel-solid` | `#21262d` | `#ffffff` | 嵌套表面（输入框、卡片内行） |
+| `--bg` | `#101315` | `#efede6` | 窗口底层（深色为冷炭黑，浅色系暖纸白） |
+| `--bg-2` | `#15181c` | `#e7e5dc` | 标题栏、侧栏 |
+| `--panel` | `#1a1e23` | `#faf9f5` | 面板 |
+| `--panel-2` | `#21262c` | `#f0eee6` | 行 hover、输入框底色 |
+| `--inset` | `#0c0f11` | `#e6e4db` | 凹槽：终端回显行、日志面板、分段控件底 |
+| `--raised` | `#282e36` | `#ffffff` | 凸起：分段选中、toast、滚动条 |
 
 ### 2.3 文字与结构
 
 | 变量 | 深色值 | 浅色值 | 用途 |
 |---|---|---|---|
-| `--text` | `#e6edf3` | `#1f2328` | 主文字 |
-| `--muted` | `#7d8590` | `#656d76` | 标签、说明、占位 |
-| `--line` | `rgba(255,255,255,.08)` | `rgba(31,35,40,.10)` | 全局 1px 分隔线 |
-| `--good` | `#3fb950` | `#1a7f37` | 连接成功、调试通过 |
-| `--bad` | `#f85149` | `#cf222e` | 连接失败、关闭按钮 hover |
-| `--mono` | `"Cascadia Mono", Consolas, "Courier New", monospace` | 同 | ID、日志、星级数值 |
+| `--text` | `#e4e8eb` | `#23262b` | 主文字 |
+| `--muted` | `#8b929b` | `#6f757c` | 次要文字、标签 |
+| `--faint` | `#5f666e` | `#a0a5aa` | 占位、序号、时间戳 |
+| `--line` | 白 7% | 黑 10% | 发丝分隔线 |
+| `--line-strong` | 白 15% | 黑 20% | 强调边框、虚线 |
+| `--good` | `#3ec47c` | `#178a4c` | 在线/成功 |
+| `--bad` | `#f0616d` | `#cf3a4a` | 离线/关闭 hover |
+| `--warn` | `#d9a441` | `#9a7414` | 连接中（闪烁） |
 
 ### 2.4 难度色（DIVA 游戏档位）
 
-仅用于 `.difficulty-jump` 芯片，通过 `--difficulty-color` 局部变量注入：
+仅用于 `.difficulty-jump` 芯片，经 `--difficulty-color` 注入：
 
 | 档位 | 类名 | 色值 |
 |---|---|---|
@@ -62,181 +71,85 @@
 | 极限 | `.difficulty-extreme` | `#DA011E` |
 | EX极限 | `.difficulty-exextreme` | `#A90EEA` |
 
-### 2.5 语义覆盖色（硬编码 rgba）
-
-以下颜色直接写在选择器中，本质是 `--good` / `--bad` / `--pink` 的透明度变体：
-
-| 色值 | 用途 |
-|---|---|
-| `rgba(63,185,80,.3)` | `.status-pill.ok` / `.debug-result.ok` 边框 |
-| `rgba(63,185,80,.08)` | `.debug-result.ok span` 背景 |
-| `rgba(248,81,73,.25)` | `.status-pill.bad` / `.debug-result.bad` 边框 |
-| `rgba(248,81,73,.06)` | `.debug-result.bad span` 背景 |
-| `rgba(225,40,133,.10)` | `.failure-toast` 背景 |
-| `rgba(225,40,133,.30)` | `.failure-toast` 边框 |
+ok/bad 的透明变体一律用 `color-mix(in srgb, var(--good) 35%, transparent)` 形式，不写死 rgba。
 
 ---
 
 ## 3. 主题机制
 
-- **切换属性**：`<html data-theme="light">`（`document.documentElement.dataset.theme`）
-- **默认主题**：`dark`（`:root` 即深色）
-- **持久化**：`localStorage.theme`，值为 `"dark"` 或 `"light"`
-- **切换组件**：`src/components/ThemeToggle.tsx`，位于侧边栏底部
-- **无系统偏好检测**：首次运行始终使用深色主题
-- **无 FOUC 预防**：初始渲染使用 `:root` 深色默认值，React hydrate 后切换
+- 切换属性：`<html data-theme="light">`；默认深色；持久化 `localStorage.theme`。
+- 切换组件 `src/components/ThemeToggle.tsx`：状态栏右侧的 `.icon-button`（太阳/月亮 SVG 图标），不是文字按钮。
+- 无系统偏好检测，首启始终深色。
 
 ---
 
 ## 4. 字体排印
 
-### 4.1 字体族
+### 4.1 字体族（三组）
 
-| 场景 | 字体族 |
+| 变量 | 字栈 | 用途 |
+|---|---|---|
+| `--font-ui` | Segoe UI Variable → Segoe UI → **Microsoft YaHei UI** → Yu Gothic UI → system-ui | 全局 UI（中文优先） |
+| `--font-jp` | **Yu Gothic UI** → Yu Gothic → Meiryo UI → Hiragana Sans → Noto Sans CJK JP → Microsoft YaHei UI | 日文内容：`.track-main strong`、`.song-row strong`、`.song-sub`、`.song-author`、`.debug-result strong`、悬浮窗 `.ov-name` |
+| `--mono` | Cascadia Mono → Consolas → Courier New → Microsoft YaHei UI | 编号/ID/计数/日志/星级/回显行；CJK 回退雅黑 |
+
+规则：**日文汉字必须用 JP 字形渲染**（桜・恋・戦 等字形与中文字形不同），新增显示歌名的组件时必须套用 `--font-jp`。
+
+### 4.2 字号阶（px）
+
+| px | 用途 |
 |---|---|
-| UI 文字 | `"Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif` |
-| 等宽（ID/日志/星级） | `"Cascadia Mono", Consolas, "Courier New", monospace`（`var(--mono)`） |
+| 10 | 导航序号、面板编号、表头、版本号、芯片标签 |
+| 11 | 副标题、统计标签、track meta、歌曲 ID |
+| 12 | 信号灯、辅助说明、日志、回显行、芯片星级、小号按钮 |
+| 13 | 全局基准：按钮、输入框、正文、导航项 |
+| 14 | 歌名、h2 以外的强调 |
+| 15 | h2 |
+| 18 | 控制台标题、向导步骤标题 |
+| 20 | 页面 h1、统计数字 |
+| 30 | 向导欢迎标题 |
 
-### 4.2 字号阶
+### 4.3 字重
 
-全部使用 px，不使用 rem/em。
-
-| px | 代表用途 |
-|---|---|
-| 10 | 房间号标签 |
-| 11 | 品牌副标题、版本号、调试提示、统计标签 |
-| 12 | eyebrow、状态药丸、弹幕用户名、日志行、星级、失败提示请求人 |
-| 13 | 窗口控制按钮、字段标签、toast、空状态、输入框 |
-| 14 | 导航项、歌曲标题、调试结果、失败提示消息 |
-| 15 | 品牌标题 |
-| 16 | h2、房间号值、向导总计 |
-| 20 | 统计数字 |
-| 22 | 向导步骤标题 |
-| 28 | h1 |
-| 32 | 向导欢迎标题 |
-
-### 4.3 字重阶
-
-| 字重 | 用途 |
-|---|---|
-| 500 | 导航项、分段控件、向导标签 |
-| 600 | 标题栏、h2、按钮、字段标签、调试结果 |
-| 700 | h1、品牌、主按钮、徽章、统计数字 |
-| 800 | 品牌头像、难度芯片文字 |
-
-### 4.4 字间距
-
-| 值 | 用途 |
-|---|---|
-| `-1px` | 向导大图标 |
-| `-.01em` | h1 |
-| `0` | h2 |
-| `.02em` | 难度芯片标签 |
-| `.04em` | eyebrow-meta、调试结果标签 |
-| `.08em` | eyebrow、房间号标签（配合 uppercase） |
-
-### 4.5 数字对齐
-
-`font-variant-numeric: tabular-nums` 用于 `.song-index` 和 `.library-stats strong`，防止数字跳动。
+400 正文 / 500 导航 / 600 按钮与标题 / 650 h2 / 700 h1 与主按钮与统计数字。
 
 ---
 
-## 5. 间距与布局
-
-### 5.1 间距
-
-项目不使用间距 token，全部使用 px gap 值：
-
-| 场景 | 典型值 |
-|---|---|
-| 组件内 gap | `1px` / `2px` / `3px` / `4px` |
-| 行内元素 gap | `6px` / `7px` / `8px` / `10px` |
-| 卡片/面板内 gap | `12px` / `14px` / `16px` |
-| 区块/页面 gap | `18px` / `20px` / `24px` |
-
-### 5.2 关键尺寸
+## 5. 间距与关键尺寸
 
 | 元素 | 值 |
 |---|---|
-| 标题栏高度 | `38px` |
-| 侧边栏宽度 | `220px`（≤1000px 时 `180px`） |
-| body 最小宽度 | `860px` |
-| 内容区内边距 | `24px` |
-| 面板内边距 | `20px`（hero 面板 `24px`） |
-| 向导最大宽度 | `520px` |
-| 悬浮窗最大宽度 | `520px`（`min(520px, calc(100vw - 24px))`） |
-
-### 5.3 网格布局类
-
-| 类名 | 列定义 | 用途 |
-|---|---|---|
-| `.control-grid` | `repeat(2, minmax(0,1fr))` | 队列页连接卡片 |
-| `.grid-two` | `minmax(0,1.35fr) minmax(280px,.65fr)` | 队列 + 弹幕双栏 |
-| `.settings-grid` / `.status-grid` | `repeat(2, minmax(0,1fr))` | 设置页 / 日志页 |
-| `.library-stats` | `repeat(4, minmax(0,1fr))` | 设置页统计瓦片 |
-| `.song-row` | `72px minmax(200px,1fr) 140px minmax(320px,.9fr)` | 曲库表格行 |
+| 顶栏 `.topbar` | `44px` |
+| 状态栏 `.statusbar` | `26px` |
+| 内容区 padding | `22px 26px` |
+| 页面 gap | `16px` |
+| 按钮高 | `30px`（`.button-sm` `25px`） |
+| 输入框高 | `32px` |
+| 网格 | `.workspace`（点歌台分栏）= `1.4fr / .6fr`；`.settings-grid` = 两列（`gap: 26px 32px`）；`.song-row` = `64px 1fr 140px .9fr` |
+| 整页撑高 | `.queue-page` / `.library-page` / `.logs-page`：`height: 100%` + flex 列，滚动区 `flex: 1; min-height: 0` |
 
 ---
 
 ## 6. 圆角与阴影
 
-### 6.1 圆角阶
-
-| 值 | 用途 |
+| 圆角 | 用途 |
 |---|---|
-| `0` | 窗口控制按钮 |
-| `3px` | 滚动条 |
-| `4px` | 日志行、调试标签、行内代码 |
-| `6px` | 状态药丸、输入框、弹幕项、难度芯片 |
-| `8px` | **最常用** — 按钮、导航项、歌曲卡片、调试结果、分段控件、toast |
-| `10px` | 大面板、品牌区、空状态、向导报告 |
-| `14px` | 向导图标（仅此一处） |
-| `50%` | 状态点、向导进度点 |
+| `4-5px` | 难度芯片、日志行、代码片 |
+| `6px` | **基准**：按钮、输入框、导航项、track 行、信号灯相关 |
+| `8px` | 面板、分段控件、toast |
+| `10px/50%` | 开关、状态圆点 |
 
-### 6.2 阴影
-
-项目几乎不用 `box-shadow`。仅两处：
-
-| 选择器 | 值 | 用途 |
-|---|---|---|
-| `input:focus, select:focus` | `0 0 0 2px var(--miku-dim)` | 焦点环 |
-| `.live-dot` | `0 0 6px var(--good)` | 直播状态发光点 |
-
-**不使用 elevation 阴影。** 深度通过 `--line`（1px 边框）+ 4 级表面色阶传达。
+阴影只有两处：焦点环 `0 0 0 2px var(--miku-dim)` 和在线信号点 `0 0 5px var(--good)`。选中/队首的左侧色条一律用 `box-shadow: inset 2px 0 0 <色>`，不影响布局。
 
 ---
 
 ## 7. 动效
 
-### 7.1 过渡
-
-| 时长 | 缓动 | 用途 |
-|---|---|---|
-| `120ms` | `ease` | 全局标准过渡：background、border-color、color、box-shadow、filter |
-| `200ms` | `ease` | 向导进度点（background + transform）、toast 入场 |
-| `280ms` | `ease` | 悬浮窗列表行入场 |
-
-不使用 cubic-bezier、弹性或回弹动画。
-
-### 7.2 关键帧
-
-```css
-@keyframes toast-in          { from { opacity: 0; transform: translateY(-8px) } to { opacity: 1; transform: translateY(0) } }
-@keyframes failure-toast-in  { from { opacity: 0; transform: translateY(-4px) } to { opacity: 1; transform: translateY(0) } }
-@keyframes ov-fade-in        { from { opacity: 0 } to { opacity: 1 } }
-```
-
-### 7.3 hover 约定
-
-| 元素 | hover 效果 |
-|---|---|
-| 按钮（primary） | `filter: brightness(1.1)` |
-| 难度芯片 | `filter: brightness(1.12)` |
-| ghost 按钮 | 边框/文字/背景切到 pink 系 |
-| 卡片/行 | 边框切到 `--miku-mid` 或背景切到 `--miku-dim` |
-| 导航项 | 文字切 `--text` + 背景 `--miku-dim` |
-
-**hover 不使用位移（translateY）。**
+- 全局过渡 `120ms ease`（background / border-color / color / filter）。
+- 入场 `@keyframes rise-in`（160ms，`translateY(-5px)` → 0）：toast、失败提示。
+- 连接中信号 `@keyframes signal-blink`（900ms 透明度呼吸）。
+- 悬浮窗 `ov-fade-in`（280ms，按行错开 30ms）。
+- 禁止位移 hover、弹性缓动。
 
 ---
 
@@ -244,245 +157,197 @@
 
 ### 8.1 按钮族
 
-所有按钮共享基础规则：
+基础：`height: 30px; padding: 0 14px; border-radius: 6px; font-size: 13px; font-weight: 600`。小号加 `.button-sm`（25px / 12px）。
 
-```css
-padding: 8px 16px;
-border-radius: 8px;
-border: 1px solid var(--line);
-font-weight: 600;
-font-size: 13px;
-white-space: nowrap;
-transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
-```
-
-| 类名 | 背景 | 文字 | hover |
-|---|---|---|---|
-| `.primary-button` | `var(--miku)` | `#fff` | `brightness(1.1)` |
-| `.secondary-button` | `var(--panel-solid)` | `var(--text)` | 边框/文字 → miku |
-| `.ghost-button` | 透明 | `var(--muted)` | 边框/文字/背景 → pink 系 |
-| `.theme-toggle` | 同 secondary | 同 secondary | 同 secondary |
-
-**禁用态**：`opacity: .4; cursor: not-allowed`（全局 `button:disabled`）。
-
-### 8.2 面板
-
-```css
-.panel       { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); padding: 20px; }
-.hero-panel  { 同 panel，padding: 24px + flex space-between }
-.table-panel { padding: 0; overflow: hidden; }
-```
-
-### 8.3 状态药丸
-
-```html
-<span class="status-pill ok">在线</span>
-```
-
-- `::before` 7px 圆点，颜色 = `currentColor`
-- `.ok` → `var(--good)`
-- `.bad` → `var(--bad)`
-
-### 8.4 难度芯片
-
-```html
-<button class="difficulty-jump difficulty-extreme" onClick={...} title="切换到 恋爱战争 的极限难度（8.0 星）">
-  <span class="difficulty-jump-label">极限</span>
-  <span class="difficulty-jump-rating">
-    <svg width="11" height="11" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path d="M10 1 L12.1 7.1 L18.6 7.2 L13.4 11.1 L15.3 17.3 L10 13.6 L4.7 17.3 L6.6 11.1 L1.4 7.2 L7.9 7.1 Z" />
-    </svg>
-    8.0
-  </span>
-</button>
-```
-
-- 两行布局：上行难度名称（`.difficulty-jump-label`），下行星级图标 + 数值（`.difficulty-jump-rating`）
-- 难度名称：11px / 800 / `letter-spacing: .02em` / `line-height: 1.1`，颜色统一 `#fff`
-- 星级图标：11×11 内联 SVG，五角星实心，`fill="currentColor"`（继承文字色），`aria-hidden="true"`
-- 星级数值：`var(--mono)` + `font-variant-numeric: tabular-nums`，13px / 800 / `line-height: 1.1`
-- 难度名称、星星图标、星级数值颜色全部统一 `#fff`；必要时用 `font-weight: 800` 保证可读性
-- 每个难度类只显式声明 `--difficulty-color`（深色纯色背景）
-- 纯色背景：`background: var(--difficulty-color)`，不能使用渐变或透明描边标签样式
-- 边框：`border: 1px solid var(--difficulty-color)`
-- `border-radius: 6px; padding: 4px 8px; min-width: 64px`
-- 网格布局：`display: grid; gap: 1px; justify-items: center; align-items: center`
-- hover: `brightness(1.12)`，不位移
-- focus-visible: 2px outline（难度色 55% + 白 45%）
-- disabled: `cursor: wait`（配合全局 opacity）
-
-### 8.5 输入框
-
-```css
-input, select {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--panel-solid);
-  color: var(--text);
-  padding: 8px 12px;
-}
-input:focus, select:focus {
-  border-color: var(--miku);
-  box-shadow: 0 0 0 2px var(--miku-dim);
-}
-input[type='checkbox'] {
-  width: 18px; height: 18px;
-  accent-color: var(--miku);
-}
-```
-
-### 8.6 分段控件
-
-```html
-<div class="segmented-control">
-  <button class="segmented-btn active">极限</button>
-  <button class="segmented-btn">困难</button>
-</div>
-```
-
-- flex 容器，`border-radius: 8px; overflow: hidden`
-- `.active`：`background: var(--miku); color: #fff`
-- 非 active hover：`background: var(--miku-dim)`
-
-### 8.7 Toast
-
-| 类型 | 类名 | 位置 | 自动消失 |
-|---|---|---|---|
-| 保存成功 | `.toast-bubble` | `fixed; top: 52px; right: 20px` | 2.2s |
-| 点歌失败 | `.failure-toast`（队列）/ `.ov-failure-toast`（悬浮窗） | 行内堆叠，最多 3 条 | 4s |
-
-入场动画 200ms，`translateY(-8px)` → `0`。
-
-### 8.8 空状态
-
-```html
-<div class="empty-state">队列是空的</div>
-<div class="empty-state small">弹幕连接后会显示在这里</div>
-```
-
-`min-height: 160px`（`.small` 为 `80px`），虚线边框，居中 muted 文字。
-
-### 8.9 eyebrow 标签
-
-```html
-<p class="eyebrow">Live Stage</p>
-```
-
-12px / 700 / uppercase / `letter-spacing: .08em` / `var(--miku)`。
-
----
-
-## 9. 页面布局规范
-
-### 9.1 标准页面结构
-
-```html
-<section class="page">
-  <header class="page-header [split]">
-    <div class="page-header-main"><h1>...</h1><p class="muted">...</p></div>
-    <div class="header-actions">...</div>
-  </header>
-  <!-- panels -->
-</section>
-```
-
-### 9.2 面板内标题
-
-```html
-<div class="panel">
-  <div class="panel-header [compact]">
-    <h2>队列</h2>
-    <span class="queue-count-badge">3</span>
-  </div>
-  <!-- content -->
-</div>
-```
-
-### 9.3 曲库表格
-
-使用 CSS Grid（非 `<table>`）：
-
-```html
-<div class="panel table-panel">
-  <div class="song-table">
-    <div class="song-row">
-      <span class="mono">001</span>
-      <div><strong>千本桜</strong><span>original · Senbonzakura</span></div>
-      <span>ryo</span>
-      <div class="library-difficulty-buttons">...</div>
-    </div>
-  </div>
-</div>
-```
-
----
-
-## 10. 悬浮窗规范
-
-悬浮窗（`/overlay`）是独立 Tauri 窗口，**不加载全局 `index.css`**。所有样式通过内联 `<style>` 注入，类名以 `ov-` 前缀隔离。
-
-### 10.1 容器
-
-```css
-.ov-overlay {
-  width: min(520px, calc(100vw - 24px));
-  margin: 12px;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, .55);
-  border: 1px solid rgba(255, 255, 255, .08);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, .35);
-}
-```
-
-### 10.2 关键差异
-
-| 特性 | 主窗口 | 悬浮窗 |
+| 类名 | 样式 | hover |
 |---|---|---|
-| 样式来源 | `src/index.css` | 内联 `<style>`（`ov-` 前缀） |
-| 背景 | `var(--bg)` 不透明 | `rgba(0,0,0,.55)` + `backdrop-filter: blur(8px)` |
-| 拖拽 | `-webkit-app-region: drag` | `getCurrentWindow().startDragging()` |
-| 窗口控制 | 系统样式 | 22px 无边框药丸 |
-| 最小宽度 | `860px` | 无（透明 body override） |
+| `.primary-button` | `--miku` 底 + `--miku-ink` 深青字（700） | `brightness(1.1)` |
+| `.secondary-button` | `--panel-2` 底 + 发丝边框 | 边框/文字 → miku |
+| `.ghost-button` | 透明 + 发丝边框 + muted 字 | 边框/文字/背景 → pink 系 |
+| `.icon-button` | 28px 方形图标按钮 | `--panel-2` 底 |
 
-### 10.3 列表行入场
+行内次要操作（移除等）用 `.ghost-button.button-sm`，默认 `opacity: 0`，行 hover / focus-visible 才显示。
 
-每行使用 `ov-fade-in`（280ms），按索引错开 `animation-delay: ${index * 30}ms`。
+### 8.2 分区（无卡片）
+
+页面内容的分组不使用带边框/底色的盒子，统一用「mono 编号 + 标题发丝线 + 留白」：
+
+```html
+<div class="config-panel">
+  <h2><span class="panel-index">01</span>基础设置</h2>
+  ...字段...
+</div>
+```
+
+`.config-panel > h2` 下方是 1px 发丝线；`.panel-index` 是 mono 10px faint 编号，`.panel-count` 是 mono 11px 计数。数据区（重建报告 `.report-panel`）用顶部发丝线与上文分隔。
+
+### 8.3 信号灯 `.signal`
+
+连接状态统一用信号灯，不用药丸：
+
+```html
+<span class="signal ok"><i />直播间 <span class="mono">#21452505</span></span>
+```
+
+6px 圆点：`.ok` 绿光 / `.bad` 红 / `.busy` 琥珀色闪烁；默认灰。
+
+### 8.4 窗口外壳
+
+```
+┌ .topbar ───────────────────────────────────────────┐
+│ ♪ 品牌 · 01–04 标签导航（底部 2px miku 指示条）· 窗口控制 │  44px，可拖拽
+├ .content ──────────────────────────────────────────┤
+│ 页面（.toolbar 功能性头部 + 面板）                       │
+├ .statusbar ────────────────────────────────────────┤
+│ ● 直播间 ● 游戏        › 状态回显 · vX.Y.Z · 主题开关 │  26px，常驻
+└─────────────────────────────────────────────────────┘
+```
+
+- 顶栏导航 `.topbar-tab`：mono 序号 `.tab-index` + 标签；选中 = 文字转 `--text` + 底部 2px `--miku` 边。
+- 状态栏左侧是 `.signal` 信号灯，右侧 `.statusbar-echo`（mono，`›` 前缀伪元素）显示最近一条事件消息。
+- 全局状态由 `src/lib/status.ts` 管理：`reportStatus()` 发消息，`setConnectionState()` / `refreshConnectionState()` 同步连接状态，页面动作后必须调用，禁止再建页面级 message bar。
+
+### 8.5 页面工具栏 `.toolbar`
+
+每页的功能性头部（搜索、连接操作、保存按钮），无标题文字。右侧动作用 `.toolbar-actions`（`margin-left: auto`），右侧元信息用 `.toolbar-meta`。连接操作组：
+
+```html
+<div class="console-group">
+  <span class="console-key">直播间</span>
+  <span class="console-value">21452505</span>   <!-- mono 值芯片 -->
+  <button class="secondary-button button-sm">连接</button>
+</div>
+<i class="console-sep" />
+```
+
+### 8.6 点歌台工作区 `.workspace`
+
+队列页**不用面板卡片**。整页撑满内容区高度，左右两栏（队列 / 弹幕）用一根发丝竖线分隔，栏内各自独立滚动：
+
+- `.queue-side`：右边框发丝线 + `padding-right: 22px`；`.feed-side`：`padding-left: 22px`。
+- 栏头 `.side-head`：13px 小标题 + 右侧 `.panel-count` 计数，下方发丝线。
+- 滚动区 `.queue-scroll` / `.feed`：`flex: 1; min-height: 0; overflow-y: auto`。
+- ≤1000px 折为单列，取消内部滚动。
+
+### 8.7 NEXT 焦点区
+
+队首不放在 tracklist 里，单独用 `.next-up` 展示并**固定在队列滚动区上方**。纯排版聚焦，禁止底色卡片：mono NEXT 标签（前置 6px miku 方块）+ JP 20px 标题 + mono meta，底部发丝线分隔。
+
+### 8.8 队列 tracklist
+
+队首进 `.next-up`（见 8.7），其余项在 tracklist 中从 `02` 开始编号。**发丝线分隔行，不用行底色卡片**：
+
+```html
+<ol class="tracklist">
+  <li class="track">
+    <span class="track-index">02</span>
+    <div class="track-main">
+      <strong>千本桜</strong>
+      <span class="track-meta">#001 · 点歌人 · 8.0★</span>
+    </div>
+    <button class="ghost-button button-sm track-remove">移除</button>
+  </li>
+</ol>
+```
+
+- 序号 mono 右对齐；meta 行 mono 11px；移除按钮 hover 行才显示。
+
+### 8.9 弹幕流 `.feed`
+
+分割线列表（非卡片）：用户名 miku 12px 内联 + 内容 13px 内联。点歌弹幕 `.request`：pink-dim 底 + inset 2px 粉丝信号条。
+
+### 8.10 难度芯片
+
+结构同旧版（`.difficulty-jump` 双行：标签 + 星 SVG + mono 数值），尺寸收紧：`min-width: 58px; padding: 3px 7px; border-radius: 5px`；标签 10px / 星级 12px；实心档位色 + 白字；hover `brightness(1.12)`。
+
+### 8.11 表单
+
+- 输入框：`--panel-2` 底，focus 时 miku 边框 + 2px miku-dim 环。
+- 开关 `.switch`：34×20 药丸，替代原生 checkbox。checked 时 miku 底白点。所有布尔设置必须用它。
+- 分段控件：`--inset` 凹槽底 + 2px padding；`.active` 用 `--raised` 凸起 + inset 发丝描边，不用 miku 填充。
+- 辅助说明统一 `.hint`（12px muted 纯文字），禁止左边框高亮提示框。
+
+### 8.12 统计行 `.stat-row`
+
+一个无盒子的统计条：上下发丝线 + `.stat` 之间竖线分隔，mono 20px miku 数字 + 11px muted 标签。禁止每个数字一个盒子。
+
+### 8.13 Toast 与失败提示
+
+- `.toast-bubble`：右上，`--raised` 底 + 左侧 2px miku 条，`rise-in` 入场，2.2s 消失。
+- `.failure-toast`：pink-dim 底 + inset 2px 粉条，行内堆叠最多 3 条，4s 消失。
+
+### 8.14 空状态
+
+虚线框（`--line-strong`）+ faint 12px 文字，无背景色。`.small` 72px 高。
+
+---
+
+## 9. 页面规范
+
+### 9.1 页面头部 = 工具栏
+
+导航标签已标明当前页面，**不再放 h1 大标题**。每页头部是功能工具栏 `.toolbar`，内容由页面功能决定：
+
+| 页面 | 工具栏内容 |
+|---|---|
+| 点歌台 | 直播间/游戏 `.console-group` + 右侧「打开悬浮窗」「切下一首」 |
+| 歌曲库 | 搜索框 + 右侧 `.toolbar-meta` 计数 |
+| 设置 | `.hint` 说明 + 右侧「未保存更改」`.signal.warn` + 保存按钮 |
+| 日志 | 状态 `.console-group` ×2（信号灯 + 名称 + 操作按钮） |
+| 关于 | 无工具栏：身份区（`.about-name` 字标）+ 三个 `.about-section` 分区 |
+
+### 9.2 曲库表格
+
+`page library-page`（整页撑高）> `.song-table-wrap`（内部滚动）> `.song-table` > `.song-row`。**不使用** `<table>`，也没有外框卡片。首行 `.song-row.song-head`：mono 10px faint 标签，吸顶 `sticky; top: 0`，背景直接用页面底色 `--bg`。数据行发丝线分隔：`.song-id`（mono faint）/ `strong` + `.song-sub`（JP 字体）/ `.song-author` / 难度芯片组。
+
+### 9.3 日志
+
+`page logs-page`（整页撑高）：工具栏放两组 `.console-group`（信号灯 + 名称 + 操作按钮），下方 `.log-stream` 是发丝线隔开的 mono 12px 文本流，内部滚动；`LogLine` 把时间戳拆成 `.log-time`（faint）弱化。
+
+### 9.4 向导
+
+进度 = mono 分数标签（`02 / 07`）+ 2px 轨道条 `.wizard-progress-track/.wizard-progress-fill`，不用圆点。欢迎步：`.wizard-kicker`（mono miku）+ 30px h1 + `.wizard-rule`（36×3 miku 短横线）。按钮一律 `.primary-button` / `.secondary-button` / `.ghost-button`。
+
+---
+
+## 10. 叠加层规范（悬浮窗 + OBS）
+
+两处叠加层共享同一套设计：悬浮窗（`/overlay`，独立 Tauri 窗口，内联 `<style>` + `ov-` 前缀，不加载 `index.css`）与 OBS 浏览器源（`obs_overlay.rs::render_overlay` 内嵌页面，轮询 `/api/queue`）。改动时必须两边同步。
+
+### 10.1 行结构
+
+每行三列：`序号/NEXT + 曲名 + 星级`
+
+- **序号**：mono、`tabular-nums`、右对齐、35% 白；队首用 `NEXT` 标签（miku 色、加粗、letter-spacing）。
+- **曲名**：JP 字栈（Yu Gothic 优先），悬浮窗 15px / OBS 19px，600 字重，超长省略。
+- **星级**：mono、700、`toFixed(1)` + `★`，**按 `difficulty_tier` 着色**。叠加在半透明黑 + 游戏画面上，使用提亮版档位色：`easy #25b8e6` / `normal #38d21f` / `hard #f0b41d` / `extreme #ff3b57` / `exextreme #c55aff`。tier 值必须白名单校验后再拼进 class。
+- 队首行：`rgba(57,197,187,.13)` 底 + inset 2px miku 左条。
+
+### 10.2 容器
+
+`rgba(0,0,0,.55)` + `backdrop-filter: blur(8px)`，圆角 5px（悬浮窗）/ 10px（OBS），标题栏计数数字用 miku 色。失败提示用 pink `rgba(225,40,133,.16/.4)`，关闭按钮 hover 用 pink。
 
 ---
 
 ## 11. 响应式
 
-唯一断点：`@media (max-width: 1000px)`。
+唯一断点 `@media (max-width: 1000px)`：
 
-| 变化 | 规则 |
-|---|---|
-| 双栏网格 | `grid-template-columns: 1fr`（单列堆叠） |
-| 页面标题 | `flex-direction: column`（标题和操作垂直排列） |
-| 侧边栏 | `220px` → `180px` |
-| 曲库行 | `72px 1fr 140px .9fr` → `60px 1fr`（后续列折到第二列） |
+- `.grid-two` / `.settings-grid` / `.status-grid` 折为单列
+- 顶栏标签收紧（隐藏 `.tab-index` 序号）
+- `.statusbar-echo` 最大宽度收窄到 260px
+- 曲库行折为两列，`.song-head` 隐藏
 
 ---
 
 ## 12. 可访问性约定
 
-| 元素 | aria 属性 |
+| 元素 | 约定 |
 |---|---|
-| 失败提示容器 | `aria-live="assertive"` |
-| 弹幕列表 | `aria-live="polite"` |
-| 房间号显示 | `aria-label="直播间房间号 N"` |
-| toast 气泡 | `role="status"` |
-| 失败提示条 | `role="alert"` |
-| 窗口控制按钮 | `aria-label="最小化/最大化/关闭"` |
-| 导航图标 | `aria-hidden="true"` |
-
----
-
-## 13. 已知不一致
-
-| 问题 | 说明 |
-|---|---|
-| 向导按钮类名 | Wizard 使用 `.btn-primary` 等未定义类，应改为 `.primary-button` 等 |
-| `.eyebrow-tag` / `.eyebrow::before` | 已 `display: none`，为废弃/预留 |
-| `.live-dot` | 已定义但未使用 |
+| 弹幕列表 / 回显行 | `aria-live="polite"` |
+| 失败提示 | `role="alert"` + `aria-live="assertive"` |
+| toast | `role="status"` |
+| 窗口控制 / 主题切换 | `aria-label` + `title` |
+| 装饰 SVG | `aria-hidden="true"` |
+| 曲库表头 | `aria-hidden="true"`（仅视觉对齐用） |
+| 按钮 focus | `:focus-visible` 2px `--miku-mid` outline |

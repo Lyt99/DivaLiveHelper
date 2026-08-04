@@ -4,6 +4,7 @@ mod danmaku;
 mod db_tool;
 mod hotkey;
 mod llm_intent;
+mod logging;
 mod obs_overlay;
 mod queue;
 mod song_db;
@@ -41,7 +42,7 @@ pub struct AppState {
 pub fn play_next_song(app: &tauri::AppHandle) -> Result<Option<SongRequest>, String> {
     let state = app.state::<AppState>();
     let Some(request) = state.queue.next() else {
-        let _ = app.emit("log-event", "队列为空，没有歌曲可播放");
+        logging::emit_log(app, "队列为空，没有歌曲可播放");
         return Ok(None);
     };
 
@@ -57,7 +58,7 @@ pub fn play_next_song(app: &tauri::AppHandle) -> Result<Option<SongRequest>, Str
 
     state.queue.complete(request.clone());
     let _ = app.emit("queue-updated", state.queue.snapshot());
-    let _ = app.emit("log-event", format!("已切换到歌曲: {}", request.song_name));
+    logging::emit_log(app, format!("已切换到歌曲: {}", request.song_name));
     Ok(Some(request))
 }
 
@@ -71,7 +72,7 @@ pub fn run() {
                 .with_handler(|app, _shortcut, event| {
                     if event.state() == ShortcutState::Pressed {
                         if let Err(error) = play_next_song(app) {
-                            let _ = app.emit("log-event", format!("快捷键切歌失败: {error}"));
+                            logging::emit_log(app, format!("快捷键切歌失败: {error}"));
                         }
                     }
                 })
@@ -130,7 +131,7 @@ pub fn run() {
                 .map_err(|_| std::io::Error::other("快捷键管理器锁失败"))?
                 .register(app.handle())
             {
-                let _ = app.emit("log-event", format!("注册快捷键失败: {error}"));
+                logging::emit_log(app.handle(), format!("注册快捷键失败: {error}"));
             }
             let config = state
                 .config
@@ -144,7 +145,7 @@ pub fn run() {
                     .map_err(|_| std::io::Error::other("OBS 管理器锁失败"))?
                     .start(app.handle())
                 {
-                    let _ = app.emit("log-event", format!("启动 OBS 覆盖层失败: {error}"));
+                    logging::emit_log(app.handle(), format!("启动 OBS 覆盖层失败: {error}"));
                 }
             }
             Ok(())

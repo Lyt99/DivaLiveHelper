@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../lib/tauri';
+import { reportStatus } from '../lib/status';
 import type { SongInfo } from '../types';
 
 type DifficultyTier = 'easy' | 'normal' | 'hard' | 'extreme' | 'exextreme';
@@ -15,11 +16,10 @@ const DIFFICULTY_BUTTONS: { key: DifficultyTier; label: string }[] = [
 export default function LibraryPage() {
   const [songs, setSongs] = useState<SongInfo[]>([]);
   const [query, setQuery] = useState('');
-  const [message, setMessage] = useState('');
   const [switchingKey, setSwitchingKey] = useState<string | null>(null);
 
   useEffect(() => {
-    api.getAllSongs().then(setSongs).catch((error) => setMessage(String(error)));
+    api.getAllSongs().then(setSongs).catch((error) => reportStatus(String(error)));
   }, []);
 
   const filtered = useMemo(() => {
@@ -36,33 +36,41 @@ export default function LibraryPage() {
     try {
       const result = await api.changeSong(song.pv_id, tier);
       const label = DIFFICULTY_BUTTONS.find((item) => item.key === tier)?.label ?? tier;
-      setMessage(`${result}（${song.name_zh || song.name} · ${label}）`);
+      reportStatus(`${result}（${song.name_zh || song.name} · ${label}）`);
     } catch (error) {
-      setMessage(String(error));
+      reportStatus(String(error));
     } finally {
       setSwitchingKey(null);
     }
   }
 
   return (
-    <section className="page">
-      <header className="page-header split">
-        <div><h1>歌曲库</h1><p className="muted">共 {songs.length} 首，列表最多显示 300 条匹配结果。</p></div>
+    <section className="page library-page">
+      <header className="toolbar">
         <input className="search-input" placeholder="搜索日文名 / 中文名 / 英文名 / 作者 / 别名" value={query} onChange={(event) => setQuery(event.target.value)} />
+        <span className="toolbar-meta">共 {songs.length} 首 · 最多显示 300 条匹配</span>
       </header>
-      <div className="panel table-panel">
+      <div className="song-table-wrap">
         <div className="song-table">
+          <div className="song-row song-head" aria-hidden="true">
+            <span>ID</span>
+            <span>曲名</span>
+            <span>作者</span>
+            <span>切歌</span>
+          </div>
           {filtered.map((song) => (
             <div key={song.pv_id} className="song-row">
-              <span className="mono">#{song.pv_id}</span>
-              <div><strong>{song.name_zh || song.name}</strong><span>{song.name}{song.name_en ? ` · ${song.name_en}` : ''}</span></div>
-              <span>{song.authors[0] || '未知作者'}</span>
+              <span className="song-id">#{song.pv_id}</span>
+              <div>
+                <strong>{song.name_zh || song.name}</strong>
+                <span className="song-sub">{song.name}{song.name_en ? ` · ${song.name_en}` : ''}</span>
+              </div>
+              <span className="song-author">{song.authors[0] || '未知作者'}</span>
               <DifficultyButtons song={song} switchingKey={switchingKey} onJump={jump} />
             </div>
           ))}
         </div>
       </div>
-      <div className="message-bar">{message}</div>
     </section>
   );
 }
@@ -96,7 +104,7 @@ function DifficultyButtons({
           >
             <span className="difficulty-jump-label">{label}</span>
             <span className="difficulty-jump-rating">
-              <svg width="11" height="11" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path d="M10 1 L12.1 7.1 L18.6 7.2 L13.4 11.1 L15.3 17.3 L10 13.6 L4.7 17.3 L6.6 11.1 L1.4 7.2 L7.9 7.1 Z" />
               </svg>
               {level.toFixed(1)}

@@ -9,6 +9,9 @@ interface FailureToast extends SongRequestFailure {
   id: number;
 }
 
+/* 合法难度档位，用于星级着色（防止异常值混进 class） */
+const DIFFICULTY_TIERS = new Set(['easy', 'normal', 'hard', 'extreme', 'exextreme']);
+
 /**
  * 悬浮点歌队列窗口
  *
@@ -178,20 +181,24 @@ export default function Overlay() {
           {queue.length === 0 ? (
             <div className="ov-empty">等待点歌…</div>
           ) : (
-            queue.map((item, index) => (
-              <div
-                key={`${item.song_id}-${item.timestamp}`}
-                className={`ov-song${index === 0 ? ' playing' : ''}`}
-                style={{ animationDelay: `${index * 30}ms` }}
-              >
-                {item.difficulty != null ? (
-                  <span className="ov-stars">{item.difficulty}★</span>
-                ) : null}
-                <div className="ov-song-main">
+            queue.map((item, index) => {
+              const tier = DIFFICULTY_TIERS.has(item.difficulty_tier) ? ` tier-${item.difficulty_tier}` : '';
+              return (
+                <div
+                  key={`${item.song_id}-${item.timestamp}`}
+                  className={`ov-song${index === 0 ? ' playing' : ''}`}
+                  style={{ animationDelay: `${index * 30}ms` }}
+                >
+                  <span className={`ov-pos${index === 0 ? ' ov-next' : ''}`}>
+                    {index === 0 ? 'NEXT' : String(index + 1).padStart(2, '0')}
+                  </span>
                   <span className="ov-name">{item.song_name}</span>
+                  {item.difficulty != null ? (
+                    <span className={`ov-stars${tier}`}>{item.difficulty.toFixed(1)}★</span>
+                  ) : null}
                 </div>
-              </div>
-            ))
+              );
+            })
           )}
         </section>
 
@@ -226,7 +233,7 @@ body,
 .ov-root {
   background: transparent;
   color: #ffffff;
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+  font-family: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", "Yu Gothic UI", sans-serif;
   width: 100%;
   height: 100%;
 }
@@ -297,7 +304,7 @@ body,
   padding-right: 4px;
 }
 .ov-titlebar-count strong {
-  color: #ffffff;
+  color: #39c5bb;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   margin-right: 2px;
@@ -358,8 +365,8 @@ body,
   justify-content: center;
 }
 .ov-close-btn:hover {
-  background: rgba(248, 81, 73, 0.22);
-  border-color: rgba(248, 81, 73, 0.5);
+  background: rgba(225, 40, 133, 0.25);
+  border-color: rgba(225, 40, 133, 0.55);
   color: #ffffff;
 }
 
@@ -382,53 +389,63 @@ body,
 }
 
 .ov-song {
-  display: flex;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 7px 12px;
+  border-radius: 6px;
   animation: ov-fade-in 280ms ease both;
 }
+
+/* 队首 = 正在播放：Miku 青信号条 */
 .ov-song.playing {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(57, 197, 187, 0.13);
+  box-shadow: inset 2px 0 0 #39c5bb;
 }
 
-.ov-stars {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.7);
-  white-space: nowrap;
-  flex-shrink: 0;
-  min-width: 36px;
-  text-align: center;
+/* 序号 / NEXT 标签 */
+.ov-pos {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: right;
   font-variant-numeric: tabular-nums;
 }
-.ov-song.playing .ov-stars { color: #e0e0e0; }
-
-.ov-song-main {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-  flex: 1 1 auto;
+.ov-pos.ov-next {
+  color: #39c5bb;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
 }
 
+/* 歌名多为日文，优先 JP 字形 */
 .ov-name {
-  margin: 5px 0;
   font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #ffffff;
+  font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo UI", "Meiryo", "Microsoft YaHei UI", sans-serif;
 }
+.ov-song.playing .ov-name { font-size: 16px; }
 
-.ov-requester {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
+/* 星级：等宽数字 + 档位色（叠加场景提亮版） */
+.ov-stars {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.65);
 }
+.ov-stars.tier-easy { color: #25b8e6; }
+.ov-stars.tier-normal { color: #38d21f; }
+.ov-stars.tier-hard { color: #f0b41d; }
+.ov-stars.tier-extreme { color: #ff3b57; }
+.ov-stars.tier-exextreme { color: #c55aff; }
 
 .ov-empty {
   padding: 24px 16px;
@@ -458,8 +475,8 @@ body,
   gap: 8px;
   padding: 6px 10px;
   border-radius: 6px;
-  background: rgba(248, 81, 73, 0.18);
-  border: 1px solid rgba(248, 81, 73, 0.35);
+  background: rgba(225, 40, 133, 0.16);
+  border: 1px solid rgba(225, 40, 133, 0.4);
   animation: ov-fade-in 200ms ease both;
   overflow: hidden;
 }
@@ -467,7 +484,7 @@ body,
 .ov-failure-requester {
   font-size: 12px;
   font-weight: 600;
-  color: rgba(255, 200, 200, 0.95);
+  color: #f27eae;
   white-space: nowrap;
   flex-shrink: 0;
   max-width: 80px;

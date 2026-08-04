@@ -1,29 +1,21 @@
 import { useEffect, useState } from 'react';
 import { listen } from '@tauri-apps/api/event';
 import { api } from '../lib/tauri';
+import { refreshConnectionState, reportStatus, useShellState } from '../lib/status';
 
 interface LogsPageProps {
   externalLogs: string[];
 }
 
 export default function LogsPage({ externalLogs }: LogsPageProps) {
-  const [gameConnected, setGameConnected] = useState(false);
-  const [danmakuConnected, setDanmakuConnected] = useState(false);
+  const { gameConnected, danmakuConnected } = useShellState();
   const [danmakuConnecting, setDanmakuConnecting] = useState(false);
-  const [message, setMessage] = useState('');
-
-  async function refresh() {
-    const [game, danmaku] = await Promise.all([api.getGameConnectionStatus(), api.getDanmakuStatus()]);
-    setGameConnected(game);
-    setDanmakuConnected(danmaku.connected);
-  }
 
   useEffect(() => {
-    refresh().catch((error) => setMessage(String(error)));
-    const connectionPromise = listen<string>('connection-status', (event) => {
+    refreshConnectionState().catch((error) => reportStatus(String(error)));
+    const connectionPromise = listen<string>('connection-status', () => {
       setDanmakuConnecting(false);
-      setMessage(event.payload);
-      refresh().catch((error) => setMessage(String(error)));
+      refreshConnectionState().catch((error) => reportStatus(String(error)));
     });
     return () => {
       connectionPromise.then((unlisten) => unlisten()).catch(() => undefined);
@@ -35,10 +27,10 @@ export default function LogsPage({ externalLogs }: LogsPageProps) {
       setDanmakuConnecting(true);
       const config = await api.getConfig();
       await api.startDanmaku(config.room_id);
-      setMessage('正在连接弹幕服务器');
+      reportStatus('正在连接弹幕服务器');
     } catch (error) {
       setDanmakuConnecting(false);
-      setMessage(String(error));
+      reportStatus(String(error));
     }
   }
 
@@ -46,38 +38,57 @@ export default function LogsPage({ externalLogs }: LogsPageProps) {
     try {
       setDanmakuConnecting(false);
       await api.stopDanmaku();
-      await refresh();
-      setMessage('已断开直播间弹幕');
+      await refreshConnectionState();
+      reportStatus('已断开直播间弹幕');
     } catch (error) {
-      setMessage(String(error));
+      reportStatus(String(error));
     }
   }
 
   async function reconnectGame() {
     try {
       await api.reconnectGame();
-      await refresh();
+      await refreshConnectionState();
     } catch (error) {
-      setMessage(String(error));
+      reportStatus(String(error));
     }
   }
 
   return (
-    <section className="page">
-      <header className="page-header"><h1>日志 / 状态</h1></header>
-      <div className="status-grid">
-        <StatusCard title="游戏进程" active={gameConnected} action="重新连接" onClick={reconnectGame} />
-        <StatusCard title="B站弹幕" active={danmakuConnected} pending={danmakuConnecting} action={danmakuConnecting ? '连接中…' : danmakuConnected ? '断开' : '连接'} onClick={danmakuConnected ? stopDanmaku : connectDanmaku} />
-      </div>
-      <div className="panel log-panel">
+    <section className="page logs-page">
+      <header className="toolbar">
+        <div className="console-group">
+          <span className={`signal ${gameConnected ? 'ok' : 'bad'}`}><i />{gameConnected ? '在线' : '离线'}</span>
+          <span className="console-key">游戏进程</span>
+          <button type="button" className="secondary-button button-sm" onClick={reconnectGame}>重新连接</button>
+        </div>
+        <i className="console-sep" />
+        <div className="console-group">
+          <span className={`signal ${danmakuConnecting ? 'busy' : danmakuConnected ? 'ok' : 'bad'}`}>
+            <i />{danmakuConnecting ? '连接中' : danmakuConnected ? '在线' : '离线'}
+          </span>
+          <span className="console-key">B 站弹幕</span>
+          <button type="button" className="secondary-button button-sm" onClick={danmakuConnected ? stopDanmaku : connectDanmaku} disabled={danmakuConnecting}>
+            {danmakuConnecting ? '连接中…' : danmakuConnected ? '断开' : '连接'}
+          </button>
+        </div>
+      </header>
+      <div className="log-stream">
         {externalLogs.length === 0 ? <div className="empty-state small">暂无日志</div> : null}
-        {externalLogs.map((line) => <div key={line} className="log-line">{line}</div>)}
+        {externalLogs.map((line) => <LogLine key={line} line={line} />)}
       </div>
-      <div className="message-bar">{message}</div>
     </section>
   );
 }
 
-function StatusCard({ title, active, pending = false, action, onClick }: { title: string; active: boolean; pending?: boolean; action: string; onClick: () => void }) {
-  return <div className="panel status-card"><span className={`status-pill ${active ? 'ok' : 'bad'}`}>{pending ? '连接中' : active ? '在线' : '离线'}</span><h2>{title}</h2><button className="secondary-button" type="button" onClick={onClick} disabled={pending}>{action}</button></div>;
+/* 日志格式为 "时间 内容"，把时间戳拆出来弱化显示 */
+function LogLine({ line }: { line: string }) {
+  const splitAt = line.indexOf(' ');
+  if (splitAt <= 0) return <div className="log-line">{line}</div>;
+  return (
+    <div className="log-line">
+      <span className="log-time">{line.slice(0, splitAt)}</span>
+      {line.slice(splitAt + 1)}
+    </div>
+  );
 }

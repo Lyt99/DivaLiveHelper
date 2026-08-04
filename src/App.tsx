@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import Layout from './components/Layout';
+import AboutPage from './pages/About';
 import ConfigPage from './pages/Config';
 import LibraryPage from './pages/SongLibrary';
 import LogsPage from './pages/Logs';
@@ -10,6 +11,7 @@ import OverlayPage from './pages/Overlay';
 import QueuePage from './pages/Queue';
 import WizardPage from './pages/Wizard';
 import { api } from './lib/tauri';
+import { refreshConnectionState, reportStatus } from './lib/status';
 import type { DanmakuEvent } from './types';
 
 function isOverlayWindow() {
@@ -47,15 +49,24 @@ export default function App() {
   useEffect(() => {
     if (isOverlayRoute) return;
 
+    // 状态栏初始数据
+    refreshConnectionState().catch(() => undefined);
+
     const logPromise = listen<string>('log-event', (event) => {
       setLogs((current) => [`${new Date().toLocaleTimeString()} ${event.payload}`, ...current].slice(0, 500));
     });
     const danmakuPromise = listen<DanmakuEvent>('danmaku', (event) => {
       setRecentDanmaku((current) => [event.payload, ...current].slice(0, 12));
     });
+    // 连接状态变化：更新状态栏消息与信号灯
+    const connectionPromise = listen<string>('connection-status', (event) => {
+      reportStatus(event.payload);
+      refreshConnectionState().catch(() => undefined);
+    });
     return () => {
       logPromise.then((unlisten) => unlisten()).catch(() => undefined);
       danmakuPromise.then((unlisten) => unlisten()).catch(() => undefined);
+      connectionPromise.then((unlisten) => unlisten()).catch(() => undefined);
     };
   }, [isOverlayRoute]);
 
@@ -79,6 +90,7 @@ export default function App() {
         <Route path="/library" element={<LibraryPage />} />
         <Route path="/config" element={<ConfigPage />} />
         <Route path="/logs" element={<LogsPage externalLogs={logs} />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </Layout>
   );

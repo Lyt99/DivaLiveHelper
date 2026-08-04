@@ -75,12 +75,12 @@ Key non-obvious fields:
 - `hotkey` — global shortcut for switching songs, e.g. `ctrl+shift+n`
 - `data_dir` — runtime data directory, default `Data`; resolved against the exe dir / bundled resource dir by `resolve_data_dir` in `lib.rs`
 - `mods_dir` — absolute path to game's `mods/` folder; each mod must have `rom/mod_pv_db.txt`
-- `auto_play_next` / `auto_play_interval` — when enabled, auto-dequeue the next song after N seconds
 - `max_queue_size` / `allow_duplicates` — queue capacity and duplicate policy
 - `obs_overlay_enabled` / `obs_overlay_host` / `obs_overlay_port` / `obs_overlay_title` — local OBS browser-source server; `validate()` requires the host to be `127.0.0.1` or `localhost`
 - `song_command_prefix` — danmaku prefix that triggers local parsing, default `点歌`
 - `sessdata` — Bilibili SESSDATA cookie; improves danmaku token flow reliability
 - `fetch_chinese_names` — toggle fetching Chinese names from external sources
+- `log_to_file` — persist backend log events to daily files under `{data_dir}/logs/` (see `logging.rs::emit_log`, the single funnel for all `log-event` emissions)
 - `http_proxy` — optional proxy for the LLM client
 - `llm_enabled` — enables semantic danmaku parsing; prefix requests still use local parsing first
 - `llm_api_key` — optional so local OpenAI-compatible models can run without a key

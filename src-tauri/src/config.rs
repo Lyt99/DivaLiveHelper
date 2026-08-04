@@ -10,8 +10,6 @@ pub struct Config {
     pub hotkey: String,
     pub data_dir: String,
     pub mods_dir: String,
-    pub auto_play_next: bool,
-    pub auto_play_interval: u32,
     pub max_queue_size: usize,
     pub allow_duplicates: bool,
     pub obs_overlay_enabled: bool,
@@ -21,6 +19,7 @@ pub struct Config {
     pub song_command_prefix: String,
     pub sessdata: String,
     pub fetch_chinese_names: bool,
+    pub log_to_file: bool,
     pub http_proxy: String,
     pub default_search_difficulty: String,
     pub difficulty_tolerance: f32,
@@ -40,8 +39,6 @@ impl Default for Config {
             hotkey: "ctrl+shift+n".to_string(),
             data_dir: "Data".to_string(),
             mods_dir: String::new(),
-            auto_play_next: false,
-            auto_play_interval: 300,
             max_queue_size: 50,
             allow_duplicates: false,
             obs_overlay_enabled: true,
@@ -51,6 +48,7 @@ impl Default for Config {
             song_command_prefix: "点歌".to_string(),
             sessdata: String::new(),
             fetch_chinese_names: false,
+            log_to_file: false,
             http_proxy: String::new(),
             default_search_difficulty: "extreme".to_string(),
             difficulty_tolerance: 0.5,
@@ -202,8 +200,6 @@ mod tests {
             hotkey: "alt+f12".to_string(),
             data_dir: "MyData".to_string(),
             mods_dir: "C:/mods".to_string(),
-            auto_play_next: true,
-            auto_play_interval: 120,
             max_queue_size: 20,
             allow_duplicates: true,
             obs_overlay_enabled: false,
@@ -213,6 +209,7 @@ mod tests {
             song_command_prefix: "播".to_string(),
             sessdata: "secret_sessdata".to_string(),
             fetch_chinese_names: true,
+            log_to_file: true,
             http_proxy: "http://proxy:8080".to_string(),
             default_search_difficulty: "exextreme".to_string(),
             difficulty_tolerance: 1.0,
@@ -232,8 +229,6 @@ mod tests {
         assert_eq!(loaded.hotkey, "alt+f12");
         assert_eq!(loaded.data_dir, "MyData");
         assert_eq!(loaded.mods_dir, "C:/mods");
-        assert!(loaded.auto_play_next);
-        assert_eq!(loaded.auto_play_interval, 120);
         assert_eq!(loaded.max_queue_size, 20);
         assert!(loaded.allow_duplicates);
         assert!(!loaded.obs_overlay_enabled);
@@ -243,6 +238,7 @@ mod tests {
         assert_eq!(loaded.song_command_prefix, "播");
         assert_eq!(loaded.sessdata, "secret_sessdata");
         assert!(loaded.fetch_chinese_names);
+        assert!(loaded.log_to_file);
         assert_eq!(loaded.http_proxy, "http://proxy:8080");
         assert_eq!(loaded.default_search_difficulty, "exextreme");
         assert_eq!(loaded.difficulty_tolerance, 1.0);

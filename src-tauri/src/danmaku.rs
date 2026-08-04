@@ -15,6 +15,7 @@ use tauri::{AppHandle, Emitter, Manager};
 use tokio::time::{sleep, timeout, Duration};
 use tokio_tungstenite::tungstenite::Message;
 
+use crate::logging::emit_log;
 use crate::{llm_intent, AppState};
 
 const ROOM_INIT_URL: &str = "https://api.live.bilibili.com/room/v1/Room/room_init";
@@ -136,11 +137,11 @@ impl DanmakuManager {
                 connected.store(false, Ordering::Relaxed);
                 match run_client(app.clone(), room_id, connected.clone()).await {
                     Ok(()) => {
-                        let _ = app.emit("log-event", "弹幕连接已断开，5 秒后重连");
+                        emit_log(&app, "弹幕连接已断开，5 秒后重连");
                         sleep(Duration::from_secs(5)).await;
                     }
                     Err(error) => {
-                        let _ = app.emit("log-event", format!("弹幕连接失败: {error}"));
+                        emit_log(&app, format!("弹幕连接失败: {error}"));
                         sleep(Duration::from_secs(5)).await;
                     }
                 }
@@ -427,8 +428,8 @@ async fn run_client(
         .map_err(|error| format!("发送认证包失败: {error}"))?;
     wait_for_auth_reply(&mut websocket).await?;
     connected.store(true, Ordering::Relaxed);
-    let _ = app.emit(
-        "log-event",
+    emit_log(
+        &app,
         format!("弹幕认证通过，监听直播间 {real_room_id}"),
     );
     let _ = app.emit("connection-status", "弹幕已连接");
@@ -521,7 +522,7 @@ async fn handle_packet(app: &AppHandle, operation: u32, payload: &[u8]) {
             }
             let _ = app.emit("danmaku", event);
         } else {
-            let _ = app.emit("log-event", "收到弹幕消息，但解析字段失败");
+            emit_log(app, "收到弹幕消息，但解析字段失败");
         }
     }
 }
@@ -585,7 +586,7 @@ pub(crate) async fn process_song_request(
         }
         Ok(_) => SongProcessOutcome::not_request(&event.user_name, "LLM 判断不是点歌指令"),
         Err(error) => {
-            let _ = app.emit("log-event", format!("LLM 意图识别失败: {error}"));
+            emit_log(app, format!("LLM 意图识别失败: {error}"));
             SongProcessOutcome::miss(
                 &event.user_name,
                 &event.content,
@@ -647,7 +648,7 @@ fn enqueue_first_result(
     let state = app.state::<AppState>();
     let Some(result) = result else {
         let message = format!("未找到匹配的歌曲: {original_query}");
-        let _ = app.emit("log-event", message.clone());
+        emit_log(app, &message);
         return SongProcessOutcome::miss(requester, original_query, message);
     };
     let added = state.queue.add(
@@ -670,7 +671,7 @@ fn enqueue_first_result(
     } else {
         format!("点歌失败（队列已满或重复）: {}", result.display_name)
     };
-    let _ = app.emit("log-event", message);
+    emit_log(app, &message);
     let _ = app.emit("queue-updated", state.queue.snapshot());
     SongProcessOutcome {
         is_song_request: true,

@@ -2,10 +2,11 @@ use std::sync::Arc;
 
 use serde::Serialize;
 use tauri::async_runtime::{self, JoinHandle};
-use tauri::{AppHandle, Emitter};
+use tauri::AppHandle;
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader};
 use tokio::net::{TcpListener, TcpStream};
 
+use crate::logging::emit_log;
 use crate::queue::SongQueue;
 
 #[derive(Debug, Clone, Serialize)]
@@ -70,7 +71,7 @@ impl OBSOverlayServer {
         self.task = Some(async_runtime::spawn(async move {
             match TcpListener::bind((host.as_str(), port)).await {
                 Ok(listener) => {
-                    let _ = app.emit("log-event", format!("OBS 覆盖层已启动: {url}"));
+                    emit_log(&app, format!("OBS 覆盖层已启动: {url}"));
                     loop {
                         match listener.accept().await {
                             Ok((stream, _)) => {
@@ -81,15 +82,14 @@ impl OBSOverlayServer {
                                 });
                             }
                             Err(error) => {
-                                let _ =
-                                    app.emit("log-event", format!("OBS 覆盖层连接失败: {error}"));
+                                emit_log(&app, format!("OBS 覆盖层连接失败: {error}"));
                                 break;
                             }
                         }
                     }
                 }
                 Err(error) => {
-                    let _ = app.emit("log-event", format!("OBS 覆盖层启动失败: {error}"));
+                    emit_log(&app, format!("OBS 覆盖层启动失败: {error}"));
                 }
             }
         }));
@@ -203,21 +203,21 @@ fn render_overlay(title: &str) -> String {
     :root {
       --panel: rgba(0, 0, 0, .55);
       --border: rgba(255, 255, 255, .08);
-      --accent: #e0e0e0;
+      --miku: #39c5bb;
       --text: #ffffff;
       --muted: rgba(255, 255, 255, .50);
-      --dim: rgba(255, 255, 255, .32);
-      --playing: rgba(255, 255, 255, .07);
-      font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+      --dim: rgba(255, 255, 255, .35);
+      --mono: "Cascadia Mono", Consolas, monospace;
+      font-family: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", "Yu Gothic UI", sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { min-height: 100vh; color: var(--text); background: transparent; overflow: hidden; }
 
     .overlay {
-      width: min(520px, calc(100vw - 24px));
+      width: min(560px, calc(100vw - 24px));
       margin: 12px;
-      padding: 16px 18px;
-      border-radius: 12px;
+      padding: 14px 16px;
+      border-radius: 10px;
       background: var(--panel);
       border: 1px solid var(--border);
       backdrop-filter: blur(8px);
@@ -227,51 +227,82 @@ fn render_overlay(title: &str) -> String {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 9px;
       border-bottom: 1px solid var(--border);
     }
     .header h1 {
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: .02em;
     }
     .header .count {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
     }
+    .header .count strong {
+      color: var(--miku);
+      font-family: var(--mono);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
 
-    .list { display: flex; flex-direction: column; gap: 6px; max-height: calc(100vh - 100px); overflow: hidden; }
+    .list { display: flex; flex-direction: column; gap: 2px; max-height: calc(100vh - 96px); overflow: hidden; }
 
     .song {
-      display: flex;
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr) auto;
       align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 8px;
+      gap: 12px;
+      padding: 8px 10px;
+      border-radius: 6px;
       animation: fade-in 280ms ease both;
     }
     .song.playing {
-      background: var(--playing);
+      background: rgba(57, 197, 187, .13);
+      box-shadow: inset 2px 0 0 var(--miku);
     }
-    .song .stars {
-      font-size: 14px;
-      color: var(--muted);
-      white-space: nowrap;
-      flex-shrink: 0;
-      min-width: 36px;
-      text-align: center;
+
+    /* 序号 / NEXT 标签 */
+    .pos {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--dim);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
     }
-    .song.playing .stars {
-      color: var(--accent);
+    .pos.next {
+      color: var(--miku);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-align: left;
     }
+
+    /* 歌名多为日文，优先 JP 字形 */
     .song .name {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      font-family: "Yu Gothic UI", "Yu Gothic", "Meiryo UI", "Meiryo", "Microsoft YaHei UI", sans-serif;
     }
+
+    /* 星级：等宽数字 + 档位色（叠加场景提亮版） */
+    .song .stars {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, .65);
+    }
+    .song .stars.tier-easy { color: #25b8e6; }
+    .song .stars.tier-normal { color: #38d21f; }
+    .song .stars.tier-hard { color: #f0b41d; }
+    .song .stars.tier-extreme { color: #ff3b57; }
+    .song .stars.tier-exextreme { color: #c55aff; }
 
     .empty {
       padding: 24px 16px;
@@ -292,6 +323,7 @@ fn render_overlay(title: &str) -> String {
   </main>
   <script>
     let lastSignature = '';
+    const TIERS = ['easy', 'normal', 'hard', 'extreme', 'exextreme'];
     const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
     async function load(){
       try{
@@ -299,7 +331,7 @@ fn render_overlay(title: &str) -> String {
         const data = await response.json();
         document.getElementById('count').textContent = data.size || 0;
         const songs = data.songs || [];
-        const signature = JSON.stringify(songs.map((song) => [song.position, song.song_id, song.song_name, song.requester, song.difficulty]));
+        const signature = JSON.stringify(songs.map((song) => [song.position, song.song_id, song.song_name, song.requester, song.difficulty, song.difficulty_tier]));
         if (signature === lastSignature) return;
         lastSignature = signature;
         const list = document.getElementById('list');
@@ -307,7 +339,16 @@ fn render_overlay(title: &str) -> String {
           list.innerHTML = '<div class="empty">等待点歌…</div>';
           return;
         }
-        list.innerHTML = songs.map((song, index) => `<div class="song${index === 0 ? ' playing' : ''}" style="animation-delay:${index * 30}ms"><span class="stars">${song.difficulty != null ? escapeHtml(song.difficulty) + '★' : ''}</span><span class="name">${escapeHtml(song.song_name)}</span></div>`).join('');
+        list.innerHTML = songs.map((song, index) => {
+          const tier = TIERS.includes(song.difficulty_tier) ? ` tier-${song.difficulty_tier}` : '';
+          const pos = index === 0
+            ? '<span class="pos next">NEXT</span>'
+            : `<span class="pos">${String(index + 1).padStart(2, '0')}</span>`;
+          const stars = song.difficulty != null
+            ? `<span class="stars${tier}">${escapeHtml(Number(song.difficulty).toFixed(1))}★</span>`
+            : '';
+          return `<div class="song${index === 0 ? ' playing' : ''}" style="animation-delay:${index * 30}ms">${pos}<span class="name">${escapeHtml(song.song_name)}</span>${stars}</div>`;
+        }).join('');
       } catch (_error) {}
     }
     load();
