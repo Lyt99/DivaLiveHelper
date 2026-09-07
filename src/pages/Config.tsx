@@ -1,7 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { api, emptyConfig } from '../lib/tauri';
 import { reportStatus } from '../lib/status';
 import type { AppConfig, HotkeyStatus, OBSOverlayStatus, RebuildReport, SongInfo } from '../types';
+
+// 跨页面切换串行保存，重新进入设置时先等待上一页的失焦保存完成。
+let configSaveQueue: Promise<boolean> = Promise.resolve(true);
 
 export default function ConfigPage() {
   const [config, setConfig] = useState<AppConfig>(emptyConfig);
@@ -10,7 +13,12 @@ export default function ConfigPage() {
   const [obsStatus, setObsStatus] = useState<OBSOverlayStatus | null>(null);
   const [rebuildReport, setRebuildReport] = useState<RebuildReport | null>(null);
   const [songs, setSongs] = useState<SongInfo[]>([]);
-  const [toast, setToast] = useState('');
+  const [loaded, setLoaded] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
+  const draftConfig = useRef(emptyConfig);
+  const persistedConfig = useRef(emptyConfig);
+  const pendingSave = useRef<{ config: AppConfig; promise: Promise<boolean> } | null>(null);
 
   const hasConfigChanges = useMemo(() => JSON.stringify(config) !== JSON.stringify(savedConfig), [config, savedConfig]);
   const libraryStats = useMemo(() => {
@@ -21,42 +29,81 @@ export default function ConfigPage() {
   }, [songs]);
 
   useEffect(() => {
-    api.getConfig().then((loaded) => {
-      setConfig(loaded);
-      setSavedConfig(loaded);
-    }).catch((error) => reportStatus(String(error)));
+    let active = true;
+    configSaveQueue.then(() => api.getConfig()).then((loadedConfig) => {
+      if (!active) return;
+      draftConfig.current = loadedConfig;
+      persistedConfig.current = loadedConfig;
+      setConfig(loadedConfig);
+      setSavedConfig(loadedConfig);
+      setLoaded(true);
+    }).catch((error) => {
+      if (active) reportStatus(`读取配置失败：${String(error)}`);
+    });
     api.getHotkeyStatus().then(setHotkeyStatus).catch(() => undefined);
     api.getObsOverlayStatus().then(setObsStatus).catch(() => undefined);
     api.getAllSongs().then(setSongs).catch(() => undefined);
+    return () => { active = false; };
   }, []);
 
-  useEffect(() => {
-    if (!toast) {
-      return;
-    }
-    const timer = window.setTimeout(() => setToast(''), 2200);
-    return () => window.clearTimeout(timer);
-  }, [toast]);
-
-  function update<K extends keyof AppConfig>(key: K, value: AppConfig[K]) {
-    setConfig((current) => ({ ...current, [key]: value }));
+  function update<K extends keyof AppConfig>(key: K, value: AppConfig[K], immediate = false) {
+    draftConfig.current = { ...draftConfig.current, [key]: value };
+    setConfig(draftConfig.current);
+    if (immediate) void save();
   }
 
-  async function save() {
-    try {
-      await api.saveConfig(config);
-      const saved = await api.getConfig();
-      setConfig(saved);
-      setSavedConfig(saved);
-      reportStatus('配置已保存');
-      setToast('保存成功');
-    } catch (error) {
-      reportStatus(String(error));
+  function save(): Promise<boolean> {
+    if (!loaded) return Promise.resolve(false);
+    const snapshot = draftConfig.current;
+    const serialized = JSON.stringify(snapshot);
+    if (pendingSave.current && JSON.stringify(pendingSave.current.config) === serialized) {
+      return pendingSave.current.promise;
     }
+    if (!pendingSave.current && JSON.stringify(persistedConfig.current) === serialized) {
+      setSaveError('');
+      if (saveError) reportStatus('配置与已保存内容一致');
+      return Promise.resolve(true);
+    }
+
+    setSaving(true);
+    setSaveError('');
+    const job: { config: AppConfig; promise: Promise<boolean> } = {
+      config: snapshot,
+      promise: configSaveQueue.then(async () => {
+        try {
+          if (JSON.stringify(persistedConfig.current) !== serialized) {
+            await api.saveConfig(snapshot);
+            persistedConfig.current = snapshot;
+            setSavedConfig(snapshot);
+          }
+          if (pendingSave.current === job) {
+            setSaveError('');
+            reportStatus('配置已自动保存');
+          }
+          return true;
+        } catch (error) {
+          if (pendingSave.current === job) {
+            const message = `自动保存失败：${String(error)}`;
+            setSaveError(message);
+            reportStatus(message);
+          }
+          return false;
+        } finally {
+          if (pendingSave.current === job) {
+            pendingSave.current = null;
+            setSaving(false);
+          }
+        }
+      }),
+    };
+    pendingSave.current = job;
+    configSaveQueue = job.promise;
+    return job.promise;
   }
 
   async function rebuildDatabase() {
     try {
+      if (!await save()) return;
       const report = await api.rebuildDatabase();
       setRebuildReport(report);
       const updatedSongs = await api.getAllSongs();
@@ -69,7 +116,7 @@ export default function ConfigPage() {
 
   async function registerHotkey() {
     try {
-      await api.saveConfig(config);
+      if (!await save()) return;
       const status = await api.registerHotkey();
       setHotkeyStatus(status);
       reportStatus(status.message);
@@ -90,7 +137,7 @@ export default function ConfigPage() {
 
   async function startObs() {
     try {
-      await api.saveConfig(config);
+      if (!await save()) return;
       const status = await api.startObsOverlay();
       setObsStatus(status);
       reportStatus(`${status.message}: ${status.url}`);
@@ -112,14 +159,19 @@ export default function ConfigPage() {
   return (
     <section className="page">
       <header className="toolbar">
-        <span className="hint">保存后，连接类设置需重启对应服务生效</span>
-        <div className="toolbar-actions">
-          {hasConfigChanges ? <span className="signal warn"><i />有未保存的更改</span> : null}
-          <button type="button" className="primary-button" onClick={save} disabled={!hasConfigChanges}>保存设置</button>
+        <span className="hint">输入框失焦、开关或单选切换后自动保存；连接类设置需重启对应服务生效</span>
+        <div className="toolbar-actions" role="status" aria-live="polite">
+          {!loaded ? <span className="signal busy"><i />读取配置中</span>
+            : saving ? <span className="signal busy"><i />正在保存</span>
+            : saveError ? <span className="signal bad" title={saveError}><i />保存失败，请修改后重试</span>
+            : hasConfigChanges ? <span className="signal warn"><i />编辑中，失焦后保存</span>
+            : <span className="signal ok"><i />已保存</span>}
         </div>
       </header>
 
-      <div className="settings-grid">
+      <fieldset className="settings-grid" disabled={!loaded} onBlur={(event) => {
+        if (event.target instanceof HTMLInputElement && event.target.type !== 'checkbox') void save();
+      }}>
         <ConfigPanel index="01" title="基础设置">
           <Field label="直播间 ID"><input value={config.room_id || ''} inputMode="numeric" pattern="[0-9]*" placeholder="输入 B 站直播间 ID" onChange={(event) => update('room_id', parseRoomId(event.target.value))} /></Field>
           <Field label="切歌快捷键"><input value={config.hotkey} onChange={(event) => update('hotkey', event.target.value)} /></Field>
@@ -129,13 +181,13 @@ export default function ConfigPage() {
           </div>
           <p className="hint">{hotkeyStatus?.message ?? '快捷键状态读取中…'}</p>
           <Field label="点歌前缀"><input value={config.song_command_prefix} onChange={(event) => update('song_command_prefix', event.target.value)} /></Field>
-          <Toggle label="保存日志到文件" checked={config.log_to_file} onChange={(value) => update('log_to_file', value)} />
+          <Toggle label="保存日志到文件" checked={config.log_to_file} onChange={(value) => update('log_to_file', value, true)} />
           <p className="hint">开启后，日志将写入数据目录下的 logs/ 文件夹，按日期分文件保存。</p>
         </ConfigPanel>
 
         <ConfigPanel index="02" title="队列设置">
           <Field label="最大队列长度"><input value={config.max_queue_size} type="number" min={1} max={200} onChange={(event) => update('max_queue_size', Number(event.target.value))} /></Field>
-          <Toggle label="允许重复点歌" checked={config.allow_duplicates} onChange={(value) => update('allow_duplicates', value)} />
+          <Toggle label="允许重复点歌" checked={config.allow_duplicates} onChange={(value) => update('allow_duplicates', value, true)} />
         </ConfigPanel>
 
         <ConfigPanel index="03" title="歌曲库">
@@ -150,14 +202,14 @@ export default function ConfigPage() {
           <div className="inline-actions">
             <button type="button" className="secondary-button button-sm" onClick={rebuildDatabase}>重建歌曲库</button>
           </div>
-          <p className="hint">修改路径后先保存设置，再重建歌曲库。重建会扫描基础曲库与游戏 MOD 目录。</p>
+          <p className="hint">路径输入框失焦后自动保存，重建会等待保存成功，再扫描基础曲库与游戏 MOD 目录。</p>
         </ConfigPanel>
 
         <ConfigPanel index="04" title="难度偏好">
           <Field label="偏好难度">
             <SegmentedControl
               value={config.default_search_difficulty}
-              onChange={(v) => update('default_search_difficulty', v)}
+              onChange={(v) => update('default_search_difficulty', v, true)}
               options={[
                 { value: 'easy', label: '简单' },
                 { value: 'normal', label: '普通' },
@@ -170,7 +222,7 @@ export default function ConfigPage() {
           <Field label="偏好难度不存在时">
             <SegmentedControl
               value={config.difficulty_fallback}
-              onChange={(v) => update('difficulty_fallback', v)}
+              onChange={(v) => update('difficulty_fallback', v, true)}
               options={[
                 { value: 'easier', label: '更简单' },
                 { value: 'harder', label: '更难' },
@@ -181,7 +233,7 @@ export default function ConfigPage() {
         </ConfigPanel>
 
         <ConfigPanel index="05" title="OBS 覆盖层">
-          <Toggle label="启用 OBS 覆盖层" checked={config.obs_overlay_enabled} onChange={(value) => update('obs_overlay_enabled', value)} />
+          <Toggle label="启用 OBS 覆盖层" checked={config.obs_overlay_enabled} onChange={(value) => update('obs_overlay_enabled', value, true)} />
           <Field label="OBS 地址"><input value={config.obs_overlay_host} onChange={(event) => update('obs_overlay_host', event.target.value)} /></Field>
           <Field label="OBS 端口"><input value={config.obs_overlay_port} type="number" onChange={(event) => update('obs_overlay_port', Number(event.target.value))} /></Field>
           <Field label="OBS 标题"><input value={config.obs_overlay_title} onChange={(event) => update('obs_overlay_title', event.target.value)} /></Field>
@@ -193,7 +245,7 @@ export default function ConfigPage() {
         </ConfigPanel>
 
         <ConfigPanel index="06" title="LLM 意图识别">
-          <Toggle label="启用 LLM 意图识别" checked={config.llm_enabled} onChange={(value) => update('llm_enabled', value)} />
+          <Toggle label="启用 LLM 意图识别" checked={config.llm_enabled} onChange={(value) => update('llm_enabled', value, true)} />
           <p className="hint">启用后，非前缀弹幕会走 OpenAI 兼容接口；本地模型可留空 API Key，云端服务通常需要填写。</p>
           <Field label="API Key（可选）"><input value={config.llm_api_key} type="password" placeholder="本地模型通常可留空" onChange={(event) => update('llm_api_key', event.target.value)} /></Field>
           <Field label="Base URL"><input value={config.llm_base_url} placeholder="https://api.deepseek.com 或 http://127.0.0.1:11434" onChange={(event) => update('llm_base_url', event.target.value)} /></Field>
@@ -201,7 +253,7 @@ export default function ConfigPage() {
           <Field label="Max Tokens"><input value={config.llm_max_tokens ?? ''} type="number" min={1} placeholder="留空 = 不限制" onChange={(event) => update('llm_max_tokens', parseMaxTokens(event.target.value))} /></Field>
           <p className="hint">限制 LLM 响应的最大 token 数，留空不限制。点歌意图识别通常 150 足够。</p>
         </ConfigPanel>
-      </div>
+      </fieldset>
 
       {rebuildReport ? (
         <div className="report-panel">
@@ -217,7 +269,6 @@ export default function ConfigPage() {
           </div>
         </div>
       ) : null}
-      {toast ? <div className="toast-bubble" role="status">{toast}</div> : null}
     </section>
   );
 }

@@ -1,33 +1,24 @@
 #[derive(Debug)]
-pub struct SongSelector {
-    connected: bool,
-}
+pub struct SongSelector;
 
 impl SongSelector {
     pub fn new() -> Self {
-        Self { connected: false }
+        Self
     }
 
     pub fn is_connected(&self) -> bool {
-        self.connected
-    }
-
-    pub fn reconnect(&mut self) -> bool {
         #[cfg(windows)]
         {
-            self.connected = windows_impl::process_exists("DivaMegaMix.exe");
+            windows_impl::process_exists("DivaMegaMix.exe")
         }
         #[cfg(not(windows))]
         {
-            self.connected = false;
+            false
         }
-        self.connected
     }
 
+
     pub fn change_song(&mut self, song_id: u32, difficulty_tier: &str) -> Result<String, String> {
-        if !self.is_connected() && !self.reconnect() {
-            return Err("游戏进程未连接".to_string());
-        }
         #[cfg(windows)]
         {
             windows_impl::change_song(song_id, difficulty_tier)?;

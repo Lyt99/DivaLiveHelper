@@ -83,7 +83,7 @@ export default function Layout({ children }: LayoutProps) {
         </span>
         <span className={`signal ${shell.gameConnected ? 'ok' : 'bad'}`}>
           <i />
-          游戏{shell.gameConnected ? '已连接' : '未连接'}
+          游戏{shell.gameConnected ? '运行中' : '未启动'}
         </span>
         <div className="statusbar-right">
           <span className="statusbar-echo" aria-live="polite">{shell.message}</span>

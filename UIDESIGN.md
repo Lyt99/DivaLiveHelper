@@ -125,7 +125,7 @@ ok/bad 的透明变体一律用 `color-mix(in srgb, var(--good) 35%, transparent
 | 页面 gap | `16px` |
 | 按钮高 | `30px`（`.button-sm` `25px`） |
 | 输入框高 | `32px` |
-| 网格 | `.workspace`（点歌台分栏）= `1.4fr / .6fr`；`.settings-grid` = 两列（`gap: 26px 32px`）；`.song-row` = `64px 1fr 140px .9fr` |
+| 网格 | `.workspace`（点歌台分栏）= `1.4fr / .6fr`；`.settings-grid` = 两列（`gap: 26px 32px`）；`.song-row` = ID / 曲名 / 作者 / MOD 来源 / 难度五列 |
 | 整页撑高 | `.queue-page` / `.library-page` / `.logs-page`：`height: 100%` + flex 列，滚动区 `flex: 1; min-height: 0` |
 
 ---
@@ -205,7 +205,7 @@ ok/bad 的透明变体一律用 `color-mix(in srgb, var(--good) 35%, transparent
 
 - 顶栏导航 `.topbar-tab`：mono 序号 `.tab-index` + 标签；选中 = 文字转 `--text` + 底部 2px `--miku` 边。
 - 状态栏左侧是 `.signal` 信号灯，右侧 `.statusbar-echo`（mono，`›` 前缀伪元素）显示最近一条事件消息。
-- 全局状态由 `src/lib/status.ts` 管理：`reportStatus()` 发消息，`setConnectionState()` / `refreshConnectionState()` 同步连接状态，页面动作后必须调用，禁止再建页面级 message bar。
+- 全局状态由 `src/lib/status.ts` 管理：`reportStatus()` 发消息，`setConnectionState()` 同步信号灯，`refreshDanmakuState()` 在弹幕操作后刷新状态。游戏进程由主窗口统一每 2 秒检测，页面只订阅共享结果，不提供手动连接按钮；禁止再建页面级 message bar。
 
 ### 8.5 页面工具栏 `.toolbar`
 
@@ -290,15 +290,15 @@ ok/bad 的透明变体一律用 `color-mix(in srgb, var(--good) 35%, transparent
 
 | 页面 | 工具栏内容 |
 |---|---|
-| 点歌台 | 直播间/游戏 `.console-group` + 右侧「打开悬浮窗」「切下一首」 |
+| 点歌台 | 直播间连接操作 / 游戏进程自动检测信号灯 `.console-group` + 右侧「打开悬浮窗」「切下一首」 |
 | 歌曲库 | 搜索框 + 右侧 `.toolbar-meta` 计数 |
-| 设置 | `.hint` 说明 + 右侧「未保存更改」`.signal.warn` + 保存按钮 |
-| 日志 | 状态 `.console-group` ×2（信号灯 + 名称 + 操作按钮） |
+| 设置 | `.hint` 自动保存说明 + 右侧保存状态信号灯；输入框失焦、开关或单选改变即保存，不提供手动保存按钮 |
+| 日志 | 状态 `.console-group` ×2：游戏进程信号灯及自动检测说明，弹幕信号灯及连接操作 |
 | 关于 | 无工具栏：身份区（`.about-name` 字标）+ 三个 `.about-section` 分区 |
 
 ### 9.2 曲库表格
 
-`page library-page`（整页撑高）> `.song-table-wrap`（内部滚动）> `.song-table` > `.song-row`。**不使用** `<table>`，也没有外框卡片。首行 `.song-row.song-head`：mono 10px faint 标签，吸顶 `sticky; top: 0`，背景直接用页面底色 `--bg`。数据行发丝线分隔：`.song-id`（mono faint）/ `strong` + `.song-sub`（JP 字体）/ `.song-author` / 难度芯片组。
+`page library-page`（整页撑高）> `.song-table-wrap`（内部滚动）> `.song-table` > `.song-row`。**不使用** `<table>`，也没有外框卡片。首行 `.song-row.song-head`：mono 10px faint 标签，吸顶 `sticky; top: 0`，背景直接用页面底色 `--bg`。数据行发丝线分隔：`.song-id`（mono faint）/ `strong` + `.song-sub`（JP 字体）/ `.song-author` / `.song-source` / 难度芯片组。来源列用 12px muted，长名称省略并通过 `title` 展示全文；窄窗口沿用两列堆叠。
 
 ### 9.3 日志
 
@@ -307,6 +307,8 @@ ok/bad 的透明变体一律用 `color-mix(in srgb, var(--good) 35%, transparent
 ### 9.4 向导
 
 进度 = mono 分数标签（`02 / 07`）+ 2px 轨道条 `.wizard-progress-track/.wizard-progress-fill`，不用圆点。欢迎步：`.wizard-kicker`（mono miku）+ 30px h1 + `.wizard-rule`（36×3 miku 短横线）。按钮一律 `.primary-button` / `.secondary-button` / `.ghost-button`。
+
+目录步骤进入后自动发现 Steam 游戏及现有 `mods/`，用 `.hint` 显示查找状态、结果和手动回退说明，游戏路径允许换行。已有路径及手动修改优先，离开步骤后忽略迟到结果；初始配置读取完成前禁用“开始配置”，避免覆盖用户输入。
 
 ---
 

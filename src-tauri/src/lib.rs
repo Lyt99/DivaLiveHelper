@@ -2,6 +2,7 @@ mod commands;
 mod config;
 mod danmaku;
 mod db_tool;
+mod game_install;
 mod hotkey;
 mod llm_intent;
 mod logging;
@@ -154,6 +155,7 @@ pub fn run() {
             commands::get_config,
             commands::save_config,
             commands::validate_config,
+            commands::detect_game_installation,
             commands::get_all_songs,
             commands::reload_database,
             commands::rebuild_database,
@@ -168,7 +170,6 @@ pub fn run() {
             commands::next_song,
             commands::change_song,
             commands::get_game_connection_status,
-            commands::reconnect_game,
             commands::start_danmaku,
             commands::stop_danmaku,
             commands::get_danmaku_status,

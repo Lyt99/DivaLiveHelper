@@ -20,7 +20,7 @@
 - **队列管理**：桌面 UI 管理点歌队列、配置、歌曲库、日志，支持重复策略、队列容量限制。
 - **游戏切歌**：通过快捷键或 UI 操作，写入 `DivaMegaMix.exe` 内存完成切歌，支持 MOD 歌曲。
 - **OBS 覆盖层**：内置本地 HTTP 服务器，提供 OBS 浏览器源页面，实时展示点歌队列。
-- **首次引导**：首次启动时通过向导完成直播间、快捷键、MOD 路径、LLM、难度偏好等配置。
+- **首次引导**：自动发现 Steam 游戏与 MOD 目录，并完成曲库重建、直播间、点歌前缀、难度偏好和快捷键配置；找不到目录时仍可手动选择。
 
 ## 前置要求
 
@@ -45,6 +45,19 @@ npm run tauri dev
 npm run tauri build
 ```
 
+### 标签自动构建
+
+将任意 tag 推送到 GitHub 后，`.github/workflows/tag-build.yml` 会在 Windows x64 上构建单文件程序：
+
+```bash
+git tag v0.1.1
+git push origin v0.1.1
+```
+
+在 **Actions → 标签构建单文件程序 → 对应运行 → Artifacts** 下载 `diva-live-helper-windows-x64.exe`。工作流使用 `--no-bundle`，只上传原始 `.exe`，不生成 MSI、安装程序或 ZIP，也不上传配置、Cookie、API Key 和本地数据目录。
+
+该程序使用系统的 **WebView2 Runtime**，不内置浏览器运行时。请将 `.exe` 放在可写目录；首次启动通过引导重建曲库，配置及 `Data/` 在运行时生成。官方基础曲库、中文名库和汉字转换表已经嵌入程序，不需要随下载携带；MOD 文件仍来自游戏安装目录。
+
 ### 验证
 
 ```bash
@@ -62,8 +75,8 @@ cargo test --manifest-path src-tauri/Cargo.toml
 
 1. 启动游戏 `DivaMegaMix.exe`。
 2. 运行 `npm run tauri dev` 或启动已构建的桌面程序。
-3. 首次启动会进入引导向导，按步骤填写直播间 ID、MOD 路径、快捷键、LLM 配置等。
-4. 在"点歌"页连接直播间和游戏进程。
+3. 首次启动会进入引导向导，自动从已登记的 Steam 库中查找游戏并填入现有 `mods/` 目录，无需游戏正在运行。已有路径或手动输入不会被自动覆盖；找不到游戏或尚无 `mods/` 时，可以手动浏览或留空，继续导入官方曲库，再完成其他配置。
+4. 在“点歌”页连接直播间；游戏进程无需手动连接，主窗口每 2 秒自动检测 `DivaMegaMix.exe`，启动、退出或重启后更新状态。切歌时会重新查找并打开当前游戏进程；检测到进程不代表已获得写入权限。
 5. 观众在直播间发送弹幕：
 
    ```text
@@ -76,7 +89,7 @@ cargo test --manifest-path src-tauri/Cargo.toml
 
 ## 配置
 
-复制 `config.example.json` 为 `config.json`，或在桌面应用的"设置"页面保存配置。`config.json` 可能包含 SESSDATA 和 LLM API Key，已在 `.gitignore` 中排除，不会提交到 Git。
+复制 `config.example.json` 为 `config.json`，或在桌面应用的“设置”页面修改配置：输入框失去焦点、开关或单选项改变后自动保存，无需手动点击保存按钮。保存失败会保留输入并提示错误；连接类设置仍需重启对应服务生效。`config.json` 可能包含 SESSDATA 和 LLM API Key，已在 `.gitignore` 中排除，不会提交到 Git。
 
 关键字段：
 
@@ -134,6 +147,12 @@ http://127.0.0.1:8765/api/queue
 | `HanziKanjiDict.txt` | 汉字→汉字转写搜索辅助表。 |
 | `pv_db.txt` / `mdata_pv_db.txt` | 旧版本体与 DLC 歌曲数据库，保留用于参考或重新生成 `base_song_db.json`。 |
 
+歌曲库的“所属 MOD / 来源”列会根据 `source` 中记录的 MOD 文件夹，在配置的 `mods_dir` 下依次读取 `mod.json` 的顶层 `name`、`config.toml` 的顶层 `name`；缺失、损坏或名称为空时显示文件夹名。本体和 DLC 分别显示“本体”“DLC”。名称在读取曲库列表时解析，无需重建数据库，不改写原始 `source`，也支持按 MOD 名或文件夹名搜索。
+
+官方曲目清单于 2026-09-07 按 [DIVA Mod Archive 的 PV 列表](https://divamodarchive.com/pvs)中来源为 `MM+` 的记录核对，共 253 首（`base` 179 首、`dlc` 74 首）。网站将本体与 DLC 统一标为 `MM+`，因此保留本项目原有的本体 / DLC 分类；不将 MOD 曲目或预留 ID 收入内置官方库。中文名仍使用独立中文曲名数据库。
+
+“重建歌曲库”会先用内置清单替换旧的 `base` / `dlc` 记录，再扫描 MOD；已从官方清单剔除的记录不会继续残留，MOD 仍可覆盖同 ID 的官方曲目。已有用户需更新程序后执行一次重建，才能清理本地旧记录。
+
 `docs/` 是已生成的公开中文曲名数据库静态站点，可用于 GitHub Pages 发布。
 
 ## 项目结构
@@ -164,6 +183,7 @@ diva-live-helper/
 │       ├── hotkey.rs            # 全局快捷键
 │       ├── llm_intent.rs        # OpenAI 兼容意图解析
 │       ├── obs_overlay.rs       # 本地 OBS 浏览器源服务器
+│       ├── game_install.rs      # Steam 游戏与 MOD 目录自动发现
 │       └── db_tool.rs           # 歌曲 DB 重建工具
 ├── Data/                        # 歌曲数据库与搜索辅助数据
 ├── docs/                        # 中文曲名数据库静态站点

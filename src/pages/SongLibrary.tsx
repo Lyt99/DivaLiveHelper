@@ -26,7 +26,7 @@ export default function LibraryPage() {
     const needle = query.trim().toLowerCase();
     if (!needle) return songs.slice(0, 300);
     return songs
-      .filter((song) => [song.name, song.name_en, song.name_zh, ...song.authors, ...song.aliases].filter(Boolean).some((value) => String(value).toLowerCase().includes(needle)))
+      .filter((song) => [song.name, song.name_en, song.name_zh, song.mod_name, song.source?.startsWith('mod:') ? song.source.slice(4) : null, ...song.authors, ...song.aliases].filter(Boolean).some((value) => String(value).toLowerCase().includes(needle)))
       .slice(0, 300);
   }, [query, songs]);
 
@@ -47,7 +47,7 @@ export default function LibraryPage() {
   return (
     <section className="page library-page">
       <header className="toolbar">
-        <input className="search-input" placeholder="搜索日文名 / 中文名 / 英文名 / 作者 / 别名" value={query} onChange={(event) => setQuery(event.target.value)} />
+        <input className="search-input" placeholder="搜索曲名 / 作者 / 别名 / MOD 名 / 文件夹名" value={query} onChange={(event) => setQuery(event.target.value)} />
         <span className="toolbar-meta">共 {songs.length} 首 · 最多显示 300 条匹配</span>
       </header>
       <div className="song-table-wrap">
@@ -56,9 +56,18 @@ export default function LibraryPage() {
             <span>ID</span>
             <span>曲名</span>
             <span>作者</span>
+            <span>所属 MOD / 来源</span>
             <span>切歌</span>
           </div>
-          {filtered.map((song) => (
+          {filtered.map((song) => {
+            const sourceName = song.source?.startsWith('mod:')
+              ? song.mod_name || song.source.slice(4) || '未知来源'
+              : song.source === 'base'
+                ? '本体'
+                : song.source === 'dlc'
+                  ? 'DLC'
+                  : '未知来源';
+            return (
             <div key={song.pv_id} className="song-row">
               <span className="song-id">#{song.pv_id}</span>
               <div>
@@ -66,9 +75,11 @@ export default function LibraryPage() {
                 <span className="song-sub">{song.name}{song.name_en ? ` · ${song.name_en}` : ''}</span>
               </div>
               <span className="song-author">{song.authors[0] || '未知作者'}</span>
+              <span className="song-source" title={sourceName}>{sourceName}</span>
               <DifficultyButtons song={song} switchingKey={switchingKey} onJump={jump} />
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

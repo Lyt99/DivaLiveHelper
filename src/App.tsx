@@ -11,7 +11,7 @@ import OverlayPage from './pages/Overlay';
 import QueuePage from './pages/Queue';
 import WizardPage from './pages/Wizard';
 import { api } from './lib/tauri';
-import { refreshConnectionState, reportStatus } from './lib/status';
+import { refreshDanmakuState, reportStatus, setConnectionState } from './lib/status';
 import type { DanmakuEvent } from './types';
 
 function isOverlayWindow() {
@@ -49,8 +49,21 @@ export default function App() {
   useEffect(() => {
     if (isOverlayRoute) return;
 
-    // 状态栏初始数据
-    refreshConnectionState().catch(() => undefined);
+    let stopped = false;
+    let gameTimer: number | undefined;
+    const pollGame = async () => {
+      try {
+        const connected = await api.getGameConnectionStatus();
+        if (!stopped) setConnectionState({ gameConnected: connected });
+      } catch {
+        if (!stopped) setConnectionState({ gameConnected: false });
+      } finally {
+        // 上一次检测完成后再计时，避免慢请求重叠；页面切换不重建这个轮询。
+        if (!stopped) gameTimer = window.setTimeout(pollGame, 2000);
+      }
+    };
+    gameTimer = window.setTimeout(pollGame, 0);
+    refreshDanmakuState().catch(() => undefined);
 
     const logPromise = listen<string>('log-event', (event) => {
       setLogs((current) => [`${new Date().toLocaleTimeString()} ${event.payload}`, ...current].slice(0, 500));
@@ -61,9 +74,11 @@ export default function App() {
     // 连接状态变化：更新状态栏消息与信号灯
     const connectionPromise = listen<string>('connection-status', (event) => {
       reportStatus(event.payload);
-      refreshConnectionState().catch(() => undefined);
+      refreshDanmakuState().catch(() => undefined);
     });
     return () => {
+      stopped = true;
+      window.clearTimeout(gameTimer);
       logPromise.then((unlisten) => unlisten()).catch(() => undefined);
       danmakuPromise.then((unlisten) => unlisten()).catch(() => undefined);
       connectionPromise.then((unlisten) => unlisten()).catch(() => undefined);

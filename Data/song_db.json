@@ -4990,22 +4990,6 @@
       },
       "source": "mod:Nitori's Song Pack"
     },
-    "700": {
-      "pv_id": 700,
-      "name": "Ievan Polkka",
-      "name_en": "",
-      "aliases": [],
-      "authors": [
-        "未設定"
-      ],
-      "difficulty": {
-        "easy": 1.0,
-        "extreme": 1.0,
-        "hard": 1.0,
-        "normal": 1.0
-      },
-      "source": "base"
-    },
     "894": {
       "pv_id": 894,
       "name": "フロートプレイ",
@@ -7907,22 +7891,6 @@
       },
       "source": "mod:Dystoria's Song Pack"
     },
-    "744": {
-      "pv_id": 744,
-      "name": "ピアノ×フォルテ×スキャンダル",
-      "name_en": "Piano X Forte X Scandal",
-      "aliases": [],
-      "authors": [
-        "OSTER project"
-      ],
-      "difficulty": {
-        "extreme": 9.5,
-        "easy": 4.0,
-        "normal": 5.5,
-        "hard": 6.5
-      },
-      "source": "base"
-    },
     "10201": {
       "pv_id": 10201,
       "name": "[PDe] 星屑ユートピア",
@@ -10548,22 +10516,6 @@
         "extreme": 9.0,
         "normal": 4.5,
         "hard": 7.0
-      },
-      "source": "base"
-    },
-    "701": {
-      "pv_id": 701,
-      "name": "Ievan Polkka",
-      "name_en": "",
-      "aliases": [],
-      "authors": [
-        "未設定"
-      ],
-      "difficulty": {
-        "extreme": 1.0,
-        "easy": 1.0,
-        "hard": 1.0,
-        "normal": 1.0
       },
       "source": "base"
     },

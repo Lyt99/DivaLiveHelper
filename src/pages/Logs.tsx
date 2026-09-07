@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { listen } from '@tauri-apps/api/event';
 import { api } from '../lib/tauri';
-import { refreshConnectionState, reportStatus, useShellState } from '../lib/status';
+import { refreshDanmakuState, reportStatus, useShellState } from '../lib/status';
 
 interface LogsPageProps {
   externalLogs: string[];
@@ -12,10 +12,10 @@ export default function LogsPage({ externalLogs }: LogsPageProps) {
   const [danmakuConnecting, setDanmakuConnecting] = useState(false);
 
   useEffect(() => {
-    refreshConnectionState().catch((error) => reportStatus(String(error)));
+    refreshDanmakuState().catch((error) => reportStatus(String(error)));
     const connectionPromise = listen<string>('connection-status', () => {
       setDanmakuConnecting(false);
-      refreshConnectionState().catch((error) => reportStatus(String(error)));
+      refreshDanmakuState().catch((error) => reportStatus(String(error)));
     });
     return () => {
       connectionPromise.then((unlisten) => unlisten()).catch(() => undefined);
@@ -38,29 +38,21 @@ export default function LogsPage({ externalLogs }: LogsPageProps) {
     try {
       setDanmakuConnecting(false);
       await api.stopDanmaku();
-      await refreshConnectionState();
+      await refreshDanmakuState();
       reportStatus('已断开直播间弹幕');
     } catch (error) {
       reportStatus(String(error));
     }
   }
 
-  async function reconnectGame() {
-    try {
-      await api.reconnectGame();
-      await refreshConnectionState();
-    } catch (error) {
-      reportStatus(String(error));
-    }
-  }
 
   return (
     <section className="page logs-page">
       <header className="toolbar">
         <div className="console-group">
-          <span className={`signal ${gameConnected ? 'ok' : 'bad'}`}><i />{gameConnected ? '在线' : '离线'}</span>
+          <span className={`signal ${gameConnected ? 'ok' : 'bad'}`}><i />{gameConnected ? '运行中' : '未启动'}</span>
           <span className="console-key">游戏进程</span>
-          <button type="button" className="secondary-button button-sm" onClick={reconnectGame}>重新连接</button>
+          <span className="hint">每 2 秒自动检测</span>
         </div>
         <i className="console-sep" />
         <div className="console-group">

@@ -3566,13 +3566,13 @@
       "evidence": "netease-transname"
     },
     "ぽっぴっぽー": {
-      "name_zh": "Po Pi Po",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_049",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "蔬菜汁",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Po Pi Po",
+      "author": "ラマーズP",
+      "candidate": "蔬菜汁",
+      "evidence": "community-title-evidence"
     },
     "ぽっぴっぽー F's Special edition": {
       "name_zh": "Po Pi Po F's Special edition",
@@ -3737,13 +3737,13 @@
       "evidence": "qq-music-parenthetical-title"
     },
     "アゲアゲアゲイン": {
-      "name_zh": "Ageage Again",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_249",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "再次再次沸腾",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Ageage Again",
+      "author": "Mitchie M",
+      "candidate": "再次再次沸腾",
+      "evidence": "community-title-evidence"
     },
     "アスノヒカリ": {
       "name_zh": "明日之光",
@@ -3773,13 +3773,13 @@
       "evidence": "netease-transname"
     },
     "アドレサンス": {
-      "name_zh": "Adolescence",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_260",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "青春期",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Adolescence",
+      "author": "Dios/シグナルP",
+      "candidate": "青春期",
+      "evidence": "community-title-evidence"
     },
     "アネモネ": {
       "name_zh": "银莲花",
@@ -3926,13 +3926,13 @@
       "evidence": "bilibili-title-evidence"
     },
     "インタビュア": {
-      "name_zh": "Interviewer",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_243",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "心境探访",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Interviewer",
+      "author": "クワガタP",
+      "candidate": "心境探访",
+      "evidence": "community-title-evidence"
     },
     "インベーダーインベーダー": {
       "name_zh": "入侵者入侵者",
@@ -4007,13 +4007,13 @@
       "evidence": "netease-transname"
     },
     "エンヴィキャットウォーク": {
-      "name_zh": "Envy Cat Walk",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_724",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "嫉妒猫步",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Envy Cat Walk",
+      "author": "トーマ",
+      "candidate": "嫉妒猫步",
+      "evidence": "community-title-evidence"
     },
     "エンヴィーベイビー": {
       "name_zh": "嫉妒宝贝",
@@ -4133,13 +4133,13 @@
       "evidence": "netease-transname"
     },
     "カラフル×セクシィ": {
-      "name_zh": "Colorful × Sexy",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_212",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "多彩×性感",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Colorful × Sexy",
+      "author": "doriko",
+      "candidate": "多彩×性感",
+      "evidence": "community-title-evidence"
     },
     "カラフル×メロディ -F2nd Edition-": {
       "name_zh": "Colorful × Melody -F2nd Edition-",
@@ -4196,13 +4196,13 @@
       "evidence": "netease-transname"
     },
     "キップル・インダストリー": {
-      "name_zh": "Kipple Industry, Inc.",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_231",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "无用产业",
+      "status": "needs_review",
+      "source": "community",
+      "name_en": "Kipple Industry Inc.",
+      "author": "millstones",
+      "candidate": "无用产业",
+      "evidence": "community-title-evidence"
     },
     "キミのことが好きでゴメンナサイ": {
       "name_zh": "对不起，我喜欢你",
@@ -4214,13 +4214,13 @@
       "evidence": "netease-transname"
     },
     "キャットフード": {
-      "name_zh": "Cat Food",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_600",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "猫粮",
+      "status": "needs_review",
+      "source": "community",
+      "name_en": "Cat Food",
+      "author": "doriko",
+      "candidate": "猫粮",
+      "evidence": "community-title-evidence"
     },
     "キャットラビング": {
       "name_zh": "猫耳摩擦",
@@ -4439,13 +4439,13 @@
       "evidence": "netease-transname"
     },
     "サンドリヨン": {
-      "name_zh": "Cendrillon",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_259",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "灰姑娘",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Cendrillon",
+      "author": "Dios/シグナルP",
+      "candidate": "灰姑娘",
+      "evidence": "community-title-evidence"
     },
     "システマティック・ラヴ": {
       "name_zh": "Systematic Love",
@@ -5024,13 +5024,13 @@
       "evidence": "netease-transname"
     },
     "ネガポジ＊コンティニューズ": {
-      "name_zh": "Negaposi＊Continues",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_629",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "正＊负持续",
+      "status": "needs_review",
+      "source": "community",
+      "name_en": "Negaposi＊Continues",
+      "author": "sasakure.UK",
+      "candidate": "正＊负持续",
+      "evidence": "community-title-evidence"
     },
     "ネクストネスト": {
       "name_zh": "Next Nest",
@@ -5240,13 +5240,13 @@
       "evidence": "netease-transname"
     },
     "パズル": {
-      "name_zh": "Puzzle",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_086",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "拼图",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Puzzle",
+      "author": "クワガタP",
+      "candidate": "拼图",
+      "evidence": "community-title-evidence"
     },
     "パラサイト": {
       "name_zh": "寄生虫",
@@ -5375,13 +5375,13 @@
       "evidence": "t-wy-pjsk-alias"
     },
     "ファインダー(DSLR remix - re:edit)": {
-      "name_zh": "Finder (DSLR remix - re:edit)",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_039",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "观景窗(DSLR remix - re:edit)",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Finder (DSLR remix - re:edit)",
+      "author": "kz",
+      "candidate": "观景窗(DSLR remix - re:edit)",
+      "evidence": "community-title-evidence"
     },
     "フィクサー": {
       "name_zh": "神射手",
@@ -5438,22 +5438,22 @@
       "evidence": "self-display-kana-title"
     },
     "ブラック★ロックシューター": {
-      "name_zh": "BLACK★ROCK SHOOTER",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_630",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "黑岩射手",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Black★Rock Shooter",
+      "author": "ryo",
+      "candidate": "黑岩射手",
+      "evidence": "community-title-evidence"
     },
     "ブラックゴールド": {
-      "name_zh": "Black Gold",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_222",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "黑金",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Black Gold",
+      "author": "otetsu",
+      "candidate": "黑金",
+      "evidence": "community-title-evidence"
     },
     "ブリキノダンス": {
       "name_zh": "马口铁之舞",
@@ -5474,13 +5474,13 @@
       "evidence": "qq-music-parenthetical-title"
     },
     "ブレス・ユア・ブレス": {
-      "name_zh": "Bless Your Breath",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_278",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "祝福你的呼吸",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Bless Your Breath",
+      "author": "和田たけあき",
+      "candidate": "祝福你的呼吸",
+      "evidence": "community-title-evidence"
     },
     "ホドモエシティ": {
       "name_zh": "帆巴市",
@@ -5636,13 +5636,13 @@
       "evidence": "pjsk-tc-master"
     },
     "メテオ": {
-      "name_zh": "Meteor",
-      "status": "auto",
-      "source": "jiut",
-      "name_en": "",
-      "author": "",
-      "candidate": "pv_722",
-      "evidence": "jiut-song-name-table"
+      "name_zh": "流星",
+      "status": "verified",
+      "source": "community",
+      "name_en": "Meteor",
+      "author": "じょん",
+      "candidate": "流星",
+      "evidence": "community-title-evidence"
     },
     "メデ": {
       "name_zh": "救我",
@@ -8048,13 +8048,13 @@
       "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "カラフル×メロディ": {
-      "name_zh": "Colorful × Melody",
-      "status": "needs_review",
-      "source": "base",
+      "name_zh": "彩色旋律",
+      "status": "verified",
+      "source": "community",
       "name_en": "Colorful × Melody",
       "author": "doriko",
-      "candidate": "Colorful × Melody",
-      "evidence": "fallback to embedded base_song_db English title; needs community review"
+      "candidate": "彩色旋律",
+      "evidence": "community-title-evidence"
     },
     "初音ミクの激唱": {
       "name_zh": "初音未来的激唱",
@@ -8156,13 +8156,13 @@
       "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "クローバー・クラブ": {
-      "name_zh": "Clover♣Club",
-      "status": "needs_review",
-      "source": "base",
+      "name_zh": "四叶草俱乐部",
+      "status": "verified",
+      "source": "community",
       "name_en": "Clover♣Club",
       "author": "ゆうゆ",
-      "candidate": "Clover♣Club",
-      "evidence": "fallback to embedded base_song_db English title; needs community review"
+      "candidate": "四叶草俱乐部",
+      "evidence": "community-title-evidence"
     },
     "Promise": {
       "name_zh": "Promise",
@@ -8210,13 +8210,13 @@
       "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "SPiCa -39's Giving Day Edition-": {
-      "name_zh": "SPiCa -39's Giving Day Edition-",
-      "status": "needs_review",
-      "source": "base",
+      "name_zh": "麦穗星 -39's Giving Day Edition-",
+      "status": "verified",
+      "source": "community",
       "name_en": "SPiCa -39's Giving Day Edition-",
       "author": "とく",
-      "candidate": "SPiCa -39's Giving Day Edition-",
-      "evidence": "fallback to embedded base_song_db original title; needs community review"
+      "candidate": "麦穗星 -39's Giving Day Edition-",
+      "evidence": "community-title-evidence"
     },
     "歌に形はないけれど": {
       "name_zh": "虽然歌声无形",
@@ -8291,13 +8291,13 @@
       "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "ローリンガール": {
-      "name_zh": "Rolling Girl",
-      "status": "needs_review",
-      "source": "base",
+      "name_zh": "翻滚少女",
+      "status": "verified",
+      "source": "community",
       "name_en": "Rolling Girl",
       "author": "wowaka",
-      "candidate": "Rolling Girl",
-      "evidence": "fallback to embedded base_song_db English title; needs community review"
+      "candidate": "翻滚少女",
+      "evidence": "community-title-evidence"
     },
     "Starduster": {
       "name_zh": "Starduster",
@@ -8489,13 +8489,13 @@
       "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "アウト オブ エデン": {
-      "name_zh": "Out of Eden",
+      "name_zh": "逃出伊甸",
       "status": "needs_review",
-      "source": "dlc",
+      "source": "community",
       "name_en": "Out of Eden",
       "author": "Kouhei (K's Sound Project)",
-      "candidate": "Out of Eden",
-      "evidence": "fallback to embedded base_song_db English title; needs community review"
+      "candidate": "逃出伊甸",
+      "evidence": "community-title-evidence"
     },
     "Rosary Pale": {
       "name_zh": "苍白玫瑰经",
@@ -8579,13 +8579,13 @@
       "evidence": "copied from embedded base_song_db name_zh; needs community review"
     },
     "PIANO*GIRL": {
-      "name_zh": "PIANO*GIRL",
-      "status": "needs_review",
-      "source": "base",
+      "name_zh": "钢琴*女孩",
+      "status": "verified",
+      "source": "community",
       "name_en": "PIANO*GIRL",
       "author": "OSTER project",
-      "candidate": "PIANO*GIRL",
-      "evidence": "fallback to embedded base_song_db original title; needs community review"
+      "candidate": "钢琴*女孩",
+      "evidence": "community-title-evidence"
     },
     "LOL -lots of laugh-": {
       "name_zh": "LOL -lots of laugh-",
@@ -9065,13 +9065,13 @@
       "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Sadistic.Music∞Factory": {
-      "name_zh": "Sadistic.Music∞Factory",
+      "name_zh": "残酷的音乐工厂",
       "status": "needs_review",
-      "source": "base",
+      "source": "community",
       "name_en": "Sadistic.Music∞Factory",
       "author": "cosMo＠暴走P",
-      "candidate": "Sadistic.Music∞Factory",
-      "evidence": "fallback to embedded base_song_db original title; needs community review"
+      "candidate": "残酷的音乐工厂",
+      "evidence": "community-title-evidence"
     },
     "ODDS&ENDS": {
       "name_zh": "ODDS&ENDS",
@@ -9119,13 +9119,13 @@
       "evidence": "fallback to embedded base_song_db original title; needs community review"
     },
     "Sweet Devil": {
-      "name_zh": "Sweet Devil",
-      "status": "needs_review",
-      "source": "base",
+      "name_zh": "甜蜜恶魔",
+      "status": "verified",
+      "source": "community",
       "name_en": "Sweet Devil",
       "author": "八王子P",
-      "candidate": "Sweet Devil",
-      "evidence": "fallback to embedded base_song_db original title; needs community review"
+      "candidate": "甜蜜恶魔",
+      "evidence": "community-title-evidence"
     },
     "erase or zero": {
       "name_zh": "erase or zero",

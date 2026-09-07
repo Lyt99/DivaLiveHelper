@@ -25,6 +25,11 @@ export interface AppConfig {
   config_file: string;
 }
 
+export interface GameInstallation {
+  game_dir: string;
+  mods_dir: string | null;
+}
+
 export interface SongRequest {
   song_id: number;
   song_name: string;
@@ -42,6 +47,7 @@ export interface SongInfo {
   authors: string[];
   difficulty: Record<string, number>;
   source: string | null;
+  mod_name: string | null;
   aliases: string[];
 }
 

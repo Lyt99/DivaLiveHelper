@@ -63,6 +63,7 @@ pub struct SongInfo {
     pub authors: Vec<String>,
     pub difficulty: HashMap<String, f32>,
     pub source: Option<String>,
+    pub mod_name: Option<String>,
     pub aliases: Vec<String>,
 }
 
@@ -204,6 +205,11 @@ impl SongDatabase {
             return Err("内置基础歌曲库版本无效".to_string());
         }
 
+        // 内置库是完整的官方曲目清单，先移除旧官方记录，避免已剔除的曲目残留。
+        // 保留 MOD 曲目；后续扫描仍可按原有顺序覆盖官方曲目。
+        self.songs
+            .retain(|_, entry| !matches!(entry.source.as_str(), "base" | "dlc"));
+
         let mut imported = 0;
         for (key, base_entry) in parsed.songs {
             let pv_id = key.parse::<u32>().unwrap_or(base_entry.pv_id);
@@ -314,12 +320,47 @@ impl SongDatabase {
                 authors: entry.authors.clone(),
                 difficulty: entry.difficulty.clone(),
                 source: non_empty(&entry.source),
+                mod_name: None,
                 aliases: entry.aliases.clone(),
             })
             .collect();
         songs.sort_by_key(|song| song.pv_id);
         songs
     }
+}
+
+#[derive(Deserialize)]
+struct ModMetadata {
+    name: String,
+}
+
+pub fn resolve_mod_names(songs: &mut [SongInfo], mods_dir: Option<&Path>) {
+    let mut names = HashMap::new();
+    for song in songs {
+        let Some(folder) = song.source.as_deref().and_then(|source| source.strip_prefix("mod:")) else {
+            song.mod_name = None;
+            continue;
+        };
+        let name = names.entry(folder).or_insert_with(|| {
+            mods_dir
+                .and_then(|root| load_mod_name(&root.join(folder)))
+                .unwrap_or_else(|| folder.to_string())
+        });
+        song.mod_name = Some(name.clone());
+    }
+}
+
+fn load_mod_name(mod_dir: &Path) -> Option<String> {
+    fs::read_to_string(mod_dir.join("mod.json"))
+        .ok()
+        .and_then(|content| serde_json::from_str::<ModMetadata>(&content).ok())
+        .and_then(|metadata| non_empty(metadata.name.trim()))
+        .or_else(|| {
+            fs::read_to_string(mod_dir.join("config.toml"))
+                .ok()
+                .and_then(|content| toml::from_str::<ModMetadata>(&content).ok())
+                .and_then(|metadata| non_empty(metadata.name.trim()))
+        })
 }
 
 fn parse_difficulty(fields: &HashMap<String, String>) -> HashMap<String, f32> {
@@ -542,6 +583,50 @@ mod tests {
         assert_eq!(entry.difficulty.get("exextreme"), Some(&9.5));
     }
 
+    #[test]
+    fn import_base_json_str_replaces_official_catalog_without_removing_mod_songs() {
+        let mut db = SongDatabase::default();
+        for (pv_id, source) in [(700, "base"), (701, "dlc"), (27, "mod:Restore Cut Songs")] {
+            db.songs.insert(pv_id, SongEntry {
+                pv_id,
+                name: "Ievan Polkka".into(),
+                source: source.into(),
+                ..Default::default()
+            });
+        }
+        let json = r#"{
+            "version": 1,
+            "songs": {
+                "262": {
+                    "pv_id": 262, "name": "ピアノ×フォルテ×スキャンダル",
+                    "name_en": "Piano x Forte x Scandal", "source": "base"
+                }
+            }
+        }"#;
+
+        for _ in 0..2 {
+            db.import_base_json_str(json).unwrap();
+            let ids: Vec<_> = db.to_song_infos().iter().map(|song| song.pv_id).collect();
+            assert_eq!(ids, vec![27, 262]);
+            assert_eq!(db.songs[&27].source, "mod:Restore Cut Songs");
+        }
+    }
+
+    #[test]
+    fn import_base_json_str_keeps_existing_catalog_on_invalid_input() {
+        let mut db = SongDatabase::default();
+        db.songs.insert(1, SongEntry {
+            pv_id: 1,
+            name: "恋は戦争".into(),
+            source: "base".into(),
+            ..Default::default()
+        });
+        for json in ["not json", r#"{"version": 0, "songs": {}}"#] {
+            assert!(db.import_base_json_str(json).is_err());
+            assert_eq!(db.to_song_infos()[0].name, "恋は戦争");
+        }
+    }
+
     // ----------------- remove_source / remove_unnamed -----------------
 
     #[test]
@@ -675,6 +760,97 @@ mod tests {
         });
         let infos = db.to_song_infos();
         assert_eq!(infos[0].name_zh, Some("中文".to_string()));
+    }
+
+    #[test]
+    fn resolve_mod_names_uses_metadata_priority_and_refreshes_existing_songs() {
+        let unique = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!(
+            "diva_mod_names_{}_{}",
+            std::process::id(),
+            unique
+        ));
+        let mod_dir = root.join("曲包文件夹");
+        let other_dir = root.join("另一目录");
+        fs::create_dir_all(&mod_dir).unwrap();
+        fs::create_dir_all(&other_dir).unwrap();
+        fs::write(mod_dir.join("mod.json"), r#"{"name":"  JSON 曲包  "}"#).unwrap();
+        fs::write(
+            mod_dir.join("config.toml"),
+            r#"name = "  中文 曲包 \"特别版\" \u66F2  "
+[details]
+name = "不是顶层名称"
+"#,
+        )
+        .unwrap();
+        fs::write(other_dir.join("config.toml"), "name = '另一首 曲包'").unwrap();
+
+        let mut database = SongDatabase::default();
+        for (index, source) in [
+            "mod:曲包文件夹",
+            "mod:曲包文件夹",
+            "mod:另一目录",
+            "mod:缺失目录",
+            "base",
+            "dlc",
+            "modded",
+            "",
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            let pv_id = index as u32;
+            database.songs.insert(pv_id, SongEntry {
+                pv_id,
+                source: source.to_string(),
+                ..Default::default()
+            });
+        }
+        let mut songs = database.to_song_infos();
+        resolve_mod_names(&mut songs, Some(&root));
+        assert_eq!(
+            songs.iter().map(|song| song.mod_name.as_deref()).collect::<Vec<_>>(),
+            vec![
+                Some("JSON 曲包"),
+                Some("JSON 曲包"),
+                Some("另一首 曲包"),
+                Some("缺失目录"),
+                None,
+                None,
+                None,
+                None,
+            ]
+        );
+
+        // 无效、空白、非字符串及仅嵌套的 JSON 名称均应继续读取 TOML。
+        for json in ["{损坏", r#"{"name":" \t\n "}"#, r#"{"name":42}"#, r#"{"details":{"name":"嵌套名称"}}"#] {
+            fs::write(mod_dir.join("mod.json"), json).unwrap();
+            resolve_mod_names(&mut songs, Some(&root));
+            assert_eq!(songs[0].mod_name.as_deref(), Some("中文 曲包 \"特别版\" 曲"));
+            assert_eq!(songs[1].mod_name, songs[0].mod_name);
+        }
+        fs::remove_file(mod_dir.join("mod.json")).unwrap();
+        resolve_mod_names(&mut songs, Some(&root));
+        assert_eq!(songs[0].mod_name.as_deref(), Some("中文 曲包 \"特别版\" 曲"));
+
+        // TOML 也不可用时回退到来源文件夹，不保留上一次请求的友好名称。
+        for toml in ["name = ", "name = '   '", "[details]\nname = '嵌套名称'"] {
+            fs::write(mod_dir.join("config.toml"), toml).unwrap();
+            resolve_mod_names(&mut songs, Some(&root));
+            assert_eq!(songs[0].mod_name.as_deref(), Some("曲包文件夹"));
+        }
+        fs::remove_file(mod_dir.join("config.toml")).unwrap();
+        resolve_mod_names(&mut songs, Some(&root));
+        assert_eq!(songs[0].mod_name.as_deref(), Some("曲包文件夹"));
+
+        resolve_mod_names(&mut songs, None);
+        assert_eq!(songs[2].mod_name.as_deref(), Some("另一目录"));
+        fs::remove_dir_all(&root).unwrap();
+        resolve_mod_names(&mut songs, Some(&root));
+        assert_eq!(songs[2].mod_name.as_deref(), Some("另一目录"));
     }
 
     // ----------------- non_empty -----------------

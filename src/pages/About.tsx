@@ -27,7 +27,7 @@ export default function AboutPage() {
         <h2><span className="panel-index">01</span>应用信息</h2>
         <div className="about-rows">
           <div className="about-row"><span>版本</span><strong className="mono">v{packageJson.version}</strong></div>
-          <div className="about-row"><span>作者</span><strong>Milkchan</strong></div>
+          <div className="about-row"><span>作者</span><strong>Milkchan(Lyt99)</strong></div>
           <div className="about-row"><span>技术栈</span><strong className="mono">Rust + Tauri 2 + React</strong></div>
           <div className="about-row"><span>平台</span><strong>Windows</strong></div>
         </div>

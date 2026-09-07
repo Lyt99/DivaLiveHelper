@@ -1,8 +1,8 @@
-import { useEffect, useState, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, type Dispatch, type MouseEvent, type RefObject, type SetStateAction } from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { open } from '@tauri-apps/plugin-dialog';
 import { api, emptyConfig } from '../lib/tauri';
-import type { AppConfig, RebuildReport } from '../types';
+import type { AppConfig, GameInstallation, RebuildReport } from '../types';
 
 const TOTAL_STEPS = 7;
 
@@ -39,7 +39,7 @@ const CloseIcon = (
 
 interface StepProps {
   config: AppConfig;
-  setConfig: (c: AppConfig) => void;
+  setConfig: Dispatch<SetStateAction<AppConfig>>;
   next: () => void;
   back: () => void;
 }
@@ -47,6 +47,9 @@ interface StepProps {
 export default function Wizard() {
   const [step, setStep] = useState(0);
   const [config, setConfig] = useState<AppConfig>({ ...emptyConfig });
+  const [configLoading, setConfigLoading] = useState(true);
+  const [configError, setConfigError] = useState('');
+  const modsDirEdited = useRef(false);
   const [rebuildReport, setRebuildReport] = useState<RebuildReport | null>(null);
   const appWindow = getCurrentWindow();
 
@@ -56,7 +59,20 @@ export default function Wizard() {
   };
 
   useEffect(() => {
-    api.getConfig().then(setConfig);
+    let cancelled = false;
+    api.getConfig().then(
+      (savedConfig) => {
+        if (cancelled) return;
+        setConfig(savedConfig);
+        setConfigLoading(false);
+      },
+      (error) => {
+        if (cancelled) return;
+        setConfigError(String(error));
+        setConfigLoading(false);
+      },
+    );
+    return () => { cancelled = true; };
   }, []);
 
   const go = (n: number) => setStep(n);
@@ -94,8 +110,8 @@ export default function Wizard() {
       </div>
 
       <div className="wizard-body">
-        {step === 0 && <WelcomeStep next={next} />}
-        {step === 1 && <ModsDirStep config={config} setConfig={setConfig} next={next} back={back} />}
+        {step === 0 && <WelcomeStep next={next} loading={configLoading} error={configError} />}
+        {step === 1 && <ModsDirStep config={config} setConfig={setConfig} edited={modsDirEdited} next={next} back={back} />}
         {step === 2 && <RebuildStep config={config} setConfig={setConfig} report={rebuildReport} setReport={setRebuildReport} next={next} back={back} />}
         {step === 3 && <RoomIdStep config={config} setConfig={setConfig} next={next} back={back} />}
         {step === 4 && <PrefixStep config={config} setConfig={setConfig} next={next} back={back} />}
@@ -108,7 +124,7 @@ export default function Wizard() {
 
 /* ── 第 1 步：欢迎 ────────────────────────────── */
 
-function WelcomeStep({ next }: { next: () => void }) {
+function WelcomeStep({ next, loading, error }: { next: () => void; loading: boolean; error: string }) {
   return (
     <div className="wizard-step wizard-welcome">
       <p className="wizard-kicker">首次运行 · 快速配置</p>
@@ -119,8 +135,11 @@ function WelcomeStep({ next }: { next: () => void }) {
         管理歌曲队列，一键切换游戏内曲目。
       </p>
       <p className="hint">接下来几步帮你完成基础配置，大约 1 分钟。</p>
+      {error && <p className="error-text" role="alert">读取配置失败：{error}。可以使用默认值继续配置。</p>}
       <div className="wizard-actions">
-        <button className="primary-button" onClick={next}>开始配置</button>
+        <button className="primary-button" onClick={next} disabled={loading}>
+          {loading ? '正在读取配置…' : error ? '使用默认值开始配置' : '开始配置'}
+        </button>
       </div>
     </div>
   );
@@ -128,34 +147,99 @@ function WelcomeStep({ next }: { next: () => void }) {
 
 /* ── 第 2 步：游戏 MOD 目录 ───────────────────── */
 
-function ModsDirStep({ config, setConfig, next, back }: StepProps) {
+type GameDiscovery =
+  | { status: 'searching' | 'existing' | 'manual' | 'missing' }
+  | { status: 'found'; installation: GameInstallation }
+  | { status: 'error'; error: string };
+
+function ModsDirStep({ config, setConfig, edited, next, back }: StepProps & { edited: RefObject<boolean> }) {
+  const request = useRef(0);
+  const [discovery, setDiscovery] = useState<GameDiscovery>(() => ({
+    status: config.mods_dir.trim() ? 'existing' : edited.current ? 'manual' : 'searching',
+  }));
+
+  useEffect(() => {
+    const currentRequest = ++request.current;
+    if (!config.mods_dir.trim() && !edited.current) {
+      api.detectGameInstallation().then(
+        (installation) => {
+          if (request.current !== currentRequest) return;
+          setDiscovery(installation ? { status: 'found', installation } : { status: 'missing' });
+          if (installation?.mods_dir) {
+            const modsDir = installation.mods_dir;
+            setConfig((current) => current.mods_dir.trim() ? current : { ...current, mods_dir: modsDir });
+          }
+        },
+        (error) => {
+          if (request.current !== currentRequest) return;
+          setDiscovery({ status: 'error', error: String(error) });
+        },
+      );
+    }
+    return () => { request.current++; };
+  }, [config.mods_dir, edited, setConfig]);
+
+  const beginManualEdit = () => {
+    edited.current = true;
+    setDiscovery({ status: 'manual' });
+    return ++request.current;
+  };
+
   const pick = async () => {
+    const currentRequest = beginManualEdit();
     try {
       const path = await open({ directory: true, multiple: false });
-      if (path) setConfig({ ...config, mods_dir: path });
+      if (path && request.current === currentRequest) {
+        setConfig((current) => ({ ...current, mods_dir: path }));
+      }
     } catch { /* 用户取消 */ }
+  };
+
+  const leave = (navigate: () => void) => {
+    request.current++;
+    navigate();
   };
 
   return (
     <div className="wizard-step">
-      <h2>游戏 MOD 目录</h2>
+      <h2>自动发现游戏与 MOD 目录</h2>
       <p className="muted">
-        选择 Project DIVA Mega Mix Plus 的 <code>mods/</code> 文件夹路径。
-        MOD 歌曲信息会从该目录下各模组的 <code>rom/mod_pv_db.txt</code> 中读取。
+        自动查找 Steam 库中已安装的 Project DIVA Mega Mix Plus。
+        MOD 歌曲信息会从 <code>mods/</code> 下各模组的 <code>rom/mod_pv_db.txt</code> 中读取。
       </p>
+      <div aria-live="polite" aria-busy={discovery.status === 'searching'}>
+        <p className={discovery.status === 'error' ? 'error-text' : 'hint'}>
+          {discovery.status === 'searching' && '正在查找 Steam 游戏安装目录…你也可以手动填写或留空继续。'}
+          {discovery.status === 'existing' && '已保留现有 MOD 目录，不会自动覆盖。'}
+          {discovery.status === 'manual' && '已切换为手动设置，不会自动覆盖你的修改。'}
+          {discovery.status === 'missing' && '未找到 Steam 或已安装的游戏。可以手动选择 MOD 目录，或留空使用官方曲库。'}
+          {discovery.status === 'found' && (discovery.installation.mods_dir
+            ? '已找到游戏并自动填入 MOD 目录。'
+            : '已找到游戏，但尚无 mods 文件夹。不会自动创建；可以手动选择其他 MOD 目录，或留空使用官方曲库。')}
+          {discovery.status === 'error' && `自动发现失败：${discovery.error}。可以手动选择 MOD 目录，或留空使用官方曲库。`}
+        </p>
+        {discovery.status === 'found' && (
+          <p className="hint wizard-game-path">游戏目录：<code>{discovery.installation.game_dir}</code></p>
+        )}
+      </div>
       <div className="wizard-field-row">
         <input
           type="text"
+          aria-label="游戏 MOD 目录"
           value={config.mods_dir}
-          onChange={(e) => setConfig({ ...config, mods_dir: e.target.value })}
+          onChange={(e) => {
+            const modsDir = e.target.value;
+            beginManualEdit();
+            setConfig((current) => ({ ...current, mods_dir: modsDir }));
+          }}
           placeholder="例如 D:\SteamLibrary\...\mods"
         />
         <button className="secondary-button" onClick={pick}>浏览</button>
       </div>
-      <p className="hint">如果不使用 MOD 歌曲，可以留空跳过。</p>
+      <p className="hint">不使用 MOD 歌曲时，可以留空进入下一步，继续导入官方曲库。</p>
       <div className="wizard-actions">
-        <button className="ghost-button" onClick={back}>上一步</button>
-        <button className="primary-button" onClick={next}>下一步</button>
+        <button className="ghost-button" onClick={() => leave(back)}>上一步</button>
+        <button className="primary-button" onClick={() => leave(next)}>下一步</button>
       </div>
     </div>
   );

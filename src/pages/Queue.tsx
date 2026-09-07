@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { listen } from '@tauri-apps/api/event';
 import { api, emptyConfig } from '../lib/tauri';
-import { reportStatus, setConnectionState } from '../lib/status';
+import { reportStatus, setConnectionState, useShellState } from '../lib/status';
 import type { AppConfig, DanmakuEvent, DanmakuStatus, DebugSongRequestResult, SongRequest, SongRequestFailure } from '../types';
 
 interface FailureToast extends SongRequestFailure {
@@ -15,7 +15,7 @@ interface QueuePageProps {
 export default function QueuePage({ recentDanmaku }: QueuePageProps) {
   const [queue, setQueue] = useState<SongRequest[]>([]);
   const [config, setConfig] = useState<AppConfig>(emptyConfig);
-  const [gameConnected, setGameConnected] = useState(false);
+  const { gameConnected } = useShellState();
   const [danmakuStatus, setDanmakuStatus] = useState<DanmakuStatus>({ connected: false, room_id: 0 });
   const [danmakuConnecting, setDanmakuConnecting] = useState(false);
   const [debugText, setDebugText] = useState('点歌 ');
@@ -23,12 +23,11 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
   const [failures, setFailures] = useState<FailureToast[]>([]);
 
   const refresh = useCallback(async () => {
-    const [items, connected, status] = await Promise.all([api.getQueue(), api.getGameConnectionStatus(), api.getDanmakuStatus()]);
+    const [items, status] = await Promise.all([api.getQueue(), api.getDanmakuStatus()]);
     setQueue(items);
-    setGameConnected(connected);
     setDanmakuStatus(status);
     // 顺手同步到底部状态栏，不用重复请求
-    setConnectionState({ gameConnected: connected, danmakuConnected: status.connected, roomId: status.room_id });
+    setConnectionState({ danmakuConnected: status.connected, roomId: status.room_id });
   }, []);
 
   useEffect(() => {
@@ -83,16 +82,6 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
     await refresh();
   }
 
-  async function handleReconnect() {
-    try {
-      const connected = await api.reconnectGame();
-      setGameConnected(connected);
-      setConnectionState({ gameConnected: connected });
-      reportStatus(connected ? '已连接到游戏进程' : '未找到 DivaMegaMix.exe');
-    } catch (error) {
-      reportStatus(String(error));
-    }
-  }
 
   async function handleStartDanmaku() {
     try {
@@ -155,7 +144,7 @@ export default function QueuePage({ recentDanmaku }: QueuePageProps) {
         <div className="console-group">
           <span className="console-key">游戏进程</span>
           <span className="console-value">DivaMegaMix.exe</span>
-          <button type="button" className="secondary-button button-sm" onClick={handleReconnect}>{gameConnected ? '重新连接' : '连接'}</button>
+          <span className={`signal ${gameConnected ? 'ok' : 'bad'}`} title="每 2 秒自动检测游戏进程，切歌时自动打开进程"><i />{gameConnected ? '运行中' : '等待启动'}</span>
         </div>
         <div className="toolbar-actions">
           <button type="button" className="ghost-button" onClick={handleOpenOverlay}>打开悬浮窗</button>

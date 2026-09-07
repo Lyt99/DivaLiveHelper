@@ -7,10 +7,11 @@ use tauri::{AppHandle, Emitter, Manager, State};
 use crate::config::Config;
 use crate::danmaku::{self, DanmakuEvent, DanmakuStatus, SongProcessOutcome};
 use crate::db_tool::{self, RebuildReport};
+use crate::game_install::{self, GameInstallation};
 use crate::hotkey::HotkeyStatus;
 use crate::obs_overlay::OBSOverlayStatus;
 use crate::queue::SongRequest;
-use crate::song_db::{SongDatabase, SongInfo};
+use crate::song_db::{resolve_mod_names, SongDatabase, SongInfo};
 use crate::song_search::{SearchResult, SongSearcher};
 use crate::{play_next_song, resolve_data_dir, AppState};
 
@@ -75,12 +76,34 @@ pub fn validate_config(config: Config) -> Result<String, String> {
 }
 
 #[tauri::command]
+pub async fn detect_game_installation() -> Result<Option<GameInstallation>, String> {
+    tauri::async_runtime::spawn_blocking(game_install::detect_game_installation)
+        .await
+        .map_err(|error| format!("自动查找游戏安装目录失败：{error}"))?
+}
+
+#[tauri::command]
 pub fn get_all_songs(state: State<'_, AppState>) -> Result<Vec<SongInfo>, String> {
-    Ok(state
-        .database
-        .read()
-        .map_err(|_| "读取歌曲库锁失败".to_string())?
-        .to_song_infos())
+    let mods_dir = {
+        let config = state
+            .config
+            .read()
+            .map_err(|_| "读取配置锁失败".to_string())?;
+        if config.mods_dir.trim().is_empty() {
+            None
+        } else {
+            Some(PathBuf::from(&config.mods_dir))
+        }
+    };
+    let mut songs = {
+        let database = state
+            .database
+            .read()
+            .map_err(|_| "读取歌曲库锁失败".to_string())?;
+        database.to_song_infos()
+    };
+    resolve_mod_names(&mut songs, mods_dir.as_deref());
+    Ok(songs)
 }
 
 #[tauri::command]
@@ -359,14 +382,6 @@ pub fn get_game_connection_status(state: State<'_, AppState>) -> Result<bool, St
         .is_connected())
 }
 
-#[tauri::command]
-pub fn reconnect_game(state: State<'_, AppState>) -> Result<bool, String> {
-    Ok(state
-        .selector
-        .lock()
-        .map_err(|_| "切歌器锁失败".to_string())?
-        .reconnect())
-}
 
 #[tauri::command]
 pub fn start_danmaku(

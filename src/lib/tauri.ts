@@ -1,8 +1,9 @@
 import { invoke } from '@tauri-apps/api/core';
-import type { AppConfig, DanmakuStatus, DebugSongRequestResult, HotkeyStatus, OBSOverlayStatus, RebuildReport, SearchResult, SongInfo, SongRequest } from '../types';
+import type { AppConfig, DanmakuStatus, DebugSongRequestResult, GameInstallation, HotkeyStatus, OBSOverlayStatus, RebuildReport, SearchResult, SongInfo, SongRequest } from '../types';
 
 export const api = {
   getConfig: () => invoke<AppConfig>('get_config'),
+  detectGameInstallation: () => invoke<GameInstallation | null>('detect_game_installation'),
   saveConfig: (config: AppConfig, skipValidation?: boolean) => invoke<void>('save_config', { config, skipValidation: skipValidation ?? false }),
   getAllSongs: () => invoke<SongInfo[]>('get_all_songs'),
   reloadDatabase: () => invoke<number>('reload_database'),
@@ -21,7 +22,6 @@ export const api = {
   clearQueue: () => invoke<void>('clear_queue'),
   nextSong: () => invoke<SongRequest | null>('next_song'),
   changeSong: (songId: number, difficultyTier: string) => invoke<string>('change_song', { songId, difficultyTier }),
-  reconnectGame: () => invoke<boolean>('reconnect_game'),
   getGameConnectionStatus: () => invoke<boolean>('get_game_connection_status'),
   startDanmaku: (roomId: number) => invoke<void>('start_danmaku', { roomId }),
   stopDanmaku: () => invoke<void>('stop_danmaku'),

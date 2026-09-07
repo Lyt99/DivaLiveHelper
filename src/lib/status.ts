@@ -34,14 +34,20 @@ export function reportStatus(message: string) {
 
 /** 页面拿到最新连接状态后直接推送，避免重复请求后端 */
 export function setConnectionState(patch: Partial<Omit<ShellState, 'message'>>) {
+  // 定时检测结果未变化时，不重复通知整个界面。
+  if (
+    (patch.gameConnected ?? state.gameConnected) === state.gameConnected &&
+    (patch.danmakuConnected ?? state.danmakuConnected) === state.danmakuConnected &&
+    (patch.roomId ?? state.roomId) === state.roomId
+  ) return;
   state = { ...state, ...patch };
   emit();
 }
 
-/** 从后端拉取最新连接状态并同步到状态栏 */
-export async function refreshConnectionState() {
-  const [game, danmaku] = await Promise.all([api.getGameConnectionStatus(), api.getDanmakuStatus()]);
-  setConnectionState({ gameConnected: game, danmakuConnected: danmaku.connected, roomId: danmaku.room_id });
+/** 弹幕动作后更新状态；游戏进程由主窗口统一定时检测。 */
+export async function refreshDanmakuState() {
+  const danmaku = await api.getDanmakuStatus();
+  setConnectionState({ danmakuConnected: danmaku.connected, roomId: danmaku.room_id });
 }
 
 export function useShellState(): ShellState {

@@ -1,0 +1,58 @@
+name: 标签构建单文件程序
+
+on:
+  push:
+    tags:
+      - '**'
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    name: Windows x64 单文件程序
+    runs-on: windows-2022
+    timeout-minutes: 60
+    env:
+      # 静态链接 MSVC 运行库，避免额外分发 VC Runtime DLL。
+      CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS: '-C target-feature=+crt-static'
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: 检出标签对应代码
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: 安装 Rust
+        uses: dtolnay/rust-toolchain@d1031067263f94b142dd6c0ce24c5eb9d02d52a0
+        with:
+          toolchain: stable
+          targets: x86_64-pc-windows-msvc
+
+      - name: 安装前端依赖
+        run: npm ci
+
+      - name: 构建单文件程序
+        run: npm run tauri -- build --no-bundle --target x86_64-pc-windows-msvc -- --locked
+
+      - name: 收集可执行文件
+        run: |
+          New-Item -ItemType Directory -Path artifacts -Force | Out-Null
+          Copy-Item -LiteralPath src-tauri/target/x86_64-pc-windows-msvc/release/diva-live-helper.exe -Destination artifacts/diva-live-helper-windows-x64.exe
+
+      - name: 上传单文件二进制
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          path: artifacts/diva-live-helper-windows-x64.exe
+          if-no-files-found: error
+          # 直接上传一个文件，不包成 ZIP。
+          archive: false
