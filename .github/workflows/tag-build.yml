@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+env:
+  # 构建产物按标签命名，例如 DIVA-live-v0.2.0.exe。
+  ARTIFACT_NAME: DIVA-live-${{ github.ref_name }}.exe
+
 jobs:
   windows:
     name: Windows x64 单文件程序
@@ -47,12 +51,13 @@ jobs:
       - name: 收集可执行文件
         run: |
           New-Item -ItemType Directory -Path artifacts -Force | Out-Null
-          Copy-Item -LiteralPath src-tauri/target/x86_64-pc-windows-msvc/release/diva-live-helper.exe -Destination artifacts/diva-live-helper-windows-x64.exe
+          Copy-Item -LiteralPath src-tauri/target/x86_64-pc-windows-msvc/release/diva-live-helper.exe -Destination "artifacts/$env:ARTIFACT_NAME"
 
       - name: 上传单文件二进制
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          path: artifacts/diva-live-helper-windows-x64.exe
+          name: ${{ env.ARTIFACT_NAME }}
+          path: artifacts/${{ env.ARTIFACT_NAME }}
           if-no-files-found: error
           overwrite: true
           # 直接上传一个文件，不包成 ZIP。
@@ -70,13 +75,13 @@ jobs:
       - name: 下载已构建的单文件程序
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
-          name: diva-live-helper-windows-x64.exe
+          name: ${{ env.ARTIFACT_NAME }}
           path: artifacts
 
       - name: 创建或更新 Release 附件
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           tag_name: ${{ github.ref_name }}
-          files: artifacts/diva-live-helper-windows-x64.exe
+          files: artifacts/${{ env.ARTIFACT_NAME }}
           fail_on_unmatched_files: true
           overwrite_files: true

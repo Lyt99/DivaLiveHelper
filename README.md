@@ -54,7 +54,7 @@ git tag v0.1.1
 git push origin v0.1.1
 ```
 
-构建成功后，工作流会自动创建或更新对应 tag 的 **GitHub Release**，可在其 **Assets** 中直接下载 `diva-live-helper-windows-x64.exe`。同一文件也保留在 **Actions → 标签构建单文件程序 → 对应运行 → Artifacts** 中。工作流使用 `--no-bundle`，只上传原始 `.exe`，不生成 MSI、安装程序或 ZIP，也不上传配置、Cookie、API Key 和本地数据目录。
+构建成功后，工作流会自动创建或更新对应 tag 的 **GitHub Release**，可在其 **Assets** 中直接下载 `DIVA-live-<tag>.exe`（如 tag `v0.2.0` 对应 `DIVA-live-v0.2.0.exe`）。同一文件也保留在 **Actions → 标签构建单文件程序 → 对应运行 → Artifacts** 中。工作流使用 `--no-bundle`，只上传原始 `.exe`，不生成 MSI、安装程序或 ZIP，也不上传配置、Cookie、API Key 和本地数据目录。
 
 构建任务保持仓库只读权限，独立的发布任务使用 `contents: write` 和内置 `GITHUB_TOKEN`，无需额外配置发布密钥。重跑时复用已有 Release 并替换同名附件；若仓库启用了不可变 Release，已发布附件不能覆盖，需使用新 tag。
 
