@@ -16,19 +16,43 @@ const DIFFICULTY_BUTTONS: { key: DifficultyTier; label: string }[] = [
 export default function LibraryPage() {
   const [songs, setSongs] = useState<SongInfo[]>([]);
   const [query, setQuery] = useState('');
+  const [sourceFilter, setSourceFilter] = useState('all');
   const [switchingKey, setSwitchingKey] = useState<string | null>(null);
 
   useEffect(() => {
     api.getAllSongs().then(setSongs).catch((error) => reportStatus(String(error)));
   }, []);
 
+  const sourceOptions = useMemo(() => {
+    const modLabels: Record<string, string> = {};
+    let hasUnknown = false;
+    for (const song of songs) {
+      if (song.source?.startsWith('mod:')) {
+        if (!modLabels[song.source]) modLabels[song.source] = sourceLabel(song);
+      } else if (!song.source) {
+        hasUnknown = true;
+      }
+    }
+    const options = [
+      { value: 'base', label: 'MM+' },
+      { value: 'dlc', label: 'MM+(DLC)' },
+      ...Object.entries(modLabels).sort((a, b) => a[1].localeCompare(b[1], 'zh')).map(([value, label]) => ({ value, label })),
+    ];
+    if (hasUnknown) options.push({ value: 'unknown', label: '未知来源' });
+    return options;
+  }, [songs]);
+
   const filtered = useMemo(() => {
+    const matches = songs.filter((song) => {
+      if (sourceFilter === 'unknown') return !song.source;
+      return sourceFilter === 'all' || song.source === sourceFilter;
+    });
     const needle = query.trim().toLowerCase();
-    if (!needle) return songs.slice(0, 300);
-    return songs
+    if (!needle) return matches.slice(0, 300);
+    return matches
       .filter((song) => [song.name, song.name_en, song.name_zh, song.mod_name, song.source?.startsWith('mod:') ? song.source.slice(4) : null, ...song.authors, ...song.aliases].filter(Boolean).some((value) => String(value).toLowerCase().includes(needle)))
       .slice(0, 300);
-  }, [query, songs]);
+  }, [query, songs, sourceFilter]);
 
   async function jump(song: SongInfo, tier: DifficultyTier) {
     const actionKey = `${song.pv_id}:${tier}`;
@@ -48,7 +72,13 @@ export default function LibraryPage() {
     <section className="page library-page">
       <header className="toolbar">
         <input className="search-input" placeholder="搜索曲名 / 作者 / 别名 / MOD 名 / 文件夹名" value={query} onChange={(event) => setQuery(event.target.value)} />
-        <span className="toolbar-meta">共 {songs.length} 首 · 最多显示 300 条匹配</span>
+        <select className="source-select" value={sourceFilter} onChange={(event) => setSourceFilter(event.target.value)} aria-label="按来源筛选">
+          <option value="all">全部来源</option>
+          {sourceOptions.map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
+        </select>
+        <span className="toolbar-meta">共 {filtered.length} 首 · 最多显示 300 条匹配</span>
       </header>
       <div className="song-table-wrap">
         <div className="song-table">
@@ -60,13 +90,7 @@ export default function LibraryPage() {
             <span>切歌</span>
           </div>
           {filtered.map((song) => {
-            const sourceName = song.source?.startsWith('mod:')
-              ? song.mod_name || song.source.slice(4) || '未知来源'
-              : song.source === 'base'
-                ? '本体'
-                : song.source === 'dlc'
-                  ? 'DLC'
-                  : '未知来源';
+            const sourceName = sourceLabel(song);
             return (
             <div key={song.pv_id} className="song-row">
               <span className="song-id">#{song.pv_id}</span>
@@ -84,6 +108,13 @@ export default function LibraryPage() {
       </div>
     </section>
   );
+}
+
+function sourceLabel(song: Pick<SongInfo, 'source' | 'mod_name'>): string {
+  if (song.source?.startsWith('mod:')) return song.mod_name || song.source.slice(4) || '未知来源';
+  if (song.source === 'base') return 'MM+';
+  if (song.source === 'dlc') return 'MM+(DLC)';
+  return '未知来源';
 }
 
 function DifficultyButtons({

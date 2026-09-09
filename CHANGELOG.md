@@ -14,7 +14,7 @@
 - 新增图标生成脚本：`scripts/generate_icon.py` 可重复生成 SVG、PNG 与多尺寸 Windows ICO。
 - 新增 Rust 单元测试覆盖：配置、队列、歌曲搜索、歌曲库解析、弹幕协议、OBS overlay 渲染、游戏切歌辅助函数等模块。
 - 歌曲库新增“所属 MOD / 来源”列及 MOD 名、文件夹名搜索；按 `mod.json.name`、`config.toml.name`、文件夹名依次解析，缺失或损坏的元数据不阻断曲库加载，已有曲库无需重建。
-- 新增标签构建工作流：推送任意 tag 后，在 Windows x64 上使用锁定依赖构建，静态链接 MSVC 运行库，只上传 `diva-live-helper-windows-x64.exe` 单文件产物，不生成安装包或 ZIP。
+- 新增标签构建工作流：推送任意 tag 后，在 Windows x64 上使用锁定依赖构建，静态链接 MSVC 运行库，只上传 `diva-live-helper-windows-x64.exe` 单文件产物，不生成安装包或 ZIP；构建成功后自动创建或更新对应 tag 的 GitHub Release 并上传同一附件，发布写权限与构建任务隔离。
 - 首次引导新增 Steam 游戏目录自动发现：支持多游戏库，自动填入现有 MOD 目录，无需游戏运行；缺失或损坏的安装信息可回退手动选择，保留已有/手动路径，并防止异步结果覆盖用户修改。
 
 ### 修复

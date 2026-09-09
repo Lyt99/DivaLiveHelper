@@ -258,7 +258,7 @@ ok/bad 的透明变体一律用 `color-mix(in srgb, var(--good) 35%, transparent
 
 ### 8.10 难度芯片
 
-结构同旧版（`.difficulty-jump` 双行：标签 + 星 SVG + mono 数值），尺寸收紧：`min-width: 58px; padding: 3px 7px; border-radius: 5px`；标签 10px / 星级 12px；实心档位色 + 白字；hover `brightness(1.12)`。
+结构同旧版（`.difficulty-jump` 双行：标签 + 星 SVG + mono 数值），尺寸收紧：`min-width: 58px; padding: 3px 7px; border-radius: 5px`；标签 10px / 星级 12px。样式为色晕芯片：档位色 13% 透明底 + 38% 发丝线描边 + 档位色文字（暗色主题经 `color-mix` 提亮 28% 白，浅色主题用原色，见 `--difficulty-ink`）；hover 实心档位色 + 白字。
 
 ### 8.11 表单
 
@@ -291,7 +291,7 @@ ok/bad 的透明变体一律用 `color-mix(in srgb, var(--good) 35%, transparent
 | 页面 | 工具栏内容 |
 |---|---|
 | 点歌台 | 直播间连接操作 / 游戏进程自动检测信号灯 `.console-group` + 右侧「打开悬浮窗」「切下一首」 |
-| 歌曲库 | 搜索框 + 右侧 `.toolbar-meta` 计数 |
+| 歌曲库 | 搜索框 + 来源筛选下拉框 `.source-select` + 右侧 `.toolbar-meta` 计数 |
 | 设置 | `.hint` 自动保存说明 + 右侧保存状态信号灯；输入框失焦、开关或单选改变即保存，不提供手动保存按钮 |
 | 日志 | 状态 `.console-group` ×2：游戏进程信号灯及自动检测说明，弹幕信号灯及连接操作 |
 | 关于 | 无工具栏：身份区（`.about-name` 字标）+ 三个 `.about-section` 分区 |

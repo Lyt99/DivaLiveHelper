@@ -988,6 +988,13 @@ input:focus, select:focus {
 
 .search-input { max-width: 360px; }
 
+/* 曲库页来源筛选下拉框 */
+.source-select {
+  width: auto;
+  min-width: 150px;
+  flex: none;
+}
+
 /* 曲库页同样撑满高度，表格内部滚动 */
 .page.library-page {
   height: 100%;
@@ -1093,16 +1100,18 @@ input:focus, select:focus {
 
 .difficulty-jump {
   --difficulty-color: var(--miku);
+  /* 暗色底上提亮档位色作文字色；浅色主题回退原色 */
+  --difficulty-ink: color-mix(in srgb, var(--difficulty-color) 72%, #ffffff 28%);
   min-width: 58px;
-  border: 1px solid var(--difficulty-color);
+  border: 1px solid color-mix(in srgb, var(--difficulty-ink) 38%, transparent);
   border-radius: 5px;
   padding: 3px 7px;
   display: grid;
   gap: 1px;
   justify-items: center;
-  color: #fff;
-  background: var(--difficulty-color);
-  transition: filter 120ms ease;
+  color: var(--difficulty-ink);
+  background: color-mix(in srgb, var(--difficulty-color) 13%, transparent);
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 
 .difficulty-jump-label {
@@ -1125,13 +1134,19 @@ input:focus, select:focus {
 
 .difficulty-jump-rating svg { flex: none; }
 
-.difficulty-jump:hover:not(:disabled) { filter: brightness(1.12); }
+.difficulty-jump:hover:not(:disabled) {
+  border-color: var(--difficulty-color);
+  color: #fff;
+  background: var(--difficulty-color);
+}
 .difficulty-jump:disabled { cursor: wait; }
 
 .difficulty-jump:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--difficulty-color) 55%, #ffffff 45%);
+  outline: 2px solid color-mix(in srgb, var(--difficulty-ink) 55%, transparent);
   outline-offset: 1px;
 }
+
+:root[data-theme='light'] .difficulty-jump { --difficulty-ink: var(--difficulty-color); }
 
 .difficulty-easy { --difficulty-color: #009CC2; }
 .difficulty-normal { --difficulty-color: #1AB406; }

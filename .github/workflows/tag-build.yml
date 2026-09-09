@@ -54,5 +54,29 @@ jobs:
         with:
           path: artifacts/diva-live-helper-windows-x64.exe
           if-no-files-found: error
+          overwrite: true
           # 直接上传一个文件，不包成 ZIP。
           archive: false
+
+  release:
+    name: 发布到标签 Release
+    needs: windows
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # 构建任务维持只读权限，仅发布任务允许写入 Release。
+    permissions:
+      contents: write
+    steps:
+      - name: 下载已构建的单文件程序
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: diva-live-helper-windows-x64.exe
+          path: artifacts
+
+      - name: 创建或更新 Release 附件
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: artifacts/diva-live-helper-windows-x64.exe
+          fail_on_unmatched_files: true
+          overwrite_files: true
